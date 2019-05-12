@@ -1,6 +1,6 @@
 #include "lem_in.h"
 
-t_edges	*ft_edge_list(char const *from, size_t f_len, char const *to, size_t t_len)
+t_edges	*ft_edge_list(char const *from, char const *to)
 {
 	t_edges *list;
 
@@ -10,13 +10,15 @@ t_edges	*ft_edge_list(char const *from, size_t f_len, char const *to, size_t t_l
 		list->from = NULL;
     else
 	{
-		list->from = ft_strdup(from);
+		if (!(list->from = ft_strdup(from)))
+			return (NULL);
 	}
 	if (!(to))
 		list->to = NULL;
 	else
 	{
-		list->to = ft_strdup(to);
+		if (!(list->to = ft_strdup(to)))
+			return (NULL);
 	}	
 	list->next = NULL;
 	return (list);
