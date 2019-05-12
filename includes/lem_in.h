@@ -27,6 +27,8 @@ typedef struct              s_edges
 typedef struct				s_data
 {
 	int						ants;
+	int						set_source;
+	int						set_sink;
     char                    *source;
     char                    *sink;
 	t_vertices				*vertices;
@@ -37,13 +39,17 @@ typedef struct				s_data
 **  Parsing functions
 */
 
-int    parse(t_data *data, char *s);
+int     parse(t_data *data, char *s);
+int     check_hash(t_data *data, char *s);
+int     get_source(t_data *data, char *s);
+int     get_sink(t_data *data, char *s);
 
+int	    split_count(char **split);
+int     split_arg(char *s, char ***split);
 
 /*
 **  List functions
 */
-
 
 t_vertices	*ft_vertice_list(char const *name, size_t len);
 void		add_vertices(t_vertices *head, char *name);
