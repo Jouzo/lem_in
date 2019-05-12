@@ -1,24 +1,38 @@
 #include "lem_in.h"
 
-t_vertices	*ft_vertice_list(char const *name, size_t len)
+int			check_vertices_name(t_vertices *head, char *name)
+{
+	t_vertices *current;
+
+	current = head;
+	while (current != NULL)
+	{
+		if (current->name == name)
+		{
+			return (-1);
+		}
+		current = current->next;
+	}
+	return (1);
+}
+
+t_vertices	*ft_vertice_list(char const *name, int x, int y)
 {
 	t_vertices *list;
-
+	printf("value of name %s\n", name);
 	if (!(list = (t_vertices*)malloc(sizeof(t_vertices))))
 		return (NULL);
-	if (!(name))
+	if (!name)
 		list->name = NULL;
 	else
-	{
-		if (!(list->name = malloc(len)))
-			return (NULL);
-		ft_memcpy(list->name, name, len);
-	}
+		list->name = ft_strdup(name);
+	list->x = x;
+	list->y = y;
 	list->next = NULL;
 	return (list);
 }
 
-void		add_vertices(t_vertices *head, char *name)
+int			add_vertices(t_vertices *head, char *name, int x, int y)
 {
 	t_vertices *current;
 
@@ -27,20 +41,22 @@ void		add_vertices(t_vertices *head, char *name)
 		current = current->next;
 	if (!(current->next = (t_vertices*)
 		malloc(sizeof(t_vertices))))
-		return ;
+		return (-1);
+	current->next->x = x;
+	current->next->y = y;
 	current->next->name = ft_strdup(name);
 	current->next->next = NULL;
+	return (1);
 }
 
 void		print_vertices(t_vertices *head)
 {
     t_vertices *current;
 
-	current = head->next;
+	current = head;
 	while (current != NULL)
 	{
-		printf("vertices : %s", current->name);
+		printf("vertices : %s, x : %d, y: %d\n", current->name, current->x, current->y);
 		current = current->next;
 	}
-	free_vertices(head);
 }

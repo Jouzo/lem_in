@@ -2,25 +2,25 @@
 
 int get_source_sink(t_data *data, char *s, int st)
 {
-    printf("inside get_s_t\n");
     char **split;
-    int ret;
 
-    ret = 1;
     if (split_arg(data, s, &split) == -1)
-        ret = -1;
+        return (-1);
 	if (split_count(split) != 3)
-        ret = -1;
+        return (free_split(split, -1));
 	if (!data->vertices)
-		if (!(ft_vertice_list(split[0], ft_strlen(split[0]), split[1], split[2])))
-            ret = -1;
+	{
+        if (!(data->vertices = ft_vertice_list(split[0], ft_atoi(split[1]), ft_atoi(split[2]))))
+            return (free_split(split, -1));
+    }	
 	else
-		if (add_vertices(split[0], ft_strlen(split[0]), split[1], split[2]) == -1)
-            ret = -1;
+    {
+		if (add_vertices(data->vertices, split[0], ft_atoi(split[1]), ft_atoi(split[2])) == -1)
+            return (free_split(split, -1));
+    }
 	if (!st)
-    	data->source = ft_strdup(s);
+        data->source = ft_strdup(split[0]);
 	else
-  	  data->sink = ft_strdup(s);
-    free_split(split);
-    return (ret);
+  	    data->sink = ft_strdup(split[0]);
+    return (free_split(split, 1));
 }

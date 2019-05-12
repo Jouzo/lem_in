@@ -9,12 +9,16 @@ int   init_data(t_data *data)
      while (get_next_line(0, &line) > 0)
 	{
 		if ((ret = parse(data, line)) <= 0)
+		{
+			free(line);
 			return (ret);
+		}
 		free(line);
 		if (data->ants)
 			printf("value of ants : %d\n", data->ants);
-		if (data->vertices)
+		if (data->vertices) {
 			print_vertices(data->vertices);
+		}
 		if (data->edges)
 			print_edges(data->edges);
 	}

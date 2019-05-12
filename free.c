@@ -24,7 +24,7 @@ void	free_edges(t_edges *head)
 	}
 }
 
-void	free_split(char **split)
+int		free_split(char **split, int ret)
 {
 	int i;
 
@@ -35,4 +35,5 @@ void	free_split(char **split)
 		i++;
 	}
 	free(split);
+	return (ret);
 }
