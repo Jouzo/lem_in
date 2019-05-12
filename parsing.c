@@ -46,16 +46,18 @@ int parse_edges(t_data *data, char **split)
 int parse_VE(t_data *data, char *s)
 {
     char **split;
-    (void)data;
-    if (split_arg(data, s, &split) == -1)
+    int ve;
+
+    ve = 0;
+    if ((ve = split_arg(data, s, &split)) == -1)
     {
         return (-1);
     }
-    if (split_count(split) == 3)
+    if (split_count(split) == 3 && ve == 1)
     {
         return (parse_vertices(data, split));
     }
-    else if (split_count(split) == 2)
+    else if (split_count(split) == 2 && ve == 2)
     {
         return (parse_edges(data, split));
     }
