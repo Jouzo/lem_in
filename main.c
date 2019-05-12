@@ -13,6 +13,10 @@ int   init_data(t_data *data)
 		free(line);
 		if (data->ants)
 			printf("value of ants : %d\n", data->ants);
+		if (data->vertices)
+			print_vertices(data->vertices);
+		if (data->edges)
+			print_edges(data->edges);
 	}
 	return (ret);
 }
@@ -37,7 +41,7 @@ int     main(int ac, char **av)
 		}
 		else if (ret == 0)
 		{
-			
+
 		}
 	}
     return (0);

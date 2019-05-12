@@ -13,13 +13,40 @@ int parse_ants(t_data *data, char *s)
     }
 }
 
+int parse_vertices(t_data *data, char **split);
+{
+    
+
+}
+
+int parse_edges(t_data *data, char **split)
+{
+
+}
 
 int parse_VE(t_data *data, char *s)
 {
     char **split;
     (void)data;
-    if (split_arg(s, &split) == -1)
+    if (split_arg(data, s, &split) == -1)
+    {
+        free_split(split);
         return (-1);
+    }
+    if (split_count(split) == 3)
+    {
+        parse_vertices(data, split);
+        free_split(split);
+    }
+    else if (split_count(split) == 2)
+    {
+        parse_edges(data, split);
+        free_split(split);
+    }
+    else 
+    {
+        return (-1);
+    }
     printf("len of split : %d\n", split_count(split));
     return (1);
 }

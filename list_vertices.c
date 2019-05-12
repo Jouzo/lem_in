@@ -44,16 +44,3 @@ void		print_vertices(t_vertices *head)
 	}
 	free_vertices(head);
 }
-
-void	free_vertices(t_vertices *head)
-{
-	t_vertices *tmp;
-
-	while (head)
-	{
-		tmp = head;
-		head = head->next;
-		free(tmp);
-	}
-}
-

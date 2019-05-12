@@ -53,15 +53,3 @@ void		print_edges(t_edges *head)
 	}
 	free_edges(head);
 }
-
-void	free_edges(t_edges *head)
-{
-	t_edges *tmp;
-
-	while (head)
-	{
-		tmp = head;
-		head = head->next;
-		free(tmp);
-	}
-}

@@ -11,6 +11,7 @@ SRCS = 	main.c\
 		check_hash.c\
 		get_s-t.c\
 		split.c\
+		free.c\
 
 OBJS = $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
 
