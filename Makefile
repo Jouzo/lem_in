@@ -3,7 +3,10 @@ NAME = lem-in
 INC_LIB = -I libft/includes
 INC = -I includes
 
-SRCS = 	push_swap.c\
+SRCS = 	main.c\
+		list_edges.c\
+		list_vertices.c\
+
 
 OBJS = $(SRCS:.c=.o)
 
