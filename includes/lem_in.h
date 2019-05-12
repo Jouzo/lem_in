@@ -27,8 +27,9 @@ typedef struct              s_edges
 typedef struct				s_data
 {
 	int						ants;
-	int						set_source;
-	int						set_sink;
+	int						set_source : 1;
+	int						set_sink : 1;
+	int						set_vertices : 1;
     char                    *source;
     char                    *sink;
 	t_vertices				*vertices;
@@ -45,7 +46,7 @@ int     get_source(t_data *data, char *s);
 int     get_sink(t_data *data, char *s);
 
 int	    split_count(char **split);
-int     split_arg(char *s, char ***split);
+int     split_arg(t_data *data, char *s, char ***split);
 
 /*
 **  List functions
@@ -60,5 +61,13 @@ t_edges	*ft_edge_list(char const *from, size_t f_len, char const *to, size_t t_l
 void		add_edges(t_edges *head, char *from, char *to);
 void		print_edges(t_edges *head);
 void        free_edges(t_edges *head);
+
+/*
+**  Free functions
+*/
+
+void	free_split(char **split);
+void	free_edges(t_edges *head);
+void	free_vertices(t_vertices *head);
 
 #endif

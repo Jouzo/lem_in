@@ -19,10 +19,10 @@ static int parse_source_sink(char *s, t_data *data)
     }
     else if (strcmp(s, "##end") == 0 && data->set_sink)
         return (-1);
-    return (-1);
+    return (0);
     }
     else
-        return (-1);
+        return (0);
 }
 
 int check_hash(t_data *data, char *s)
