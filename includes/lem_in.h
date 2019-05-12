@@ -2,6 +2,8 @@
 # define LEM_IN_H
 # include <stdio.h>
 # include <stdlib.h>
+# include "../libft/libft.h"
+# include "../libft/get_next_line.h"
 # define MAX(a, b) a <= b ? b : a
 # define MIN(a, b) a <= b ? a : b
 # define MAXINT 2147483647
@@ -12,7 +14,7 @@ typedef struct              s_vertices
     int                     x;
     int                     y;
     char                    *name;
-    t_vertices              *next;
+    struct s_vertices       *next;
 }
                            t_vertices;
 
@@ -20,7 +22,7 @@ typedef struct              s_edges
 {
     char                    *from;
     char                    *to;
-    t_edges                 *next;
+    struct s_edges          *next;
 }                           t_edges;
 
 typedef struct				s_data
@@ -36,6 +38,19 @@ typedef struct				s_data
 **  Parsing functions
 */
 
+/*
+**  List functions
+*/
 
+
+t_vertices	*ft_vertice_list(char const *name, size_t len);
+void		add_vertices(t_vertices *head, char *name);
+void		print_vertices(t_vertices *head);
+void        free_vertices(t_vertices *head);
+
+t_edges	*ft_edge_list(char const *from, size_t f_len, char const *to, size_t t_len);
+void		add_edges(t_edges *head, char *from, char *to);
+void		print_edges(t_edges *head);
+void        free_edges(t_edges *head);
 
 #endif
