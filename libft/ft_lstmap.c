@@ -6,7 +6,7 @@
 /*   By: jdescler <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 18:38:06 by jdescler          #+#    #+#             */
-/*   Updated: 2018/11/13 10:48:05 by jdescler         ###   ########.fr       */
+/*   Updated: 2018/11/14 18:56:09 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 		list = list->next;
 		lst = lst->next;
 	}
+	list->next = NULL;
 	return (ptr);
 }

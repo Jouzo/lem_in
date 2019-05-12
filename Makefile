@@ -6,7 +6,7 @@ INC = -I includes
 SRCS = 	main.c\
 		list_edges.c\
 		list_vertices.c\
-
+		parsing.c\
 
 OBJS = $(SRCS:.c=.o)
 

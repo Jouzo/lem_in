@@ -6,11 +6,11 @@
 /*   By: jdescler <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 17:57:29 by jdescler          #+#    #+#             */
-/*   Updated: 2018/11/15 14:20:08 by jdescler         ###   ########.fr       */
+/*   Updated: 2018/12/05 13:23:56 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
 int				get_line(char **s, char **line, int fd)
 {
@@ -41,10 +41,10 @@ int				get_next_line(const int fd, char **line)
 {
 	int			ret;
 	char		buffer[BUFF_SIZE + 1];
-	static char	*s[4864];
+	static char	*s[FD_MAX];
 	char		*tmp;
 
-	if (fd < 0 || line == NULL)
+	if (fd < 0 || line == NULL || BUFF_SIZE <= 0)
 		return (-1);
 	while ((ret = read(fd, buffer, BUFF_SIZE)) > 0)
 	{

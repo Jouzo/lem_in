@@ -6,7 +6,7 @@
 /*   By: jdescler <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 13:29:32 by jdescler          #+#    #+#             */
-/*   Updated: 2018/11/12 13:29:43 by jdescler         ###   ########.fr       */
+/*   Updated: 2018/11/14 18:25:02 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,23 @@ char	*ft_strcasestr(const char *haystack, const char *needle)
 {
 	int		i;
 	int		j;
-	char	*s1;
-	char	*s2;
 
 	i = 0;
-	if (!(s1 = (char *)malloc(sizeof(char) * ft_strlen(haystack))))
-		return (NULL);
-	if (!(s2 = (char *)malloc(sizeof(char) * ft_strlen(needle))))
-		return (NULL);
-	if (needle == NULL)
+	if (ft_strlen(needle) == 0)
 		return ((char *)haystack);
-	s1 = ft_strtolower((char *)haystack);
-	s2 = ft_strtolower((char *)needle);
-	while (s1[i])
+	while (haystack[i])
 	{
-		j = 0;
-		while (s1[i + j] == s2[j])
-			j++;
-		if (s2[j] == '\0')
-			return ((char *)&haystack[i]);
+		if ((ft_tolower(haystack[i]) == ft_tolower(needle[0])))
+		{
+			j = 1;
+			while (ft_tolower(haystack[i + j]) == ft_tolower(needle[j])
+					&& needle[j])
+				j++;
+			if (needle[j] == '\0')
+				return ((char *)&haystack[i]);
+			else if (!(haystack + i + j))
+				return (NULL);
+		}
 		i++;
 	}
 	return (NULL);

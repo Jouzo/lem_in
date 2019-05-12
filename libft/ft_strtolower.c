@@ -6,7 +6,7 @@
 /*   By: jdescler <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 19:54:50 by jdescler          #+#    #+#             */
-/*   Updated: 2018/11/09 19:54:53 by jdescler         ###   ########.fr       */
+/*   Updated: 2018/11/14 18:22:01 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 char	*ft_strtolower(char *str)
 {
-	char *res;
+	char *ptr;
 
-	if (!(res = (char *)malloc(sizeof(char) * ft_strlen(str))))
-		return (NULL);
+	ptr = str;
 	while (*str)
-		*res++ = ft_tolower(*str++);
-	return (res);
+	{
+		*str = ft_tolower(*str);
+		str++;
+	}
+	return (ptr);
 }

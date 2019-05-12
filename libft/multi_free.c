@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mega_malloc.c                                      :+:      :+:    :+:   */
+/*   multi_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdescler <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/13 17:37:42 by jdescler          #+#    #+#             */
-/*   Updated: 2018/11/14 10:47:23 by jdescler         ###   ########.fr       */
+/*   Created: 2018/12/05 13:18:35 by jdescler          #+#    #+#             */
+/*   Updated: 2018/12/05 13:21:39 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_mega_malloc(char *s, char c)
+void	multi_free(void *first, void *second)
 {
-	char **arr;
-
-	if (!(arr = (char**)malloc(sizeof(char*) * (ft_word_count(s, c) + 1))))
-		return (NULL);
-	return (arr);
+	free(first);
+	free(second);
 }
