@@ -10,23 +10,19 @@ t_edges	*ft_edge_list(char const *from, size_t f_len, char const *to, size_t t_l
 		list->from = NULL;
     else
 	{
-		if (!(list->from = malloc(sizeof(char) * f_len)))
-			return (NULL);
-		ft_memcpy(list->from, from, f_len);;
+		list->from = ft_strdup(from);
 	}
 	if (!(to))
 		list->to = NULL;
 	else
 	{
-		if (!(list->to = malloc(sizeof(char) * t_len)))
-			return (NULL);
-		ft_memcpy(list->to, to, t_len);
+		list->to = ft_strdup(to);
 	}	
 	list->next = NULL;
 	return (list);
 }
 
-void		add_edges(t_edges *head, char *from, char *to)
+int		add_edges(t_edges *head, char *from, char *to)
 {
 	t_edges *current;
 
@@ -35,21 +31,21 @@ void		add_edges(t_edges *head, char *from, char *to)
 		current = current->next;
 	if (!(current->next = (t_edges*)
 		malloc(sizeof(t_edges))))
-		return ;
+		return (-1);
 	current->next->from = ft_strdup(from);
 	current->next->to = ft_strdup(to);
 	current->next->next = NULL;
+	return (1);
 }
 
 void		print_edges(t_edges *head)
 {
     t_edges *current;
 
-	current = head->next;
+	current = head;
 	while (current != NULL)
 	{
-		printf("from : %s to: %s\n", current->from, current->to);
+		printf("edge from : %s to: %s\n", current->from, current->to);
 		current = current->next;
 	}
-	free_edges(head);
 }

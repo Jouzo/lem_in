@@ -9,13 +9,13 @@ SRCS = 	main.c\
 		list_vertices.c\
 		parsing.c\
 		check_hash.c\
-		get_s-t.c\
+		get_source_sink.c\
 		split.c\
 		free.c\
 
 OBJS = $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
 
-CC = gcc -O3 -Iincludes/
+CC = gcc -O3 -g -Iincludes/
 CFLAGS = -Wall -Werror -Wextra
 LIBFT = libft/libft.a
 

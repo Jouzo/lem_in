@@ -2,10 +2,9 @@
 
 static int parse_source_sink(char *s, t_data *data)
 {
-    printf("value of s in parse source sink : %s\n, *set_source : %d\n, *set_sink %d : \n", s, data->set_source, data->set_sink);
     if (s)
     {
-    if (strcmp(s, "##start") == 0 && data->set_source == 0)
+    if (strcmp(s, "##start") == 0 && !data->set_source)
     {
         data->set_source = 1;
         return (1);
@@ -22,12 +21,13 @@ static int parse_source_sink(char *s, t_data *data)
     return (0);
     }
     else
-        return (0);
+        return (-1);
 }
 
 int check_hash(t_data *data, char *s)
 {
-	printf("inside parse %d %d\n", data->set_sink, data->set_source);
+    if (s)
+    {
 	if (s[0] == '#' && s[1] == '#')
 	{
 		if (parse_source_sink(s, data) == -1)
@@ -39,4 +39,7 @@ int check_hash(t_data *data, char *s)
 		return (1);
 	}
     return (1);
+    }
+    else 
+        return (-1);
 }
