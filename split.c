@@ -30,7 +30,7 @@ int split_arg(t_data *data, char *s, char ***split)
 			return (-1);
         *split = ft_strsplit(s, '-');
 		data->set_vertices = 1;
-        return (1);
+        return (2);
     }
     else
         return (-1);
