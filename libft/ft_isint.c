@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_stralloc.c                                      :+:      :+:    :+:   */
+/*   ft_isint.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdescler <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/12 13:30:58 by jdescler          #+#    #+#             */
-/*   Updated: 2018/11/12 13:31:03 by jdescler         ###   ########.fr       */
+/*   Created: 2018/12/09 20:54:44 by jdescler          #+#    #+#             */
+/*   Updated: 2018/12/15 12:21:44 by mmovahhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_stralloc(char *s)
+int		ft_isint(char *s)
 {
-	char *res;
+	size_t i;
 
-	if (!(res = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1))))
-		return (NULL);
-	return (res);
+	i = 0;
+	while (s[i])
+	{
+		if (s[0] == '-')
+			i++;
+		if (!ft_isdigit(s[i]))
+			break;
+		i++;
+	}
+	return (i == ft_strlen(s));
 }

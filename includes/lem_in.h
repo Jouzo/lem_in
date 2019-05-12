@@ -2,8 +2,7 @@
 # define LEM_IN_H
 # include <stdio.h>
 # include <stdlib.h>
-# include "../libft/libft.h"
-# include "../libft/get_next_line.h"
+# include "../libft/includes/libft.h"
 # define MAX(a, b) a <= b ? b : a
 # define MIN(a, b) a <= b ? a : b
 # define MAXINT 2147483647
@@ -37,6 +36,9 @@ typedef struct				s_data
 /*
 **  Parsing functions
 */
+
+int    parse(t_data *data, char *s);
+
 
 /*
 **  List functions

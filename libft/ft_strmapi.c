@@ -6,7 +6,7 @@
 /*   By: jdescler <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/10 15:13:48 by jdescler          #+#    #+#             */
-/*   Updated: 2018/11/12 13:22:21 by jdescler         ###   ########.fr       */
+/*   Updated: 2018/11/14 18:02:45 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	i = 0;
 	if (s)
 	{
-		if (!(res = ft_stralloc((char*)s)))
+		if (!(res = ft_strnew(ft_strlen(s))))
 			return (NULL);
 		while (s[i])
 		{
