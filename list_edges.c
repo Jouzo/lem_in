@@ -1,6 +1,6 @@
 #include "lem_in.h"
 
-int			check_edges_names(t_vertices *head, char *from, char *to)
+int			check_edges_name(t_vertices *head, char *from, char *to)
 {
 	t_vertices *current;
 	int ret;
