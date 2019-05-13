@@ -34,18 +34,29 @@ int     main(int ac, char **av)
 	(void)av;
 	(void)ac;
 	i = 1;
-	// if (ac < 2)
-	// 	return (0);
     if ((ret = init_data(&data)) <= 0) 
 	{
 		if (ret == -1)
 		{
-		write(1, "Error\n", 5);
-		return (-1);
+			if (data.source && data.sink && data.ants)
+			{
+				// DO LEM-IN ALGO
+				printf("current state :\n");
+				printf("source : %s\nsink : %s\nants : %s\n : %s\n", data.source, data.sink, data.ants);
+				printf("Vertices :\n");
+				print_vertices(data.vertices);
+				printf("Edges :\n");
+				print_edges(data.edges);
+			}
+			else
+			{
+				write(1, "Error\n", 5);
+				return (-1);
+			}
 		}
 		else if (ret == 0)
 		{
-
+			write(1, "No ants\n", 8);
 		}
 	}
     return (0);
