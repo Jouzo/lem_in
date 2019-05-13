@@ -9,7 +9,8 @@ int			check_edges_name(t_vertices *head, char *from, char *to)
 	current = head;
 	while (current != NULL)
 	{
-		if (current->name == from || current->name == to)
+		if (ft_strcmp(current->name, from) == 0
+			|| ft_strcmp(current->name, to) == 0)
 		{
 			ret++;
 		}
@@ -21,6 +22,7 @@ int			check_edges_name(t_vertices *head, char *from, char *to)
 	}
 	else
 	{
+		printf("return -1 check edges\n");
 		return (-1);
 	}
 }
