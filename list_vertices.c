@@ -5,10 +5,12 @@ int			check_vertices_name(t_vertices *head, char *name)
 	t_vertices *current;
 
 	current = head;
+	printf("inside check vertices name\n");
 	while (current != NULL)
 	{
-		if (current->name == name)
+		if (ft_strcmp(current->name,name) == 0)
 		{
+			printf("return -1 check vertices\n");
 			return (-1);
 		}
 		current = current->next;
