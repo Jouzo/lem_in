@@ -1,5 +1,30 @@
 #include "lem_in.h"
 
+int			check_edges_names(t_vertices *head, char *from, char *to)
+{
+	t_vertices *current;
+	int ret;
+
+	ret = 0;
+	current = head;
+	while (current != NULL)
+	{
+		if (current->name == from || current->name == to)
+		{
+			ret++;
+		}
+		current = current->next;
+	}
+	if (ret == 2)
+	{
+		return (1);
+	}
+	else
+	{
+		return (-1);
+	}
+}
+
 t_edges	*ft_edge_list(char const *from, char const *to)
 {
 	t_edges *list;

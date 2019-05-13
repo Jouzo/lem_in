@@ -19,7 +19,6 @@ int			check_vertices_name(t_vertices *head, char *name)
 t_vertices	*ft_vertice_list(char const *name, int x, int y)
 {
 	t_vertices *list;
-	printf("value of name %s\n", name);
 	if (!(list = (t_vertices*)malloc(sizeof(t_vertices))))
 		return (NULL);
 	if (!name)

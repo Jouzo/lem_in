@@ -15,6 +15,8 @@ int parse_ants(t_data *data, char *s)
 
 int parse_vertices(t_data *data, char **split)
 {   
+    if (!check_vertices_names(data->vertices, split[0]))
+    {
 	if (!data->vertices)
 	{
         if (!(data->vertices = ft_vertice_list(split[0], ft_atoi(split[1]), ft_atoi(split[2]))))
@@ -26,13 +28,20 @@ int parse_vertices(t_data *data, char **split)
             return (free_split(split, -1));
     }
     return (free_split(split, 1));
+    }
+    else
+    {
+        return (free_split(split, -1));
+    }
 }
 
 int parse_edges(t_data *data, char **split)
 {   
+    if (!check_edges_names(data->vertices, split[0], split[1]))
+    {
 	if (!data->edges)
 	{
-        if (!(data->edges = ft_vertice_list(split[0], ft_atoi(split[1]), ft_atoi(split[2]))))
+        if (!(data->edges = ft_edge_list(split[0], split[1])))
             return (free_split(split, -1));
     }	
 	else
@@ -41,6 +50,10 @@ int parse_edges(t_data *data, char **split)
             return (free_split(split, -1));
     }
     return (free_split(split, 1));
+    }
+    else {
+        return (free_split(split, -1));
+    }
 }
 
 int parse_VE(t_data *data, char *s)
