@@ -61,7 +61,7 @@ t_edges     *ft_edge_list(char const *from, char const *to);
 int    		add_edges(t_edges *head, char *from, char *to);
 void		print_edges(t_edges *head);
 void        free_edges(t_edges *head);
-int			check_edges_names(t_vertices *head, char *from, char *to);
+int			check_edges_name(t_vertices *head, char *from, char *to);
 
 /*
 **  Free functions
