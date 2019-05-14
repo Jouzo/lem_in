@@ -1,4 +1,4 @@
-#include "lem_in.h"
+#include "parsing.h"
 
 int				check_existing_edges(t_edges *head, char *from, char *to)
 {
@@ -72,19 +72,15 @@ t_edges			*new_edge(char const *from, char const *to)
 	return (list);
 }
 
-int				add_edges(t_edges *head, char *from, char *to)
+int				add_edge(t_edges *head, char *from, char *to)
 {
-	t_edges *current;
+	t_edges *new;
 
-	current = head;
-	while (current->next != NULL)
-		current = current->next;
-	if (!(current->next = (t_edges*)
-				malloc(sizeof(t_edges))))
+	new = head;
+	while (new->next)
+		new = new->next;
+	if (!(new->next = new_edge(from, to)))
 		return (-1);
-	current->next->from = ft_strdup(from);
-	current->next->to = ft_strdup(to);
-	current->next->next = NULL;
 	return (1);
 }
 

@@ -1,11 +1,11 @@
-#ifndef LEM_IN_H
-# define LEM_IN_H
+#ifndef PARSING_H
+# define PARSING_H
 # include <stdio.h>
 # include <stdlib.h>
-# include "../libft/includes/libft.h"
+# include "../../libft/includes/libft.h"
 # define MAX(a, b) a <= b ? b : a
 # define MIN(a, b) a <= b ? a : b
-# define MAXINT 2147483647
+# define INT_MAX 2147483647
 
 typedef struct				s_vertices 
 {
@@ -49,17 +49,16 @@ int			split_arg(t_data *data, char *s, char ***split);
 **  List functions
 */
 
-t_vertices	*ft_vertice_list(char const *name, int x, int y);
-int 		add_vertices(t_vertices *head,
+t_vertices	*new_vertex(char const *name, int x, int y);
+int 		add_vertex(t_vertices *head,
 				char *name, int x, int y);
 void		print_vertices(t_vertices *head);
-void        free_vertices(t_vertices *head);
 int			check_vertices_name(t_vertices *head,
 									char *name);
+int			check_coordinates(char *x, char *y);
 t_edges     *new_edge(char const *from, char const *to);
-int    		add_edges(t_edges *head, char *from, char *to);
+int    		add_edge(t_edges *head, char *from, char *to);
 void		print_edges(t_edges *head);
-void        free_edges(t_edges *head);
 int			check_edges_name(t_vertices *head,
 					char *from, char *to);
 

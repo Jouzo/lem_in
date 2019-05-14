@@ -9,12 +9,15 @@ OBJS = $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
 
 CC = gcc -O3 -g
 CFLAGS = -Wall -Werror -Wextra
-PARSING = parsing/parsing.a
+PARSING = parsing/libparsing.a
 LIBFT = libft/libft.a
+
 
 all: $(NAME)
 
-$(PARSING):
+FORCE: ;
+
+$(PARSING): FORCE
 	@make -C parsing
 
 $(NAME): $(PARSING) $(LIBFT) $(OBJS) 

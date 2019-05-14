@@ -6,7 +6,7 @@
 #    By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 18:10:13 by jdescler          #+#    #+#              #
-#    Updated: 2019/05/12 14:58:36 by jdescler         ###   ########.fr        #
+#    Updated: 2019/05/14 23:36:44 by jdescler         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = libft.a
 
 SRCS = ft_abs.c\
 	   ft_atoi.c\
+	   ft_atoll.c\
 	   ft_bzero.c\
 	   ft_isalnum.c\
 	   ft_isalpha.c\

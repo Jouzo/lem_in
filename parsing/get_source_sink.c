@@ -1,4 +1,4 @@
-#include "lem_in.h"
+#include "parsing.h"
 
 int		get_source_sink(t_data *data, char *s, int st)
 {
@@ -10,13 +10,13 @@ int		get_source_sink(t_data *data, char *s, int st)
 		return (free_split(split, -1));
 	if (!data->vertices)
 	{
-		if (!(data->vertices = ft_vertice_list(split[0],
+		if (!(data->vertices = new_vertex(split[0],
 				ft_atoi(split[1]), ft_atoi(split[2]))))
 			return (free_split(split, -1));
 	}
 	else
 	{
-		if (add_vertices(data->vertices, split[0],
+		if (add_vertex(data->vertices, split[0],
 				ft_atoi(split[1]), ft_atoi(split[2])) == -1)
 			return (free_split(split, -1));
 	}
