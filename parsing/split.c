@@ -1,6 +1,6 @@
 #include "lem_in.h"
 
-int	split_count(char **split)
+int		split_count(char **split)
 {
 	int i;
 
@@ -10,7 +10,7 @@ int	split_count(char **split)
 	return (i);
 }
 
-int split_arg(t_data *data, char *s, char ***split)
+int		split_arg(t_data *data, char *s, char ***split)
 {
 	int i;
 

@@ -1,8 +1,7 @@
 #include "lem_in.h"
 
-int parse_ants(t_data *data, char *s)
+int		parse_ants(t_data *data, char *s)
 {
-	// printf("inside parse ants\n");
 	if (strcmp(s, "0") == 0)
 		return (0);
 	else if (atoi(s) <= 0)
@@ -21,19 +20,20 @@ int parse_ants(t_data *data, char *s)
 	}
 }
 
-int parse_vertices(t_data *data, char **split)
-{   
-	// printf("inside parse vertices\n");
+int		parse_vertices(t_data *data, char **split)
+{
 	if (check_vertices_name(data->vertices, split[0]) > 0)
 	{
 		if (!data->vertices)
 		{
-			if (!(data->vertices = ft_vertice_list(split[0], ft_atoi(split[1]), ft_atoi(split[2]))))
+			if (!(data->vertices = ft_vertice_list(split[0],
+				ft_atoi(split[1]), ft_atoi(split[2]))))
 				return (free_split(split, -1));
-		}	
+		}
 		else
 		{
-			if (add_vertices(data->vertices, split[0], ft_atoi(split[1]), ft_atoi(split[2])) == -1)
+			if (add_vertices(data->vertices, split[0],
+				ft_atoi(split[1]), ft_atoi(split[2])) == -1)
 				return (free_split(split, -1));
 		}
 		return (free_split(split, 1));
@@ -44,16 +44,15 @@ int parse_vertices(t_data *data, char **split)
 	}
 }
 
-int parse_edges(t_data *data, char **split)
-{   
-	// printf("inside parse edges\n");
+int		parse_edges(t_data *data, char **split)
+{
 	if (check_edges_name(data->vertices, split[0], split[1]) > 0)
 	{
 		if (!data->edges)
 		{
 			if (!(data->edges = new_edge(split[0], split[1])))
 				return (free_split(split, -1));
-		}	
+		}
 		else
 		{
 			if (add_edges(data->edges, split[0], split[1]) == -1)
@@ -67,10 +66,10 @@ int parse_edges(t_data *data, char **split)
 	}
 }
 
-int parse_VE(t_data *data, char *s)
+int		parse_ve(t_data *data, char *s)
 {
-	char **split;
-	int ve;
+	char	**split;
+	int		ve;
 
 	ve = 0;
 	if ((ve = split_arg(data, s, &split)) == -1)
@@ -90,7 +89,7 @@ int parse_VE(t_data *data, char *s)
 	return (1);
 }
 
-int parse(t_data *data, char *s)
+int		parse(t_data *data, char *s)
 {
 	if (s[0] == '#')
 		return (check_hash(data, s));
@@ -110,7 +109,7 @@ int parse(t_data *data, char *s)
 			return (parse_ants(data, s));
 		else
 		{
-			return parse_VE(data, s);
+			return (parse_ve(data, s));
 		}
 	}
 	return (1);

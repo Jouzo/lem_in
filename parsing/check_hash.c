@@ -1,6 +1,6 @@
 #include "lem_in.h"
 
-static int parse_source_sink(char *s, t_data *data)
+static int		parse_source_sink(char *s, t_data *data)
 {
 	if (s)
 	{
@@ -24,7 +24,7 @@ static int parse_source_sink(char *s, t_data *data)
 		return (-1);
 }
 
-int check_hash(t_data *data, char *s)
+int				check_hash(t_data *data, char *s)
 {
 	if (s)
 	{
@@ -39,6 +39,6 @@ int check_hash(t_data *data, char *s)
 		}
 		return (1);
 	}
-	else 
+	else
 		return (-1);
 }
