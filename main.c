@@ -1,12 +1,22 @@
 #include "lem_in.h"
 
+void	print_data(t_data *data)
+{
+	printf("current state :\n");
+	printf("source : %s\nsink : %s\nants : %d\n", data->source, data->sink, data->ants);
+	// printf("Vertices :\n");
+	print_vertices(data->vertices);
+	printf("Edges :\n");
+	print_edges(data->edges);
+}
+
 int   init_data(t_data *data)
 {    
-    char	*line;
+	char	*line;
 	int 	ret;
 
 	ret = 1;
-     while (get_next_line(0, &line) > 0)
+	while (get_next_line(0, &line) > 0)
 	{
 		if ((ret = parse(data, line)) <= 0)
 		{
@@ -14,13 +24,6 @@ int   init_data(t_data *data)
 			return (ret);
 		}
 		free(line);
-		if (data->ants)
-			printf("value of ants : %d\n", data->ants);
-		if (data->vertices) {
-			print_vertices(data->vertices);
-		}
-		if (data->edges)
-			print_edges(data->edges);
 	}
 	return (ret);
 }
@@ -29,28 +32,25 @@ int     main(int ac, char **av)
 {
 	int		i;
 	int		ret;
-    t_data data;
+	t_data data;
 	ft_bzero(&data, sizeof(t_data));
 	(void)av;
 	(void)ac;
 	i = 1;
-    if ((ret = init_data(&data)) <= 0) 
+	if ((ret = init_data(&data)) <= 0) 
 	{
 		if (ret == -1)
 		{
-			if (data.source && data.sink && data.ants)
+			if (data.source && data.sink && data.ants && data.edges)
 			{
 				// DO LEM-IN ALGO
-				printf("current state :\n");
-				printf("source : %s\nsink : %s\nants : %d\n", data.source, data.sink, data.ants);
-				printf("Vertices :\n");
-				print_vertices(data.vertices);
-				printf("Edges :\n");
-				print_edges(data.edges);
+				// print_data(&data);
+				// printf("now calculate\n");
 				free_data(&data);
 			}
 			else
 			{
+				// print_data(&data);
 				free_data(&data);
 				write(1, "Error\n", 5);
 				return (-1);
@@ -62,5 +62,11 @@ int     main(int ac, char **av)
 			write(1, "No ants\n", 8);
 		}
 	}
-    return (0);
+	else
+	{	
+		// DO LEM-IN ALGO
+		print_data(&data);
+		free_data(&data);
+	}
+	return (0);
 }
