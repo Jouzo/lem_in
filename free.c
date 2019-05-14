@@ -8,6 +8,7 @@ void	free_vertices(t_vertices *head)
 	{
 		tmp = head;
 		head = head->next;
+		free(tmp->name);
 		free(tmp);
 	}
 }
@@ -20,6 +21,8 @@ void	free_edges(t_edges *head)
 	{
 		tmp = head;
 		head = head->next;
+		free(tmp->from);
+		free(tmp->to);
 		free(tmp);
 	}
 }
@@ -44,4 +47,8 @@ void	free_data(t_data *data)
 		free_vertices(data->vertices);
 	if (data->edges)
 		free_edges(data->edges);
+	if (data->source)
+		free(data->source);
+	if (data->sink)
+		free(data->sink);
 }

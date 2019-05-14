@@ -8,12 +8,12 @@ int			check_existing_edges(t_edges *head, char *from, char *to)
 	while (current != NULL)
 	{
 		if (ft_strcmp(current->from, from) == 0
-			&& ft_strcmp(current->to, to) == 0)
+				&& ft_strcmp(current->to, to) == 0)
 		{
 			return (-1);
 		}
 		if (ft_strcmp(current->from, to) == 0
-			&& ft_strcmp(current->to, from) == 0)
+				&& ft_strcmp(current->to, from) == 0)
 		{
 			return (-1);
 		}
@@ -32,7 +32,7 @@ int			check_edges_name(t_vertices *head, char *from, char *to)
 	while (current != NULL)
 	{
 		if (ft_strcmp(current->name, from) == 0
-			|| ft_strcmp(current->name, to) == 0)
+				|| ft_strcmp(current->name, to) == 0)
 		{
 			ret++;
 		}
@@ -44,7 +44,6 @@ int			check_edges_name(t_vertices *head, char *from, char *to)
 	}
 	else
 	{
-		printf("return -1 check edges\n");
 		return (-1);
 	}
 }
@@ -57,7 +56,7 @@ t_edges	*ft_edge_list(char const *from, char const *to)
 		return (NULL);
 	if (!(from))
 		list->from = NULL;
-    else
+	else
 	{
 		if (!(list->from = ft_strdup(from)))
 			return (NULL);
@@ -81,7 +80,7 @@ int		add_edges(t_edges *head, char *from, char *to)
 	while (current->next != NULL)
 		current = current->next;
 	if (!(current->next = (t_edges*)
-		malloc(sizeof(t_edges))))
+				malloc(sizeof(t_edges))))
 		return (-1);
 	current->next->from = ft_strdup(from);
 	current->next->to = ft_strdup(to);
@@ -91,7 +90,7 @@ int		add_edges(t_edges *head, char *from, char *to)
 
 void		print_edges(t_edges *head)
 {
-    t_edges *current;
+	t_edges *current;
 
 	current = head;
 	while (current != NULL)
