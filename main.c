@@ -39,9 +39,9 @@ int     main(int ac, char **av)
 	i = 1;
 	if ((ret = init_data(&data)) <= 0) 
 	{
-		if (ret == -1)
+		if (ret < 0)
 		{
-			if (data.source && data.sink && data.ants && data.edges)
+			if (data.source && data.sink && data.ants)
 			{
 				// DO LEM-IN ALGO
 				// print_data(&data);
@@ -62,11 +62,6 @@ int     main(int ac, char **av)
 			write(1, "No ants\n", 8);
 		}
 	}
-	else
-	{	
-		// DO LEM-IN ALGO
-		print_data(&data);
-		free_data(&data);
-	}
+	free_data(&data);
 	return (0);
 }

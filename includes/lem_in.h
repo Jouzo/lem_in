@@ -56,7 +56,7 @@ void		print_vertices(t_vertices *head);
 void        free_vertices(t_vertices *head);
 int			check_vertices_name(t_vertices *head,
 									char *name);
-t_edges     *ft_edge_list(char const *from, char const *to);
+t_edges     *new_edge(char const *from, char const *to);
 int    		add_edges(t_edges *head, char *from, char *to);
 void		print_edges(t_edges *head);
 void        free_edges(t_edges *head);
