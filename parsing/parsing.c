@@ -1,4 +1,4 @@
-#include "lem_in.h"
+#include "parsing.h"
 
 int		parse_ants(t_data *data, char *s)
 {
@@ -10,6 +10,8 @@ int		parse_ants(t_data *data, char *s)
 	{
 		if (ft_isint(s))
 		{
+			if (ft_atoll(s) > INT_MAX)
+				return (-1);
 			data->ants = atoi(s);
 			return (1);
 		}
@@ -22,17 +24,18 @@ int		parse_ants(t_data *data, char *s)
 
 int		parse_vertices(t_data *data, char **split)
 {
-	if (check_vertices_name(data->vertices, split[0]) > 0)
+	if (check_vertices_name(data->vertices, split[0]) > 0
+			&& check_coordinates(split[1], split[2]))
 	{
 		if (!data->vertices)
 		{
-			if (!(data->vertices = ft_vertice_list(split[0],
+			if (!(data->vertices = new_vertex(split[0],
 				ft_atoi(split[1]), ft_atoi(split[2]))))
 				return (free_split(split, -1));
 		}
 		else
 		{
-			if (add_vertices(data->vertices, split[0],
+			if (add_vertex(data->vertices, split[0],
 				ft_atoi(split[1]), ft_atoi(split[2])) == -1)
 				return (free_split(split, -1));
 		}
@@ -55,7 +58,7 @@ int		parse_edges(t_data *data, char **split)
 		}
 		else
 		{
-			if (add_edges(data->edges, split[0], split[1]) == -1)
+			if (add_edge(data->edges, split[0], split[1]) == -1)
 				return (free_split(split, -1));
 		}
 		return (free_split(split, 1));

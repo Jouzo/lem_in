@@ -1,4 +1,4 @@
-#include "includes/lem_in.h"
+#include "parsing/includes/parsing.h"
 
 void	print_data(t_data *data)
 {
@@ -44,13 +44,13 @@ int     main(int ac, char **av)
 			if (data.source && data.sink && data.ants)
 			{
 				// DO LEM-IN ALGO
-				// print_data(&data);
+				print_data(&data);
 				// printf("now calculate\n");
 				free_data(&data);
 			}
 			else
 			{
-				// print_data(&data);
+				print_data(&data);
 				free_data(&data);
 				write(1, "Error\n", 5);
 				return (-1);
@@ -62,6 +62,9 @@ int     main(int ac, char **av)
 			write(1, "No ants\n", 8);
 		}
 	}
+	else {
+	print_data(&data);
 	free_data(&data);
+	}
 	return (0);
 }

@@ -1,7 +1,7 @@
-NAME = parsing.a
+NAME = libparsing.a
 
 INC_LIB = -I ../libft/includes
-INC = -I ../includes
+INC = -I includes
 OBJDIR = obj
 
 SRCS = 	list_edges.c\

@@ -6,7 +6,7 @@
 /*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 16:59:15 by jdescler          #+#    #+#             */
-/*   Updated: 2019/05/12 14:53:14 by jdescler         ###   ########.fr       */
+/*   Updated: 2019/05/14 23:36:31 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ void				ft_putnbr_fd(int n, int fd);
 
 char				*ft_itoa(int n);
 int					ft_atoi(const char *str);
+long long			ft_atoll(const char *str);
 int					ft_isalnum(int c);
 int					ft_isint(char *s);
 int					ft_isalpha(int c);

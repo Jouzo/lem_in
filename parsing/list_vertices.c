@@ -1,4 +1,9 @@
-#include "lem_in.h"
+#include "parsing.h"
+
+int				check_coordinates(char *x, char *y)
+{
+	return (ft_isint(x) && ft_isint(y));
+}
 
 int				check_vertices_name(t_vertices *head, char *name)
 {
@@ -16,7 +21,7 @@ int				check_vertices_name(t_vertices *head, char *name)
 	return (1);
 }
 
-t_vertices		*ft_vertice_list(char const *name, int x, int y)
+t_vertices		*new_vertex(char const *name, int x, int y)
 {
 	t_vertices *list;
 
@@ -35,21 +40,15 @@ t_vertices		*ft_vertice_list(char const *name, int x, int y)
 	return (list);
 }
 
-int				add_vertices(t_vertices *head, char *name, int x, int y)
+int				add_vertex(t_vertices *head, char *name, int x, int y)
 {
-	t_vertices *current;
+	t_vertices *new;
 
-	current = head;
-	while (current->next != NULL)
-		current = current->next;
-	if (!(current->next = (t_vertices*)
-				malloc(sizeof(t_vertices))))
+	new = head;
+	while (new->next != NULL)
+		new = new->next;
+	if (!(new->next = new_vertex(name, x, y)))
 		return (-1);
-	if (!(current->next->name = ft_strdup(name)))
-		return (-1);
-	current->next->x = x;
-	current->next->y = y;
-	current->next->next = NULL;
 	return (1);
 }
 
