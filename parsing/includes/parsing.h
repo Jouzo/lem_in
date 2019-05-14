@@ -7,19 +7,18 @@
 # define MIN(a, b) a <= b ? a : b
 # define INT_MAX 2147483647
 
-typedef struct				s_vertices 
+typedef struct				s_vertices
 {
-    int						x;
-    int						y;
-    char					*name;
-	struct s_vertices			*next;
-}
-                           t_vertices;
+	int						x;
+	int						y;
+	char					*name;
+	struct s_vertices		*next;
+}							t_vertices;
 
-typedef struct				s_edges 
+typedef struct				s_edges
 {
-    char					*from;
-    char					*to;
+	char					*from;
+	char					*to;
 	struct s_edges			*next;
 }							t_edges;
 
@@ -29,10 +28,10 @@ typedef struct				s_data
 	int						set_source;
 	int						set_sink;
 	int						set_vertices;
-    char					*source;
-    char					*sink;
+	char					*source;
+	char					*sink;
 	t_vertices				*vertices;
-    t_edges					*edges;
+	t_edges					*edges;
 }							t_data;
 
 /*
@@ -50,25 +49,25 @@ int			split_arg(t_data *data, char *s, char ***split);
 */
 
 t_vertices	*new_vertex(char const *name, int x, int y);
-int 		add_vertex(t_vertices *head,
+int			add_vertex(t_vertices *head,
 				char *name, int x, int y);
 void		print_vertices(t_vertices *head);
 int			check_vertices_name(t_vertices *head,
-									char *name);
+				char *name);
 int			check_coordinates(char *x, char *y);
-t_edges     *new_edge(char const *from, char const *to);
-int    		add_edge(t_edges *head, char *from, char *to);
+t_edges		*new_edge(char const *from, char const *to);
+int			add_edge(t_edges *head, char *from, char *to);
 void		print_edges(t_edges *head);
 int			check_edges_name(t_vertices *head,
-					char *from, char *to);
+				char *from, char *to);
 
 /*
 **  Free functions
 */
 
-int     	free_split(char **split, int ret);
-void	    free_edges(t_edges *head);
-void	    free_vertices(t_vertices *head);
-void        free_data(t_data *data);
+int			free_split(char **split, int ret);
+void		free_edges(t_edges *head);
+void		free_vertices(t_vertices *head);
+void		free_data(t_data *data);
 
 #endif
