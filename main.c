@@ -47,15 +47,18 @@ int     main(int ac, char **av)
 				print_vertices(data.vertices);
 				printf("Edges :\n");
 				print_edges(data.edges);
+				free_data(data);
 			}
 			else
 			{
+				free_data(data);
 				write(1, "Error\n", 5);
 				return (-1);
 			}
 		}
 		else if (ret == 0)
 		{
+			free_data(data);
 			write(1, "No ants\n", 8);
 		}
 	}

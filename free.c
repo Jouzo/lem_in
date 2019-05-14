@@ -37,3 +37,11 @@ int		free_split(char **split, int ret)
 	free(split);
 	return (ret);
 }
+
+void	free_data(t_data *data)
+{
+	if (data->vertices)
+		free_vertices(data->vertices);
+	if (data->edges)
+		free_edges(data->edges);
+}
