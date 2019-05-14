@@ -51,7 +51,7 @@ int parse_edges(t_data *data, char **split)
 	{
 		if (!data->edges)
 		{
-			if (!(data->edges = ft_edge_list(split[0], split[1])))
+			if (!(data->edges = new_edge(split[0], split[1])))
 				return (free_split(split, -1));
 		}	
 		else

@@ -48,7 +48,7 @@ int			check_edges_name(t_vertices *head, char *from, char *to)
 	}
 }
 
-t_edges	*ft_edge_list(char const *from, char const *to)
+t_edges	*new_edge(char const *from, char const *to)
 {
 	t_edges *list;
 
