@@ -70,5 +70,6 @@ int			check_edges_name(t_vertices *head, char *from, char *to);
 int     	free_split(char **split, int ret);
 void	    free_edges(t_edges *head);
 void	    free_vertices(t_vertices *head);
+void        free_data(t_data *data);
 
 #endif
