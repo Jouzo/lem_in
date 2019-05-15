@@ -4,7 +4,8 @@ void	print_data(t_data *data)
 {
 	printf("current state :\n");
 	printf("source : %s\nsink : %s\nants : %d\n", data->source, data->sink, data->ants);
-	// printf("Vertices :\n");
+	printf("Vertices :\n");
+	swap_source(data);
 	print_vertices(data->vertices);
 	printf("Edges :\n");
 	print_edges(data->edges);

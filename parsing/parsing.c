@@ -35,7 +35,7 @@ int		parse_vertices(t_data *data, char **split)
 		}
 		else
 		{
-			if (add_vertex(data->vertices, split[0],
+			if (add_vertex(&data->vertices, split[0],
 				ft_atoi(split[1]), ft_atoi(split[2])) == -1)
 				return (free_split(split, -1));
 		}
@@ -58,7 +58,7 @@ int		parse_edges(t_data *data, char **split)
 		}
 		else
 		{
-			if (add_edge(data->edges, split[0], split[1]) == -1)
+			if (add_edge(&data->edges, split[0], split[1]) == -1)
 				return (free_split(split, -1));
 		}
 		return (free_split(split, 1));

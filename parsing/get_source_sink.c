@@ -1,5 +1,30 @@
 #include "parsing.h"
 
+void	swap_source(t_data *data)
+{
+	if (!data->source || ft_strcmp(data->source, data->vertices->name) == 0
+		|| !data->vertices->next)
+			return ;
+	t_vertices *tmp_source;
+	t_vertices *tmp;
+	t_vertices *prev;	
+	prev = data->vertices;
+	tmp = data->vertices->next;
+	while (tmp)
+	{
+		if (ft_strcmp(data->source, tmp->name) == 0)
+		{
+			tmp_source = tmp;
+			prev->next = tmp->next;
+		}
+		prev = tmp;
+		tmp = tmp->next;
+	}
+	tmp_source->next = data->vertices;
+	data->vertices = tmp_source;
+}
+
+
 int		get_source_sink(t_data *data, char *s, int st)
 {
 	char **split;
@@ -16,7 +41,7 @@ int		get_source_sink(t_data *data, char *s, int st)
 	}
 	else
 	{
-		if (add_vertex(data->vertices, split[0],
+		if (add_vertex(&data->vertices, split[0],
 				ft_atoi(split[1]), ft_atoi(split[2])) == -1)
 			return (free_split(split, -1));
 	}
