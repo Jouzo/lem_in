@@ -75,3 +75,20 @@ peut etre que pour faire moins d'operations, au lieu d'avoir la fonction get_ava
 qui check dans toutes les listes chainée qui representes les paths deja trouvés si a un moment m, un vertex est occupé,
 on pourrai garder l'info dans la structure de chaque vertex, pour chaque stage il est dispo ou occupé, dans une liste chainée:
 available -> 1 -> 0 -> 0 -> 1 -> 1 -> 1 -> 0
+
+
+
+bfs
+
+on met la source dans la queue
+on set le status de la source en waiting
+while (la queue n'est pas vide)
+{
+    _vertex_ = la valeur du premiere element de la queue
+    on supprime le premiere element de la queue
+    
+    on check tout les voisins de _vertex_ qui sont en status initial
+    on change leurs status pour waiting
+    on les insert a la fin de la queue
+    on insert dans un tableau qui retient les chemin empreinté le edge qui a été empreinté
+}
