@@ -6,7 +6,6 @@ int		check_split(char **split)
 			&& ft_isint(split[2]));
 }
 
-
 int		split_count(char **split)
 {
 	int i;

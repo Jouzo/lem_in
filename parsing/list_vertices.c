@@ -1,5 +1,20 @@
 #include "parsing.h"
 
+size_t	vertices_len(t_vertices *head)
+{
+	size_t i;
+	t_vertices *tmp;
+
+	i = 0;
+	tmp = head;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	return (i);
+}
+
 int				check_vertices_name(t_vertices *head, char *name)
 {
 	t_vertices *current;

@@ -1,9 +1,10 @@
 NAME = lem-in
 
-INC = -I includes
+INC = -Iincludes
 OBJDIR = obj
 
 SRCS = 	main.c\
+		stringify.c\
 
 OBJS = $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
 
@@ -24,7 +25,7 @@ $(NAME): $(PARSING) $(LIBFT) $(OBJS)
 	$(CC) $(INC) $(CFLAGS) $(OBJS) $(LIBFT) $(PARSING) -o $(NAME)
 
 $(OBJDIR)/%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(INC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@make clean -C parsing
