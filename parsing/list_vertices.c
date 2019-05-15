@@ -1,10 +1,5 @@
 #include "parsing.h"
 
-int				check_coordinates(char *x, char *y)
-{
-	return (ft_isint(x) && ft_isint(y));
-}
-
 int				check_vertices_name(t_vertices *head, char *name)
 {
 	t_vertices *current;
