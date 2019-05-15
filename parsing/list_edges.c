@@ -72,15 +72,14 @@ t_edges			*new_edge(char const *from, char const *to)
 	return (list);
 }
 
-int				add_edge(t_edges *head, char *from, char *to)
+int				add_edge(t_edges **head, char *from, char *to)
 {
 	t_edges *new;
 
-	new = head;
-	while (new->next)
-		new = new->next;
-	if (!(new->next = new_edge(from, to)))
+	if (!(new = new_edge(from, to)))
 		return (-1);
+	new->next = *head;
+	*head = new;
 	return (1);
 }
 
