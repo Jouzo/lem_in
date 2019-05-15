@@ -10,14 +10,16 @@ bool    is_empty(queue *queue)
     return (queue->size == 0);
 }
 
-queue* create_queue(int nb_vertices)
-{ 
-    queue* queue = malloc(sizeof(queue)); 
-    queue->front = 0;
-    queue->size = 0;
-    queue->rear = 0;
-    queue->capacity = nb_vertices;
-    queue->vertices = malloc(nb_vertices * sizeof(int));
+queue create_queue(int nb_vertices)
+{
+    queue queue;
+    
+    // queue = malloc(sizeof(queue)); 
+    queue.front = 0;
+    queue.size = 0;
+    queue.rear = 0;
+    queue.capacity = nb_vertices;
+    queue.vertices = malloc(nb_vertices * sizeof(int));
     return queue;
 }
 

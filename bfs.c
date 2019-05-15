@@ -1,7 +1,5 @@
 #include "algo.h"
 
-void create_graph();
-
 int *BFS(int v, queue *queue, char *edges, char **state_state);
 
 void	change_state(char **state, int vertex, int new_state)
@@ -9,18 +7,20 @@ void	change_state(char **state, int vertex, int new_state)
 	(*state)[vertex] = new_state + 48;
 }
 
-// void	check_edge()
+// void	check_edge(char *edges, int state, int vertex, queue *queue)
+// {
+// 	edges[vertex * queue->capacity + i] == '1'
+// }
 
 void    *ft_memset(void *b, int c, size_t len)
 {
-        unsigned char *ptr;
+    unsigned char *ptr;
 
-        ptr = b;
-        while (len--)
-                *ptr++ = (unsigned char)c;
-        return (b);
+    ptr = b;
+    while (len--)
+            *ptr++ = (unsigned char)c;
+    return (b);
 }
-
 
 void  get_path(int *path, queue queue)
 {
@@ -35,12 +35,12 @@ void  get_path(int *path, queue queue)
    printf("-=-=-=-%d\n", u);
 }
 
-int 	init_stage(queue *queue, char **state)
+int 	init_stage(char **state, int nb_vertices)
 {
 	int v;
 
 	v = 0;
-	ft_memset(*state, '1', 5);
+	ft_memset(*state, '1', nb_vertices);
 	printf("Enter Start Vertex for BFS: \n");
 	scanf("%d", &v);
 	return (v);
@@ -72,16 +72,41 @@ int   *BFS(int vertex, queue *queue, char *edges, char **state)
    	return (path);
 }
 
-void create_graph(queue *queue, char **edges)
+static int init_args(t_args *args, int nb_vertices)
+{
+	if (!(args = malloc(sizeof(t_args))))
+		return (-1);
+	args->state = malloc(nb_vertices + 1);
+	args->state[nb_vertices] = '\0';
+	args->queue = create_queue(nb_vertices);
+	return (0);
+}
+
+int algo(char **edges, int nb_vertices)
+{
+	int *path;
+	int first_vertex;
+	t_args args;
+
+	init_args(&args, nb_vertices);
+	first_vertex = init_stage(&args.state, nb_vertices);
+	path = BFS(first_vertex, &args.queue, *edges, &args.state);
+   	get_path(path, args.queue);
+	return 0;
+}
+
+// this function will be deleted. just for develloping
+int create_graph(char **edges)
 {
 	int count;
 	int max_edge;
 	int origin;
 	int destin;
+	int nb_vertices;
  
 	printf("Enter number of vertices : ");
-	scanf("%d", &queue->capacity);
-	max_edge = queue->capacity * (queue->capacity - 1);
+	scanf("%d", &nb_vertices);
+	max_edge = nb_vertices * (nb_vertices - 1);
 	for(count=1; count<=max_edge; count++)
 	{
 		printf("Enter edge %d( -1 -1 to quit ) : ",count);
@@ -90,46 +115,34 @@ void create_graph(queue *queue, char **edges)
 		if((origin == -1) && (destin == -1))
 			break;
  
-		if(origin>=queue->capacity || destin>=queue->capacity || origin<0 || destin<0)
+		if(origin>=nb_vertices || destin>=nb_vertices || origin<0 || destin<0)
 		{
 			printf("Invalid edge!\n");
 			count--;
 		}
 		else
 		{
-			int fst = origin * (queue->capacity) + destin;
-			int sec = destin * (queue->capacity) + origin;
+			int fst = origin * nb_vertices + destin;
+			int sec = destin * nb_vertices + origin;
 			(*edges)[fst] = '1';
 			(*edges)[sec] = '1';
 		}
 	}
+	return nb_vertices;
 }
 
-int algo(char **edges)
-{
-	queue queue;
-	int *path;
-	int first_vertex;
-	char *state;
-	
-	state = malloc(6);
-	state[5] = '\0';
-
-	queue = *create_queue(5);
-	create_graph(&queue, edges);
-	first_vertex = init_stage(&queue, &state);
-	path = BFS(first_vertex, &queue, *edges, &state);
-   	get_path(path, queue);
-	return 0;
-}
-
+// this function will be deleted. just for develloping
 int main()
 {
 	char *edges;
+	int nb_vertices = 5;
 
-	if (!(edges = malloc(5 * 5 * sizeof(char) + 1)))
+	if (!(edges = malloc(nb_vertices * nb_vertices * sizeof(char) + 1)))
 		return (-1);
-	edges[25] = '\0';
-	ft_memset(edges, '0', 25);
-	algo(&edges);
+	edges[nb_vertices * nb_vertices] = '\0';
+	ft_memset(edges, '0', nb_vertices * nb_vertices);
+
+	nb_vertices = create_graph(&edges);
+
+	algo(&edges, nb_vertices);
 }
