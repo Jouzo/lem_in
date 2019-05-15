@@ -25,7 +25,7 @@ int		parse_ants(t_data *data, char *s)
 int		parse_vertices(t_data *data, char **split)
 {
 	if (check_vertices_name(data->vertices, split[0]) > 0
-			&& check_coordinates(split[1], split[2]))
+			&& check_split(split))
 	{
 		if (!data->vertices)
 		{
@@ -49,7 +49,8 @@ int		parse_vertices(t_data *data, char **split)
 
 int		parse_edges(t_data *data, char **split)
 {
-	if (check_edges_name(data->vertices, split[0], split[1]) > 0)
+	if (check_edges_name(data->vertices, split[0], split[1]) > 0
+			&& check_split(split))
 	{
 		if (!data->edges)
 		{

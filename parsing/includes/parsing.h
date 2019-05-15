@@ -54,7 +54,7 @@ int			add_vertex(t_vertices **head,
 void		print_vertices(t_vertices *head);
 int			check_vertices_name(t_vertices *head,
 				char *name);
-int			check_coordinates(char *x, char *y);
+int			check_split(char **split);
 t_edges		*new_edge(char const *from, char const *to);
 int			add_edge(t_edges **head, char *from, char *to);
 void		print_edges(t_edges *head);

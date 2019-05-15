@@ -1,5 +1,12 @@
 #include "parsing.h"
 
+int		check_split(char **split)
+{
+	return (split[0][0] != 'L' && ft_isint(split[1])
+			&& ft_isint(split[2]));
+}
+
+
 int		split_count(char **split)
 {
 	int i;
