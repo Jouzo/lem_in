@@ -2,13 +2,13 @@
 
 void	swap_source(t_data *data)
 {
-	if (!data->source || ft_strcmp(data->source, data->vertices->name) == 0
-		|| !data->vertices->next)
-			return ;
 	t_vertices *tmp_source;
 	t_vertices *tmp;
 	t_vertices *prev;
 
+	if (!data->source || ft_strcmp(data->source, data->vertices->name) == 0
+			|| !data->vertices->next)
+		return ;
 	prev = data->vertices;
 	tmp = data->vertices->next;
 	while (tmp)
@@ -29,15 +29,15 @@ int		get_source(t_data *data, char **split)
 {
 	if (!data->vertices)
 	{
-	if (!(data->vertices = new_vertex(split[0],
-				ft_atoi(split[1]), ft_atoi(split[2]))))
-		return (-1);
+		if (!(data->vertices = new_vertex(split[0],
+						ft_atoi(split[1]), ft_atoi(split[2]))))
+			return (-1);
 	}
 	else
 	{
-	if (add_vertex(&data->vertices, split[0],
-		ft_atoi(split[1]), ft_atoi(split[2])) == -1)
-		return (-1);
+		if (add_vertex(&data->vertices, split[0],
+					ft_atoi(split[1]), ft_atoi(split[2])) == -1)
+			return (-1);
 	}
 	data->source = ft_strdup(split[0]);
 	return (1);
@@ -50,18 +50,18 @@ int		get_sink(t_data *data, char **split)
 	new = NULL;
 	if (!data->vertices)
 	{
-	if (!(data->vertices = new_vertex(split[0],
-			ft_atoi(split[1]), ft_atoi(split[2]))))
-		return (-1);
+		if (!(data->vertices = new_vertex(split[0],
+						ft_atoi(split[1]), ft_atoi(split[2]))))
+			return (-1);
 	}
 	else
 	{
-	new = data->vertices;
-	while (new->next != NULL)
-		new = new->next;
-	if (!(new->next = new_vertex(split[0],
-		ft_atoi(split[1]), ft_atoi(split[2]))))
-		return (-1);
+		new = data->vertices;
+		while (new->next != NULL)
+			new = new->next;
+		if (!(new->next = new_vertex(split[0],
+						ft_atoi(split[1]), ft_atoi(split[2]))))
+			return (-1);
 	}
 	data->sink = ft_strdup(split[0]);
 	return (1);
