@@ -56,30 +56,3 @@ void print_queue(queue queue)
     }
     printf("\n");
 }
-
-// int main()
-// {
-//     queue queue;
-
-//     queue = *create_queue(12);
-//     enqueue(&queue, 13);
-//     enqueue(&queue, 14);
-//     enqueue(&queue, 15);
-//     enqueue(&queue, 16);
-//     enqueue(&queue, 17);
-//     print_queue(queue);
-//     dequeue(&queue);
-//     print_queue(queue);
-//     dequeue(&queue);
-//     print_queue(queue);
-//     dequeue(&queue);
-//     print_queue(queue);
-//     dequeue(&queue);
-//     print_queue(queue);
-//     dequeue(&queue);
-//     print_queue(queue);
-//     dequeue(&queue);
-//     print_queue(queue);
-//     dequeue(&queue);
-//     print_queue(queue);
-// }

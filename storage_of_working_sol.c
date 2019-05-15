@@ -143,6 +143,6 @@ int main()
 {
 	create_graph();
 	int *path = BF_Traversal();
-   get_path(path);
+   	get_path(path);
 	return 0;
 }
