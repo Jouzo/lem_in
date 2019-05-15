@@ -67,7 +67,7 @@ int		get_sink(t_data *data, char **split)
 	return (1);
 }
 
-int		get_source_sink(t_data *data, char *s, int st)
+int		get_source_sink(t_data *data, char *s, int source)
 {
 	char **split;
 
@@ -75,7 +75,7 @@ int		get_source_sink(t_data *data, char *s, int st)
 		return (-1);
 	if (split_count(split) != 3)
 		return (free_split(split, -1));
-	if (!st)
+	if (source)
 		return (free_split(split, get_source(data, split)));
 	else
 		return (free_split(split, get_sink(data, split)));

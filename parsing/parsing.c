@@ -49,8 +49,7 @@ int		parse_vertices(t_data *data, char **split)
 
 int		parse_edges(t_data *data, char **split)
 {
-	if (check_edges_name(data->vertices, split[0], split[1]) > 0
-			&& check_split(split))
+	if (check_edges_name(data->vertices, split[0], split[1]) > 0)
 	{
 		if (!data->edges)
 		{
@@ -99,12 +98,12 @@ int		parse(t_data *data, char *s)
 		return (check_hash(data, s));
 	else if (data->set_source == 1 && !data->source)
 	{
-		if (get_source_sink(data, s, 0) == -1)
+		if (get_source_sink(data, s, 1) == -1)
 			return (-1);
 	}
 	else if (data->set_sink == 1 && !data->sink)
 	{
-		if (get_source_sink(data, s, 1) == -1)
+		if (get_source_sink(data, s, 0) == -1)
 			return (-1);
 	}
 	else
