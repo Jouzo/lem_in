@@ -1,5 +1,6 @@
 #ifndef ALGO_H
 # define ALGO_H
+# include "../../libft/includes/libft.h"
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -27,6 +28,9 @@ typedef struct	s_args {
 /*
 ** queue functions
 */
+
+//a suppr
+int pre_main();
 
 bool        is_full(queue *queue);
 bool        is_empty(queue *queue);
