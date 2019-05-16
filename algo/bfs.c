@@ -1,4 +1,4 @@
-#include "algo.h"
+#include "./includes/algo.h"
 
 int *BFS(int v, queue *queue, char *edges, char **state_state);
 
@@ -35,12 +35,12 @@ void  get_path(int *path, queue queue)
    printf("-=-=-=-%d\n", u);
 }
 
-int 	init_stage(char **state, int nb_vertices)
+int 	init_stage(t_args *args, int nb_vertices)
 {
 	int v;
 
 	v = 0;
-	ft_memset(*state, '1', nb_vertices);
+	ft_memset(args->state, '1', nb_vertices);
 	printf("Enter Start Vertex for BFS: \n");
 	scanf("%d", &v);
 	return (v);
@@ -72,27 +72,31 @@ int   *BFS(int vertex, queue *queue, char *edges, char **state)
    	return (path);
 }
 
-static int init_args(t_args *args, int nb_vertices)
+static t_args *init_args(int nb_vertices)
 {
+	t_args *args;
+
 	if (!(args = malloc(sizeof(t_args))))
-		return (-1);
-	args->state = malloc(nb_vertices + 1);
+		return (NULL);
+	if (!(args->state = malloc(nb_vertices + 1)))
+		return (NULL);
+	bzero(args->state, nb_vertices);
 	args->state[nb_vertices] = '\0';
 	args->queue = create_queue(nb_vertices);
-	return (0);
+	return (args);
 }
 
 int algo(char **edges, int nb_vertices)
 {
 	int *path;
 	int first_vertex;
-	t_args args;
+	t_args *args;
 
-	init_args(&args, nb_vertices);
-	first_vertex = init_stage(&args.state, nb_vertices);
-	path = BFS(first_vertex, &args.queue, *edges, &args.state);
-   	get_path(path, args.queue);
-	return 0;
+	args = init_args(nb_vertices);
+	first_vertex = init_stage(args, nb_vertices);
+	path = BFS(first_vertex, &args->queue, *edges, &args->state);
+   	get_path(path, args->queue);
+	return (0);
 }
 
 // this function will be deleted. just for develloping
@@ -132,7 +136,7 @@ int create_graph(char **edges)
 }
 
 // this function will be deleted. just for develloping
-int main()
+int pre_main()
 {
 	char *edges;
 	int nb_vertices = 5;
@@ -145,4 +149,5 @@ int main()
 	nb_vertices = create_graph(&edges);
 
 	algo(&edges, nb_vertices);
+	return (0);
 }

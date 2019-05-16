@@ -1,4 +1,4 @@
-#include "algo.h"
+#include "./includes/algo.h"
 
 bool    is_full(queue *queue)
 {
