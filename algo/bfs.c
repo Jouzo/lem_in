@@ -77,14 +77,11 @@ static t_args *init_args(int nb_vertices)
 	return (args);
 }
 
-void reset(int *path, t_args *args, t_vertex *vertex)
+void reset(int *path, t_args *args)
 {
-printf("%d et %d \n", vertex->vertex, path[0]);
-
-	// free_vertex(vertex);
-	print_queue(args->queue);
 	free_queue(&args->queue);
 	free(path);
+	free(args->state);
 	// free(args);
 }
 
@@ -104,14 +101,15 @@ int algo(char **edges, int nb_vertices)
 
 		path = BFS(first_vertex, &args->queue, *edges, &args->state);
    		new_path = get_path(path, args->queue);
-		if (test == 0)
+		// if (test == 0)
 			flow = new_flow(new_path);
-		else
-			add_flow(flow, new_path);
-		reset(path, args, new_path);
+		// else
+		// 	add_flow(flow, new_path);
+		reset(path, args);
 		test++;
 	}
 	print_flow(flow);
+	free_flow(flow);
 	return (0);
 }
 
