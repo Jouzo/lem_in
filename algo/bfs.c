@@ -22,7 +22,6 @@ t_vertex  *get_path(int *path, t_queue queue)
 		u = path[u];
 		push_vertex(&aug_path, u);
 	}
-	// print_path(aug_path);
 	return (aug_path);
 }
 
@@ -94,17 +93,17 @@ int algo(char **edges, int nb_vertices)
 	t_flow *flow;
 	int test = 0;
 
-	while (test < 1)
+	while (test < 2)
 	{
 		args = init_args(nb_vertices);
 		first_vertex = init_state(args, nb_vertices);
 
 		path = BFS(first_vertex, &args->queue, *edges, &args->state);
    		new_path = get_path(path, args->queue);
-		// if (test == 0)
+		if (test == 0)
 			flow = new_flow(new_path);
-		// else
-		// 	add_flow(flow, new_path);
+		else
+			add_flow(flow, new_path);
 		reset(path, args);
 		test++;
 	}
@@ -125,7 +124,8 @@ int create_graph(char **edges)
 	printf("Enter number of vertices : ");
 	scanf("%d", &nb_vertices);
 	max_edge = nb_vertices * (nb_vertices - 1) / 2;
-	for(count=1; count<=max_edge; count++)
+	count = 1;
+	while (count <= max_edge)
 	{
 		printf("Enter edge %d( -1 -1 to quit ) : ",count);
 		scanf("%d %d",&origin,&destin);
@@ -145,6 +145,7 @@ int create_graph(char **edges)
 			(*edges)[fst] = '1';
 			(*edges)[sec] = '1';
 		}
+		count++;
 	}
 	return nb_vertices;
 }
