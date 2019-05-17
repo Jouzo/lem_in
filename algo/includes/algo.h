@@ -50,7 +50,7 @@ void        print_queue(queue queue);
 */
 
 void        print_path(t_vertex *head);
-int         add_vertex(t_vertex *head, int vertex);
+int         push_vertex(t_vertex **head, int vertex);
 t_vertex      *new_path(int vertex);
 
 

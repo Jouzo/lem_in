@@ -11,15 +11,15 @@ t_vertex      *new_path(int vertex)
     return (list);
 }
 
-int         add_vertex(t_vertex *head, int vertex)
+int         push_vertex(t_vertex **head, int vertex)
 {
     t_vertex *new;
 
-    new = head;
-    while (new->next)
-        new = new->next;
-    if (!(new->next = new_path(vertex)))
+    if (!(new = malloc(sizeof(t_vertex))))
         return (-1);
+    new->vertex = vertex;
+    new->next = *head;
+    *head = new;
     return (1);
 }
 

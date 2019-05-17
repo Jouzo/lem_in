@@ -27,7 +27,7 @@ void  get_path(int *path, queue queue)
 	while (u > 0)
 	{
 		u = path[u];
-		add_vertex(aug_path, u);
+		push_vertex(&aug_path, u);
 	}
 	print_path(aug_path);
 }
