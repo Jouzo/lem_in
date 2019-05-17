@@ -40,9 +40,10 @@ int 	init_state(t_args *args, int nb_vertices)
 int   *BFS(int vertex, t_queue *queue, char *edges, char **state)
 {
 	int i;
-   	int *path;
+	int *path;
 
-	path = malloc(10 * sizeof(int));
+	if (!(path = malloc(queue->capacity * sizeof(int))))
+		return (NULL);
 	enqueue(queue, vertex);
 	change_state(state, vertex, WAITING);
 	while (!is_empty(queue))
@@ -76,6 +77,17 @@ static t_args *init_args(int nb_vertices)
 	return (args);
 }
 
+void reset(int *path, t_args *args, t_vertex *vertex)
+{
+printf("%d et %d \n", vertex->vertex, path[0]);
+
+	// free_vertex(vertex);
+	print_queue(args->queue);
+	free_queue(&args->queue);
+	free(path);
+	// free(args);
+}
+
 int algo(char **edges, int nb_vertices)
 {
 	int *path;
@@ -85,7 +97,7 @@ int algo(char **edges, int nb_vertices)
 	t_flow *flow;
 	int test = 0;
 
-	while (test < 5)
+	while (test < 1)
 	{
 		args = init_args(nb_vertices);
 		first_vertex = init_state(args, nb_vertices);
@@ -96,6 +108,7 @@ int algo(char **edges, int nb_vertices)
 			flow = new_flow(new_path);
 		else
 			add_flow(flow, new_path);
+		reset(path, args, new_path);
 		test++;
 	}
 	print_flow(flow);
@@ -113,7 +126,7 @@ int create_graph(char **edges)
  
 	printf("Enter number of vertices : ");
 	scanf("%d", &nb_vertices);
-	max_edge = nb_vertices * (nb_vertices - 1);
+	max_edge = nb_vertices * (nb_vertices - 1) / 2;
 	for(count=1; count<=max_edge; count++)
 	{
 		printf("Enter edge %d( -1 -1 to quit ) : ",count);
@@ -152,5 +165,6 @@ int pre_main()
 	nb_vertices = create_graph(&edges);
 
 	algo(&edges, nb_vertices);
+	free(edges);
 	return (0);
 }
