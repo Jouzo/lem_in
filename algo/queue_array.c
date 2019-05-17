@@ -1,18 +1,18 @@
 #include "./includes/algo.h"
 
-bool    is_full(queue *queue)
+bool    is_full(t_queue *queue)
 {
     return (queue->size == queue->capacity);
 }
 
-bool    is_empty(queue *queue)
+bool    is_empty(t_queue *queue)
 {
     return (queue->size == 0);
 }
 
-queue create_queue(int nb_vertices)
+t_queue create_queue(int nb_vertices)
 {
-    queue queue;
+    t_queue queue;
     
     // queue = malloc(sizeof(queue)); 
     queue.front = 0;
@@ -23,7 +23,7 @@ queue create_queue(int nb_vertices)
     return queue;
 }
 
-int dequeue(queue* queue)
+int dequeue(t_queue* queue)
 {
     int vertex;
 
@@ -38,14 +38,14 @@ int dequeue(queue* queue)
     return (vertex);
 }
 
-void enqueue(queue *queue, int vertex)
+void enqueue(t_queue *queue, int vertex)
 {
     queue->vertices[queue->rear] = vertex;
     queue->rear++;
     queue->size++;
 }
 
-void print_queue(queue queue)
+void print_queue(t_queue queue)
 {
     int i;
 

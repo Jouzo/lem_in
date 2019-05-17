@@ -1,6 +1,6 @@
 #include "./includes/algo.h"
 
-t_vertex      *new_path(int vertex)
+t_vertex      *init_path(int vertex)
 {
     t_vertex *list;
 

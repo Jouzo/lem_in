@@ -1,38 +1,32 @@
 #include "./includes/algo.h"
 
-int *BFS(int v, queue *queue, char *edges, char **state_state);
-
 void	change_state(char **state, int vertex, int new_state)
 {
 	(*state)[vertex] = new_state + 48;
 }
 
-void    *ft_memset(void *b, int c, size_t len)
+int		check_available(char *state, int vertex)
 {
-    unsigned char *ptr;
-
-    ptr = b;
-    while (len--)
-            *ptr++ = (unsigned char)c;
-    return (b);
+	return (state[vertex] == '1');
 }
 
-void  get_path(int *path, queue queue)
+t_vertex  *get_path(int *path, t_queue queue)
 {
 	int u;
 	t_vertex *aug_path;
 
 	u = queue.capacity - 1;
-	aug_path = new_path(u);
+	aug_path = init_path(u);
 	while (u > 0)
 	{
 		u = path[u];
 		push_vertex(&aug_path, u);
 	}
-	print_path(aug_path);
+	// print_path(aug_path);
+	return (aug_path);
 }
 
-int 	init_stage(t_args *args, int nb_vertices)
+int 	init_state(t_args *args, int nb_vertices)
 {
 	int v;
 
@@ -43,7 +37,7 @@ int 	init_stage(t_args *args, int nb_vertices)
 	return (v);
 }
  
-int   *BFS(int vertex, queue *queue, char *edges, char **state)
+int   *BFS(int vertex, t_queue *queue, char *edges, char **state)
 {
 	int i;
    	int *path;
@@ -57,7 +51,7 @@ int   *BFS(int vertex, queue *queue, char *edges, char **state)
 		change_state(state, vertex, VISITED);
 		for (i = 0; i < queue->capacity; i++)
 		{
-			if(edges[vertex * queue->capacity + i] == '1' && (*state)[i] == '1')
+			if(edges[vertex * queue->capacity + i] == '1' && check_available(*state, i))
 			{
             	path[i] = vertex;
 				enqueue(queue, i);
@@ -77,7 +71,6 @@ static t_args *init_args(int nb_vertices)
 		return (NULL);
 	if (!(args->state = malloc(nb_vertices + 1)))
 		return (NULL);
-	bzero(args->state, nb_vertices);
 	args->state[nb_vertices] = '\0';
 	args->queue = create_queue(nb_vertices);
 	return (args);
@@ -88,11 +81,24 @@ int algo(char **edges, int nb_vertices)
 	int *path;
 	int first_vertex;
 	t_args *args;
+	t_vertex *new_path;
+	t_flow *flow;
+	int test = 0;
 
-	args = init_args(nb_vertices);
-	first_vertex = init_stage(args, nb_vertices);
-	path = BFS(first_vertex, &args->queue, *edges, &args->state);
-   	get_path(path, args->queue);
+	while (test < 5)
+	{
+		args = init_args(nb_vertices);
+		first_vertex = init_state(args, nb_vertices);
+
+		path = BFS(first_vertex, &args->queue, *edges, &args->state);
+   		new_path = get_path(path, args->queue);
+		if (test == 0)
+			flow = new_flow(new_path);
+		else
+			add_flow(flow, new_path);
+		test++;
+	}
+	print_flow(flow);
 	return (0);
 }
 
