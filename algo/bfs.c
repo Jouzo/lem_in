@@ -7,11 +7,6 @@ void	change_state(char **state, int vertex, int new_state)
 	(*state)[vertex] = new_state + 48;
 }
 
-// void	check_edge(char *edges, int state, int vertex, queue *queue)
-// {
-// 	edges[vertex * queue->capacity + i] == '1'
-// }
-
 void    *ft_memset(void *b, int c, size_t len)
 {
     unsigned char *ptr;
@@ -24,15 +19,17 @@ void    *ft_memset(void *b, int c, size_t len)
 
 void  get_path(int *path, queue queue)
 {
-   int u;
+	int u;
+	t_vertex *aug_path;
 
-   u = queue.capacity - 1;
-   while (u > 0)
-   {
-      printf("-=-=-=-%d\n", u);
-      u = path[u];
-   }
-   printf("-=-=-=-%d\n", u);
+	u = queue.capacity - 1;
+	aug_path = new_path(u);
+	while (u > 0)
+	{
+		u = path[u];
+		add_vertex(aug_path, u);
+	}
+	print_path(aug_path);
 }
 
 int 	init_stage(t_args *args, int nb_vertices)

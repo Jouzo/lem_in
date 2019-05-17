@@ -6,6 +6,7 @@ OBJDIR = obj
 
 SRCS = 	bfs.c\
 		queue_array.c\
+		new_path.c\
 
 OBJS = $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
 

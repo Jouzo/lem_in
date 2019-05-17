@@ -9,8 +9,13 @@
 # define WAITING 2
 # define VISITED 3
 
+typedef struct	s_vertex
+{
+	int vertex;
+	struct s_vertex	*next;
+}				t_vertex;
 
-typedef struct  Queue 
+typedef struct  Queue
 { 
     int front;
     int rear;
@@ -38,5 +43,15 @@ queue       create_queue(int nb_vertices);
 int         dequeue(queue* queue);
 void        enqueue(queue *queue, int vertex);
 void        print_queue(queue queue);
+
+
+/*
+** linked list functions for t_vertex
+*/
+
+void        print_path(t_vertex *head);
+int         add_vertex(t_vertex *head, int vertex);
+t_vertex      *new_path(int vertex);
+
 
 #endif
