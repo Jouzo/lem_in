@@ -15,17 +15,24 @@ typedef struct	s_vertex
 	struct s_vertex	*next;
 }				t_vertex;
 
-typedef struct  Queue
+typedef struct  s_flow
+{
+    t_vertex        *flow;
+    struct s_flow   *next;
+}                   t_flow;
+
+
+typedef struct  s_queue
 { 
     int front;
     int rear;
     int size;
     int capacity;
     int *vertices;
-}               queue;
+}               t_queue;
 
 typedef struct	s_args {
-	queue queue;
+	t_queue queue;
 	char *edges;
 	char *state;
 }				t_args;
@@ -37,12 +44,12 @@ typedef struct	s_args {
 //a suppr
 int pre_main();
 
-bool        is_full(queue *queue);
-bool        is_empty(queue *queue);
-queue       create_queue(int nb_vertices);
-int         dequeue(queue* queue);
-void        enqueue(queue *queue, int vertex);
-void        print_queue(queue queue);
+bool        is_full(t_queue *queue);
+bool        is_empty(t_queue *queue);
+t_queue       create_queue(int nb_vertices);
+int         dequeue(t_queue* queue);
+void        enqueue(t_queue *queue, int vertex);
+void        print_queue(t_queue queue);
 
 
 /*
@@ -51,7 +58,15 @@ void        print_queue(queue queue);
 
 void        print_path(t_vertex *head);
 int         push_vertex(t_vertex **head, int vertex);
-t_vertex      *new_path(int vertex);
+t_vertex    *init_path(int vertex);
+
+/*
+** linked list functions for t_flow
+*/
+
+t_flow      *new_flow(t_vertex *head);
+void        print_flow(t_flow *head);
+int         add_flow(t_flow *head, t_vertex *path);
 
 
 #endif
