@@ -18,4 +18,15 @@ void    free_queue(t_queue *queue)
     free(queue);
 }
 
+void    free_flow(t_flow *flow)
+{
+    t_flow *tmp;
 
+    while (flow)
+    {
+        tmp = flow;
+        flow = flow->next;
+        free_vertex(tmp->flow);
+        free(tmp);
+    }
+}
