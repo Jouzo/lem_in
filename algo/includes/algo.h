@@ -72,6 +72,7 @@ int         add_flow(t_flow *head, t_vertex *path);
 **  free functions
 */
 
+void    reset(int *path, t_args *args);
 void    free_queue(t_queue *queue);
 void    free_vertex(t_vertex *head);
 void    free_flow(t_flow *flow);

@@ -30,3 +30,11 @@ void    free_flow(t_flow *flow)
         free(tmp);
     }
 }
+
+void reset(int *path, t_args *args)
+{
+	free_queue(&args->queue);
+	free(path);
+	free(args->state);
+	// free(args);
+}
