@@ -58,28 +58,36 @@ int		check_flow(int *path, int vertex, t_flow *flow)
 {
 	int size;
 	int tmp;
+	t_flow *flow_tmp;
 
+	flow_tmp = flow;
 	size = get_path_size(path, vertex);
-	while (flow)
+	printf("size: %d et vertex: %d\n", size, vertex);
+	while (flow_tmp)
 	{
 		tmp = size;
-		while (tmp && flow->flow)
+		while (flow_tmp->flow && tmp)
 		{
-			flow->flow = flow->flow->next;
+			flow_tmp->flow = flow_tmp->flow->next;
 			tmp--;
 		}
-		if (tmp == 0)
-			printf("---%d\n", flow->flow->vertex);
-		flow = flow->next;
+		// if (flow_tmp->flow)
+		// {
+			printf("dede\n");
+			// if (flow_tmp->flow->vertex == vertex)
+			// 	printf("---%d\n", flow_tmp->flow->vertex);
+		// }
+		flow_tmp = flow_tmp->next;
 	}
 	return (1);
 }
 
-int		*BFS(int vertex, t_queue *queue, char *edges, char **state)//, t_flow *flow)
+int		*BFS(int vertex, t_queue *queue, char *edges, char **state, t_flow *flow, int stage)
 {
 	int i;
 	int *path;
-
+	
+	printf("---start of bfs---\n");
 	if (!(path = malloc(queue->capacity * sizeof(int))))
 		return (NULL);
 	enqueue(queue, vertex);
@@ -92,13 +100,16 @@ int		*BFS(int vertex, t_queue *queue, char *edges, char **state)//, t_flow *flow
 		{
 			if(edges[vertex * queue->capacity + i] == '1' && check_available(*state, i))
 			{
-				// check_flow(path, vertex, flow);
+				if (stage > 0)
+					printf("@@@%d\n", flow->flow->vertex);
+				// 	check_flow(path, i, flow);
             	path[i] = vertex;
 				enqueue(queue, i);
 				change_state(state, i, WAITING);
 			}
 		}
 	}
+	printf("---end of bfs---\n");
 	printf("\n");
    	return (path);
 }
@@ -130,7 +141,7 @@ int algo(char **edges, int nb_vertices, int nb_ants)
 	{
 		args = init_args(nb_vertices);
 		first_vertex = init_state(args, nb_vertices);
-		path = BFS(first_vertex, &args->queue, *edges, &args->state);//, flow);
+		path = BFS(first_vertex, &args->queue, *edges, &args->state, flow, count);
    		new_path = get_path(path, args->queue);
 		if (count == 0)
 			flow = new_flow(new_path);
@@ -186,7 +197,7 @@ int create_graph(char **edges)
 int pre_main()
 {
 	char *edges;
-	int nb_vertices = 5;
+	int nb_vertices = 8;
 
 	if (!(edges = malloc(nb_vertices * nb_vertices * sizeof(char) + 1)))
 		return (-1);
