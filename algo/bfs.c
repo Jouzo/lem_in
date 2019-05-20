@@ -7,10 +7,7 @@ void	change_state(char **state, int vertex, int new_state)
 
 int		check_available(char *state, int vertex)
 {
-	if (state[vertex] == '1')
-		return (1);
-	else
-		return (0);		
+	return (state[vertex] == '1');
 }
 
 t_vertex  *get_path(int *path, t_queue queue)
@@ -67,8 +64,9 @@ int		check_flow(int *path, int vertex, t_flow *flow)
 	{
 		tmp = size;
 		path_tmp = flow_tmp->flow;
-		while (flow_tmp->flow && tmp)
+		while (path_tmp && tmp)
 		{
+			printf("vertex inside path_tmp:  % d\n", path_tmp->vertex);
 			path_tmp = path_tmp->next;
 			tmp--;
 		}
@@ -91,6 +89,8 @@ int		*BFS(int vertex, t_queue *queue, char *edges, char **state, t_flow *flow, i
 	printf("---start of bfs---\n");
 	if (!(path = malloc(queue->capacity * sizeof(int))))
 		return (NULL);
+	for (int j = 0; j < queue->capacity; j++)
+		path[j] = 0;
 	enqueue(queue, vertex);
 	change_state(state, vertex, WAITING);
 	while (!is_empty(queue))
@@ -99,16 +99,21 @@ int		*BFS(int vertex, t_queue *queue, char *edges, char **state, t_flow *flow, i
 		change_state(state, vertex, VISITED);
 		for (i = 0; i < queue->capacity; i++)
 		{
-			if(edges[vertex * queue->capacity + i] == '1' && check_available(*state, i))
+			printf("i: %d, vertex: %d autorized: %d\n", i, vertex, edges[vertex * queue->capacity + i] == '1' && check_available(*state, i) && (check_flow(path, i, flow) || i == 7));
+			if (edges[vertex * queue->capacity + i] == '1' && check_available(*state, i) && (check_flow(path, i, flow) || i == 7))
 			{
-				// if (check_flow(path, i, flow) == 1 || vertex == 7)
-				// {
-					printf("source: %d and destination: %d and check_flow: %d\n", vertex, i, check_flow(path, i, flow));
+				printf("in\n");
+				// if (check_flow(path, i, flow) || i == 7)
+				// {	
+				// 	printf("post\n");
+					printf("source: %d and destination: %d\n", vertex, i);
             		path[i] = vertex;
 					enqueue(queue, i);
 					change_state(state, i, WAITING);
 				// }
+				// printf("postpost\n");
 			}
+			printf("end i: %d\n", i);
 		}
 	}
 	printf("---end of bfs---\n");
