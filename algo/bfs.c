@@ -35,7 +35,6 @@ int  get_path_size(int *path, int sink)
 		sink = path[sink];
 		size++;
 	}
-	// printf("value of sink: %d and value of size: %d\n", sink, size);
 	return (size);
 }
 
@@ -50,32 +49,39 @@ int 	init_state(t_args *args, int nb_vertices)
 	return (v);
 }
 
-int		check_flow(int *path, int vertex, t_flow *flow)
+int		check_flow(int *path, int vertex, t_flow *flow, int stage)
 {
-	(void)flow;
+	if (stage == 0)
+		return (1);
+	// (void)flow;
 	int size;
 	int tmp;
 	t_flow *flow_tmp;
 	t_vertex *path_tmp;
 
 	size = get_path_size(path, vertex);
+	printf("size: %d\n", size);
 	flow_tmp = flow;
 	while (flow_tmp)
 	{
 		tmp = size;
 		path_tmp = flow_tmp->flow;
+		if (path_tmp && path_tmp->vertex)
+			printf("dedede\n");// %d\n", path_tmp->vertex);
 		while (path_tmp && tmp)
 		{
-			printf("vertex inside path_tmp:  % d\n", path_tmp->vertex);
+			printf("ooo\n");
+			printf("vertex inside path_tmp:  %d\n", path_tmp->vertex);
 			path_tmp = path_tmp->next;
 			tmp--;
 		}
-		// printf("vertex to check: %d and vertex in path: %d and size: %d\n", vertex, path_tmp->vertex, size);
 		if (path_tmp && path_tmp->vertex == vertex)
 				return (0);
-				// printf("*****vertex checking: %d and vertex inside path: %d\n", vertex, path_tmp->vertex);
-		flow_tmp = flow_tmp->next;
+		if (flow_tmp->flow != NULL)
+			printf("in while %d\n", flow_tmp->flow->vertex);
+			flow_tmp = flow_tmp->next;
 	}
+	printf("after while\n");
 	return (1);
 }
 
@@ -84,7 +90,7 @@ int		*BFS(int vertex, t_queue *queue, char *edges, char **state, t_flow *flow, i
 	int i;
 	int *path;
 	(void)stage;
-	// (void)flow;
+	(void)flow;
 
 	printf("---start of bfs---\n");
 	if (!(path = malloc(queue->capacity * sizeof(int))))
@@ -99,21 +105,12 @@ int		*BFS(int vertex, t_queue *queue, char *edges, char **state, t_flow *flow, i
 		change_state(state, vertex, VISITED);
 		for (i = 0; i < queue->capacity; i++)
 		{
-			printf("i: %d, vertex: %d autorized: %d\n", i, vertex, edges[vertex * queue->capacity + i] == '1' && check_available(*state, i) && (check_flow(path, i, flow) || i == 7));
-			if (edges[vertex * queue->capacity + i] == '1' && check_available(*state, i) && (check_flow(path, i, flow) || i == 7))
+			if (edges[vertex * queue->capacity + i] == '1' && check_available(*state, i) && (check_flow(path, i, flow, stage) || i == queue->capacity - 1))
 			{
-				printf("in\n");
-				// if (check_flow(path, i, flow) || i == 7)
-				// {	
-				// 	printf("post\n");
-					printf("source: %d and destination: %d\n", vertex, i);
-            		path[i] = vertex;
-					enqueue(queue, i);
-					change_state(state, i, WAITING);
-				// }
-				// printf("postpost\n");
+            	path[i] = vertex;
+				enqueue(queue, i);
+				change_state(state, i, WAITING);
 			}
-			printf("end i: %d\n", i);
 		}
 	}
 	printf("---end of bfs---\n");
@@ -211,9 +208,12 @@ int pre_main()
 	edges[nb_vertices * nb_vertices] = '\0';
 	ft_memset(edges, '0', nb_vertices * nb_vertices);
 
-	// nb_vertices = create_graph(&edges);
-	edges = "0111000010001000100001001000001001000001001000010001000100001110";
+	nb_vertices = create_graph(&edges);
+	// char *bis_edges = "0111000010001000100001001000001001000001001000010001000100001110";
+	// printf("%s\n%s et %d\n", edges, bis_edges, nb_vertices);
+	printf("---%d\n", nb_vertices);
+	// algo(&edges, nb_vertices, 3);
 	algo(&edges, nb_vertices, 3);
-	// free(edges); //to uncomment with the create_graph line above
+	free(edges); //to uncomment with the create_graph line above
 	return (0);
 }
