@@ -1,21 +1,21 @@
 #include "./includes/algo.h"
 
-t_vertex      *init_path(int vertex)
+t_path      *init_path(int vertex)
 {
-    t_vertex *list;
+    t_path *list;
 
-    if (!(list = malloc(sizeof(t_vertex))))
+    if (!(list = malloc(sizeof(t_path))))
         return (NULL);
     list->vertex = vertex;
     list->next = NULL;
     return (list);
 }
 
-int         push_vertex(t_vertex **head, int vertex)
+int         push_vertex(t_path **head, int vertex)
 {
-    t_vertex *new;
+    t_path *new;
 
-    if (!(new = malloc(sizeof(t_vertex))))
+    if (!(new = malloc(sizeof(t_path))))
         return (-1);
     new->vertex = vertex;
     new->next = *head;
@@ -23,9 +23,9 @@ int         push_vertex(t_vertex **head, int vertex)
     return (1);
 }
 
-void        print_path(t_vertex *head)
+void        print_path(t_path *head)
 {
-    t_vertex *current;
+    t_path *current;
 
     current = head;
     while (current != NULL)
