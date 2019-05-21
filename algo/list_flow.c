@@ -1,17 +1,17 @@
 #include "./includes/algo.h"
 
-t_flow      *new_flow(t_vertex *head)
+t_flow      *new_flow(t_path *head)
 {
     t_flow *all_paths;
 
     if (!(all_paths = malloc(sizeof(t_flow))))
         return (NULL);
-    all_paths->flow = head;
+    all_paths->path = head;
     all_paths->next = NULL;
     return (all_paths);
 }
 
-int     add_flow(t_flow *head, t_vertex *path)
+int     add_flow(t_flow *head, t_path *path)
 {
     t_flow *new;
 
@@ -31,7 +31,7 @@ void    print_flow(t_flow *head)
     while (current != NULL)
     {
         printf("-------\n");
-        print_path(current->flow);
+        print_path(current->path);
         current = current->next;
     }
 }

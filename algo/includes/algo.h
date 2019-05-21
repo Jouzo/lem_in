@@ -9,15 +9,15 @@
 # define WAITING 2
 # define VISITED 3
 
-typedef struct	s_vertex
+typedef struct	s_path
 {
 	int vertex;
-	struct s_vertex	*next;
-}				t_vertex;
+	struct s_path	*next;
+}				t_path;
 
 typedef struct  s_flow
 {
-    t_vertex        *flow;
+    t_path          *path;
     struct s_flow   *next;
 }                   t_flow;
 
@@ -46,27 +46,27 @@ int pre_main();
 
 bool        is_full(t_queue *queue);
 bool        is_empty(t_queue *queue);
-t_queue       create_queue(int nb_vertices);
+t_queue     create_queue(int nb_vertices);
 int         dequeue(t_queue* queue);
 void        enqueue(t_queue *queue, int vertex);
 void        print_queue(t_queue queue);
 
 
 /*
-** linked list functions for t_vertex
+** linked list functions for t_path
 */
 
-void        print_path(t_vertex *head);
-int         push_vertex(t_vertex **head, int vertex);
-t_vertex    *init_path(int vertex);
+void        print_path(t_path *head);
+int         push_vertex(t_path **head, int vertex);
+t_path      *init_path(int vertex);
 
 /*
 ** linked list functions for t_flow
 */
 
-t_flow      *new_flow(t_vertex *head);
+t_flow      *new_flow(t_path *head);
 void        print_flow(t_flow *head);
-int         add_flow(t_flow *head, t_vertex *path);
+int         add_flow(t_flow *head, t_path *path);
 
 /*
 **  free functions
@@ -74,7 +74,7 @@ int         add_flow(t_flow *head, t_vertex *path);
 
 void    reset(int *path, t_args *args);
 void    free_queue(t_queue *queue);
-void    free_vertex(t_vertex *head);
+void    free_vertex(t_path *head);
 void    free_flow(t_flow *flow);
 
 /*
@@ -82,7 +82,7 @@ void    free_flow(t_flow *flow);
 */
 int		    *BFS(t_queue *queue, char *edges, char **state, t_flow *flow, int stage);
 int		    check_flow(int *path, int vertex, t_flow *flow, int stage);
-t_vertex    *get_path(int *path, t_queue queue);
+t_path      *get_path(int *path, t_queue queue);
 int		    check_available(char *state, int vertex);
 void	    change_state(char **state, int vertex, int new_state);
 int         get_path_size(int *path, int sink);

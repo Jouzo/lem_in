@@ -1,8 +1,8 @@
 #include "./includes/algo.h"
 
-void    free_vertex(t_vertex *head)
+void    free_vertex(t_path *head)
 {
-    t_vertex *tmp;
+    t_path *tmp;
 
     while (head)
     {
@@ -26,7 +26,7 @@ void    free_flow(t_flow *flow)
     {
         tmp = flow;
         flow = flow->next;
-        free_vertex(tmp->flow);
+        free_vertex(tmp->path);
         free(tmp);
     }
 }

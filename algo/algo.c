@@ -18,7 +18,7 @@ int algo(char **edges, int nb_vertices, int nb_ants)
 	int *path;
 	int count;
 	t_args *args;
-	t_vertex *new_path;
+	t_path *new_path;
 	t_flow *flow;
 
 	count = 0;

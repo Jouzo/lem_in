@@ -10,10 +10,10 @@ int		check_available(char *state, int vertex)
 	return (state[vertex] == '1');
 }
 
-t_vertex  *get_path(int *path, t_queue queue)
+t_path  *get_path(int *path, t_queue queue)
 {
 	int u;
-	t_vertex *aug_path;
+	t_path *aug_path;
 
 	u = queue.capacity - 1;
 	aug_path = init_path(u);
@@ -43,7 +43,7 @@ int		check_flow(int *path, int vertex, t_flow *flow, int stage)
 	int size;
 	int tmp;
 	t_flow *flow_tmp;
-	t_vertex *path_tmp;
+	t_path *path_tmp;
 
 	if (stage == 0)
 		return (1);
@@ -52,7 +52,7 @@ int		check_flow(int *path, int vertex, t_flow *flow, int stage)
 	while (flow_tmp)
 	{
 		tmp = size;
-		path_tmp = flow_tmp->flow;
+		path_tmp = flow_tmp->path;
 		while (path_tmp && tmp)
 		{
 			path_tmp = path_tmp->next;
@@ -67,8 +67,8 @@ int		check_flow(int *path, int vertex, t_flow *flow, int stage)
 
 void	bzero_tab(int *tab, int size)
 {
-	for (int j = 0; j < size; j++)
-		tab[j] = 0;
+	while (size)
+		tab[size--] = 0;		
 }
 
 int		*BFS(t_queue *queue, char *edges, char **state, t_flow *flow, int stage)
