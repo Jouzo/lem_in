@@ -25,7 +25,7 @@ int		parse_ants(t_data *data, char *s)
 int		parse_vertices(t_data *data, char **split)
 {
 	if (check_vertices_name(data->vertices, split[0]) > 0
-			&& check_coordinates(split[1], split[2]))
+			&& check_split(split))
 	{
 		if (!data->vertices)
 		{
@@ -35,7 +35,7 @@ int		parse_vertices(t_data *data, char **split)
 		}
 		else
 		{
-			if (add_vertex(data->vertices, split[0],
+			if (add_vertex(&data->vertices, split[0],
 				ft_atoi(split[1]), ft_atoi(split[2])) == -1)
 				return (free_split(split, -1));
 		}
@@ -58,7 +58,7 @@ int		parse_edges(t_data *data, char **split)
 		}
 		else
 		{
-			if (add_edge(data->edges, split[0], split[1]) == -1)
+			if (add_edge(&data->edges, split[0], split[1]) == -1)
 				return (free_split(split, -1));
 		}
 		return (free_split(split, 1));
@@ -98,12 +98,12 @@ int		parse(t_data *data, char *s)
 		return (check_hash(data, s));
 	else if (data->set_source == 1 && !data->source)
 	{
-		if (get_source_sink(data, s, 0) == -1)
+		if (get_source_sink(data, s, 1) == -1)
 			return (-1);
 	}
 	else if (data->set_sink == 1 && !data->sink)
 	{
-		if (get_source_sink(data, s, 1) == -1)
+		if (get_source_sink(data, s, 0) == -1)
 			return (-1);
 	}
 	else

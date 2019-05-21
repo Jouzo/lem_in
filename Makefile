@@ -1,9 +1,10 @@
 NAME = lem-in
 
-INC = -I includes
+INC = -Iincludes
 OBJDIR = obj
 
 SRCS = 	main.c\
+		stringify.c\
 
 OBJS = $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
 
@@ -11,7 +12,7 @@ CC = gcc -O3 -g
 CFLAGS = -Wall -Werror -Wextra
 PARSING = parsing/libparsing.a
 LIBFT = libft/libft.a
-
+ALGO = algo/lib_algo.a
 
 all: $(NAME)
 
@@ -20,11 +21,14 @@ FORCE: ;
 $(PARSING): FORCE
 	@make -C parsing
 
-$(NAME): $(PARSING) $(LIBFT) $(OBJS) 
-	$(CC) $(INC) $(CFLAGS) $(OBJS) $(LIBFT) $(PARSING) -o $(NAME)
+$(ALGO): FORCE
+	@make -C parsing
+
+$(NAME): $(PARSING) $(LIBFT) $(ALGO) $(OBJS) 
+	$(CC) $(INC) $(CFLAGS) $(OBJS) $(LIBFT) $(PARSING) $(ALGO) -o $(NAME)
 
 $(OBJDIR)/%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(INC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@make clean -C parsing
