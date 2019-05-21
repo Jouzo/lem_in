@@ -27,9 +27,9 @@ t_vertex  *get_path(int *path, t_queue queue)
 
 int  get_path_size(int *path, int sink)
 {
-	sink--;
-	int size = 1;
+	int size;
 
+	size = 0;
 	while (sink > 0)
 	{
 		sink = path[sink];
@@ -51,37 +51,45 @@ int 	init_state(t_args *args, int nb_vertices)
 
 int		check_flow(int *path, int vertex, t_flow *flow, int stage)
 {
+	(void)path;
 	if (stage == 0)
 		return (1);
-	// (void)flow;
+	print_flow(flow);
+	printf("------------------------------\n");
+
 	int size;
 	int tmp;
 	t_flow *flow_tmp;
 	t_vertex *path_tmp;
 
 	size = get_path_size(path, vertex);
+	// printf("size: %d for the vertex: %d\n", size, vertex);
+	// size = 1;
+	// static int size_bis = 1;
+	// size_bis++;
+	// if (size_bis % 3 == 0)
+	// 	size++;
+	
 	printf("size: %d\n", size);
+
 	flow_tmp = flow;
 	while (flow_tmp)
 	{
 		tmp = size;
 		path_tmp = flow_tmp->flow;
-		if (path_tmp && path_tmp->vertex)
-			printf("dedede\n");// %d\n", path_tmp->vertex);
 		while (path_tmp && tmp)
 		{
-			printf("ooo\n");
-			printf("vertex inside path_tmp:  %d\n", path_tmp->vertex);
 			path_tmp = path_tmp->next;
 			tmp--;
 		}
+		// printf("tmp: %d   vertex a checker: %d     vertex dans list: %d\n", size, vertex, path_tmp->vertex);
 		if (path_tmp && path_tmp->vertex == vertex)
-				return (0);
-		if (flow_tmp->flow != NULL)
-			printf("in while %d\n", flow_tmp->flow->vertex);
-			flow_tmp = flow_tmp->next;
+		{
+			// printf("=====vertex: %d\n", path_tmp->vertex);
+			return (0);
+		}	
+		flow_tmp = flow_tmp->next;
 	}
-	printf("after while\n");
 	return (1);
 }
 
@@ -89,8 +97,8 @@ int		*BFS(int vertex, t_queue *queue, char *edges, char **state, t_flow *flow, i
 {
 	int i;
 	int *path;
-	(void)stage;
-	(void)flow;
+	// (void)stage;
+	// (void)flow;
 
 	printf("---start of bfs---\n");
 	if (!(path = malloc(queue->capacity * sizeof(int))))
@@ -107,7 +115,8 @@ int		*BFS(int vertex, t_queue *queue, char *edges, char **state, t_flow *flow, i
 		{
 			if (edges[vertex * queue->capacity + i] == '1' && check_available(*state, i) && (check_flow(path, i, flow, stage) || i == queue->capacity - 1))
 			{
-            	path[i] = vertex;
+				// printf("src: %d  dest: %d   auto: %d\n", vertex, i, check_flow(path, i, flow, stage));
+				path[i] = vertex;
 				enqueue(queue, i);
 				change_state(state, i, WAITING);
 			}
