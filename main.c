@@ -1,10 +1,11 @@
-#include "parsing/includes/parsing.h"
+#include "includes/lem_in.h"
+#include "algo/includes/algo.h"
 
 void	print_data(t_data *data)
 {
 	printf("current state :\n");
 	printf("source : %s\nsink : %s\nants : %d\n", data->source, data->sink, data->ants);
-	// printf("Vertices :\n");
+	swap_source(data);
 	print_vertices(data->vertices);
 	printf("Edges :\n");
 	print_edges(data->edges);
@@ -43,9 +44,10 @@ int     main(int ac, char **av)
 		{
 			if (data.source && data.sink && data.ants)
 			{
+
 				// DO LEM-IN ALGO
 				print_data(&data);
-				// printf("now calculate\n");
+				printf("now calculate ret < 0\n");
 				free_data(&data);
 			}
 			else
@@ -63,8 +65,11 @@ int     main(int ac, char **av)
 		}
 	}
 	else {
+	printf("now calculate ret > 0\n");
 	print_data(&data);
-	free_data(&data);
+	char *graph = stringify(&data);
+	algo(&graph, ft_sqrt(ft_strlen(graph)), 3);
+	// free_data(&data);
 	}
 	return (0);
 }

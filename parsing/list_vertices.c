@@ -1,8 +1,18 @@
 #include "parsing.h"
 
-int				check_coordinates(char *x, char *y)
+size_t	vertices_len(t_vertices *head)
 {
-	return (ft_isint(x) && ft_isint(y));
+	size_t i;
+	t_vertices *tmp;
+
+	i = 0;
+	tmp = head;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	return (i);
 }
 
 int				check_vertices_name(t_vertices *head, char *name)
@@ -40,15 +50,14 @@ t_vertices		*new_vertex(char const *name, int x, int y)
 	return (list);
 }
 
-int				add_vertex(t_vertices *head, char *name, int x, int y)
+int				add_vertex(t_vertices **head, char *name, int x, int y)
 {
 	t_vertices *new;
 
-	new = head;
-	while (new->next != NULL)
-		new = new->next;
-	if (!(new->next = new_vertex(name, x, y)))
+	if (!(new = new_vertex(name, x, y)))
 		return (-1);
+	new->next = *head;
+	*head = new;
 	return (1);
 }
 
