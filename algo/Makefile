@@ -5,6 +5,7 @@ INC = -I includes
 OBJDIR = obj
 
 SRCS = 	bfs.c\
+		algo.c\
 		queue_array.c\
 		list_path.c\
 		list_flow.c\
