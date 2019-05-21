@@ -77,5 +77,14 @@ void    free_queue(t_queue *queue);
 void    free_vertex(t_vertex *head);
 void    free_flow(t_flow *flow);
 
+/*
+**  bfs functions
+*/
+int		    *BFS(t_queue *queue, char *edges, char **state, t_flow *flow, int stage);
+int		    check_flow(int *path, int vertex, t_flow *flow, int stage);
+t_vertex    *get_path(int *path, t_queue queue);
+int		    check_available(char *state, int vertex);
+void	    change_state(char **state, int vertex, int new_state);
+int         get_path_size(int *path, int sink);
 
 #endif
