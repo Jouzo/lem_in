@@ -82,7 +82,7 @@ int create_graph(char **edges)
 int pre_main()
 {
 	char *edges;
-	int nb_vertices = 8;
+	int nb_vertices = 6;
 
 	if (!(edges = malloc(nb_vertices * nb_vertices * sizeof(char) + 1)))
 		return (-1);
@@ -90,10 +90,10 @@ int pre_main()
 	ft_memset(edges, '0', nb_vertices * nb_vertices);
 
 	// nb_vertices = create_graph(&edges);
-	char *bis_edges = "0111000010001000100001001000001001000001001000010001000100001110";
-	// char *bis_edges = "011000100100100110011001001001000110";
+	// char *bis_edges = "0111000010001000100001001000001001000001001000010001000100001110";
+	char *bis_edges = "011000100100100110011001001001000110";
 	// algo(&edges, nb_vertices, 3);
-	algo(&bis_edges, nb_vertices, 3);
+	algo(&bis_edges, nb_vertices, 2);
 	// free(edges); //to uncomment with the create_graph line above
 	return (0);
 }
