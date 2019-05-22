@@ -10,13 +10,16 @@ int		check_available(char *state, int vertex)
 	return (state[vertex] == '1');
 }
 
-t_path  *get_path(int *path, t_queue queue)
+t_path  *get_path(int *path, t_queue queue, char *edges)
 {
+	(void)edges;
 	int u;
 	t_path *aug_path;
 
 	u = queue.capacity - 1;
 	aug_path = init_path(u);
+	// if (path[u] == 0 && edges[u] == '0')
+	// 	return (aug_path);
 	while (u > 0)
 	{
 		u = path[u];
@@ -32,6 +35,7 @@ int  get_path_size(int *path, int sink)
 	size = 0;
 	while (sink > 0)
 	{
+		printf("sink: %d   path[snink]: %d\n", sink, path[sink]);
 		sink = path[sink];
 		size++;
 	}
@@ -47,7 +51,8 @@ int		check_flow(int *path, int vertex, t_flow *flow, int stage)
 
 	if (stage == 0)
 		return (1);
-	size = get_path_size(path, vertex);	
+	size = get_path_size(path, vertex);
+	// printf("size: %d   vertex: %d\n", size, vertex);
 	flow_tmp = flow;
 	while (flow_tmp)
 	{
@@ -59,7 +64,10 @@ int		check_flow(int *path, int vertex, t_flow *flow, int stage)
 			tmp--;
 		}
 		if (path_tmp && path_tmp->vertex == vertex)
+		{
+			// printf("oups===%d\n", vertex);
 			return (0);
+		}
 		flow_tmp = flow_tmp->next;
 	}
 	return (1);
@@ -71,34 +79,41 @@ void	bzero_tab(int *tab, int size)
 		tab[size--] = 0;		
 }
 
-int		*BFS(t_queue *queue, char *edges, char **state, t_flow *flow, int stage)
+int		*find_path(t_queue *queue, char *edges, char **state, t_flow *flow, int stage)
 {
-	int i;
-	int *path;
 	int vertex;
+	int *path;
 
-	printf("---start of bfs---\n");
-	vertex = 0;
 	if (!(path = malloc(queue->capacity * sizeof(int))))
 		return (NULL);
 	bzero_tab(path, queue->capacity); 
-	enqueue(queue, vertex);
-	change_state(state, vertex, WAITING);
+
 	while (!is_empty(queue))
 	{
 		vertex = dequeue(queue);
 		change_state(state, vertex, VISITED);
-		for (i = 0; i < queue->capacity; i++)
+		for (int i = 0; i < queue->capacity; i++)
 		{
-			if (edges[vertex * queue->capacity + i] == '1' && check_available(*state, i) && (check_flow(path, i, flow, stage) || i == queue->capacity - 1))
+			if (edges[vertex * queue->capacity + i] == '1' && check_available(*state, i) 
+				&& (i == queue->capacity - 1 || check_flow(path, i, flow, stage)))
 			{
-				// printf("src: %d  dest: %d   auto: %d\n", vertex, i, check_flow(path, i, flow, stage));
 				path[i] = vertex;
 				enqueue(queue, i);
 				change_state(state, i, WAITING);
 			}
 		}
 	}
+	return (path);
+}
+
+int		*BFS(t_queue *queue, char *edges, char **state, t_flow *flow, int stage)
+{
+	int *path;
+
+	printf("---start of bfs---\n");
+	enqueue(queue, 0);
+	change_state(state, 0, WAITING);
+	path = find_path(queue, edges, state, flow, stage);
 	printf("---end of bfs---\n");
 	printf("\n");
    	return (path);

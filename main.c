@@ -68,7 +68,7 @@ int     main(int ac, char **av)
 	printf("now calculate ret > 0\n");
 	print_data(&data);
 	char *graph = stringify(&data);
-	algo(&graph, ft_sqrt(ft_strlen(graph)), 3);
+	algo(&graph, ft_sqrt(ft_strlen(graph)), 2);
 	// free_data(&data);
 	}
 	return (0);
