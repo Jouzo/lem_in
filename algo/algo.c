@@ -27,7 +27,7 @@ int algo(char **edges, int nb_vertices, int nb_ants)
 		args = init_args(nb_vertices);
 		ft_memset(args->state, '1', nb_vertices);
 		path = BFS(&args->queue, *edges, &args->state, flow, count);
-   		new_path = get_path(path, args->queue);
+   		new_path = get_path(path, args->queue, *edges);
 		if (count == 0)
 			flow = new_flow(new_path);
 		else
@@ -82,19 +82,18 @@ int create_graph(char **edges)
 int pre_main()
 {
 	char *edges;
-	int nb_vertices = 8;
+	int nb_vertices = 6;
 
 	if (!(edges = malloc(nb_vertices * nb_vertices * sizeof(char) + 1)))
 		return (-1);
 	edges[nb_vertices * nb_vertices] = '\0';
 	ft_memset(edges, '0', nb_vertices * nb_vertices);
 
-	nb_vertices = create_graph(&edges);
+	// nb_vertices = create_graph(&edges);
 	// char *bis_edges = "0111000010001000100001001000001001000001001000010001000100001110";
-	// printf("%s\n%s et %d\n", edges, bis_edges, nb_vertices);
-	printf("---%d\n", nb_vertices);
+	char *bis_edges = "011000100100100110011001001001000110";
 	// algo(&edges, nb_vertices, 3);
-	algo(&edges, nb_vertices, 3);
-	free(edges); //to uncomment with the create_graph line above
+	algo(&bis_edges, nb_vertices, 2);
+	// free(edges); //to uncomment with the create_graph line above
 	return (0);
 }
