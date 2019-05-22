@@ -28,21 +28,21 @@ t_path  *get_path(int *path, t_queue queue, char *edges)
 	return (aug_path);
 }
 
-int  get_path_size(int *path, int sink)
+int  get_path_size(int *path, int sink, int vertex)
 {
 	int size;
 
 	size = 0;
+	path[sink] = vertex;
 	while (sink > 0)
 	{
-		printf("sink: %d   path[snink]: %d\n", sink, path[sink]);
 		sink = path[sink];
 		size++;
 	}
 	return (size);
 }
 
-int		check_flow(int *path, int vertex, t_flow *flow, int stage)
+int		check_flow(int *path, int vertex, t_flow *flow, int stage, int vertex_source)
 {
 	int size;
 	int tmp;
@@ -51,8 +51,7 @@ int		check_flow(int *path, int vertex, t_flow *flow, int stage)
 
 	if (stage == 0)
 		return (1);
-	size = get_path_size(path, vertex);
-	// printf("size: %d   vertex: %d\n", size, vertex);
+	size = get_path_size(path, vertex, vertex_source);
 	flow_tmp = flow;
 	while (flow_tmp)
 	{
@@ -92,10 +91,10 @@ int		*find_path(t_queue *queue, char *edges, char **state, t_flow *flow, int sta
 	{
 		vertex = dequeue(queue);
 		change_state(state, vertex, VISITED);
-		for (int i = 0; i < queue->capacity; i++)
+		for (int i = 1; i < queue->capacity; i++)
 		{
 			if (edges[vertex * queue->capacity + i] == '1' && check_available(*state, i) 
-				&& (i == queue->capacity - 1 || check_flow(path, i, flow, stage)))
+				&& (i == queue->capacity - 1 || check_flow(path, i, flow, stage, vertex)))
 			{
 				path[i] = vertex;
 				enqueue(queue, i);
@@ -103,6 +102,12 @@ int		*find_path(t_queue *queue, char *edges, char **state, t_flow *flow, int sta
 			}
 		}
 	}
+	// int i = 0;
+	// while (i < 6)
+	// {
+	// 	printf("path: %d\n", path[i]);
+	// 	i++;
+	// }
 	return (path);
 }
 
