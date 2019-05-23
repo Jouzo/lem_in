@@ -82,11 +82,11 @@ void    free_flow(t_flow *flow);
 */
 
 int		    *BFS(t_queue *queue, char *edges, char **state, t_flow *flow, int stage);
-int		    check_flow(int *path, int vertex, t_flow *flow, int stage);
+int		    check_flow(int *path, int vertex, t_flow *flow, int stage, int vertex_source);
 t_path      *get_path(int *path, t_queue queue, char *edges);
 int		    check_available(char *state, int vertex);
 void	    change_state(char **state, int vertex, int new_state);
-int         get_path_size(int *path, int sink);
+int         get_path_size(int *path, int sink, int vertex_source);
 
 /*
 **  algo functions
