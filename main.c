@@ -34,6 +34,7 @@ int     main(int ac, char **av)
 	int		i;
 	int		ret;
 	t_data data;
+	t_flow *flow;
 	ft_bzero(&data, sizeof(t_data));
 	(void)av;
 	(void)ac;
@@ -68,7 +69,9 @@ int     main(int ac, char **av)
 	printf("now calculate ret > 0\n");
 	print_data(&data);
 	char *graph = stringify(&data);
-	algo(&graph, ft_sqrt(ft_strlen(graph)), 2);
+	flow = algo(&graph, ft_sqrt(ft_strlen(graph)), 2);
+	print_flow(flow, data.vertices);
+	free_flow(flow);
 	// free_data(&data);
 	}
 	return (0);
