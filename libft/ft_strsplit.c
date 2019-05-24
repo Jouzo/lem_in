@@ -6,22 +6,22 @@
 /*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/10 15:22:39 by jdescler          #+#    #+#             */
-/*   Updated: 2019/05/12 14:45:22 by jdescler         ###   ########.fr       */
+/*   Updated: 2019/05/24 20:19:34 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char    **ft_mega_malloc(char *s, char c)
+static char		**ft_mega_malloc(char *s, char c)
 {
-        char **arr;
+	char **arr;
 
-        if (!(arr = (char**)malloc(sizeof(char*) * (ft_word_count(s, c) + 1))))
-                return (NULL);
-        return (arr);
+	if (!(arr = (char**)malloc(sizeof(char*) * (ft_word_count(s, c) + 1))))
+		return (NULL);
+	return (arr);
 }
 
-char		**ft_strsplit(char const *s, char c)
+char			**ft_strsplit(char const *s, char c)
 {
 	char	**arr;
 	int		len;
