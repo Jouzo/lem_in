@@ -1,6 +1,6 @@
 #include "./includes/algo.h"
 
-static t_args *init_args(int nb_vertices)
+static t_args *init_args(int nb_vertices, char **edges)
 {
 	t_args *args;
 
@@ -9,6 +9,7 @@ static t_args *init_args(int nb_vertices)
 	if (!(args->state = malloc(nb_vertices + 1)))
 		return (NULL);
 	args->state[nb_vertices] = '\0';
+	args->edges = *edges;
 	args->queue = create_queue(nb_vertices);
 	return (args);
 }
@@ -24,11 +25,11 @@ t_flow *algo(char **edges, int nb_vertices, int nb_ants)
 	count = 0;
 	while (count < nb_ants)
 	{
-		args = init_args(nb_vertices);
+		args = init_args(nb_vertices, edges);
 		ft_memset(args->state, '1', nb_vertices);
 		// path = BFS(&args->queue, *edges, &args->state, flow, count);
    		// new_path = get_path(path, args->queue, *edges);
-		   new_path = BFS(&args->queue, *edges, &args->state, flow, count);
+		   new_path = BFS(args, flow, count);
 		if (count == 0)
 			flow = new_flow(new_path);
 		else
