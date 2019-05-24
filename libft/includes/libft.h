@@ -6,7 +6,7 @@
 /*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 16:59:15 by jdescler          #+#    #+#             */
-/*   Updated: 2019/05/14 23:36:31 by jdescler         ###   ########.fr       */
+/*   Updated: 2019/05/24 11:22:57 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <string.h>
 # include <unistd.h>
 
-# define BUFF_SIZE 32
+# define BUFF_GNL 32
 # define FD_MAX 15
 
 typedef struct		s_list

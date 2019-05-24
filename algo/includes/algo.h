@@ -92,7 +92,7 @@ int         get_path_size(int *path, int sink, int vertex_source);
 **  algo functions
 */
 
-int         algo(char **edges, int nb_vertices, int nb_ants);
+t_flow		*algo(char **edges, int nb_vertices, int nb_ants);
 
 
 #endif

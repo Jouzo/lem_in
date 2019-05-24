@@ -102,12 +102,6 @@ int		*find_path(t_queue *queue, char *edges, char **state, t_flow *flow, int sta
 			}
 		}
 	}
-	// int i = 0;
-	// while (i < 6)
-	// {
-	// 	printf("path: %d\n", path[i]);
-	// 	i++;
-	// }
 	return (path);
 }
 
