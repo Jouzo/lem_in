@@ -76,7 +76,7 @@ char	*stringify(t_data *data)
 {
 	char	*s;
 	size_t	size;
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	size = vertices_len(data->vertices);
@@ -86,7 +86,6 @@ char	*stringify(t_data *data)
 	s[size * size] = '\0';
 	if (assign(data->edges, data->vertices, &s, size) == -1)
 		return (NULL);
-	// printf("string : %s\n", s);
 	while (i < size * size)
 	{
 		write(1, s + i, size);

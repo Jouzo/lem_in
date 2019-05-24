@@ -1,6 +1,6 @@
 #include "./includes/algo.h"
 
-t_args *init_args(int nb_vertices, char **edges)
+t_args	*init_args(int nb_vertices, char **edges)
 {
 	t_args *args;
 
@@ -20,27 +20,26 @@ void	reinit_args(t_args *args)
 	ft_memset(args->state, '1', strlen(args->state));
 	ft_bzero(args->queue.vertices, sizeof(int) * ft_strlen(args->state));
 	args->queue.front = 0;
-    args->queue.size = 0;
-    args->queue.rear = 0;
+	args->queue.size = 0;
+	args->queue.rear = 0;
 }
 
-
-t_flow *algo(char **edges, int nb_vertices, int nb_ants)
+t_flow	*algo(char **edges, int nb_vertices, int nb_ants)
 {
-	int count;
-	t_args *args = NULL;
-	t_path *new_path;
-	t_flow *flow;
+	int		count;
+	t_args	*args;
+	t_path	*path;
+	t_flow	*flow;
 
 	count = 0;
 	args = init_args(nb_vertices, edges);
 	while (count < nb_ants)
 	{
-		new_path = BFS(args, flow, count, nb_vertices, edges);
+		path = BFS(args, flow, count, nb_vertices, edges);
 		if (count == 0)
-			flow = new_flow(new_path);
+			flow = new_flow(path);
 		else
-			add_flow(flow, new_path);
+			add_flow(flow, path);
 		count++;
 	}
 	return (flow);
@@ -54,7 +53,7 @@ int create_graph(char **edges)
 	int origin;
 	int destin;
 	int nb_vertices;
- 
+
 	printf("Enter number of vertices : ");
 	scanf("%d", &nb_vertices);
 	max_edge = nb_vertices * (nb_vertices - 1) / 2;
@@ -63,10 +62,10 @@ int create_graph(char **edges)
 	{
 		printf("Enter edge %d( -1 -1 to quit ) : ",count);
 		scanf("%d %d",&origin,&destin);
- 
+
 		if((origin == -1) && (destin == -1))
 			break;
- 
+
 		if(origin>=nb_vertices || destin>=nb_vertices || origin<0 || destin<0)
 		{
 			printf("Invalid edge!\n");

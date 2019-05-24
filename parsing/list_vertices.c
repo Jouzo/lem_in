@@ -1,9 +1,9 @@
 #include "parsing.h"
 
-size_t	vertices_len(t_vertices *head)
+size_t			vertices_len(t_vertices *head)
 {
-	size_t i;
-	t_vertices *tmp;
+	size_t		i;
+	t_vertices	*tmp;
 
 	i = 0;
 	tmp = head;
