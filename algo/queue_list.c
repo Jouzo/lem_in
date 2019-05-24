@@ -10,10 +10,10 @@ void print(queue *queue)
 {
 	printf(" %d",queue->vertex);
 	if(!queue->next)
-    {
-        printf("\n");
-        return;
-    }
+	{
+		printf("\n");
+		return;
+	}
 	print(queue->next);
 }
 
@@ -35,7 +35,7 @@ void en_queque(int vertex, queue *head)
 
 int de_queue(queue **head)
 {
-    int vertex;
+	int vertex;
 	queue* temp = *head;
 	*head = (*head)->next;
 	vertex = temp->vertex;
@@ -56,28 +56,28 @@ queue	*create_queue_head(int vertex)
 
 int main()
 {
-    queue *queue;
+	queue *queue;
 
-    if (!(queue = create_queue_head(12)))
-        return (-1); // free everyting and return err
-    en_queque(1, queue);
-    en_queque(2, queue);
-    en_queque(3, queue);
-    en_queque(4, queue);
-    en_queque(5, queue);
-    print(queue);
-    de_queue(&queue);
-    print(queue);
-    de_queue(&queue);
-    print(queue);
-    de_queue(&queue);
-    print(queue);
-    de_queue(&queue);
-    print(queue);
-    de_queue(&queue);
-    print(queue);
-    de_queue(&queue);
-    // print(queue);
+	if (!(queue = create_queue_head(12)))
+		return (-1); // free everyting and return err
+	en_queque(1, queue);
+	en_queque(2, queue);
+	en_queque(3, queue);
+	en_queque(4, queue);
+	en_queque(5, queue);
+	print(queue);
+	de_queue(&queue);
+	print(queue);
+	de_queue(&queue);
+	print(queue);
+	de_queue(&queue);
+	print(queue);
+	de_queue(&queue);
+	print(queue);
+	de_queue(&queue);
+	print(queue);
+	de_queue(&queue);
+	// print(queue);
 }
 
 //its not finish, some protections needed

@@ -10,6 +10,7 @@ SRCS = 	bfs.c\
 		list_path.c\
 		list_flow.c\
 		free.c\
+		path.c\
 
 OBJS = $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
 
