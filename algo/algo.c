@@ -1,6 +1,6 @@
 #include "./includes/algo.h"
 
-static t_args *init_args(int nb_vertices)
+t_args *init_args(int nb_vertices, char **edges)
 {
 	t_args *args;
 
@@ -8,31 +8,39 @@ static t_args *init_args(int nb_vertices)
 		return (NULL);
 	if (!(args->state = malloc(nb_vertices + 1)))
 		return (NULL);
+	ft_memset(args->state, '1', nb_vertices);
 	args->state[nb_vertices] = '\0';
+	args->edges = *edges;
 	args->queue = create_queue(nb_vertices);
 	return (args);
 }
 
+void	reinit_args(t_args *args)
+{
+	ft_memset(args->state, '1', strlen(args->state));
+	ft_bzero(args->queue.vertices, sizeof(int) * ft_strlen(args->state));
+	args->queue.front = 0;
+    args->queue.size = 0;
+    args->queue.rear = 0;
+}
+
+
 t_flow *algo(char **edges, int nb_vertices, int nb_ants)
 {
-	int *path;
 	int count;
-	t_args *args;
+	t_args *args = NULL;
 	t_path *new_path;
 	t_flow *flow;
 
 	count = 0;
+	args = init_args(nb_vertices, edges);
 	while (count < nb_ants)
 	{
-		args = init_args(nb_vertices);
-		ft_memset(args->state, '1', nb_vertices);
-		path = BFS(&args->queue, *edges, &args->state, flow, count);
-   		new_path = get_path(path, args->queue, *edges);
+		new_path = BFS(args, flow, count, nb_vertices, edges);
 		if (count == 0)
 			flow = new_flow(new_path);
 		else
 			add_flow(flow, new_path);
-		reset(path, args);
 		count++;
 	}
 	return (flow);

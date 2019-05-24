@@ -23,7 +23,7 @@ void        print_path2(t_path *head, char **vertices)
     current = head;
     while (current != NULL)
     {
-        ft_printf("vertex to the source: %s\n", vertices[current->vertex]);
+        printf("vertex to the source: %s\n", vertices[current->vertex]);
         current = current->next;
     }
 }
@@ -35,7 +35,7 @@ void    print_flow2(t_flow *head, char **vertices)
     current = head;
     while (current != NULL)
     {
-        ft_printf("-------\n");
+        printf("-------\n");
         print_path2(current->path, vertices);
         current = current->next;
     }
