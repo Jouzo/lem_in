@@ -3,8 +3,6 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include "../../libft/includes/libft.h"
-# define MAX(a, b) a <= b ? b : a
-# define MIN(a, b) a <= b ? a : b
 # define INT_MAX 2147483647
 
 typedef struct				s_vertices

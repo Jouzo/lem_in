@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdescler <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/05 17:57:29 by jdescler          #+#    #+#             */
-/*   Updated: 2018/12/05 13:23:56 by jdescler         ###   ########.fr       */
+/*   Updated: 2019/05/24 11:23:12 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ int				get_line(char **s, char **line, int fd)
 int				get_next_line(const int fd, char **line)
 {
 	int			ret;
-	char		buffer[BUFF_SIZE + 1];
+	char		buffer[BUFF_GNL + 1];
 	static char	*s[FD_MAX];
 	char		*tmp;
 
-	if (fd < 0 || line == NULL || BUFF_SIZE <= 0)
+	if (fd < 0 || line == NULL || BUFF_GNL <= 0)
 		return (-1);
-	while ((ret = read(fd, buffer, BUFF_SIZE)) > 0)
+	while ((ret = read(fd, buffer, BUFF_GNL)) > 0)
 	{
 		buffer[ret] = '\0';
 		if (!s[fd])
