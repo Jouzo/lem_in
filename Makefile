@@ -9,7 +9,7 @@ SRCS = 	main.c\
 
 OBJS = $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
 
-CC = gcc -O2 -g
+CC = gcc -O2 -g -fsanitize=address
 CFLAGS = -Wall -Werror -Wextra
 PARSING = parsing/libparsing.a
 LIBFT = libft/libft.a
@@ -26,6 +26,9 @@ $(PARSING): FORCE
 $(ALGO): FORCE
 	@make -C algo
 
+$(PRINTF): FORCE
+	@make -C ft_printf
+
 $(NAME): $(PARSING) $(LIBFT) $(PRINTF) $(ALGO) $(OBJS) 
 	$(CC) $(INC) $(CFLAGS) $(OBJS) $(LIBFT) $(PRINTF) $(PARSING) $(ALGO) -o $(NAME)
 
@@ -35,11 +38,13 @@ $(OBJDIR)/%.o: %.c
 clean:
 	@make clean -C parsing
 	@make clean -C algo
+	@make clean -C ft_printf
 	-rm -rf $(OBJDIR)/*.o
 
 fclean:clean
 	@make fclean -C parsing
 	@make fclean -C algo
+	@make fclean -C ft_printf
 	-rm -f $(NAME)
 
 re: fclean all
