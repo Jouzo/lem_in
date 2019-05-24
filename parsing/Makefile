@@ -14,7 +14,7 @@ SRCS = 	list_edges.c\
 
 OBJS = $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
 
-CC = gcc -O3 -g
+CC = gcc -O3
 CFLAGS = -Wall -Werror -Wextra
 LIBFT = ../libft/libft.a
 

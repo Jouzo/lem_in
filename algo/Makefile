@@ -13,7 +13,7 @@ SRCS = 	bfs.c\
 
 OBJS = $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
 
-CC = gcc -g #-fsanitize=address
+CC = gcc #-fsanitize=address
 CFLAGS = -Wall -Werror -Wextra
 LIBFT = ../libft/libft.a
 
