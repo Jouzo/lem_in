@@ -15,7 +15,7 @@ static t_args *init_args(int nb_vertices)
 
 t_flow *algo(char **edges, int nb_vertices, int nb_ants)
 {
-	int *path;
+	// int *path;
 	int count;
 	t_args *args;
 	t_path *new_path;
@@ -26,13 +26,14 @@ t_flow *algo(char **edges, int nb_vertices, int nb_ants)
 	{
 		args = init_args(nb_vertices);
 		ft_memset(args->state, '1', nb_vertices);
-		path = BFS(&args->queue, *edges, &args->state, flow, count);
-   		new_path = get_path(path, args->queue, *edges);
+		// path = BFS(&args->queue, *edges, &args->state, flow, count);
+   		// new_path = get_path(path, args->queue, *edges);
+		   new_path = BFS(&args->queue, *edges, &args->state, flow, count);
 		if (count == 0)
 			flow = new_flow(new_path);
 		else
 			add_flow(flow, new_path);
-		reset(path, args);
+		reset(args);
 		count++;
 	}
 	return (flow);
