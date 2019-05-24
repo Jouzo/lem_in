@@ -69,9 +69,10 @@ int     main(int ac, char **av)
 	printf("now calculate ret > 0\n");
 	print_data(&data);
 	char *graph = stringify(&data);
-	flow = algo(&graph, ft_sqrt(ft_strlen(graph)), 2);
-	print_flow(flow, data.vertices);
-	free_flow(flow);
+	flow = algo(&graph, ft_sqrt(ft_strlen(graph)), data.ants);
+	// print_flow(flow);
+	output(flow, &data);
+	// free_flow(flow);
 	// free_data(&data);
 	}
 	return (0);
