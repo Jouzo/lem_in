@@ -109,15 +109,16 @@ t_path		*find_path(t_args *args, t_flow *flow, int stage)
 	return (get_path(path, args->queue, args->edges));
 }
 
-t_path		*BFS(t_args *args, t_flow *flow, int stage)
+t_path		*BFS(t_args *args, t_flow *flow, int stage, int nb_vertices, char **edges)
 {
-	// int *path;
+	(void)edges;
+	(void)nb_vertices;
 
 	printf("---start of bfs---\n");
 	printf("\n");
+
+	reinit_args(args);
 	enqueue(&args->queue, 0);
 	change_state(&args->state, 0, WAITING);
 	return (find_path(args, flow, stage));
-	// printf("---end of bfs---\n");
-   	// return (path);
 }

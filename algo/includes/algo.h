@@ -81,7 +81,7 @@ void    free_flow(t_flow *flow);
 **  bfs functions
 */
 
-t_path		    *BFS(t_args *args, t_flow *flow, int stage);
+t_path		*BFS(t_args *args, t_flow *flow, int stage, int nb_vertices, char **edges);
 int		    check_flow(int *path, int vertex, t_flow *flow, int stage, int vertex_source);
 t_path      *get_path(int *path, t_queue queue, char *edges);
 int		    check_available(char *state, int vertex);
@@ -93,6 +93,8 @@ int         get_path_size(int *path, int sink, int vertex_source);
 */
 
 t_flow		*algo(char **edges, int nb_vertices, int nb_ants);
-
+t_args      *init_args(int nb_vertices, char **edges);
+void	    bzero_tab(int *tab, int size);
+void	    reinit_args(t_args *args);
 
 #endif
