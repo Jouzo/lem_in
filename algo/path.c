@@ -42,12 +42,12 @@ t_path	*find_path(t_args *args, t_flow *flow, int stage)
 	int *path;
 	int i;
 
-	i = 0;
 	if (!(path = malloc(args->queue.capacity * sizeof(int))))
 		return (NULL);
 	ft_bzero(path, sizeof(int) * args->queue.capacity);
 	while (!is_empty(&args->queue))
 	{
+		i = 1;
 		vertex = dequeue(&args->queue);
 		change_state(&args->state, vertex, VISITED);
 		while (i < args->queue.capacity)
