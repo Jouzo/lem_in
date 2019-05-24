@@ -1,5 +1,21 @@
 #include "lem_in.h"
 
+static char	*formatted_ouput(char *vertex, int ant)
+{
+	char *s;
+	int size;
+
+	size = ft_sizeofint(ant);
+	if (!(s = (char*)malloc(sizeof(char) * (size + ft_strlen(vertex)) + 3)))
+		return (NULL);
+	s[size + ft_strlen(vertex) + 3] = 0;
+	s[0] = 'L';
+	ft_strcat(s, ft_itoa(ant));
+	s[size + 1] = '-';
+	ft_strcat(s, vertex);
+	return (s);
+}
+
 void        print_path2(t_path *head, char **vertices)
 {
     t_path *current;
