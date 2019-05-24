@@ -13,7 +13,7 @@ static t_args *init_args(int nb_vertices)
 	return (args);
 }
 
-int algo(char **edges, int nb_vertices, int nb_ants)
+t_flow *algo(char **edges, int nb_vertices, int nb_ants)
 {
 	int *path;
 	int count;
@@ -35,9 +35,7 @@ int algo(char **edges, int nb_vertices, int nb_ants)
 		reset(path, args);
 		count++;
 	}
-	print_flow(flow);
-	free_flow(flow);
-	return (0);
+	return (flow);
 }
 
 // this function will be deleted. just for develloping
