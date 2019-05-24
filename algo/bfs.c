@@ -75,12 +75,6 @@ int		check_flow(int *path, int vertex, t_flow *flow, int stage, int vertex_sourc
 	return (1);
 }
 
-void	bzero_tab(int *tab, int size)
-{
-	while (size)
-		tab[size--] = 0;		
-}
-
 // t_path		*find_path(t_queue *queue, char *edges, char **state, t_flow *flow, int stage)
 t_path		*find_path(t_args *args, t_flow *flow, int stage)
 {
@@ -89,7 +83,7 @@ t_path		*find_path(t_args *args, t_flow *flow, int stage)
 
 	if (!(path = malloc(args->queue.capacity * sizeof(int))))
 		return (NULL);
-	bzero_tab(path, args->queue.capacity); 
+	ft_bzero(path, sizeof(int) * args->queue.capacity); 
 	while (!is_empty(&args->queue))
 	{
 		vertex = dequeue(&args->queue);

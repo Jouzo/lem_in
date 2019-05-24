@@ -18,7 +18,7 @@ t_args *init_args(int nb_vertices, char **edges)
 void	reinit_args(t_args *args)
 {
 	ft_memset(args->state, '1', strlen(args->state));
-	bzero_tab(args->queue.vertices, ft_strlen(args->state));
+	ft_bzero(args->queue.vertices, sizeof(int) * ft_strlen(args->state));
 	args->queue.front = 0;
     args->queue.size = 0;
     args->queue.rear = 0;

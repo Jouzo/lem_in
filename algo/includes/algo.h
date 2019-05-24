@@ -94,7 +94,6 @@ int         get_path_size(int *path, int sink, int vertex_source);
 
 t_flow		*algo(char **edges, int nb_vertices, int nb_ants);
 t_args      *init_args(int nb_vertices, char **edges);
-void	    bzero_tab(int *tab, int size);
 void	    reinit_args(t_args *args);
 
 #endif
