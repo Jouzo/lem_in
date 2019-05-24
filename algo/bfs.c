@@ -18,13 +18,17 @@ t_path  *get_path(int *path, t_queue queue, char *edges)
 
 	u = queue.capacity - 1;
 	aug_path = init_path(u);
-	// if (path[u] == 0 && edges[u] == '0')
-	// 	return (aug_path);
+	if (path[u] == 0 && edges[u] == '0')
+	{
+		free(path);
+		return (aug_path);
+	}		
 	while (u > 0)
 	{
 		u = path[u];
 		push_vertex(&aug_path, u);
 	}
+	free(path);
 	return (aug_path);
 }
 
@@ -78,7 +82,7 @@ void	bzero_tab(int *tab, int size)
 		tab[size--] = 0;		
 }
 
-int		*find_path(t_queue *queue, char *edges, char **state, t_flow *flow, int stage)
+t_path		*find_path(t_queue *queue, char *edges, char **state, t_flow *flow, int stage)
 {
 	int vertex;
 	int *path;
@@ -86,7 +90,6 @@ int		*find_path(t_queue *queue, char *edges, char **state, t_flow *flow, int sta
 	if (!(path = malloc(queue->capacity * sizeof(int))))
 		return (NULL);
 	bzero_tab(path, queue->capacity); 
-
 	while (!is_empty(queue))
 	{
 		vertex = dequeue(queue);
@@ -102,18 +105,18 @@ int		*find_path(t_queue *queue, char *edges, char **state, t_flow *flow, int sta
 			}
 		}
 	}
-	return (path);
+	return (get_path(path, *queue, edges));
 }
 
-int		*BFS(t_queue *queue, char *edges, char **state, t_flow *flow, int stage)
+t_path		*BFS(t_queue *queue, char *edges, char **state, t_flow *flow, int stage)
 {
-	int *path;
+	// int *path;
 
 	printf("---start of bfs---\n");
+	printf("\n");
 	enqueue(queue, 0);
 	change_state(state, 0, WAITING);
-	path = find_path(queue, edges, state, flow, stage);
-	printf("---end of bfs---\n");
-	printf("\n");
-   	return (path);
+	return (find_path(queue, edges, state, flow, stage));
+	// printf("---end of bfs---\n");
+   	// return (path);
 }

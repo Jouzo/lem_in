@@ -72,7 +72,7 @@ int         add_flow(t_flow *head, t_path *path);
 **  free functions
 */
 
-void    reset(int *path, t_args *args);
+void    reset(t_args *args);
 void    free_queue(t_queue *queue);
 void    free_vertex(t_path *head);
 void    free_flow(t_flow *flow);
@@ -81,7 +81,7 @@ void    free_flow(t_flow *flow);
 **  bfs functions
 */
 
-int		    *BFS(t_queue *queue, char *edges, char **state, t_flow *flow, int stage);
+t_path		    *BFS(t_queue *queue, char *edges, char **state, t_flow *flow, int stage);
 int		    check_flow(int *path, int vertex, t_flow *flow, int stage, int vertex_source);
 t_path      *get_path(int *path, t_queue queue, char *edges);
 int		    check_available(char *state, int vertex);
