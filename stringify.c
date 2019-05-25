@@ -86,13 +86,13 @@ char	*stringify(t_data *data)
 	s[size * size] = '\0';
 	if (assign(data->edges, data->vertices, &s, size) == -1)
 		return (NULL);
-	char *one = "\x1B[31m1\033[0m";
+	char *one = "\x1B[31m1 \033[0m";
 	while (i < size * size)
 	{
 		if (s[i] == '1')
 			write(1, one, ft_strlen(one));
 		else 
-			write(1, "0", 1);
+			write(1, "0 ", 2);
 		if ((i + 1) % size == 0)
 		{
 			write(1, "\n", 1);
