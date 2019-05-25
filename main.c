@@ -35,6 +35,7 @@ int     main(int ac, char **av)
 	int		ret;
 	t_data data;
 	t_flow *flow;
+	char *graph;
 	ft_bzero(&data, sizeof(t_data));
 	(void)av;
 	(void)ac;
@@ -49,6 +50,9 @@ int     main(int ac, char **av)
 				// DO LEM-IN ALGO
 				print_data(&data);
 				printf("now calculate ret < 0\n");
+				graph = stringify(&data);
+				flow = algo(&graph, ft_sqrt(ft_strlen(graph)), data.ants);
+				output(flow, &data);
 				free_data(&data);
 			}
 			else
@@ -68,7 +72,7 @@ int     main(int ac, char **av)
 	else {
 	printf("now calculate ret > 0\n");
 	print_data(&data);
-	char *graph = stringify(&data);
+	graph = stringify(&data);
 	flow = algo(&graph, ft_sqrt(ft_strlen(graph)), data.ants);
 	// print_flow(flow);
 	output(flow, &data);

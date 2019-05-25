@@ -3,8 +3,8 @@ NAME = lem-in
 INC = -Iincludes
 OBJDIR = obj
 
-SRCS = 	main.c\
-		stringify.c\
+SRCS = 	stringify.c\
+		main.c\
 		output.c\
 
 OBJS = $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
