@@ -81,7 +81,7 @@ void    free_flow(t_flow *flow);
 **  bfs functions
 */
 
-t_path		*BFS(t_args *args, t_flow *flow, int stage, int nb_vertices, char **edges);
+t_path		*BFS(t_args *args, t_flow *flow, int stage, int nb_vertices);
 int		    check_flow(int *path, int vertex, t_flow *flow, int stage, int vertex_source);
 int		    check_available(char *state, int vertex);
 void	    change_state(char **state, int vertex, int new_state);

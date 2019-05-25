@@ -39,9 +39,8 @@ int		check_flow(int *path, int vertex, t_flow *flow, int stage, int vertex_sourc
 	return (1);
 }
 
-t_path		*BFS(t_args *args, t_flow *flow, int stage, int nb_vertices, char **edges)
+t_path		*BFS(t_args *args, t_flow *flow, int stage, int nb_vertices)
 {
-	(void)edges;
 	(void)nb_vertices;
 
 	printf("---start of bfs---\n");
