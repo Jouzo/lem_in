@@ -56,6 +56,7 @@ t_path	*find_path(t_args *args, t_flow *flow, int stage, int await)
 		change_state(&args->state, vertex, VISITED);
 		while (i < args->queue.capacity)
 		{
+			// if args->edges[args->queue.capacity * i + vertex] == '2'
 			if (args->edges[vertex * args->queue.capacity + i] == '1'
 			&& check_available(args->state, i) && (i == args->queue.capacity - 1
 					|| check_flow(path, i, flow, stage, vertex, await)))

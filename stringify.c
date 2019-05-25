@@ -72,21 +72,13 @@ int		assign(t_edges *edge, t_vertices *vertice, char **s, int size)
 	return (1);
 }
 
-char	*stringify(t_data *data)
+void print_map(int size, char *s)
 {
-	char	*s;
-	size_t	size;
-	size_t	i;
-
+	int i;
+	char *one;
+	
+	one = "\x1B[31m1 \033[0m";
 	i = 0;
-	size = vertices_len(data->vertices);
-	if (!(s = (char*)malloc(sizeof(char) * size * size + 1)))
-		return (NULL);
-	ft_memset(s, '0', size * size);
-	s[size * size] = '\0';
-	if (assign(data->edges, data->vertices, &s, size) == -1)
-		return (NULL);
-	char *one = "\x1B[31m1 \033[0m";
 	while (i < size * size)
 	{
 		if (s[i] == '1')
@@ -99,5 +91,20 @@ char	*stringify(t_data *data)
 		}
 		i++;
 	}
+}
+
+char	*stringify(t_data *data)
+{
+	char	*s;
+	size_t	size;
+
+	size = vertices_len(data->vertices);
+	if (!(s = (char*)malloc(sizeof(char) * size * size + 1)))
+		return (NULL);
+	ft_memset(s, '0', size * size);
+	s[size * size] = '\0';
+	if (assign(data->edges, data->vertices, &s, size) == -1)
+		return (NULL);
+	print_map(size, s);
 	return (s);
 }
