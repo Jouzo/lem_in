@@ -35,7 +35,7 @@ t_flow	*algo(char **edges, int nb_vertices, int nb_ants)
 	args = init_args(nb_vertices, edges);
 	while (count < nb_ants)
 	{
-		path = BFS(args, flow, count, nb_vertices, edges);
+		path = BFS(args, flow, count, 0);
 		if (count == 0)
 			flow = new_flow(path);
 		else
