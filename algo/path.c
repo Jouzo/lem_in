@@ -1,6 +1,6 @@
 #include "algo.h"
 
-t_path	*get_path(int *path, t_queue queue, char *edges, int await)
+t_path	*get_path(int *path, t_queue queue, char *edges, int await, char **map)
 {
 	int		u;
 	t_path	*aug_path;
@@ -14,6 +14,8 @@ t_path	*get_path(int *path, t_queue queue, char *edges, int await)
 	}
 	while (u > 0)
 	{
+		map[u * queue.capacity + path[u]] = '2';
+		map[path[u] * queue.capacity + u] = '2';
 		u = path[u];
 		push_vertex(&aug_path, u);
 	}
@@ -40,7 +42,7 @@ int		get_path_size(int *path, int sink, int vertex)
 	return (size);
 }
 
-t_path	*find_path(t_args *args, t_flow *flow, int stage, int await)
+t_path	*find_path(t_args *args, t_flow *flow, int stage, int await, char **map)
 {
 	int vertex;
 	int *path;
@@ -71,7 +73,7 @@ t_path	*find_path(t_args *args, t_flow *flow, int stage, int await)
 	if (path[args->queue.capacity - 1] == 0 && args->edges[args->queue.capacity - 1] == '0')
 	{
 		await++;
-		return (BFS(args, flow, stage, await));
+		return (BFS(args, flow, stage, await, map));
 	}
-	return (get_path(path, args->queue, args->edges, await));
+	return (get_path(path, args->queue, args->edges, await, map));
 }
