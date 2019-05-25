@@ -49,7 +49,7 @@ int		split_arg(t_data *data, char *s, char ***split)
 	int i;
 
 	i = 0;
-	while (ft_isalnum(s[i]) && s[i])
+	while (s[i] && s[i] != ' ' && s[i] != '-')
 		i++;
 	if (s[i] == ' ' && count_spaces(s))
 	{
