@@ -40,12 +40,12 @@ int		check_flow(int *path, int vertex, t_flow *flow, int stage, int vertex_sourc
 	return (1);
 }
 
-t_path		*BFS(t_args *args, t_flow *flow, int stage, int await)
+t_path		*BFS(t_args *args, t_flow *flow, int stage, int await, char **map)
 {
 	printf("---start of bfs---\n");
 	printf("\n");
 	reinit_args(args);
 	enqueue(&args->queue, 0);
 	change_state(&args->state, 0, WAITING);
-	return (find_path(args, flow, stage, await));
+	return (find_path(args, flow, stage, await, map));
 }

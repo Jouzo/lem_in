@@ -30,17 +30,20 @@ t_flow	*algo(char **edges, int nb_vertices, int nb_ants)
 	t_args	*args;
 	t_path	*path;
 	t_flow	*flow;
+	char *map;
 
 	count = 0;
+	map = ft_strdup(*edges);
 	args = init_args(nb_vertices, edges);
 	while (count < nb_ants)
 	{
-		path = BFS(args, flow, count, 0);
+		path = BFS(args, flow, count, 0, &map);
 		if (count == 0)
 			flow = new_flow(path);
 		else
 			add_flow(flow, path);
 		count++;
 	}
+	print_map(map);
 	return (flow);
 }
