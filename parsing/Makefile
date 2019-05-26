@@ -19,13 +19,11 @@ CFLAGS = -Wall -Werror -Wextra
 LIBFT = ../libft/libft.a
 
 all: directory $(NAME) 
-
-$(LIBFT):
-	@make -C ../libft
+	@:
 
 $(NAME): $(LIBFT) $(OBJS)
-	ar rc $(NAME) $(OBJS) $(LIBFT)
-	ranlib $(NAME) 
+	@ar rc $(NAME) $(OBJS) $(LIBFT)
+	@ranlib $(NAME) 
 
 directory: $(OBJDIR)
 
@@ -33,15 +31,13 @@ $(OBJDIR):
 	mkdir -p $(OBJDIR)
 
 $(OBJDIR)/%.o: %.c
-	$(CC) $(INC) $(CFLAGS) -c $< -o $@
+	@ $(CC) $(INC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@make clean -C ../libft
-	-rm -f $(OBJS)
+	@-rm -f $(OBJS)
 
 fclean:clean
-	@make fclean -C ../libft
-	-rm -f $(NAME)
+	@-rm -f $(NAME)
 
 re: fclean all
 

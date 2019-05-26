@@ -51,5 +51,3 @@ int		output(t_flow *flow, t_data *data)
 	// return (free_split(split, 1));
 	return (1);
 }
-
-
