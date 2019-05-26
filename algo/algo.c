@@ -37,13 +37,14 @@ t_flow	*algo(char **edges, int nb_vertices, int nb_ants)
 	args = init_args(nb_vertices, edges);
 	while (count < nb_ants)
 	{
-		path = BFS(args, flow, count, 0, &map);
+		path = BFS(args, count, &map);
 		if (count == 0)
 			flow = new_flow(path);
 		else
 			add_flow(flow, path);
 		count++;
 	}
+	printf("\n---------------------------------------\nAT THE END:\n");
 	print_map(map);
 	return (flow);
 }
