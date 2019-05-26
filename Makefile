@@ -16,9 +16,19 @@ LIBFT = libft/libft.a
 PRINTF = ft_printf/libftprintf.a
 ALGO = algo/lib_algo.a
 
-all: $(NAME)
+all: $(OBJDIR) $(NAME)
+	@:
+
+$(OBJDIR):
+	@mkdir -p $(OBJDIR)
+
+$(OBJDIR)/%.o: %.c
+	@ $(CC) $(INC) $(CFLAGS) -c $< -o $@
 
 FORCE: ;
+
+$(LIBFT): FORCE
+	@make -C libft
 
 $(PARSING): FORCE
 	@make -C parsing
@@ -29,23 +39,29 @@ $(ALGO): FORCE
 $(PRINTF): FORCE
 	@make -C ft_printf
 
-$(NAME): $(PARSING) $(LIBFT) $(PRINTF) $(ALGO) $(OBJS) 
-	$(CC) $(INC) $(CFLAGS) $(OBJS) $(LIBFT) $(PRINTF) $(PARSING) $(ALGO) -o $(NAME)
+$(NAME): $(LIBFT) $(PARSING) $(PRINTF) $(ALGO) $(OBJS) 
+	@ $(CC) $(INC) $(CFLAGS) $(OBJS) $(LIBFT) $(PRINTF) $(PARSING) $(ALGO) -o $(NAME)
+	@echo "Made lem-in !"
 
 $(OBJDIR)/%.o: %.c
-	$(CC) $(INC) $(CFLAGS) -c $< -o $@
+	@ $(CC) $(INC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@make clean -C parsing
 	@make clean -C algo
 	@make clean -C ft_printf
-	-rm -rf $(OBJDIR)/*.o
+	@make clean -C libft
+	@-rm -rf $(OBJDIR)/*.o
+	@echo "Cleaned lem-in !"	
 
-fclean:clean
+fclean:
 	@make fclean -C parsing
 	@make fclean -C algo
 	@make fclean -C ft_printf
-	-rm -f $(NAME)
+	@make fclean -C libft
+	@-rm -rf $(OBJDIR)/*.o
+	@-rm -f $(NAME)
+	@echo "Fcleaned lem-in !"	
 
 re: fclean all
 

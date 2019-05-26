@@ -79,7 +79,7 @@ t_path	*find_path(t_args *args, t_flow *flow, int stage, int await, char **map)
 		while (i < args->queue.capacity)
 		{
 			if (args->edges[vertex * args->queue.capacity + i] == '1' && check_map(map, vertex, i))
-				printf("here vertex: %d  i: %d\n", vertex, i);
+				printf("from: %d  to: %d\n", vertex, i);
 			i++;
 		}
 		i = 1;
