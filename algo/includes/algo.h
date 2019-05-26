@@ -21,7 +21,6 @@ typedef struct  s_flow
     struct s_flow   *next;
 }                   t_flow;
 
-
 typedef struct  s_queue
 { 
     int front;
@@ -81,8 +80,8 @@ void    free_flow(t_flow *flow);
 **  bfs functions
 */
 
-t_path		*BFS(t_args *args, t_flow *flow, int stage, int await, char **map);
-int		    check_flow(int *path, int vertex, t_flow *flow, int stage, int vertex_source, int await);
+t_path		*BFS(t_args *args, int stage, char **map);
+int		    check_flow(int *path, int vertex, t_flow *flow, int stage, int vertex_source);
 int		    check_available(char *state, int vertex);
 void	    change_state(char **state, int vertex, int new_state);
 int         get_path_size(int *path, int sink, int vertex_source);
@@ -99,12 +98,15 @@ void	    reinit_args(t_args *args);
 **	path functions
 */
 
-t_path		*find_path(t_args *args, t_flow *flow, int stage, int await, char **map);
-t_path      *get_path(int *path, t_queue queue, char *edges, int await, char **map);
+t_path		*find_path(t_args *args, int stage, char **map);
+t_path      *get_path(int *path, t_queue queue, char *edges, char **map);
 
 
 
 
 void print_map(char *s);
+int check_map(char **map, int u, int v, t_args *args, int stage);
+void	go_reverse(int vertex, int i);
+void	check_reverse(t_args *args, int vertex, char **map);
 
 #endif
