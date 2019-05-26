@@ -1,16 +1,18 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
+#    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 18:10:13 by jdescler          #+#    #+#              #
-#    Updated: 2019/05/14 23:36:44 by jdescler         ###   ########.fr        #
+#    Updated: 2019/05/26 18:41:12 by jdescler         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
+
+OBJDIR = obj
 
 SRCS = ft_abs.c\
 	   ft_atoi.c\
@@ -89,28 +91,37 @@ SRCS = ft_abs.c\
 	   ft_atoll.c\
 	   
 
-OBJS = $(SRCS:.c=.o)
-
+OBJS = $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
 CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra -Iincludes -c
 
-all: $(NAME)
+all: $(OBJDIR) $(NAME)
+	@:
+
+$(OBJDIR):
+	@mkdir -p $(OBJDIR)
+
+$(OBJDIR)/%.o: %.c
+	@ $(CC) $(INC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJS)
-	ar rc $(NAME) $(OBJS)
-	ranlib $(NAME)
+	@ar rc $(NAME) $(OBJS)
+	@ranlib $(NAME)
+	@echo "Made libft !"
 
 $(OBJ): $(SRCS)
-	$(CC) $(CFLAGS) $(SRCS)
+	@ $(CC) $(CFLAGS) $(SRCS)
 
-.PHONY: clean
 clean:
-	-rm -f $(OBJS)
+	@-rm -rf $(OBJDIR)
+	@echo "Cleaned libft !"
 
-.PHONY: fclean
-fclean:clean
-	-rm -f $(NAME)
+fclean:
+	@-rm -rf $(OBJDIR)
+	@-rm -f $(NAME)
+	@echo "Fcleaned libft !"
 
-.PHONY: re
 re: fclean all
+
+.PHONY: all clean fclean re
