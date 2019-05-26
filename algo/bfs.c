@@ -40,11 +40,28 @@ int		check_flow(int *path, int vertex, t_flow *flow, int stage, int vertex_sourc
 	return (1);
 }
 
+void		refresh_map(char **map, t_args *args)
+{
+	int i;
+
+	i = 1;
+	while ((*map)[i])
+	{
+		if ((*map)[i] == '2' && i % args->queue.capacity != 0)
+			args->state[i % args->queue.capacity] = '2';
+		i++;
+	}
+	args->state[args->queue.capacity - 1] = '1';
+}
+
 t_path		*BFS(t_args *args, t_flow *flow, int stage, int await, char **map)
 {
 	printf("---start of bfs---\n");
 	printf("\n");
 	reinit_args(args);
+	// if (stage > 0)
+	// 	refresh_map(map, args);
+	// printf("value de state: %s\n", args->state);
 	enqueue(&args->queue, 0);
 	change_state(&args->state, 0, WAITING);
 	return (find_path(args, flow, stage, await, map));

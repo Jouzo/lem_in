@@ -14,8 +14,8 @@ t_path	*get_path(int *path, t_queue queue, char *edges, int await, char **map)
 	}
 	while (u > 0)
 	{
-		map[u * queue.capacity + path[u]] = '2';
-		map[path[u] * queue.capacity + u] = '2';
+		(*map)[u * queue.capacity + path[u]] = '2';
+		(*map)[path[u] * queue.capacity + u] = '2';
 		u = path[u];
 		push_vertex(&aug_path, u);
 	}
@@ -42,6 +42,24 @@ int		get_path_size(int *path, int sink, int vertex)
 	return (size);
 }
 
+int check_map(char **map, int u, int v)
+{
+	int size;
+	int i;
+	
+	i = 0;
+	size = ft_sqrt(ft_strlen(*map)) - 1;
+	if (u == size || v == size)
+		return (0);
+	while (i < size)
+	{
+		if ((*map)[i * size + v] == '2')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 t_path	*find_path(t_args *args, t_flow *flow, int stage, int await, char **map)
 {
 	int vertex;
@@ -54,16 +72,26 @@ t_path	*find_path(t_args *args, t_flow *flow, int stage, int await, char **map)
 	while (!is_empty(&args->queue))
 	{
 		i = 1;
+		// print_queue(args->queue);
+		// printf("\n--------\n");
 		vertex = dequeue(&args->queue);
 		change_state(&args->state, vertex, VISITED);
 		while (i < args->queue.capacity)
 		{
-			// if args->edges[args->queue.capacity * i + vertex] == '2'
+			if (args->edges[vertex * args->queue.capacity + i] == '1' && check_map(map, vertex, i))
+				printf("here vertex: %d  i: %d\n", vertex, i);
+			i++;
+		}
+		i = 1;
+		while (i < args->queue.capacity)
+		{
 			if (args->edges[vertex * args->queue.capacity + i] == '1'
-			&& check_available(args->state, i) && (i == args->queue.capacity - 1
-					|| check_flow(path, i, flow, stage, vertex, await)))
+			&& check_available(args->state, i) && check_flow(path, i, flow, stage, vertex, await))
 			{
+				// if (check_map(map, vertex, i))
+					// reverse_flow();
 				path[i] = vertex;
+				// printf("value de i: %d\n", i);
 				enqueue(&args->queue, i);
 				change_state(&args->state, i, WAITING);
 			}

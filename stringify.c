@@ -72,17 +72,23 @@ int		assign(t_edges *edge, t_vertices *vertice, char **s, int size)
 	return (1);
 }
 
-void print_map(int size, char *s)
+void print_map(char *s)
 {
 	int i;
 	char *one;
+	char *two;
+	int size;
 	
+	size = ft_sqrt(ft_strlen(s));
 	one = "\x1B[31m1 \033[0m";
+	two = "\x1B[32m2 \033[0m";
 	i = 0;
 	while (i < size * size)
 	{
 		if (s[i] == '1')
 			write(1, one, ft_strlen(one));
+		else if (s[i] == '2')
+			write(1, two, ft_strlen(one));
 		else 
 			write(1, "0 ", 2);
 		if ((i + 1) % size == 0)
@@ -105,6 +111,6 @@ char	*stringify(t_data *data)
 	s[size * size] = '\0';
 	if (assign(data->edges, data->vertices, &s, size) == -1)
 		return (NULL);
-	print_map(size, s);
+	print_map(s);
 	return (s);
 }
