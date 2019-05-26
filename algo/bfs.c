@@ -50,7 +50,7 @@ void		refresh_map(char **map, t_args *args)
 		if ((*map)[i] == '2' && i % args->queue.capacity != 0)
 		{
 			// args->state[i % args->queue.capacity] = '2';
-			args->edges[i] = '0';
+			args->edges[i] = '2';
 		}
 		i++;
 	}
