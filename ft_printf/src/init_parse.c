@@ -6,11 +6,11 @@
 /*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 18:44:16 by mmovahhe          #+#    #+#             */
-/*   Updated: 2019/05/11 14:44:40 by jdescler         ###   ########.fr       */
+/*   Updated: 2019/05/26 20:22:36 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/ft_printf.h"
+#include "ft_printf.h"
 
 void	check_taille2(const char *str, int *i, t_args *args)
 {

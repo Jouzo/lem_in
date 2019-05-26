@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_parse3.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmovahhe <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/11 16:10:28 by mmovahhe          #+#    #+#             */
-/*   Updated: 2019/05/11 16:10:32 by mmovahhe         ###   ########.fr       */
+/*   Updated: 2019/05/26 20:22:36 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/ft_printf.h"
+#include "ft_printf.h"
 
 void	check_larg_mini(const char *str, int *i, t_args *args)
 {

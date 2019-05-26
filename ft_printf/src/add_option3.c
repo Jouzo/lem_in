@@ -6,11 +6,11 @@
 /*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 18:42:15 by mmovahhe          #+#    #+#             */
-/*   Updated: 2019/05/11 14:53:37 by jdescler         ###   ########.fr       */
+/*   Updated: 2019/05/26 20:22:36 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/ft_printf.h"
+#include "ft_printf.h"
 
 void	init_width_o_prec(t_args *args, int *len, int size)
 {
