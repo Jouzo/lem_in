@@ -103,4 +103,8 @@ t_path		*find_path(t_args *args, t_flow *flow, int stage, int await, char **map)
 t_path      *get_path(int *path, t_queue queue, char *edges, int await, char **map);
 
 
+
+
+void print_map(char *s);
+
 #endif

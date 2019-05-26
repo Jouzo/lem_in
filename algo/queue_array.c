@@ -49,9 +49,9 @@ void print_queue(t_queue queue)
 {
 	int i;
 
-	i = 0;
+	i = queue.front;
 	printf("the queue:\n");
-	while (i < queue.size)
+	while (i < queue.rear)
 	{
 		printf("%d\n", queue.vertices[i]);
 		i++;
