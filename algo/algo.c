@@ -24,7 +24,7 @@ void	reinit_args(t_args *args)
 	args->queue.rear = 0;
 }
 
-t_flow	*algo(char **edges, int nb_vertices, int nb_ants)
+char 	*algo(char **edges, int nb_vertices, int nb_ants)
 {
 	int		count;
 	t_args	*args;
@@ -46,5 +46,5 @@ t_flow	*algo(char **edges, int nb_vertices, int nb_ants)
 	}
 	printf("\n---------------------------------------\nAT THE END:\n");
 	print_map(map);
-	return (flow);
+	return (map);
 }

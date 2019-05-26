@@ -90,7 +90,7 @@ int         get_path_size(int *path, int sink, int vertex_source);
 **  algo functions
 */
 
-t_flow		*algo(char **edges, int nb_vertices, int nb_ants);
+char		*algo(char **edges, int nb_vertices, int nb_ants);
 t_args      *init_args(int nb_vertices, char **edges);
 void	    reinit_args(t_args *args);
 
@@ -104,8 +104,8 @@ t_path      *get_path(int *path, t_queue queue, char *edges, char **map);
 
 
 
-void print_map(char *s);
-int check_map(char **map, int u, int v, t_args *args, int stage);
+void 		print_map(char *s);
+int 		check_map(char **map, int u, int v, t_args *args, int stage);
 void	go_reverse(int vertex, int i);
 void	check_reverse(t_args *args, int vertex, char **map);
 

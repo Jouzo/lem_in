@@ -5,7 +5,7 @@
 
 char	*stringify(t_data *data);
 char	**split_vertices(t_vertices *head);
-int		output(t_flow *flow, t_data *data);
+int		output(char *map, t_data *data);
 int		ft_printf(const char *format, ...);
 
 
