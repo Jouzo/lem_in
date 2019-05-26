@@ -6,11 +6,11 @@
 /*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 18:41:44 by mmovahhe          #+#    #+#             */
-/*   Updated: 2019/05/11 14:48:10 by jdescler         ###   ########.fr       */
+/*   Updated: 2019/05/26 20:22:36 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/ft_printf.h"
+#include "ft_printf.h"
 
 int		(*g_conversions[10])(char *, va_list, t_args*, int*) =
 {
