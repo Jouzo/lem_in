@@ -10,36 +10,6 @@ int		check_available(char *state, int vertex)
 	return (state[vertex] == '1');
 }
 
-int		check_flow(int *path, int vertex, t_flow *flow, int stage, int vertex_source, int await)
-{
-	int size;
-	int tmp;
-	t_flow *flow_tmp;
-	t_path *path_tmp;
-
-	if (stage == 0)
-		return (1);
-	size = get_path_size(path, vertex, vertex_source) + await;
-	// printf("size: %d  await: %d  vertex: %d\n", size, await, vertex);
-	flow_tmp = flow;
-	while (flow_tmp)
-	{
-		tmp = size;
-		path_tmp = flow_tmp->path;
-		while (path_tmp && tmp)
-		{
-			path_tmp = path_tmp->next;
-			tmp--;
-		}
-		if (path_tmp && path_tmp->vertex == vertex)
-		{
-			return (0);
-		}
-		flow_tmp = flow_tmp->next;
-	}
-	return (1);
-}
-
 void		refresh_map(char **map, t_args *args)
 {
 	int i;
@@ -48,16 +18,13 @@ void		refresh_map(char **map, t_args *args)
 	while ((*map)[i])
 	{
 		if ((*map)[i] == '2' && i % args->queue.capacity != 0)
-		{
-			// args->state[i % args->queue.capacity] = '2';
 			args->edges[i] = '2';
-		}
 		i++;
 	}
 	args->state[args->queue.capacity - 1] = '1';
 }
 
-t_path		*BFS(t_args *args, t_flow *flow, int stage, int await, char **map)
+t_path		*BFS(t_args *args, int stage, char **map)
 {
 	printf("---start of bfs---\n");
 	printf("\n");
@@ -68,5 +35,5 @@ t_path		*BFS(t_args *args, t_flow *flow, int stage, int await, char **map)
 	// print_map(args->edges);
 	enqueue(&args->queue, 0);
 	change_state(&args->state, 0, WAITING);
-	return (find_path(args, flow, stage, await, map));
+	return (find_path(args, stage, map));
 }

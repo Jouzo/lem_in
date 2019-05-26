@@ -9,7 +9,7 @@ SRCS = 	stringify.c\
 
 OBJS = $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
 
-CC = gcc -O2 -g -fsanitize=address
+CC = gcc -O2 -g
 CFLAGS = -Wall -Werror -Wextra
 PARSING = parsing/libparsing.a
 LIBFT = libft/libft.a
