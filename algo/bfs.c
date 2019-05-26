@@ -48,7 +48,10 @@ void		refresh_map(char **map, t_args *args)
 	while ((*map)[i])
 	{
 		if ((*map)[i] == '2' && i % args->queue.capacity != 0)
-			args->state[i % args->queue.capacity] = '2';
+		{
+			// args->state[i % args->queue.capacity] = '2';
+			args->edges[i] = '0';
+		}
 		i++;
 	}
 	args->state[args->queue.capacity - 1] = '1';
@@ -59,9 +62,10 @@ t_path		*BFS(t_args *args, t_flow *flow, int stage, int await, char **map)
 	printf("---start of bfs---\n");
 	printf("\n");
 	reinit_args(args);
-	// if (stage > 0)
-	// 	refresh_map(map, args);
+	if (stage > 0)
+		refresh_map(map, args);
 	// printf("value de state: %s\n", args->state);
+	// print_map(args->edges);
 	enqueue(&args->queue, 0);
 	change_state(&args->state, 0, WAITING);
 	return (find_path(args, flow, stage, await, map));
