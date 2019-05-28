@@ -48,40 +48,43 @@ t_path	*find_path(t_args *args, int stage, char **map)
 	int *path;
 	int i;
 	(void)stage;
+	int go_rev;
 
+	go_rev = 0;
 	if (!(path = malloc(args->queue.capacity * sizeof(int))))
 		return (NULL);
 	ft_bzero(path, sizeof(int) * args->queue.capacity);
 	while (!is_empty(&args->queue))
-	{	
+	{
 		vertex = dequeue(&args->queue);	
 		change_state(&args->state, vertex, VISITED);
 		i = 1;
 		while (i < args->queue.capacity)
 		{
-			if (args->edges[vertex * args->queue.capacity + i] > '0'
+			if (args->edges[vertex * args->queue.capacity + i] > '0' 
 			&& check_available(args->state, i))
 			{
-				if (args->edges[vertex * args->queue.capacity + i] == '1')
+				if (check_map(map, i, vertex, args, stage) && !go_rev)
 				{
+					path[i] = vertex; 
+					args->edges[vertex * args->queue.capacity + i] = '0';
+					args->edges[i * args->queue.capacity + vertex] = '0';
+					enqueue(&args->queue, i);
+					go_rev++;
+					printf("have to go in reverse i: %d vertex: %d  \n", i, vertex);
+					break;
+				}
+				else if (args->edges[vertex * args->queue.capacity + i] == '1')
+				{
+					go_rev = 0;
 					path[i] = vertex;
 					// printf("value de i: %d value de vertex: %d\n", i, vertex);
 					enqueue(&args->queue, i);
 					change_state(&args->state, i, WAITING);
-					if (i == 7 || vertex == 7)
+					if (i == args->queue.capacity - 1 || vertex == args->queue.capacity - 1)
 						return (get_path(path, args->queue, args->edges, map));
 				}
-				else if (check_map(map, i, vertex, args, stage))
-				{
-					path[i] = vertex;
-					args->edges[vertex * args->queue.capacity + i] = '0';
-					args->edges[i * args->queue.capacity + vertex] = '0';
-					enqueue(&args->queue, i);
-					printf("have to go in reverse i: %d vertex: %d\n", i, vertex);
-				}
-				// printf("i: %d vertex: %d\n", i, vertex);		
-				// print_queue(args->queue);
-			}
+			} 
 			i++;
 		} 
 	}
