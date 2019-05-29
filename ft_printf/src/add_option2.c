@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   add_option2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmovahhe <mmovahhe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 18:41:38 by mmovahhe          #+#    #+#             */
-/*   Updated: 2019/05/11 16:53:11 by mmovahhe         ###   ########.fr       */
+/*   Updated: 2019/05/26 20:22:36 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/ft_printf.h"
+#include "ft_printf.h"
 
 void	padding_right(char *buf, char *conv, t_args *args, int *p_buf)
 {

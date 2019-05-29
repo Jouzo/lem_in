@@ -1,19 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmovahhe <mmovahhe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/14 18:43:04 by mmovahhe          #+#    #+#             */
-/*   Updated: 2019/04/22 20:02:35 by mmovahhe         ###   ########.fr       */
+/*   Created: 2019/02/14 18:44:00 by mmovahhe          #+#    #+#             */
+/*   Updated: 2019/05/26 20:22:36 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/ft_printf.h"
+#include "ft_printf.h"
 
-void	ft_bzero(void *s, size_t n)
+size_t	ft_strlen(char const *s)
 {
-	if (n != 0)
-		ft_memset(s, 0, n);
+	int i;
+
+	i = 0;
+	if (s)
+	{
+		while (s[i])
+			i++;
+	}
+	return (i);
 }
