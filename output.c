@@ -22,6 +22,58 @@
 // 		printf("%s\n", formatted_ouput(vertices[i], ant));
 // }
 
+int		find_next_x(char *map, int start, int size)
+{
+	int i;
+	int j;
+	int middle;
+	middle = start / size * size + size / 2;
+
+	i = 0;
+	j = 0;
+	printf("in next x : value of middle : %d\n", middle);
+	while ((middle + i) / size < size && (middle - i) / size > 0)
+	{
+		if (map[(middle + i)] == '2')
+			return ((middle + i));
+		if (map[(middle - i)] == '2')
+			return ((middle - i));
+		i++;
+	}
+	if (size % 2 == 0)
+	{
+		if (map[(middle + (i + 1))] == '2')
+			return ((middle + (i + 1)));
+	}
+	return (-1);
+}
+
+int		find_next_y(char *map, int start, int size)
+{
+	int i;
+	int j;
+	int middle;
+	middle = size * size / 2 + start % size;
+
+	i = 0;
+	j = 0;
+	printf("value of middle : %d\n", middle);
+	while ((middle + i * size) / size < size && (middle - i * size) / size > 0)
+	{
+		if (map[(middle + i * size)] == '2')
+			return ((middle + i * size));
+		if (map[(middle - i * size)] == '2')
+			return ((middle - i * size));
+		i++;
+	}
+	if (size % 2 == 0)
+	{
+		if (map[(middle + (i + 1) * size)] == '2')
+			return ((middle + (i + 1) * size));
+	}
+	return (-1);
+}
+
 int		number_of_path(char *map, int size)
 {
 	int i;
@@ -61,7 +113,8 @@ void    parse_map(char *map, char **vertices, int size)
 	int j;
 	int br;
 	int count;
-
+	int k;
+	k = 0;
 	count = 0;
 	br = 0;
 	j = first_path(map, size);
@@ -70,11 +123,13 @@ void    parse_map(char *map, char **vertices, int size)
 	while (j < size && count < number_of_path(map, size))
 	{
 	path = 0;
-	i = j;
+	i = k = j;
 	x_y = 0;
-    while (map[i])
+    while (i < size * size)
     {
 		if (map[i] == '2') {
+		k = !x_y ? find_next_y(map, i, size) : find_next_x(map, i, size);
+			printf("value of k : %d\n", k);
 			printf("i when 2 : %d\n", i);
 			j = i / size == 0 ? i : j;
 			if (!path) {
@@ -93,7 +148,7 @@ void    parse_map(char *map, char **vertices, int size)
 					break ;
 				}
 		}
-		i += x_y == 0 ? 1 : size;
+		i += !x_y ? 1 : size;
     }
 	j++;
 	}
