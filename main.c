@@ -43,7 +43,7 @@ int     main(int ac, char **av)
 	if ((ret = init_data(&data)) <= 0) 
 	{
 		if (ret < 0)
-		{	
+		{
 			if (data.source && data.sink && data.ants && data.edges)
 			{
 
@@ -81,8 +81,3 @@ int     main(int ac, char **av)
 	}
 	return (0);
 }
-
-// void	reverse_flow(char **map, int vertex)
-// {
-
-// }
