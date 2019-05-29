@@ -17,36 +17,87 @@
 // }
 
 
+// void	print_final(char **vertices, int ant, int i)
+// {
+// 		printf("%s\n", formatted_ouput(vertices[i], ant));
+// }
+
+int		number_of_path(char *map, int size)
+{
+	int i;
+	int count;
+
+	i = 0;
+	count = 0;
+	while (i < size)
+	{
+		if (map[i] == '2')
+			count++;
+		i++;
+	}
+	return (count);
+}
+
+int		first_path(char *map, int size)
+{
+	int i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (map[i] == '2')
+			return (i);
+		i++;
+	}
+	return (0);
+}
+
 void    parse_map(char *map, char **vertices, int size)
 {	
 	int i;
 	int x_y;
 	t_path *path;
+	t_flow *flow;
 	int j;
+	int br;
+	int count;
 
-	j = 0;
-	x_y = 0;
-	i = 0;
+	count = 0;
+	br = 0;
+	j = first_path(map, size);
 	(void)vertices;
-	while (j < size)
+	printf("number of path : %d\n", number_of_path(map, size));
+	while (j < size && count < number_of_path(map, size))
 	{
+	path = 0;
+	i = j;
+	x_y = 0;
     while (map[i])
     {
-        printf("------- %d\n", i);
-        // print_path2(map, vertices);
 		if (map[i] == '2') {
-			if (!path)
+			printf("i when 2 : %d\n", i);
+			j = i / size == 0 ? i : j;
+			if (!path) {
 				path = init_path(i);
+			}
 			else
 				push_vertex(&path, i);
-        	printf("elem of map: %c\n", map[i]);
 			x_y = x_y ? 0 : 1;
+			if ((i % size) + 1 == size || (i / size) + 1 == size)
+				{	
+					if (!count)
+						flow = new_flow(path);
+					else
+						add_flow(flow, path);
+					count++;
+					break ;
+				}
 		}
 		i += x_y == 0 ? 1 : size;
     }
 	j++;
 	}
-	print_path(path);
+	print_flow(flow);
 }
 
 int		output(char *map, t_data *data)
