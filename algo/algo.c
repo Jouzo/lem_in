@@ -39,9 +39,9 @@ char 	*algo(char **edges, int nb_vertices, int nb_ants)
 	{
 		path = BFS(args, count, &map);
 		if (count == 0)
-			flow = new_flow(path);
+			flow = new_flow(path, 0);
 		else
-			add_flow(flow, path);
+			add_flow(&flow, new_flow(path, 0));
 		count++;
 	}
 	printf("\n---------------------------------------\nAT THE END:\n");
