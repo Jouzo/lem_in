@@ -6,6 +6,8 @@ OBJDIR = obj
 SRCS = 	stringify.c\
 		main.c\
 		output.c\
+		path.c\
+		print.c\
 
 OBJS = $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
 
@@ -17,15 +19,12 @@ PRINTF = ft_printf/libftprintf.a
 ALGO = algo/lib_algo.a
 
 all: $(OBJDIR) $(NAME)
-	@:
 
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 
 $(OBJDIR)/%.o: %.c
 	@ $(CC) $(INC) $(CFLAGS) -c $< -o $@
-
-FORCE: ;
 
 $(LIBFT): FORCE
 	@make -C libft
@@ -66,3 +65,5 @@ fclean:
 re: fclean all
 
 .PHONY: clean fclean re
+
+FORCE: 
