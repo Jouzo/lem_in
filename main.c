@@ -26,6 +26,7 @@ int   init_data(t_data *data)
 		}
 		free(line);
 	}
+	printf("done parsing\n");
 	return (ret);
 }
 
@@ -74,6 +75,9 @@ int     main(int ac, char **av)
 	print_data(&data);
 	graph = stringify(&data);
 	map = algo(&graph, ft_sqrt(ft_strlen(graph)), data.ants);
+	printf("\n");
+	printf("\n");
+	printf("\n");
 	// print_flow(flow);
 	output(map, &data);
 	// free_flow(flow);

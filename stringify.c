@@ -6,26 +6,6 @@ void	fill_string(char **s, int x, int y, int size)
 	(*s)[x * size + y] = '1';
 }
 
-char	**split_vertices(t_vertices *head)
-{
-	char		**split;
-	t_vertices	*tmp;
-	int			i;
-
-	i = 0;
-	tmp = head;
-	if (!(split = (char**)malloc(sizeof(char*) * vertices_len(head) + 1)))
-		return (NULL);
-	while (tmp)
-	{
-		if (!(split[i] = ft_strdup(tmp->name)))
-			return (NULL);
-		tmp = tmp->next;
-		i++;
-	}
-	return (split);
-}
-
 void	get_coordinates(t_edges *edge, char **split, int *x, int *y)
 {
 	int size;
@@ -70,33 +50,6 @@ int		assign(t_edges *edge, t_vertices *vertice, char **s, int size)
 		tmp = tmp->next;
 	}
 	return (1);
-}
-
-void print_map(char *s)
-{
-	int i;
-	char *one;
-	char *two;
-	int size;
-	
-	size = ft_sqrt(ft_strlen(s));
-	one = "\x1B[31m1 \033[0m";
-	two = "\x1B[32m2 \033[0m";
-	i = 0;
-	while (i < size * size)
-	{
-		if (s[i] == '1')
-			write(1, one, ft_strlen(one));
-		else if (s[i] == '2')
-			write(1, two, ft_strlen(one));
-		else 
-			write(1, "0 ", 2);
-		if ((i + 1) % size == 0)
-		{
-			write(1, "\n", 1);
-		}
-		i++;
-	}
 }
 
 char	*stringify(t_data *data)

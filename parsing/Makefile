@@ -18,9 +18,8 @@ CC = gcc -O3
 CFLAGS = -Wall -Werror -Wextra
 LIBFT = ../libft/libft.a
 
-all: directory $(NAME) 
+all: directory $(NAME)
 	@:
-
 $(NAME): $(LIBFT) $(OBJS)
 	@ar rc $(NAME) $(OBJS) $(LIBFT)
 	@ranlib $(NAME) 
