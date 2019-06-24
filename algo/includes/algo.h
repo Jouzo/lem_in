@@ -11,13 +11,14 @@
 
 typedef struct	s_path
 {
-	int vertex;
+	int 			vertex;
 	struct s_path	*next;
 }				t_path;
 
 typedef struct  s_flow
 {
     t_path          *path;
+	int				size;
     struct s_flow   *next;
 }                   t_flow;
 
@@ -63,9 +64,9 @@ t_path      *init_path(int vertex);
 ** linked list functions for t_flow
 */
 
-t_flow      *new_flow(t_path *head);
+t_flow      *new_flow(t_path *head, int size);
 void        print_flow(t_flow *head);
-int         add_flow(t_flow *head, t_path *path);
+int         add_flow(t_flow **head, t_flow *new);
 
 /*
 **  free functions
