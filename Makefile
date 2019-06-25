@@ -8,6 +8,7 @@ SRCS = 	stringify.c\
 		output.c\
 		path.c\
 		print.c\
+		ants.c\
 
 OBJS = $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
 
