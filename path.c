@@ -44,6 +44,22 @@ static int		check_col(char **map, int start, int size)
 	return (-1);
 }
 
+int		number_of_path(char *map, int size)
+{
+	int i;
+	int count;
+
+	i = 0;
+	count = 0;
+	while (i < size)
+	{
+		if (map[i] == '2')
+			count++;
+		i++;
+	}
+	return (count);
+}
+
 int		first_path(char *map, int size)
 {
 	int i;

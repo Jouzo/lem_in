@@ -95,26 +95,3 @@ void		print_map(char *s)
 // 		printf("%s\n", print);
 // 	}
 // }
-
-// void sortedInsert(struct Node** head_ref, struct Node* new_node) 
-// { 
-//     struct Node* current;
-//     /* Special case for the head end */
-//     if (*head_ref == NULL || (*head_ref)->data >= new_node->data) 
-//     { 
-//         new_node->next = *head_ref; 
-//         *head_ref = new_node; 
-//     } 
-//     else
-//     { 
-//         /* Locate the node before the point of insertion */
-//         current = *head_ref; 
-//         while (current->next!=NULL && 
-//                current->next->data < new_node->data) 
-//         { 
-//             current = current->next; 
-//         } 
-//         new_node->next = current->next; 
-//         current->next = new_node; 
-//     } 
-// } 
