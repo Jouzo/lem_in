@@ -74,8 +74,7 @@ int     main(int ac, char **av)
 	print_data(&data);
 	graph = stringify(&data);
 	flow = algo(&graph, ft_sqrt(ft_strlen(graph)), data.ants);
-	print_flow(flow);
-	// output(flow, &data);
+	output(flow, &data);
 	// free_flow(flow);
 	// free_data(&data);
 	}
