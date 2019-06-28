@@ -1,6 +1,6 @@
 #include "includes/lem_in.h"
 
-static void		count_ants_per_path(t_flow *flow)
+static void			count_ants_per_path(t_flow *flow)
 {
 	int i;
 	t_flow *tmp;
@@ -9,13 +9,13 @@ static void		count_ants_per_path(t_flow *flow)
 	i = 0;
 	while (tmp->next) 
 	{
-		tmp->next->size = -(tmp->next->size - flow->size);
+		tmp->next->ants = -(tmp->next->size - flow->size);
 		tmp = tmp->next;
 	}
-	flow->size = 0;
+	flow->ants = 0;
 }
 
-int			*get_ants_tab(t_flow *flow, int nb_path)
+static int			*get_ants_tab(t_flow *flow, int nb_path)
 {
 	int		i;
 	t_flow	*tmp;
@@ -27,14 +27,14 @@ int			*get_ants_tab(t_flow *flow, int nb_path)
 	i = 0;
 	while (tmp) 
 	{
-		tab[i] = tmp->size;
+		tab[i] = tmp->ants;
 		tmp = tmp->next;
 		i++;
 	}
 	return (tab);
 }
 
-int			assign_ants_per_path(t_flow *flow, int *ants)
+static int			assign_ants_per_path(t_flow *flow, int *ants)
 {
 	int		i;
 	t_flow	*tmp;
@@ -43,7 +43,7 @@ int			assign_ants_per_path(t_flow *flow, int *ants)
 	i = 0;
 	while (tmp)
 	{
-		tmp->size = ants[i++];
+		tmp->ants = ants[i++];
 		tmp = tmp->next;
 	}
 	print_flow(flow);
@@ -51,7 +51,7 @@ int			assign_ants_per_path(t_flow *flow, int *ants)
 	return (1);
 }
 
-int			get_ants_per_path(t_flow *flow, int nb_ants, int nb_path)
+int					get_ants_per_path(t_flow *flow, int nb_ants, int nb_path)
 {
 	int		i;
 	t_flow	*tmp;

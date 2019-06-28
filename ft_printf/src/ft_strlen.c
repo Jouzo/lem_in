@@ -6,7 +6,7 @@
 /*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 18:44:00 by mmovahhe          #+#    #+#             */
-/*   Updated: 2019/05/26 20:22:36 by jdescler         ###   ########.fr       */
+/*   Updated: 2019/06/27 22:54:40 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 size_t	ft_strlen(char const *s)
 {
-	int i;
-
-	i = 0;
 	if (s)
 	{
+	int i;
+	i = 0;
 		while (s[i])
 			i++;
-	}
 	return (i);
+	}
+	else {
+		return -1;
+	}
 }
