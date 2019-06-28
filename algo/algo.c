@@ -43,6 +43,7 @@ t_flow	*algo(char **edges, int nb_vertices, int nb_ants)
 		else
 			add_flow(flow, path);
 		count++;
+		print_map(map);
 	}
 	printf("\n---------------------------------------\nAT THE END:\n");
 	print_map(map);
