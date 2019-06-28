@@ -7,8 +7,7 @@ char	*stringify(t_data *data);
 char	**split_vertices(t_vertices *head);
 int		output(char *map, t_data *data);
 int		ft_printf(const char *format, ...);
-void	print_output(char *s, char **vertices, t_flow *flow, int ants);
-
+void	print_output(char **vertices, t_flow *flow, int ants);
 
 /*
 ** path functions

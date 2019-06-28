@@ -86,7 +86,7 @@ int		get_one_path(int start, int size, t_flow **flow, char *map)
 	while (start < size * size)
     {
 		start = !x_y ? check_col(&map, start, size) : check_row(&map, start, size);
-		push_vertex(&path, start);
+		push_vertex(&path, x_y ? start % size : start / size);
 		x_y = x_y ? 0 : 1;
 		size_path++;
 		if ((start % size) + 1 == size || (start / size) + 1 == size)

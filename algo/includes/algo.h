@@ -12,6 +12,7 @@
 typedef struct	s_path
 {
 	int 			vertex;
+	int 			ant;
 	struct s_path	*next;
 }				t_path;
 
@@ -19,6 +20,7 @@ typedef struct  s_flow
 {
     t_path          *path;
 	int				size;
+	int				ants;
     struct s_flow   *next;
 }                   t_flow;
 

@@ -7,18 +7,20 @@ t_path		*init_path(int vertex)
 	if (!(list = malloc(sizeof(t_path))))
 		return (NULL);
 	list->vertex = vertex;
+	list->ant = 0;
 	list->next = NULL;
 	return (list);
 }
 
 int			push_vertex(t_path **head, int vertex)
 {
-	t_path *new;
+	t_path *tmp;
 
-	if (!(new = init_path(vertex)))
+	tmp = *head;
+	while (tmp->next)
+		tmp = tmp->next;
+	if (!(tmp->next = init_path(vertex)))
 		return (-1);
-	new->next = *head;
-	*head = new;
 	return (1);
 }
 
@@ -33,6 +35,8 @@ void		print_path(t_path *head)
 	while (current != NULL)
 	{
 		printf("vertex to the source: %d\n", current->vertex);
+		printf("ant no: %d\n", current->ant);
 		current = current->next;
 	}
+	printf("\n");
 }

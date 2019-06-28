@@ -14,6 +14,7 @@ char		**split_vertices(t_vertices *head)
 	{
 		if (!(split[i] = ft_strdup(tmp->name)))
 			return (NULL);
+		printf("split[i] : %s\n", split[i]);
 		tmp = tmp->next;
 		i++;
 	}
@@ -87,7 +88,7 @@ int			output(char *map, t_data *data)
 	if (get_ants_per_path(flow, data->ants, nb_path) == -1)
 		return (-1);
 	print_map(map);
-	// print_output(map, split, flow, data->ants);
+	print_output(split, flow, data->ants);
 	// return (free_split(split, 1));
 	return (1);
 }

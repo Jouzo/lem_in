@@ -28,7 +28,7 @@ int			add_flow(t_flow **head, t_flow *new)
                current->next->size < new->size) 
         {
             current = current->next; 
-        } 
+        }
         new->next = current->next; 
         current->next = new; 
     }
@@ -47,6 +47,7 @@ void		print_flow(t_flow *head)
 		printf("\n-------\n");
 		print_path(current->path);
 		printf("size : %d\n",current->size);
+		printf("ants : %d\n",current->ants);
 		current = current->next;
 	}
 }
