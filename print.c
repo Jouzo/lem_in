@@ -48,72 +48,77 @@ void		print_map(char *s)
 	}
 }
 
-static void		move_up_path(t_path *path)
+static void		move_up_path(t_path *path, int *ants)
 {
 	t_path *list;
 	int tmp;
 	int tmp2;
+	int check;
 
 	list = path;
 	tmp = list->ant;
 	list->ant = 0;
-	while (list->next && list->next->ant > 0)
+	// print_path(path);
+	while (list->next)
 	{
+		check = list->ant > check ? list->ant : check;
 		list = list->next;
 		tmp2 = list->ant;
 		list->ant = tmp;
 		tmp = tmp2;
 	}
-	if (list->next)
-		list->next->ant = tmp;
+	// printf("value of ant : %d\n", list->ant);
+	if (check == 0)
+		(*ants)--;
+	// printf("value of ants : %d\n", *ants);
+	// printf("2\n");
+	// print_path(path);
 }
 
 static void		print_ants_in_path(t_flow *flow, char **vertices, int ant, int *ants)
 { 
 	t_path *tmp;
-	// int size;
+	int size;
 
-	// size = 0;
+	size = 0;
 	tmp = flow->path;
-	(void)ants;
 	tmp->ant = ant;
-	while (tmp && tmp->ant > 0)
+	while (tmp)
 	{
-		// printf("value of tmp->ant : %d\n", tmp->ant);
-		// printf("\n-----%d, %s\n", tmp->vertex, vertices[tmp->vertex]);
-		formatted_output(vertices[tmp->vertex], tmp->ant);
-		// printf("%s\n", vertices[i]);
-		ft_putchar(' ');
-		// ft_strdel(&out);
+		if (tmp->ant > 0)
+		{		
+			formatted_output(vertices[tmp->vertex], tmp->ant);
+			ft_putchar(' ');
+		}
 		tmp = tmp->next;
 	}
-	move_up_path(flow->path);
+	move_up_path(flow->path, ants);
 }
 
 void			print_output(char **vertices, t_flow *flow, int ants)
 {
 	t_flow *tmp;
 	int i;
-	int size;
+	int tmp_ants;
 
-	size = 0;
+	tmp_ants = ants + 1;
 	i = 1;
-	while (vertices[size])
-		size++;
-	while (i < ants)
+	while (ants)
 	{
 	tmp = flow;
 		while (tmp && ants)
 		{
-			// printf("tmp->ants : %d\n", tmp->ants);
 			if (tmp->ants > 0)
 			{
 				print_ants_in_path(tmp, vertices, i, &ants);
-				// ants--;
-				i++;
+				if (i > 0 && i < tmp_ants)
+					i++;
 			}
+			if (i == tmp_ants)
+				i = 0;
 			tmp = tmp->next;
 		}
+	// printf("value of ants : %d\n", ants);
 	ft_putchar('\n');
 	}
 }
