@@ -14,7 +14,6 @@ char		**split_vertices(t_vertices *head)
 	{
 		if (!(split[i] = ft_strdup(tmp->name)))
 			return (NULL);
-		printf("split[i] : %s\n", split[i]);
 		tmp = tmp->next;
 		i++;
 	}
