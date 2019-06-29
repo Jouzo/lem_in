@@ -62,7 +62,7 @@ int     main(int ac, char **av)
 	{
 		if (get_flags(&data, av[1]) < 0 || ac > 2)
 		{
-			write(1, "usage: ./lem-in [-v] < a lem_in map", 35);
+			write(1, "usage: ./lem-in [-v] < a lem_in map\n", 36);
 			return (-1);
 		}
 	}
