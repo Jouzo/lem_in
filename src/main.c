@@ -2,12 +2,14 @@
 
 void	print_data(t_data *data)
 {
-	printf("current state :\n");
-	printf("source : %s\nsink : %s\nants : %d\n", data->source, data->sink, data->ants);
+	// // printf("current state :\n");
+	// // printf("source : %s\nsink : %s\nants : %d\n", data->source, data->sink, data->ants);
 	swap_source(data);
-	print_vertices(data->vertices);
-	printf("Edges :\n");
-	print_edges(data->edges);
+	// if (data->vertices)
+		// print_vertices(data->vertices);
+	// // printf("Edges :\n");
+	// if (data->edges)
+		// print_edges(data->edges);
 }
 
 int   init_data(t_data *data)
@@ -20,12 +22,12 @@ int   init_data(t_data *data)
 	{
 		if ((ret = parse(data, line)) <= 0)
 		{
-			free(line);
+			ft_memdel((void**)&line);
 			return (ret);
 		}
-		free(line);
+		ft_memdel((void**)&line);
 	}
-	printf("done parsing\n");
+	// // printf("done parsing\n");
 	return (ret);
 }
 
@@ -35,7 +37,6 @@ int     main(int ac, char **av)
 	int		ret;
 	t_data data;
 	char *map;
-	char *graph;
 	ft_bzero(&data, sizeof(t_data));
 	(void)av;
 	(void)ac;
@@ -49,9 +50,9 @@ int     main(int ac, char **av)
 
 				// DO LEM-IN ALGO
 				print_data(&data);
-				printf("now calculate ret < 0\n");
-				graph = stringify(&data);
-				map = algo(&graph, ft_sqrt(ft_strlen(graph)), data.ants);
+				// // printf("now calculate ret < 0\n");
+				map = stringify(&data);
+				algo(&map, ft_sqrt(ft_strlen(map)), data.ants);
 				output(map, &data);
 				free_data(&data);
 			}
@@ -70,17 +71,18 @@ int     main(int ac, char **av)
 		}
 	}
 	else {
-	printf("now calculate ret > 0\n");
+	// // printf("now calculate ret > 0\n");
 	print_data(&data);
-	graph = stringify(&data);
-	map = algo(&graph, ft_sqrt(ft_strlen(graph)), data.ants);
-	printf("\n");
-	printf("\n");
-	printf("\n");
+	map = stringify(&data);
+	algo(&map, ft_sqrt(ft_strlen(map)), data.ants);
+	// printf("\n");
+	// printf("\n");
+	// printf("\n");
 	// print_flow(flow);
 	output(map, &data);
 	// free_flow(flow);
-	// free_data(&data);
+	free_data(&data);
+	ft_memdel((void**)&map);
 	}
 	return (0);
 }

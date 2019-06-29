@@ -1,6 +1,6 @@
 #ifndef LEM_IN_H
 # define LEM_IN_H
-# include "libft.h"
+# include "../libft/includes/libft.h"
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -11,6 +11,75 @@
 # define WAITING 2
 # define VISITED 3
 
+/*
+    *****************************************
+    *********     PARSING STRUCTS    ********
+    *****************************************
+*/
+
+typedef struct				s_vertices
+{
+	int						x;
+	int						y;
+	char					*name;
+	struct s_vertices		*next;
+}							t_vertices;
+
+typedef struct				s_edges
+{
+	char					*from;
+	char					*to;
+	struct s_edges			*next;
+}							t_edges;
+
+typedef struct				s_data
+{
+	int						ants;
+	int						set_source;
+	int						set_sink;
+	int						set_vertices;
+	char					*source;
+	char					*sink;
+	t_vertices				*vertices;
+	t_edges					*edges;
+}							t_data;
+
+/*
+    *****************************************
+    *********      ALGO STRUCTS       *******
+    *****************************************
+*/
+
+typedef struct				s_path
+{
+	int 					vertex;
+	int 					ant;
+	struct s_path			*next;
+}							t_path;
+
+typedef struct  			s_flow
+{
+    t_path          		*path;
+	int						size;
+	int						ants;
+    struct s_flow   		*next;
+}                   		t_flow;
+
+typedef struct  			s_queue
+{ 
+    int						front;
+    int						rear;
+    int						size;
+    int						capacity;
+    int						*vertices;
+}               			t_queue;
+
+typedef struct				s_args
+{
+	t_queue 				queue;
+	char					*edges;
+	char					*state;
+}							t_args;
 
 
 /*
@@ -70,7 +139,7 @@ int         get_path_size(int *path, int sink, int vertex_source);
 **  algo functions
 */
 
-char		*algo(char **edges, int nb_vertices, int nb_ants);
+void		algo(char **edges, int nb_vertices, int nb_ants);
 t_args      *init_args(int nb_vertices, char **edges);
 void	    reinit_args(t_args *args);
 

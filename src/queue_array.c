@@ -1,4 +1,4 @@
-#include "algo.h"
+#include "lem_in.h"
 
 bool    is_full(t_queue *queue)
 {
@@ -29,7 +29,7 @@ int dequeue(t_queue* queue)
 
 	if (is_empty(queue))
 	{
-		printf("oups, the queue is empty");
+		// printf("oups, the queue is empty");
 		return (-1);
 	}
 	vertex = queue->vertices[queue->front]; 
@@ -50,11 +50,11 @@ void print_queue(t_queue queue)
 	int i;
 
 	i = queue.front; 
-	printf("the queue:\n");
+	// printf("the queue:\n");
 	while (i < queue.rear)
 	{
-		printf("%d\n", queue.vertices[i]);
+		// printf("%d\n", queue.vertices[i]);
 		i++;
 	}
-	printf("\n");
+	// printf("\n");
 }

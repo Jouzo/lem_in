@@ -1,4 +1,4 @@
-#include "algo.h"
+#include "lem_in.h"
 
 t_path	*get_path(int *path, t_queue queue, char *edges, char **map)
 {
@@ -9,7 +9,7 @@ t_path	*get_path(int *path, t_queue queue, char *edges, char **map)
 	aug_path = init_path(u);
 	if (path[u] == 0 && edges[u] == '0')
 	{
-		free(path);
+		ft_memdel((void**)&path);
 		return (aug_path);
 	}
 	while (u > 0)
@@ -24,7 +24,7 @@ t_path	*get_path(int *path, t_queue queue, char *edges, char **map)
 		u = path[u];
 		push_vertex(&aug_path, u);
 	}
-	free(path);
+	ft_memdel((void**)&path);
 	return (aug_path);
 }
 
@@ -49,11 +49,12 @@ t_path	*find_path(t_args *args, int stage, char **map)
 	int i;
 	(void)stage;
 	int go_rev;
+	int k;
 
+	k = 0;
 	go_rev = 0;
-	if (!(path = malloc(args->queue.capacity * sizeof(int))))
+	if (!(path = ft_memalloc(args->queue.capacity * sizeof(int))))
 		return (NULL);
-	ft_bzero(path, sizeof(int) * args->queue.capacity);
 	while (!is_empty(&args->queue))
 	{
 		vertex = dequeue(&args->queue);	
@@ -64,33 +65,33 @@ t_path	*find_path(t_args *args, int stage, char **map)
 			if (args->edges[vertex * args->queue.capacity + i] > '0'
 			&& check_available(args->state, i))
 			{
-				printf("\n");
+				// // printf("\n");
 				for (int i = 0; i < args->queue.capacity; i++)
-					printf("---path[%d] = %d\n", i, path[i]);
+					k = 2;
 
 				if (check_map(map, i, vertex, args, stage) > - 1 && !go_rev)
 				{
 					path[i] = vertex;
 					enqueue(&args->queue, i);
 					go_rev++;
-					printf("have to go in reverse i: %d vertex: %d  \n", i, vertex);
+					// // printf("have to go in reverse i: %d vertex: %d  \n", i, vertex);
 					// change_state(&args->state, i, WAITING);
 					break;
 				}
 				else if (args->edges[vertex * args->queue.capacity + i] == '1')
 				{
-					printf("2\n");
+					// // printf("2\n");
 					go_rev = 0;
 					path[i] = vertex;
-					// printf("value de i: %d value de vertex: %d\n", i, vertex);
+					// // printf("value de i: %d value de vertex: %d\n", i, vertex);
 					enqueue(&args->queue, i);
 					// if (stage == 0)
 						change_state(&args->state, i, WAITING);
 					if (i == args->queue.capacity - 1 || vertex == args->queue.capacity - 1)
 						return (get_path(path, args->queue, args->edges, map));
 				}
-				else 
-					printf("3\n");
+				// else 
+					// // printf("3\n");
 			} 
 			i++;
 		}

@@ -1,4 +1,4 @@
-#include "algo.h"
+#include "lem_in.h"
 
 t_flow		*new_flow(t_path *head, int size)
 {
@@ -40,14 +40,14 @@ void		print_flow(t_flow *head)
 	t_flow *current;
 
 	current = head;
-	printf("inside printf flow\n");
+	// printf("inside printf flow\n");
 	while (current != NULL)
 	{
 		
-		printf("\n-------\n");
+		// printf("\n-------\n");
 		print_path(current->path);
-		printf("size : %d\n",current->size);
-		printf("ants : %d\n",current->ants);
+		// printf("size : %d\n",current->size);
+		// printf("ants : %d\n",current->ants);
 		current = current->next;
 	}
 }

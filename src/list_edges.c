@@ -1,4 +1,4 @@
-#include "parsing.h"
+#include "lem_in.h"
 
 int				check_existing_edges(t_edges *head, char *from, char *to)
 {
@@ -90,7 +90,7 @@ void			print_edges(t_edges *head)
 	current = head;
 	while (current != NULL)
 	{
-		printf("edge from : %s to: %s\n", current->from, current->to);
+		// printf("edge from : %s to: %s\n", current->from, current->to);
 		current = current->next;
 	}
 }

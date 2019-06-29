@@ -1,21 +1,24 @@
-#include "includes/lem_in.h"
+#include "lem_in.h"
 
 int		formatted_output(char *vertex, int ant)
 {
 	char *s;
 	int size;
+	char *ant_to_a;
 
 	size = ft_sizeofint(ant);
-	if (!(s = (char*)malloc(sizeof(char) * (size + ft_strlen(vertex)) + 3)))
+	if (!(ant_to_a = ft_itoa(ant)))
 		return (0);
-	s[size + ft_strlen(vertex) + 3] = 0;
+	if (!(s = ft_strnew(size + ft_strlen(vertex) + 2)))
+		return (0);
+	s[size + ft_strlen(vertex) + 2] = 0;
 	s[0] = 'L';
-	ft_strcat(s, ft_itoa(ant));
+	s = ft_strcat(s, ant_to_a);
 	s[size + 1] = '-';
-	ft_strcat(s, vertex);
-	// printf("vertex : %s, ant : %d\n", vertex, ant);
+	s = ft_strcat(s, vertex);
 	write(1, s, ft_strlen(s));
-	// free(s);
+	ft_memdel((void**)&s);
+	ft_memdel((void**)&ant_to_a);
 	return (1);
 }
 
@@ -58,7 +61,6 @@ static void		move_up_path(t_path *path, int *ants)
 	list = path;
 	tmp = list->ant;
 	list->ant = 0;
-	// print_path(path);
 	while (list->next)
 	{
 		check = list->ant > check ? list->ant : check;
@@ -67,12 +69,8 @@ static void		move_up_path(t_path *path, int *ants)
 		list->ant = tmp;
 		tmp = tmp2;
 	}
-	// printf("value of ant : %d\n", list->ant);
 	if (check == 0)
 		(*ants)--;
-	// printf("value of ants : %d\n", *ants);
-	// printf("2\n");
-	// print_path(path);
 }
 
 static void		print_ants_in_path(t_flow *flow, char **vertices, int ant, int *ants)
@@ -118,7 +116,6 @@ void			print_output(char **vertices, t_flow *flow, int ants)
 				i = 0;
 			tmp = tmp->next;
 		}
-	// printf("value of ants : %d\n", ants);
 	ft_putchar('\n');
 	}
 }

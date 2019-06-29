@@ -46,7 +46,7 @@ static int			assign_ants_per_path(t_flow *flow, int *ants)
 		tmp->ants = ants[i++];
 		tmp = tmp->next;
 	}
-	print_flow(flow);
+	// print_flow(flow);
 	free(ants);
 	return (1);
 }
