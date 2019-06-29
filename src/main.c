@@ -1,14 +1,14 @@
 #include "lem_in.h"
 
-static int	check_parsing(t_data data)
+static int		check_parsing(t_data data)
 {
 	return (data.source && data.sink && data.ants && data.edges);
 }
 
-static int   init_data(t_data *data)
-{    
+static int		init_data(t_data *data)
+{
 	char	*line;
-	int 	ret;
+	int		ret;
 
 	ret = 1;
 	while (get_next_line(0, &line) > 0)
@@ -28,11 +28,17 @@ static void		lem_in(t_data *data)
 {
 	char *map;
 
-	swap_source(data);
-	map = stringify(data);
-	algo(&map, ft_sqrt(ft_strlen(map)), data->ants);
-	output(map, data);
-	ft_memdel((void**)&map);
+	map = NULL;
+	if (check_parsing(*data))
+	{
+		swap_source(data);
+		map = stringify(data);
+		algo(&map, ft_sqrt(ft_strlen(map)), data->ants);
+		output(map, data);
+		ft_memdel((void**)&map);
+	}
+	else
+		write(1, "Error\n", 5);
 }
 
 static int		get_flags(t_data *data, char *flag)
@@ -53,10 +59,10 @@ static int		get_flags(t_data *data, char *flag)
 	return (1);
 }
 
-int     main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	t_data data;
-	
+
 	ft_bzero(&data, sizeof(t_data));
 	if (ac > 1)
 	{
@@ -66,20 +72,8 @@ int     main(int ac, char **av)
 			return (-1);
 		}
 	}
-	if (init_data(&data) <= 0) 
-	{
-		if (check_parsing(data))
-			lem_in(&data);
-		else
-			write(1, "Error\n", 5);
-	}
-	else 
-	{
-		if (check_parsing(data))
-			lem_in(&data);
-		else
-			write(1, "Error\n", 5);
-	}
+	init_data(&data);
+	lem_in(&data);
 	free_data(&data);
 	return (0);
 }
