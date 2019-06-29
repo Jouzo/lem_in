@@ -66,6 +66,10 @@ t_path	*find_path(t_args *args, int stage, char **map)
 			if (args->edges[vertex * args->queue.capacity + i] > '0'
 			&& check_available(args->state, i))
 			{
+				printf("value de i: %d, vertex: %d\n", i, vertex);
+				printf("\n\n");
+				for (int i = 0; i < args->queue.capacity; i++)
+					printf("==path[%d] = %d\n", i, path[i]);
 				if ((rev = check_map(map, i, vertex, args, stage)) > - 1 && !go_rev)
 				{
 					printf("1\n");
@@ -77,7 +81,7 @@ t_path	*find_path(t_args *args, int stage, char **map)
 					}
 					if (!path[rev])
 					{
-						// printf("have to go in reverse i: %d vertex: %d into: %d\n", i, vertex, rev);
+						printf("have to go in reverse i: %d vertex: %d into: %d\n", i, vertex, rev);
 						path[rev] = vertex;
 						enqueue(&args->queue, rev);
 						go_rev++;
