@@ -1,5 +1,7 @@
 #include "lem_in.h"
 
+int g_color = 0;
+
 static void		move_up_path(t_path *path)
 {
 	t_path	*list;
@@ -57,7 +59,11 @@ static void		print_ants_in_path(t_flow *flow,
 	{
 		if (tmp->ant > 0)
 		{
+			(g_color > 0 && (tmp->vertex == size - 1))
+				? write(1, "\x1B[31m", 5) : 0;
 			formatted_output(vertices[tmp->vertex], tmp->ant);
+			(g_color > 0 && (tmp->vertex == size - 1))
+				? write(1, "\x1B[0m", 4) : 0;
 			ft_putchar(' ');
 			if (tmp->vertex == size - 1)
 				(*ants)--;
@@ -72,37 +78,39 @@ void			print_map(char *s)
 	int		i;
 	char	*one;
 	char	*two;
-	char	*three;
 	int		size;
 
 	size = ft_sqrt(ft_strlen(s));
 	one = "\x1B[31m1 \033[0m";
 	two = "\x1B[32m2 \033[0m";
-	three = "\x1B[34m3 \033[0m";
 	i = 0;
+	ft_putchar('\n');
+	write(1, "---------- LEM IN MAP ----------\n", 33);
+	ft_putchar('\n');
 	while (i < size * size)
 	{
 		if (s[i] == '1')
 			write(1, one, ft_strlen(one));
 		else if (s[i] == '2')
 			write(1, two, ft_strlen(one));
-		else if (s[i] == '3')
-			write(1, three, ft_strlen(one));
 		else
 			write(1, "0 ", 2);
 		if ((i + 1) % size == 0)
 			write(1, "\n", 1);
 		i++;
 	}
+	ft_putchar('\n');
 }
 
-void			print_output(char **vertices, t_flow *flow, int ants)
+void			print_output(char **vertices, t_flow *flow,
+								int ants, int color)
 {
 	t_flow	*tmp;
 	int		i;
-	int		tmp_ants;
+	int		max_ants;
 
-	tmp_ants = ants + 1;
+	g_color = color;
+	max_ants = ants + 1;
 	i = 1;
 	while (ants)
 	{
@@ -112,10 +120,10 @@ void			print_output(char **vertices, t_flow *flow, int ants)
 			if (tmp->ants > 0)
 			{
 				print_ants_in_path(tmp, vertices, i, &ants);
-				if (i > 0 && i < tmp_ants)
+				if (i > 0 && i < max_ants)
 					i++;
 			}
-			if (i == tmp_ants)
+			if (i == max_ants)
 				i = 0;
 			tmp = tmp->next;
 		}

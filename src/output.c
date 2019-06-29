@@ -55,7 +55,7 @@ int			output(char *map, t_data *data)
 	if (get_ants_per_path(flow, data->ants, nb_path) == -1)
 		return (-1);
 	// print_map(map);
-	print_output(split, flow, data->ants);
+	print_output(split, flow, data->ants, data->flag & COLOR);
 	free_flow(flow);
 	return (free_split(split, 1));
 }
