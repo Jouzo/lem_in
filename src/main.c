@@ -13,7 +13,8 @@ static int		init_data(t_data *data)
 	ret = 1;
 	while (get_next_line(0, &line) > 0)
 	{
-		data->flag != QUIET ? ft_putendl(line) : 0;
+		if (!(data->flag & QUIET))
+			ft_putendl(line);
 		if ((ret = parse(data, line)) <= 0)
 		{
 			ft_memdel((void**)&line);
@@ -34,6 +35,8 @@ static void		lem_in(t_data *data)
 		swap_source(data);
 		map = stringify(data);
 		algo(&map, ft_sqrt(ft_strlen(map)), data->ants);
+		if (data->flag & MAP)
+			print_map(map);
 		output(map, data);
 		ft_memdel((void**)&map);
 	}
@@ -51,7 +54,11 @@ static int		get_flags(t_data *data, char *flag)
 	while (flag[i])
 	{
 		if (flag[i] == 'q')
-			data->flag = QUIET;
+			data->flag |= QUIET;
+		else if (flag[i] == 'c')
+			data->flag |= COLOR;
+		else if (flag[i] == 'm')
+			data->flag |= MAP;
 		else
 			return (-1);
 		i++;
@@ -68,10 +75,11 @@ int				main(int ac, char **av)
 	{
 		if (get_flags(&data, av[1]) < 0 || ac > 2)
 		{
-			write(1, "usage: ./lem-in [-v] < a lem_in map\n", 36);
+			write(1, "usage: ./lem-in [-vc] < a lem_in map\n", 37);
 			return (-1);
 		}
 	}
+	printf("value of flag : %d\n", data.flag);
 	init_data(&data);
 	lem_in(&data);
 	free_data(&data);

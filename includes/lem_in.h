@@ -10,7 +10,9 @@
 # define INITIAL 1
 # define WAITING 2
 # define VISITED 3
-# define QUIET 1
+# define QUIET 1 << 0
+# define COLOR 1 << 1
+# define MAP 1 << 2
 
 /*
 *****************************************
@@ -226,6 +228,6 @@ int							get_ants_per_path(t_flow *flow, int nb_ants,
 */
 
 void						print_output(char **vertices,
-										t_flow *flow, int ants);
+										t_flow *flow, int ants, int color);
 
 #endif
