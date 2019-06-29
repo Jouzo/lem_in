@@ -32,9 +32,11 @@ static void		lem_in(t_data *data)
 	map = NULL;
 	if (check_parsing(*data))
 	{
+		printf("done parsing\n");
 		swap_source(data);
 		map = stringify(data);
 		algo(&map, ft_sqrt(ft_strlen(map)), data->ants);
+		printf("done algo\n");
 		if (data->flag & MAP)
 			print_map(map);
 		output(map, data);
@@ -75,7 +77,7 @@ int				main(int ac, char **av)
 	{
 		if (get_flags(&data, av[1]) < 0 || ac > 2)
 		{
-			write(1, "usage: ./lem-in [-vc] < a lem_in map\n", 37);
+			write(1, "usage: ./lem-in [-cmv] < a lem_in map\n", 38);
 			return (-1);
 		}
 	}

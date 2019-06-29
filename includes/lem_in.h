@@ -156,8 +156,6 @@ t_path						*get_path(int *path, t_queue queue,
 										char *edges, char **map);
 
 void						print_map(char *s);
-int							check_map(char **map, int u, int v,
-										t_args *args, int stage);
 void						go_reverse(int vertex, int i);
 void						check_reverse(t_args *args, int vertex, char **map);
 
@@ -229,5 +227,10 @@ int							get_ants_per_path(t_flow *flow, int nb_ants,
 
 void						print_output(char **vertices,
 										t_flow *flow, int ants, int color);
+
+
+
+int     check_map(char **map, int u, int v, t_args *args, int stage, int *path);
+void print_queue(t_queue queue);
 
 #endif

@@ -24,20 +24,20 @@ static void		update_map(char **map, t_args *args)
 			if (!debug)
 		{
 
-			printf("args->queue.capacity : %d\n", args->queue.capacity);
-			printf("set edges[i] to 2 !\n");
-			printf("edges : %s\n", args->edges);
-			print_map(args->edges);
-			printf("i : %d\n", i);
+			// printf("args->queue.capacity : %d\n", args->queue.capacity);
+			// printf("set edges[i] to 2 !\n");
+			// printf("edges : %s\n", args->edges);
+			// print_map(args->edges);
+			// printf("i : %d\n", i);
 			debug = 1;
 		}
 			args->edges[i] = '2';
 		}
 		i++;
 	}
-	printf("args->state at end of refresh map : %s\n", args->state);
+	// printf("args->state at end of refresh map : %s\n", args->state);
 	args->state[args->queue.capacity - 1] = '1';
-	printf("args->state at end of refresh map : %s\n", args->state);
+	// printf("args->state at end of refresh map : %s\n", args->state);
 }
 
 t_path			*BFS(t_args *args, int stage, char **map)
@@ -45,8 +45,8 @@ t_path			*BFS(t_args *args, int stage, char **map)
 	reinit_args(args);
 	if (stage > 0)
 		update_map(map, args);
-	printf("---print map in BFS---\n");
-	printf("\n");
+	// printf("---print map in BFS---\n");
+	// printf("\n");
 	// print_map(*map);
 	enqueue(&args->queue, 0);
 	change_state(&args->state, 0, WAITING);

@@ -16,7 +16,7 @@ SRCS_NAMES = 	main.c\
 				list_flow.c\
 				list_path.c\
 				find_path.c\
-				queue_array.c\
+				queue.c\
 				reverse.c\
 				check_hash.c\
 				free_parsing.c\
