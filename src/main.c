@@ -79,7 +79,6 @@ int				main(int ac, char **av)
 			return (-1);
 		}
 	}
-	printf("value of flag : %d\n", data.flag);
 	init_data(&data);
 	lem_in(&data);
 	free_data(&data);
