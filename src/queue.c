@@ -40,3 +40,17 @@ void		enqueue(t_queue *queue, int vertex)
 	queue->rear++;
 	queue->size++;
 }
+
+void	 print_queue(t_queue queue)
+{
+       int i;
+
+       i = queue.front; 
+    //    printf("the queue:\n");
+       while (i < queue.rear)
+       {
+               printf("%d\n", queue.vertices[i]);
+               i++;
+       }
+       printf("\n");
+}
