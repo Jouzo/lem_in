@@ -202,8 +202,6 @@ void						free_data(t_data *data);
 char						*stringify(t_data *data);
 char						**split_vertices(t_vertices *head);
 int							output(char *map, t_data *data);
-void						print_output(char **vertices,
-										t_flow *flow, int ants);
 
 /*
 ** path functions
@@ -220,5 +218,12 @@ int							get_one_path(int start, int size,
 
 int							get_ants_per_path(t_flow *flow, int nb_ants,
 												int nb_path);
+
+/*
+** print functions
+*/
+
+void						print_output(char **vertices,
+										t_flow *flow, int ants);
 
 #endif

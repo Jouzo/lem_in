@@ -1,6 +1,6 @@
 #include "lem_in.h"
 
-static void		move_up_path(t_path *path, int *ants)
+static void		move_up_path(t_path *path)
 {
 	t_path	*list;
 	int		tmp;
@@ -18,8 +18,6 @@ static void		move_up_path(t_path *path, int *ants)
 		list->ant = tmp;
 		tmp = tmp2;
 	}
-	if (check == 0)
-		(*ants)--;
 }
 
 static int		formatted_output(char *vertex, int ant)
@@ -51,6 +49,8 @@ static void		print_ants_in_path(t_flow *flow,
 	int		size;
 
 	size = 0;
+	while (vertices[size])
+		size++;
 	tmp = flow->path;
 	tmp->ant = ant;
 	while (tmp)
@@ -59,10 +59,12 @@ static void		print_ants_in_path(t_flow *flow,
 		{
 			formatted_output(vertices[tmp->vertex], tmp->ant);
 			ft_putchar(' ');
+			if (tmp->vertex == size - 1)
+				(*ants)--;
 		}
 		tmp = tmp->next;
 	}
-	move_up_path(flow->path, ants);
+	move_up_path(flow->path);
 }
 
 void			print_map(char *s)
