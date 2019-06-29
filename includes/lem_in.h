@@ -10,6 +10,7 @@
 # define INITIAL 1
 # define WAITING 2
 # define VISITED 3
+# define QUIET 1
 
 /*
 *****************************************
@@ -40,6 +41,7 @@ typedef struct				s_data
 	int						set_vertices;
 	char					*source;
 	char					*sink;
+	int						flag;
 	t_vertices				*vertices;
 	t_edges					*edges;
 }							t_data;

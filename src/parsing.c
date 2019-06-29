@@ -42,9 +42,7 @@ int		parse_vertices(t_data *data, char **split)
 		return (free_split(split, 1));
 	}
 	else
-	{
 		return (free_split(split, -1));
-	}
 }
 
 int		parse_edges(t_data *data, char **split)
@@ -64,9 +62,7 @@ int		parse_edges(t_data *data, char **split)
 		return (free_split(split, 1));
 	}
 	else
-	{
 		return (free_split(split, -1));
-	}
 }
 
 int		parse_ve(t_data *data, char *s)
@@ -76,17 +72,11 @@ int		parse_ve(t_data *data, char *s)
 
 	ve = 0;
 	if ((ve = split_arg(data, s, &split)) == -1)
-	{
 		return (-1);
-	}
 	if (split_count(split) == 3 && ve == 1)
-	{
 		return (parse_vertices(data, split));
-	}
 	else if (split_count(split) == 2 && ve == 2)
-	{
 		return (parse_edges(data, split));
-	}
 	else
 		return (free_split(split, -1));
 	return (1);
@@ -111,9 +101,7 @@ int		parse(t_data *data, char *s)
 		if (!data->ants)
 			return (parse_ants(data, s));
 		else
-		{
 			return (parse_ve(data, s));
-		}
 	}
 	return (1);
 }
