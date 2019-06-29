@@ -46,14 +46,15 @@ int			output(char *map, t_data *data)
 	int		nb_path;
 
 	flow = NULL;
+	split = NULL;
 	size = vertices_len(data->vertices);
 	nb_path = number_of_path(map, size);
-	split = NULL;
 	if (!(split = split_vertices(data->vertices)))
 		return (-1);
 	parse_map(map, size, &flow);
 	if (get_ants_per_path(flow, data->ants, nb_path) == -1)
 		return (-1);
+	// print_map(map);
 	print_output(split, flow, data->ants);
 	free_flow(flow);
 	return (free_split(split, 1));
