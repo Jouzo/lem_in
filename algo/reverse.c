@@ -16,44 +16,60 @@ int		find_source(char **map, int u, int v, int size)
 	return (0);
 }
 
-int		find_previous(char **map, int v, int size)
+void	get_adj_vertice(char **map, int v, int size, int *val1, int *val2)
 {
 	int i;
-	int val1;
-	int val2;
 
 	i = 0;
-	val1 = 0;
-	val2 = 0;
+	*val1 = 0;
+	*val2 = 0;
 	while (i < size)
 	{
 		if ((*map)[size * v + i] == '2')
 		{
-			if (!val1)
-				val1 = i;
+			if (!(*val1))
+				*val1 = i;
 			else
-				val2 = i;
+				*val2 = i;
 		}
-		if (val2 == size -1)
-			return (val1);
-		if (val1 && val2)
+		if (*val2 == size - 1)
+			return;
+		if (*val1 && *val2)
 			break;
 		i++;
 	}
-	if (find_source(map, val1, v, size))
-		return (val1);
-	else
-		return (val2);
-	return (0);
 }
 
-int check_map(char **map, int u, int v, t_args *args, int stage)
+int		find_previous(char **map, int v, int size, int u)
+{
+	int val1;
+	int val2;
+	(void)u;
+	
+	get_adj_vertice(map, v, size, &val1, &val2);
+	printf("value of u: %d\n", u);
+	if (u == val1 || u == val2)
+		return (-1);
+	return (find_source(map, val1, v, size) ? val1 : val2);
+}
+
+int		find_forbidden(char **map, int v, int size)
+{
+	int val1;
+	int val2;
+
+	get_adj_vertice(map, v, size, &val1, &val2);
+	return (find_source(map, val1, v, size) ? val2 : val1);	
+}
+
+int		check_map(char **map, int u, int v, t_args *args, int stage, int *path)
 {
 	int size;
 	int i;
 	(void)args;
 	(void)stage;
-	
+	(void)path;
+
 	i = 0;
 	size = ft_sqrt(ft_strlen(*map));
 		// printf("here u: %d  v: %d\n", u, v);
@@ -66,10 +82,13 @@ int check_map(char **map, int u, int v, t_args *args, int stage)
 		{
 			// printf("find_previous of %d, return value: %d\n", v, find_previous(map, v, size));
 			printf("--------------%d\n", i);
-            return (find_previous(map, v, size));
+			printf("find previous: %d  find forbidden: %d\n", find_previous(map, v, size, path[v]), find_forbidden(map, v, size));
+            return (find_previous(map, v, size, path[v]));
 		}
 		i++;
 	}
 		// printf("here u: %d  v: %d\n", u, v);
 	return (-1);
 }
+
+// int check_forbidden(char **map, int )
