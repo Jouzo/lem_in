@@ -8,7 +8,8 @@ char		**split_vertices(t_vertices *head)
 
 	i = 0;
 	tmp = head;
-	if (!(split = (char**)ft_memalloc(sizeof(char*) * (vertices_len(head) + 1))))
+	if (!(split = (char**)ft_memalloc(sizeof(char*)
+					* (vertices_len(head) + 1))))
 		return (NULL);
 	while (tmp)
 	{
@@ -23,8 +24,8 @@ char		**split_vertices(t_vertices *head)
 void		parse_map(char *map, int size, t_flow **flow)
 {
 	int		i;
-	int 	count;
-	int 	first;
+	int		count;
+	int		first;
 
 	first = first_path(map, size);
 	count = 0;
@@ -41,8 +42,8 @@ int			output(char *map, t_data *data)
 {
 	char	**split;
 	int		size;
-	t_flow *flow;
-	int nb_path;
+	t_flow	*flow;
+	int		nb_path;
 
 	flow = NULL;
 	size = vertices_len(data->vertices);
@@ -53,7 +54,6 @@ int			output(char *map, t_data *data)
 	parse_map(map, size, &flow);
 	if (get_ants_per_path(flow, data->ants, nb_path) == -1)
 		return (-1);
-	print_map(map);
 	print_output(split, flow, data->ants);
 	free_flow(flow);
 	return (free_split(split, 1));

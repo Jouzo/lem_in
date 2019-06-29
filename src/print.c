@@ -1,10 +1,32 @@
 #include "lem_in.h"
 
-int		formatted_output(char *vertex, int ant)
+static void		move_up_path(t_path *path, int *ants)
 {
-	char *s;
-	int size;
-	char *ant_to_a;
+	t_path	*list;
+	int		tmp;
+	int		tmp2;
+	int		check;
+
+	list = path;
+	tmp = list->ant;
+	list->ant = 0;
+	while (list->next)
+	{
+		check = list->ant > check ? list->ant : check;
+		list = list->next;
+		tmp2 = list->ant;
+		list->ant = tmp;
+		tmp = tmp2;
+	}
+	if (check == 0)
+		(*ants)--;
+}
+
+static int		formatted_output(char *vertex, int ant)
+{
+	char	*s;
+	int		size;
+	char	*ant_to_a;
 
 	size = ft_sizeofint(ant);
 	if (!(ant_to_a = ft_itoa(ant)))
@@ -22,7 +44,28 @@ int		formatted_output(char *vertex, int ant)
 	return (1);
 }
 
-void		print_map(char *s)
+static void		print_ants_in_path(t_flow *flow,
+					char **vertices, int ant, int *ants)
+{
+	t_path	*tmp;
+	int		size;
+
+	size = 0;
+	tmp = flow->path;
+	tmp->ant = ant;
+	while (tmp)
+	{
+		if (tmp->ant > 0)
+		{
+			formatted_output(vertices[tmp->vertex], tmp->ant);
+			ft_putchar(' ');
+		}
+		tmp = tmp->next;
+	}
+	move_up_path(flow->path, ants);
+}
+
+void			print_map(char *s)
 {
 	int		i;
 	char	*one;
@@ -51,59 +94,17 @@ void		print_map(char *s)
 	}
 }
 
-static void		move_up_path(t_path *path, int *ants)
-{
-	t_path *list;
-	int tmp;
-	int tmp2;
-	int check;
-
-	list = path;
-	tmp = list->ant;
-	list->ant = 0;
-	while (list->next)
-	{
-		check = list->ant > check ? list->ant : check;
-		list = list->next;
-		tmp2 = list->ant;
-		list->ant = tmp;
-		tmp = tmp2;
-	}
-	if (check == 0)
-		(*ants)--;
-}
-
-static void		print_ants_in_path(t_flow *flow, char **vertices, int ant, int *ants)
-{ 
-	t_path *tmp;
-	int size;
-
-	size = 0;
-	tmp = flow->path;
-	tmp->ant = ant;
-	while (tmp)
-	{
-		if (tmp->ant > 0)
-		{		
-			formatted_output(vertices[tmp->vertex], tmp->ant);
-			ft_putchar(' ');
-		}
-		tmp = tmp->next;
-	}
-	move_up_path(flow->path, ants);
-}
-
 void			print_output(char **vertices, t_flow *flow, int ants)
 {
-	t_flow *tmp;
-	int i;
-	int tmp_ants;
+	t_flow	*tmp;
+	int		i;
+	int		tmp_ants;
 
 	tmp_ants = ants + 1;
 	i = 1;
 	while (ants)
 	{
-	tmp = flow;
+		tmp = flow;
 		while (tmp && ants)
 		{
 			if (tmp->ants > 0)
@@ -116,6 +117,6 @@ void			print_output(char **vertices, t_flow *flow, int ants)
 				i = 0;
 			tmp = tmp->next;
 		}
-	ft_putchar('\n');
+		ft_putchar('\n');
 	}
 }

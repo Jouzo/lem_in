@@ -73,7 +73,7 @@ int		parse_ve(t_data *data, char *s)
 {
 	char	**split;
 	int		ve;
-	
+
 	ve = 0;
 	if ((ve = split_arg(data, s, &split)) == -1)
 	{

@@ -1,6 +1,6 @@
 #include "lem_in.h"
 
-void    free_path(t_path *head)
+void		free_path(t_path *head)
 {
 	t_path *tmp;
 
@@ -12,7 +12,7 @@ void    free_path(t_path *head)
 	}
 }
 
-void    free_flow(t_flow *flow)
+void		free_flow(t_flow *flow)
 {
 	t_flow *tmp;
 
@@ -25,7 +25,7 @@ void    free_flow(t_flow *flow)
 	}
 }
 
-void reset(t_args *args)
+void		reset(t_args *args)
 {
 	ft_memdel((void**)&(args->queue.vertices));
 	ft_memdel((void**)&(args->state));
