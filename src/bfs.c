@@ -32,7 +32,7 @@ t_path		*BFS(t_args *args, int stage, char **map)
 	if (stage > 0)
 		refresh_map(map, args);
 	// // printf("value de state: %s\n", args->state);
-	// print_map(args->edges);
+	// // print_map(args->edges);
 	enqueue(&args->queue, 0);
 	change_state(&args->state, 0, WAITING);
 	return (find_path(args, stage, map));

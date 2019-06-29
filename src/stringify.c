@@ -60,13 +60,11 @@ char	*stringify(t_data *data)
 
 	size = 0;
 	size = vertices_len(data->vertices);
-	// // printf("size * size %zu\n", size * size);
 	if (!(s = ft_strnew(sizeof(char) * size * size)))
 		return (NULL);
 	ft_memset(s, '0', size * size);
-	// // printf("%s\n", s);
 	if (assign(data->edges, data->vertices, &s, size) == -1)
 		return (NULL);
-	print_map(s);
+	// print_map(s);
 	return (s);
 }

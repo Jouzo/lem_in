@@ -96,7 +96,6 @@ bool						is_empty(t_queue *queue);
 t_queue						create_queue(int nb_vertices);
 int							dequeue(t_queue *queue);
 void						enqueue(t_queue *queue, int vertex);
-void						print_queue(t_queue queue);
 
 /*
 ** linked list functions for t_path

@@ -44,5 +44,5 @@ void	algo(char **edges, int nb_vertices, int nb_ants)
 	// printf("\n---------------------------------------\nAT THE END:\n");
 	free_flow(flow);
 	reset(args);
-	print_map(*edges);
+	// print_map(*edges);
 }

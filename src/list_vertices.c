@@ -69,8 +69,8 @@ void			print_vertices(t_vertices *head)
 	while (current)
 	{
 		if (current->name && current->x && current->y)
-			// printf("vertices : %s, x : %d, y: %d\n",
-				// current->name, current->x, current->y);
+			printf("vertices : %s, x : %d, y: %d\n",
+				current->name, current->x, current->y);
 		current = current->next;
 	}
 }

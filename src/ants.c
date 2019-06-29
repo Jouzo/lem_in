@@ -2,12 +2,12 @@
 
 static void			count_ants_per_path(t_flow *flow)
 {
-	int i;
-	t_flow *tmp;
+	int		i;
+	t_flow	*tmp;
 
 	tmp = flow;
 	i = 0;
-	while (tmp->next) 
+	while (tmp->next)
 	{
 		tmp->next->ants = -(tmp->next->size - flow->size);
 		tmp = tmp->next;
@@ -25,7 +25,7 @@ static int			*get_ants_tab(t_flow *flow, int nb_path)
 		return (NULL);
 	tmp = flow;
 	i = 0;
-	while (tmp) 
+	while (tmp)
 	{
 		tab[i] = tmp->ants;
 		tmp = tmp->next;
@@ -46,7 +46,6 @@ static int			assign_ants_per_path(t_flow *flow, int *ants)
 		tmp->ants = ants[i++];
 		tmp = tmp->next;
 	}
-	// print_flow(flow);
 	free(ants);
 	return (1);
 }
@@ -63,9 +62,9 @@ int					get_ants_per_path(t_flow *flow, int nb_ants, int nb_path)
 	if (!(ants = get_ants_tab(flow, nb_path)))
 		return (-1);
 	tmp = flow;
-	while (count < nb_ants) 
+	while (count < nb_ants)
 	{
-	i = 0;
+		i = 0;
 		while (i < nb_path && count < nb_ants)
 		{
 			if (ants[i] >= 0)
