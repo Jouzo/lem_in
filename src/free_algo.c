@@ -1,4 +1,4 @@
-#include "algo.h"
+#include "lem_in.h"
 
 void    free_path(t_path *head)
 {
@@ -8,14 +8,8 @@ void    free_path(t_path *head)
 	{
 		tmp = head;
 		head = head->next;
-		free(tmp);
+		ft_memdel((void**)&tmp);
 	}
-}
-
-void    free_queue(t_queue *queue)
-{
-	free(queue->vertices);
-	free(queue);
 }
 
 void    free_flow(t_flow *flow)
@@ -27,14 +21,13 @@ void    free_flow(t_flow *flow)
 		tmp = flow;
 		flow = flow->next;
 		free_path(tmp->path);
-		free(tmp);
+		ft_memdel((void**)&tmp);
 	}
 }
 
 void reset(t_args *args)
 {
-	free_queue(&args->queue);
-	// free(path);
-	free(args->state);
-	// free(args);
+	ft_memdel((void**)&(args->queue.vertices));
+	ft_memdel((void**)&(args->state));
+	ft_memdel((void**)&(args));
 }

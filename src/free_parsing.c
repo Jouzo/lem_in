@@ -1,4 +1,4 @@
-#include "parsing.h"
+#include "lem_in.h"
 
 void	free_vertices(t_vertices *head)
 {
@@ -8,8 +8,8 @@ void	free_vertices(t_vertices *head)
 	{
 		tmp = head;
 		head = head->next;
-		free(tmp->name);
-		free(tmp);
+		ft_memdel((void**)&tmp->name);
+		ft_memdel((void**)&tmp);
 	}
 }
 
@@ -21,9 +21,9 @@ void	free_edges(t_edges *head)
 	{
 		tmp = head;
 		head = head->next;
-		free(tmp->from);
-		free(tmp->to);
-		free(tmp);
+		ft_memdel((void**)&tmp->from);
+		ft_memdel((void**)&tmp->to);
+		ft_memdel((void**)&tmp);
 	}
 }
 
@@ -34,10 +34,10 @@ int		free_split(char **split, int ret)
 	i = 0;
 	while (split[i])
 	{
-		free(split[i]);
+		ft_memdel((void**)&split[i]);
 		i++;
 	}
-	free(split);
+	ft_memdel((void**)&split);
 	return (ret);
 }
 
@@ -47,8 +47,6 @@ void	free_data(t_data *data)
 		free_vertices(data->vertices);
 	if (data->edges)
 		free_edges(data->edges);
-	if (data->source)
-		free(data->source);
-	if (data->sink)
-		free(data->sink);
+	ft_memdel((void**)&data->source);
+	ft_memdel((void**)&data->sink);
 }

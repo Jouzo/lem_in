@@ -1,4 +1,4 @@
-#include "parsing.h"
+#include "lem_in.h"
 
 size_t			vertices_len(t_vertices *head)
 {
@@ -66,10 +66,11 @@ void			print_vertices(t_vertices *head)
 	t_vertices *current;
 
 	current = head;
-	while (current != NULL)
+	while (current)
 	{
-		printf("vertices : %s, x : %d, y: %d\n",
-			current->name, current->x, current->y);
+		if (current->name && current->x && current->y)
+			// printf("vertices : %s, x : %d, y: %d\n",
+				// current->name, current->x, current->y);
 		current = current->next;
 	}
 }

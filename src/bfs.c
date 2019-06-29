@@ -1,4 +1,4 @@
-#include "algo.h"
+#include "lem_in.h"
 
 void	change_state(char **state, int vertex, int new_state)
 {
@@ -26,12 +26,12 @@ void		refresh_map(char **map, t_args *args)
 
 t_path		*BFS(t_args *args, int stage, char **map)
 {
-	printf("---start of bfs---\n");
-	printf("\n");
+	// // printf("---start of bfs---\n");
+	// // printf("\n");
 	reinit_args(args);
 	if (stage > 0)
 		refresh_map(map, args);
-	// printf("value de state: %s\n", args->state);
+	// // printf("value de state: %s\n", args->state);
 	// print_map(args->edges);
 	enqueue(&args->queue, 0);
 	change_state(&args->state, 0, WAITING);

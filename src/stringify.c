@@ -1,4 +1,4 @@
-#include "includes/lem_in.h"
+#include "lem_in.h"
 
 void	fill_string(char **s, int x, int y, int size)
 {
@@ -38,6 +38,7 @@ int		assign(t_edges *edge, t_vertices *vertice, char **s, int size)
 	int		y;
 	char	**split;
 
+	split = NULL;
 	if (!(split = split_vertices(vertice)))
 		return (-1);
 	tmp = edge;
@@ -49,7 +50,7 @@ int		assign(t_edges *edge, t_vertices *vertice, char **s, int size)
 		fill_string(s, x, y, size);
 		tmp = tmp->next;
 	}
-	return (1);
+	return (free_split(split, 1));
 }
 
 char	*stringify(t_data *data)
@@ -57,11 +58,13 @@ char	*stringify(t_data *data)
 	char	*s;
 	size_t	size;
 
+	size = 0;
 	size = vertices_len(data->vertices);
-	if (!(s = (char*)malloc(sizeof(char) * size * size + 1)))
+	// // printf("size * size %zu\n", size * size);
+	if (!(s = ft_strnew(sizeof(char) * size * size)))
 		return (NULL);
 	ft_memset(s, '0', size * size);
-	s[size * size] = '\0';
+	// // printf("%s\n", s);
 	if (assign(data->edges, data->vertices, &s, size) == -1)
 		return (NULL);
 	print_map(s);

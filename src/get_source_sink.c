@@ -1,4 +1,4 @@
-#include "parsing.h"
+#include "lem_in.h"
 
 void	swap_source(t_data *data)
 {
@@ -39,7 +39,8 @@ int		get_source(t_data *data, char **split)
 					ft_atoi(split[1]), ft_atoi(split[2])) == -1)
 			return (-1);
 	}
-	data->source = ft_strdup(split[0]);
+	if (!(data->source = ft_strdup(split[0])))
+		return (-1);
 	return (1);
 }
 
@@ -76,7 +77,17 @@ int		get_source_sink(t_data *data, char *s, int source)
 	if (split_count(split) != 3)
 		return (free_split(split, -1));
 	if (source)
-		return (free_split(split, get_source(data, split)));
+	{
+		if (get_source(data, split) == -1)
+			return (free_split(split, -1));
+		else
+			return (free_split(split, 1));
+	}
 	else
-		return (free_split(split, get_sink(data, split)));
+	{
+		if (get_sink(data, split) == -1)
+			return (free_split(split, -1));
+		else
+			return (free_split(split, 1));
+	}
 }

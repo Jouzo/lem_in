@@ -1,4 +1,4 @@
-#include "includes/lem_in.h"
+#include "lem_in.h"
 
 static int		check_row(char **map, int start, int size)
 {
@@ -33,7 +33,7 @@ static int		check_col(char **map, int start, int size)
 		if ((*map)[start + i * size] == '2') {;
 			return (start + i * size);
 		}
-		if ((*map)[start - j * size] == '2') {
+		if (start - j * size >= 0 && (*map)[start - j * size] == '2') {
 			return (start - j * size);
 		}
 		if (j % size == 0 && i % size == size)
@@ -51,6 +51,8 @@ int		number_of_path(char *map, int size)
 
 	i = 0;
 	count = 0;
+	// // printf("map in number of path size : %d \n", size);
+	// // printf("map : %s\n", map);
 	while (i < size)
 	{
 		if (map[i] == '2')
