@@ -20,6 +20,7 @@ int   init_data(t_data *data)
 	ret = 1;
 	while (get_next_line(0, &line) > 0)
 	{
+		ft_putendl(line);
 		if ((ret = parse(data, line)) <= 0)
 		{
 			ft_memdel((void**)&line);
