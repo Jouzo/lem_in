@@ -1,5 +1,19 @@
 #include "lem_in.h"
 
+void	update_map(t_args *args, int u, int v)
+{
+	if (args->edges[u * args->queue.capacity + v] == '2')
+	{
+		args->edges[u * args->queue.capacity + v] = '0';
+		args->edges[v * args->queue.capacity + u] = '0';
+	}
+	else
+	{
+		args->edges[u * args->queue.capacity + v] = '2';
+		args->edges[v * args->queue.capacity + u] = '2';
+	}	
+}
+
 t_path	*get_path(int *path, t_args *args)
 {
 	int		u;
@@ -14,14 +28,7 @@ t_path	*get_path(int *path, t_args *args)
 	}
 	while (u > 0)
 	{
-		args->edges[u * args->queue.capacity + path[u]] = '2';
-		args->edges[path[u] * args->queue.capacity + u] = '2';
-		if (args->edges[u * args->queue.capacity + path[u]] == '0')
-		{
-			args->edges[path[u] * args->queue.capacity + u] = '0';
-			args->edges[u * args->queue.capacity + path[u]] = '0';
-		}
-	// printf("value of u: %d, path[u]: %d\n", u, path[u]);
+		update_map(args, u, path[u]);
 		u = path[u];
 		push_vertex(&aug_path, u);
 	}
