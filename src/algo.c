@@ -34,8 +34,7 @@ void	algo(char **edges, int nb_vertices, int nb_ants)
 	args = init_args(nb_vertices, edges);
 	while (count < nb_ants)
 	{
-		path = BFS(args, count, edges);
-		print_path(path);
+		path = BFS(args, count);
 		if (count == 0)
 			flow = new_flow(path, 0);
 		else

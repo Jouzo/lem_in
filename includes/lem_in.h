@@ -130,7 +130,7 @@ void						free_flow(t_flow *flow);
 **  bfs functions
 */
 
-t_path						*BFS(t_args *args, int stage, char **map);
+t_path						*BFS(t_args *args, int stage);
 int							check_flow(int *path, int vertex, t_flow *flow,
 								int stage, int vertex_source);
 int							check_available(char *state, int vertex);
@@ -151,9 +151,8 @@ void						reinit_args(t_args *args);
 **	path functions
 */
 
-t_path						*find_path(t_args *args, int stage, char **map);
-t_path						*get_path(int *path, t_queue queue,
-										char *edges, char **map);
+t_path						*find_path(t_args *args, int stage);
+t_path						*get_path(int *path, t_args *args);
 
 void						print_map(char *s);
 void						go_reverse(int vertex, int i);
@@ -230,7 +229,7 @@ void						print_output(char **vertices,
 
 
 
-int     check_map(char **map, int u, int v, t_args *args, int stage, int *path);
+int     check_map(int u, int v, t_args *args, int stage, int *path);
 void print_queue(t_queue queue);
 
 #endif
