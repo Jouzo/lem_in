@@ -8,7 +8,8 @@ LIBFTDIR = libft
 SRCS_NAMES = 	main.c\
 				output.c\
 				path.c\
-				print.c\
+				print_map.c\
+				print_output.c\
 				ants.c\
 				algo.c\
 				bfs.c\

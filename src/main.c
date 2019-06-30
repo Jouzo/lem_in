@@ -43,7 +43,7 @@ static void		lem_in(t_data *data)
 		ft_memdel((void**)&map);
 	}
 	else
-		write(1, "Error\n", 5);
+		write(1, "ERROR\n", 6);
 }
 
 static int		get_flags(t_data *data, char *flag)

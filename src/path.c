@@ -90,6 +90,7 @@ int				get_one_path(int start, int size, t_flow **flow, char *map)
 		size_path++;
 		if ((start % size) + 1 == size || (start / size) + 1 == size)
 		{
+			// print_path(path);
 			if (!(*flow))
 				*flow = new_flow(path, size_path);
 			else
