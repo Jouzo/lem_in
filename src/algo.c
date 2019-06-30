@@ -1,5 +1,29 @@
 #include "lem_in.h"
 
+// static void		update_map(char **map, t_args *args)
+// {
+// 	int i;
+// 	int debug;
+
+// 	debug = 0;
+// 	i = 1;
+// 	while ((*map)[i])
+// 	{
+// 		if ((*map)[i] == '2' && i % args->queue.capacity != 0)
+// 		{
+// 			if (!debug)
+// 			{
+// 			printf("set edges[i] to 2 !\n");
+// 			print_map(args->edges);
+// 			printf("i : %d\n", i);
+// 			debug = 1;
+// 			}
+// 			args->edges[i] = '2';
+// 		}
+// 		i++;
+// 	}
+// }
+
 t_args	*init_args(int nb_vertices, char **edges)
 {
 	t_args *args;
@@ -40,6 +64,8 @@ void	algo(char **edges, int nb_vertices, int nb_ants)
 		else
 			add_flow(&flow, new_flow(path, 0));
 		count++;
+		// print_path(path);
+		// update_map(path, edges);
 	}
 	// printf("\n---------------------------------------\nAT THE END:\n");
 	free_flow(flow);
