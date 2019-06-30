@@ -2,67 +2,69 @@ NAME = lem-in
 
 INC = -Iincludes
 OBJDIR = obj
+SRCDIR = src
+LIBFTDIR = libft
 
-SRCS = 	stringify.c\
-		main.c\
-		output.c\
+SRCS_NAMES = 	main.c\
+				output.c\
+				path.c\
+				print.c\
+				ants.c\
+				algo.c\
+				bfs.c\
+				free_algo.c\
+				list_flow.c\
+				list_path.c\
+				find_path.c\
+				queue.c\
+				reverse.c\
+				check_hash.c\
+				free_parsing.c\
+				get_source_sink.c\
+				list_edges.c\
+				list_vertices.c\
+				parsing.c\
+				split.c\
+				stringify.c\
 
-OBJS = $(patsubst %.c,$(OBJDIR)/%.o,$(SRCS))
+OBJS_NAMES = $(SRCS_NAMES:.c=.o)
 
-CC = gcc -O2 -g
-CFLAGS = -Wall -Werror -Wextra
-PARSING = parsing/libparsing.a
+SRCS = $(addprefix $(SRCDIR)/,$(SRCS_NAMES))
+OBJS = $(addprefix $(OBJDIR)/,$(OBJS_NAMES))
+
+CC = gcc 
+CFLAGS = -O2 -g -Wall -Werror -Wextra
+
 LIBFT = libft/libft.a
-PRINTF = ft_printf/libftprintf.a
-ALGO = algo/lib_algo.a
 
-all: $(OBJDIR) $(NAME)
-	@:
+all: $(OBJS) $(NAME)
 
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 
-$(OBJDIR)/%.o: %.c
-	@ $(CC) $(INC) $(CFLAGS) -c $< -o $@
-
-FORCE: ;
-
 $(LIBFT): FORCE
-	@make -C libft
+	@make -C $(LIBFTDIR)
 
-$(PARSING): FORCE
-	@make -C parsing
-
-$(ALGO): FORCE
-	@make -C algo
-
-$(PRINTF): FORCE
-	@make -C ft_printf
-
-$(NAME): $(LIBFT) $(PARSING) $(PRINTF) $(ALGO) $(OBJS) 
-	@ $(CC) $(INC) $(CFLAGS) $(OBJS) $(LIBFT) $(PRINTF) $(PARSING) $(ALGO) -o $(NAME)
+$(NAME): $(OBJS) $(LIBFT)
+	@ $(CC) $(INC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 	@echo "Made lem-in !"
 
-$(OBJDIR)/%.o: %.c
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@ $(CC) $(INC) $(CFLAGS) -c $< -o $@
 
 clean:
-	@make clean -C parsing
-	@make clean -C algo
-	@make clean -C ft_printf
 	@make clean -C libft
-	@-rm -rf $(OBJDIR)/*.o
+	@-rm -rf $(OBJS)
 	@echo "Cleaned lem-in !"	
 
 fclean:
-	@make fclean -C parsing
-	@make fclean -C algo
-	@make fclean -C ft_printf
 	@make fclean -C libft
-	@-rm -rf $(OBJDIR)/*.o
+	@-rm -rf $(OBJS)
 	@-rm -f $(NAME)
 	@echo "Fcleaned lem-in !"	
 
 re: fclean all
 
-.PHONY: clean fclean re
+.PHONY: clean fclean re all
+
+FORCE: 
