@@ -1,5 +1,7 @@
 NAME = lem-in
 
+OPTION = ./includes/lem_in.h
+
 INC = -Iincludes
 OBJDIR = obj
 SRCDIR = src
@@ -36,7 +38,7 @@ OBJS = $(addprefix $(OBJDIR)/,$(OBJS_NAMES))
 CC = gcc 
 CFLAGS = -O2 -g -Wall -Werror -Wextra
 
-LIBFT = libft/libft.a
+LIBFT = libft/libft.a 
 
 all: $(OBJS) $(NAME)
 
@@ -46,8 +48,8 @@ $(OBJDIR):
 $(LIBFT): FORCE
 	@make -C $(LIBFTDIR)
 
-$(NAME): $(OBJS) $(LIBFT)
-	@ $(CC) $(INC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+$(NAME): $(OBJS) $(LIBFT) $(OPTION)
+	@ $(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 	@echo "Made lem-in !"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c

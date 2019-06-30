@@ -6,7 +6,7 @@
 #    By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 18:10:13 by jdescler          #+#    #+#              #
-#    Updated: 2019/05/26 20:33:14 by jdescler         ###   ########.fr        #
+#    Updated: 2019/06/30 21:05:48 by jdescler         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,7 +100,6 @@ CC = gcc
 CFLAGS = -c -O2 -Wall -Werror -Wextra -Iincludes
 
 all: $(OBJDIR) $(NAME)
-	@:
 
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)

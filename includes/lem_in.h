@@ -138,6 +138,9 @@ void						change_state(char **state, int vertex,
 											int new_state);
 int							get_path_size(int *path, int sink,
 											int vertex_source);
+int							get_max_bfs(char *source, char *sink,
+											int ants, t_edges *edges);
+
 
 /*
 **  algo functions
