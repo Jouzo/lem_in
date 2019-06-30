@@ -12,9 +12,9 @@ int				check_available(char *state, int vertex)
 
 int				get_max_bfs(char *source, char *sink, int ants, t_edges *edges)
 {
-	t_edges *tmp;
-	int i;
-	int j;
+	t_edges	*tmp;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -35,7 +35,6 @@ int				get_max_bfs(char *source, char *sink, int ants, t_edges *edges)
 		return (ants);
 	return (0);
 }
-
 
 t_path			*BFS(t_args *args, int stage, char **map)
 {
