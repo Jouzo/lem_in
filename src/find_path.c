@@ -1,25 +1,25 @@
 #include "lem_in.h"
 
-t_path	*get_path(int *path, t_queue queue, char *edges, char **map)
+t_path	*get_path(int *path, t_args *args)
 {
 	int		u;
 	t_path	*aug_path;
 
-	u = queue.capacity - 1;
+	u = args->queue.capacity - 1;
 	aug_path = init_path(u);
-	if (path[u] == 0 && edges[u] == '0')
+	if (path[u] == 0 && args->edges[u] == '0')
 	{
 		ft_memdel((void**)&path);
 		return (aug_path);
 	}
 	while (u > 0)
 	{
-		(*map)[u * queue.capacity + path[u]] = '2';
-		(*map)[path[u] * queue.capacity + u] = '2';
-		if (edges[u * queue.capacity + path[u]] == '0')
+		args->edges[u * args->queue.capacity + path[u]] = '2';
+		args->edges[path[u] * args->queue.capacity + u] = '2';
+		if (args->edges[u * args->queue.capacity + path[u]] == '0')
 		{
-			(*map)[path[u] * queue.capacity + u] = '0';
-			(*map)[u * queue.capacity + path[u]] = '0';
+			args->edges[path[u] * args->queue.capacity + u] = '0';
+			args->edges[u * args->queue.capacity + path[u]] = '0';
 		}
 	// printf("value of u: %d, path[u]: %d\n", u, path[u]);
 		u = path[u];
@@ -43,7 +43,7 @@ int		get_path_size(int *path, int sink, int vertex)
 	return (size);
 }
 
-t_path	*find_path(t_args *args, int stage, char **map)
+t_path	*find_path(t_args *args, int stage)
 {
 	int vertex;
 	int *path;
@@ -69,7 +69,7 @@ t_path	*find_path(t_args *args, int stage, char **map)
 				// printf("value de i: %d, vertex: %d value in map: %c\n", i, vertex, args->edges[vertex * args->queue.capacity + i]);
 				// for (int i = 0; i < args->queue.capacity; i++)
 				// 	printf("==path[%d] = %d\n", i, path[i]);
-				if ((rev = check_map(map, i, vertex, args, stage, path)) > - 1)// && !go_rev)
+				if ((rev = check_map(i, vertex, args, stage, path)) > - 1)// && !go_rev)
 				{
 					// printf("1\n");
 					// args->edges[vertex * args->queue.capacity + i] = '0';
@@ -106,7 +106,7 @@ t_path	*find_path(t_args *args, int stage, char **map)
 				// 	if (i == args->queue.capacity - 1 || vertex == args->queue.capacity - 1)
 				// 		return (get_path(path, args->queue, args->edges, map));
 				// }
-				else if (args->edges[vertex * args->queue.capacity + i] == '1')// && i != find_forbidden(map, vertex, args->queue.capacity -1))
+				else if (args->edges[vertex * args->queue.capacity + i] == '1')// && i != find_forbidden(args->edges, vertex, args->queue.capacity -1))
 				{
 					// printf("3\n");
 					// go_rev = 0;
@@ -118,7 +118,7 @@ t_path	*find_path(t_args *args, int stage, char **map)
 					// printf("---i: %d, vertex: %d\n", i, vertex);
 
 					if (i == args->queue.capacity - 1 || vertex == args->queue.capacity - 1)
-						return (get_path(path, args->queue, args->edges, map));
+						return (get_path(path, args));
 				}
 				// else 
 					// printf("4\n");
@@ -127,5 +127,5 @@ t_path	*find_path(t_args *args, int stage, char **map)
 			i++;
 		}
 	}
-	return (get_path(path, args->queue, args->edges, map));
+	return (get_path(path, args));
 }
