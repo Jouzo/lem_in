@@ -6,7 +6,7 @@
 /*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 20:20:49 by jdescler          #+#    #+#             */
-/*   Updated: 2019/06/30 18:11:23 by jdescler         ###   ########.fr       */
+/*   Updated: 2019/06/30 18:29:28 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ long long		ft_atoll(const char *str)
 	i = 0;
 	pos = 1;
 	res = 0;
-	printf("inside atoll\n");
 	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
 			|| str[i] == '\f' || str[i] == '\r')
 		i++;
