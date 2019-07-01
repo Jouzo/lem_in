@@ -131,7 +131,7 @@ void						free_flow(t_flow *flow);
 **  bfs functions
 */
 
-t_path						*BFS(t_args *args, int stage, char **map);
+t_path						*BFS(t_args *args, int stage);
 int							check_flow(int *path, int vertex, t_flow *flow,
 								int stage, int vertex_source);
 int							check_available(char *state, int vertex);
@@ -147,7 +147,7 @@ int							get_max_bfs(char *source, char *sink,
 **  algo functions
 */
 
-void						algo(char **edges, int nb_vertices, int nb_ants);
+void						algo(char **edges, int nb_vertices, int max_bfs);
 t_args						*init_args(int nb_vertices, char **edges);
 void						reinit_args(t_args *args);
 
@@ -155,9 +155,8 @@ void						reinit_args(t_args *args);
 **	path functions
 */
 
-t_path						*find_path(t_args *args, int stage, char **map);
-t_path						*get_path(int *path, t_queue queue,
-										char *edges, char **map);
+t_path						*find_path(t_args *args, int stage);
+t_path						*get_path(int *path, t_args *args);
 
 void						print_map(char *s, t_data *data);
 void						go_reverse(int vertex, int i);
@@ -215,8 +214,8 @@ int							output(char *map, t_data *data);
 
 int							first_path(char *map, int size);
 int							number_of_path(char *map, int size);
-int							get_one_path(int start, int size,
-									t_flow **flow, char *map);
+int							get_one_path(int start,
+								t_flow **flow, char *map);
 
 /*
 ** ants functions
@@ -234,7 +233,8 @@ void						print_output(char **vertices,
 
 
 
-int     check_map(char **map, int u, int v, t_args *args, int stage, int *path);
+int     check_map(int u, int v, t_args *args, int stage, int *path);
 void print_queue(t_queue queue);
+int		find_forbidden(char *map, int v, int size);
 
 #endif

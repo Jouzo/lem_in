@@ -1,45 +1,18 @@
 #include "lem_in.h"
 
-static int		check_row(char **map, int start, int size)
+int				add_path(t_path **path, int vertex)
 {
-	int i;
-	int j;
-
-	i = 1;
-	j = 1;
-	while (1)
+	if (!(*path))
 	{
-		if ((*map)[start + i] == '2')
-			return (start + i);
-		if ((*map)[start - j] == '2')
-			return (start - j);
-		if (j % size == 0 && i % size == size)
-			return (-1);
-		(start - j) % size > 0 ? j++ : 0;
-		(start + i) % size < size ? i++ : 0;
+		if (!(*path = init_path(vertex)))
+			return (0);
 	}
-	return (-1);
-}
-
-static int		check_col(char **map, int start, int size)
-{
-	int i;
-	int j;
-
-	i = 1;
-	j = 1;
-	while (1)
+	else
 	{
-		if ((*map)[start + i * size] == '2')
-			return (start + i * size);
-		if (start - j * size >= 0 && (*map)[start - j * size] == '2')
-			return (start - j * size);
-		if (j % size == 0 && i % size == size)
-			return (-1);
-		(start - j * size) / size > 0 ? j++ : 0;
-		(start + i * size) / size < size ? i++ : 0;
+		if (!(push_vertex(path, vertex)))
+			return (0);
 	}
-	return (-1);
+	return (1);
 }
 
 int				number_of_path(char *map, int size)
@@ -72,31 +45,53 @@ int				first_path(char *map, int size)
 	return (0);
 }
 
-int				get_one_path(int start, int size, t_flow **flow, char *map)
+static int		find_source(char *map, int u, int v, t_path **path)
 {
-	int		x_y;
+	int i;
+	int size;
+	static int size_path = 0;
+	int tmp;
+
+	tmp = 0;
+	size = ft_sqrt(ft_strlen(map));
+	if (u == size - 1)
+	{
+		tmp = size_path;
+		size_path = 0;
+		// printf("seg3 : %d %d\n", u, v);
+		if (!(add_path(path, u)))
+			return (0);
+		// printf("seg4\n");
+		return (tmp);
+	}
+	i = 0;
+	while (i < size)
+	{
+		if (map[size * u + i] == '2' && i != v)
+		{
+			size_path++;
+			// printf("value of u : %d\n", u);
+			if (!(add_path(path, u)))
+				return (0);
+			return (find_source(map, i, u, path));
+		}
+		i++;
+	} 
+	return (1);
+}
+
+int				get_one_path(int start, t_flow **flow, char *map)
+{
 	t_path	*path;
 	int		size_path;
 
-	x_y = 0;
-	size_path = 1;
-	path = init_path(start);
-	while (start < size * size)
-	{
-		start = !x_y ? check_col(&map, start, size)
-			: check_row(&map, start, size);
-		push_vertex(&path, x_y ? start % size : start / size);
-		x_y = !x_y;
-		size_path++;
-		if ((start % size) + 1 == size || (start / size) + 1 == size)
-		{
-			// print_path(path);
-			if (!(*flow))
-				*flow = new_flow(path, size_path);
-			else
-				add_flow(flow, new_flow(path, size_path));
-			return (1);
-		}
-	}
-	return (-1);
+	path = NULL;
+	size_path = find_source(map, start, 0, &path);
+	printf("seg\n");
+	if (!(*flow))
+		*flow = new_flow(path, size_path);
+	else
+		add_flow(flow, new_flow(path, size_path));
+	printf("seg2\n");
+	return (1);
 }
