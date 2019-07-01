@@ -38,8 +38,7 @@ static void		lem_in(t_data *data)
 	{
 		// printf("done parsing\n");
 		swap_source(data);
-		map = stringify(data);
-		if ((max_bfs = get_max_bfs(data->source, data->sink, data->ants, data->edges)) == 0)
+		if (!(map = stringify(data))|| (!(max_bfs = get_max_bfs(data->source, data->sink, data->ants, data->edges))))
 		{
 			write(1, "ERROR\n", 6);
 			return ;
@@ -70,8 +69,11 @@ static int		get_flags(t_data *data, char *flag)
 			data->flag |= COLOR;
 		else if (flag[i] == 'm')
 			data->flag |= MAP;
-		else if (flag[i] == 'n')
+		else if (flag[i] == 'M')
+		{
+			data->flag |= MAP;
 			data->flag |= NAME;
+		}
 		else
 			return (-1);
 		i++;
@@ -88,7 +90,11 @@ int				main(int ac, char **av)
 	{
 		if (get_flags(&data, av[1]) < 0 || ac > 2)
 		{
-			write(1, "usage: ./lem-in [-cmnv] < a lem_in map\n", 39);
+			write(1, "usage: ./lem-in [-Mcmq] < a lem_in map\n", 39);
+			write(1, "c: display last move in red for every ants\n", 43);
+			write(1, "m: display the matrice\n", 23);
+			write(1, "M: display the name of every vertices with the map\n", 51);
+			write(1, "q: quiet mode, doesn't show the input\n", 38);
 			return (-1);
 		}
 	}
