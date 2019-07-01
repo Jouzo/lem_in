@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoll.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdescler <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 20:20:49 by jdescler          #+#    #+#             */
-/*   Updated: 2019/05/24 20:20:51 by jdescler         ###   ########.fr       */
+/*   Updated: 2019/06/30 18:29:28 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 long long		ft_atoll(const char *str)
 {

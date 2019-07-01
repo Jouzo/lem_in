@@ -74,7 +74,7 @@ int		get_source_sink(t_data *data, char *s, int source)
 
 	if (split_arg(data, s, &split) == -1)
 		return (-1);
-	if (split_count(split) != 3)
+	if (split_count(split) != 3 || !check_split(split))
 		return (free_split(split, -1));
 	if (source)
 	{
