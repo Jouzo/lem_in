@@ -13,6 +13,8 @@ static int		init_data(t_data *data)
 	ret = 1;
 	while (get_next_line(0, &line) > 0)
 	{
+		if (line[0] == '\n' && !line[1])
+			return (-1);
 		if (!(data->flag & QUIET))
 			ft_putendl(line);
 		if ((ret = parse(data, line)) <= 0)
@@ -34,13 +36,17 @@ static void		lem_in(t_data *data)
 	map = NULL;
 	if (check_parsing(*data))
 	{
-		printf("done parsing\n");
+		// printf("done parsing\n");
 		swap_source(data);
 		map = stringify(data);
-		max_bfs = get_max_bfs(data->source, data->sink, data->ants, data->edges);
-		printf("max_bfs : %d\n", max_bfs);
+		if ((max_bfs = get_max_bfs(data->source, data->sink, data->ants, data->edges)) == 0)
+		{
+			write(1, "ERROR\n", 6);
+			return ;
+		}
 		algo(&map, ft_sqrt(ft_strlen(map)), data->ants);
-		printf("done algo\n");
+		
+		// printf("done algo\n");
 		if (data->flag & MAP)
 			print_map(map);
 		output(map, data);
