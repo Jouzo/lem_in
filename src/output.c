@@ -32,8 +32,8 @@ void		parse_map(char *map, int size, t_flow **flow)
 	i = first;
 	while (i < size)
 	{
-		if ((map)[i] == '2') 
-			get_one_path(i, size, flow, map);
+		if ((map)[i] == '2')
+			get_one_path(i, flow, map);
 		i++;
 	}
 
@@ -56,6 +56,7 @@ int			output(char *map, t_data *data)
 	parse_map(map, size, &flow);
 	if (get_ants_per_path(flow, data->ants, nb_path) == -1)
 		return (-1);
+	// print_flow(flow);
 	print_output(split, flow, data->ants, data->flag & COLOR);
 	free_flow(flow);
 	return (free_split(split, 1));

@@ -138,12 +138,14 @@ void						change_state(char **state, int vertex,
 											int new_state);
 int							get_path_size(int *path, int sink,
 											int vertex_source);
+int							get_max_bfs(char *source, char *sink,
+									int ants, t_edges *edges);
 
 /*
 **  algo functions
 */
 
-void						algo(char **edges, int nb_vertices, int nb_ants);
+void						algo(char **edges, int nb_vertices, int max_bfs);
 t_args						*init_args(int nb_vertices, char **edges);
 void						reinit_args(t_args *args);
 
@@ -210,8 +212,8 @@ int							output(char *map, t_data *data);
 
 int							first_path(char *map, int size);
 int							number_of_path(char *map, int size);
-int							get_one_path(int start, int size,
-									t_flow **flow, char *map);
+int							get_one_path(int start,
+								t_flow **flow, char *map);
 
 /*
 ** ants functions
@@ -231,5 +233,6 @@ void						print_output(char **vertices,
 
 int     check_map(int u, int v, t_args *args, int stage, int *path);
 void print_queue(t_queue queue);
+int		find_forbidden(char *map, int v, int size);
 
 #endif

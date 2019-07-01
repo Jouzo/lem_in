@@ -50,6 +50,20 @@ int		get_path_size(int *path, int sink, int vertex)
 	return (size);
 }
 
+// static int		check_line(char *map, int line, int size)
+// {
+// 	int i;
+
+// 	i = 0;
+// 	while (i < size)
+// 	{
+// 		if (map[line * size + i] == '2' && line != 0 && i != 0)// && line != size - 1 && i != size -1)
+// 			return (1);
+// 		i++;
+// 	}
+// 	return (0);
+// }
+
 t_path	*find_path(t_args *args, int stage)
 {
 	int vertex;
@@ -60,11 +74,12 @@ t_path	*find_path(t_args *args, int stage)
 	int rev;
 
 	go_rev = 0;
+	printf("\n\nstrat of BFS====================\n");
 	if (!(path = ft_memalloc(args->queue.capacity * sizeof(int))))
 		return (NULL);
 	while (!is_empty(&args->queue))
 	{
-		vertex = dequeue(&args->queue);	
+		vertex = dequeue(&args->queue);
 		change_state(&args->state, vertex, VISITED);
 		i = 1;
 		while (i < args->queue.capacity)
@@ -72,15 +87,15 @@ t_path	*find_path(t_args *args, int stage)
 			if (args->edges[vertex * args->queue.capacity + i] > '0'
 			&& check_available(args->state, i))
 			{
-				// printf("\n\n");
-				// printf("value de i: %d, vertex: %d value in map: %c\n", i, vertex, args->edges[vertex * args->queue.capacity + i]);
-				// for (int i = 0; i < args->queue.capacity; i++)
-				// 	printf("==path[%d] = %d\n", i, path[i]);
+				printf("\n\n");
+				printf("value de i: %d, vertex: %d value in map: %c\n", i, vertex, args->edges[vertex * args->queue.capacity + i]);
+				for (int i = 0; i < args->queue.capacity; i++)
+					printf("==path[%d] = %d\n", i, path[i]);
+
+
 				if ((rev = check_map(i, vertex, args, stage, path)) > - 1)// && !go_rev)
 				{
-					// printf("1\n");
-					// args->edges[vertex * args->queue.capacity + i] = '0';
-					// args->edges[vertex + args->queue.capacity * i] = '0';
+					printf("1    rev: %d\n", rev);
 					if (rev == 0)
 					{
 						change_state(&args->state, vertex, INITIAL);
@@ -99,6 +114,11 @@ t_path	*find_path(t_args *args, int stage)
 						break;
 					}
 				}
+				// else if (args->edges[vertex * args->queue.capacity + i] > '1' && i != find_forbidden(args->edges, vertex, args->queue.capacity -1))
+				// {
+				// 	printf("2\n");
+				// }
+
 				// else if (args->edges[vertex * args->queue.capacity + i] > '1' && go_rev)
 				// {
 				// 	printf("2\n");
@@ -113,9 +133,10 @@ t_path	*find_path(t_args *args, int stage)
 				// 	if (i == args->queue.capacity - 1 || vertex == args->queue.capacity - 1)
 				// 		return (get_path(path, args->queue, args->edges, map));
 				// }
-				else if (args->edges[vertex * args->queue.capacity + i] == '1')// && i != find_forbidden(args->edges, vertex, args->queue.capacity -1))
+				// else
+				else if (args->edges[vertex * args->queue.capacity + i] == '1')// && !check_line(args->edges, vertex, args->queue.capacity))
 				{
-					// printf("3\n");
+					printf("3\n");
 					// go_rev = 0;
 					path[i] = vertex;
 					// // printf("value de i: %d value de vertex: %d\n", i, vertex);
@@ -127,8 +148,22 @@ t_path	*find_path(t_args *args, int stage)
 					if (i == args->queue.capacity - 1 || vertex == args->queue.capacity - 1)
 						return (get_path(path, args));
 				}
-				// else 
-					// printf("4\n");
+				// else if (args->edges[vertex * args->queue.capacity + i] > '1' && i != find_forbidden(args->edges, vertex, args->queue.capacity -1))
+				// {
+				// 	printf("3bis\n");
+				// 	// go_rev = 0;
+				// 	path[i] = vertex;
+				// 	// // printf("value de i: %d value de vertex: %d\n", i, vertex);
+				// 	enqueue(&args->queue, i);
+				// 	// if (stage == 0)
+				// 	change_state(&args->state, i, WAITING);
+				// 	// printf("---i: %d, vertex: %d\n", i, vertex);
+
+				// 	if (i == args->queue.capacity - 1 || vertex == args->queue.capacity - 1)
+				// 		return (get_path(path, args));
+				// }
+				else 
+					printf("4 value of rev: %d\n", rev);
 			}
 			// print_queue(args->queue);
 			i++;

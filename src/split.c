@@ -1,9 +1,21 @@
 #include "lem_in.h"
 
-int		check_split(char **split)
+int		check_split(char **s)
 {
-	return (split[0][0] != 'L' && ft_isint(split[1])
-			&& ft_isint(split[2]));
+	if (s[1] && ft_strlen(s[1]) >= 10)
+	{
+		if (ft_strlen(s[1]) > 11 || ft_atoll(s[1]) > INT_MAX || ft_atoll(s[1]) < INT_MIN)
+			return (0);
+	}
+	if (s[2] && ft_strlen(s[2]) >= 10)
+	{
+		if (ft_strlen(s[2]) > 11 || ft_atoll(s[2]) > INT_MAX || ft_atoll(s[2]) < INT_MIN)
+		{
+			return (0);
+		}
+	}
+	return (s[0][0] && ft_isint(s[1])
+			&& ft_isint(s[2]));
 }
 
 int		split_count(char **split)

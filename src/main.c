@@ -28,14 +28,18 @@ static int		init_data(t_data *data)
 static void		lem_in(t_data *data)
 {
 	char *map;
+	int max_bfs;
 
+	max_bfs = 0;
 	map = NULL;
 	if (check_parsing(*data))
 	{
 		printf("done parsing\n");
 		swap_source(data);
 		map = stringify(data);
-		algo(&map, ft_sqrt(ft_strlen(map)), data->ants);
+		max_bfs = get_max_bfs(data->source, data->sink, data->ants, data->edges);
+		printf("max_bfs : %d\n", max_bfs);
+		algo(&map, ft_sqrt(ft_strlen(map)), max_bfs);
 		printf("done algo\n");
 		if (data->flag & MAP)
 			print_map(map);
@@ -43,7 +47,7 @@ static void		lem_in(t_data *data)
 		ft_memdel((void**)&map);
 	}
 	else
-		write(1, "Error\n", 5);
+		write(1, "ERROR\n", 6);
 }
 
 static int		get_flags(t_data *data, char *flag)

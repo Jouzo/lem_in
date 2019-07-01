@@ -58,6 +58,7 @@ int		find_forbidden(char *map, int v, int size)
 	int val2;
 
 	get_adj_vertice(map, v, size, &val1, &val2);
+	printf("forbidden: %d\n", find_source(map, val1, v, size) ? val2 : val1);
 	return (find_source(map, val1, v, size) ? val2 : val1);	
 }
 
@@ -89,5 +90,3 @@ int		check_map(int u, int v, t_args *args, int stage, int *path)
 		// printf("here u: %d  v: %d\n", u, v);
 	return (-1);
 }
-
-// int check_forbidden(char **map, int )
