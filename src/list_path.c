@@ -20,7 +20,7 @@ int			push_vertex(t_path **head, int vertex)
 	while (tmp->next)
 		tmp = tmp->next;
 	if (!(tmp->next = init_path(vertex)))
-		return (-1);
+		return (0);
 	return (1);
 }
 
