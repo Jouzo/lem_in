@@ -6,14 +6,14 @@ void	swap_source(t_data *data)
 	t_vertices *tmp;
 	t_vertices *prev;
 
-	if (!data->source || ft_strcmp(data->source, data->vertices->name) == 0
+	if (!data->source || !ft_strcmp(data->source, data->vertices->name)
 			|| !data->vertices->next)
 		return ;
 	prev = data->vertices;
 	tmp = data->vertices->next;
 	while (tmp)
 	{
-		if (ft_strcmp(data->source, tmp->name) == 0)
+		if (!ft_strcmp(data->source, tmp->name))
 		{
 			tmp_source = tmp;
 			prev->next = tmp->next;
@@ -27,6 +27,8 @@ void	swap_source(t_data *data)
 
 int		get_source(t_data *data, char **split)
 {
+	if (data->sink && !ft_strcmp(data->sink, split[0]))
+		return (-1);
 	if (!data->vertices)
 	{
 		if (!(data->vertices = new_vertex(split[0],
@@ -49,6 +51,8 @@ int		get_sink(t_data *data, char **split)
 	t_vertices *new;
 
 	new = NULL;
+	if (data->source && !ft_strcmp(data->source, split[0]))
+		return (-1);
 	if (!data->vertices)
 	{
 		if (!(data->vertices = new_vertex(split[0],
@@ -64,7 +68,8 @@ int		get_sink(t_data *data, char **split)
 						ft_atoi(split[1]), ft_atoi(split[2]))))
 			return (-1);
 	}
-	data->sink = ft_strdup(split[0]);
+	if (!(data->sink = ft_strdup(split[0])))
+		return (-1);
 	return (1);
 }
 

@@ -22,10 +22,8 @@ int				check_vertices_name(t_vertices *head, char *name)
 	current = head;
 	while (current != NULL)
 	{
-		if (ft_strcmp(current->name, name) == 0)
-		{
+		if (!ft_strcmp(current->name, name))
 			return (-1);
-		}
 		current = current->next;
 	}
 	return (1);

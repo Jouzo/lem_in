@@ -7,13 +7,13 @@ int				check_existing_edges(t_edges *head, char *from, char *to)
 	current = head;
 	while (current != NULL)
 	{
-		if (ft_strcmp(current->from, from) == 0
-				&& ft_strcmp(current->to, to) == 0)
+		if (!ft_strcmp(current->from, from)
+				&& !ft_strcmp(current->to, to))
 		{
 			return (-1);
 		}
-		if (ft_strcmp(current->from, to) == 0
-				&& ft_strcmp(current->to, from) == 0)
+		if (!ft_strcmp(current->from, to)
+				&& !ft_strcmp(current->to, from))
 		{
 			return (-1);
 		}
@@ -31,8 +31,8 @@ int				check_edges_name(t_vertices *head, char *from, char *to)
 	current = head;
 	while (current != NULL)
 	{
-		if (ft_strcmp(current->name, from) == 0
-				|| ft_strcmp(current->name, to) == 0)
+		if (!ft_strcmp(current->name, from)
+				|| !ft_strcmp(current->name, to))
 		{
 			ret++;
 		}
