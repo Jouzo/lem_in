@@ -4,7 +4,7 @@ int		parse_ants(t_data *data, char *s)
 {
 	if (strcmp(s, "0") == 0)
 		return (0);
-	else if (atoi(s) <= 0)
+	else if (ft_atoll(s) <= 0)
 		return (-1);
 	else
 	{
