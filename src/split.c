@@ -10,11 +10,9 @@ int		check_split(char **s)
 	if (s[2] && ft_strlen(s[2]) >= 10)
 	{
 		if (ft_strlen(s[2]) > 11 || ft_atoll(s[2]) > INT_MAX || ft_atoll(s[2]) < INT_MIN)
-		{
 			return (0);
-		}
 	}
-	return (s[0][0] && ft_isint(s[1])
+	return (s[0][0] != 'L' && ft_isint(s[1])
 			&& ft_isint(s[2]));
 }
 
