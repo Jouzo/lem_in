@@ -66,18 +66,18 @@ int		split_arg(t_data *data, char *s, char ***split)
 	if (s[i] == ' ' && count_spaces(s))
 	{
 		if (data->set_vertices != 0)
-			return (-1);
+			return (0);
 		*split = ft_strsplit(s, ' ');
 		return (1);
 	}
 	else if (s[i] == '-' && count_dash(s))
 	{
 		if (!data->vertices)
-			return (-1);
+			return (0);
 		*split = ft_strsplit(s, '-');
 		data->set_vertices = 1;
 		return (2);
 	}
 	else
-		return (-1);
+		return (0);
 }

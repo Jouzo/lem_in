@@ -1,26 +1,26 @@
 #include "lem_in.h"
 
-int				check_existing_edges(t_edges *head, char *from, char *to)
-{
-	t_edges *current;
+// int				check_existing_edges(t_edges *head, char *from, char *to)
+// {
+// 	t_edges *current;
 
-	current = head;
-	while (current != NULL)
-	{
-		if (!ft_strcmp(current->from, from)
-				&& !ft_strcmp(current->to, to))
-		{
-			return (-1);
-		}
-		if (!ft_strcmp(current->from, to)
-				&& !ft_strcmp(current->to, from))
-		{
-			return (-1);
-		}
-		current = current->next;
-	}
-	return (1);
-}
+// 	current = head;
+// 	while (current != NULL)
+// 	{
+// 		if (!ft_strcmp(current->from, from)
+// 				&& !ft_strcmp(current->to, to))
+// 		{
+// 			return (0);
+// 		}
+// 		if (!ft_strcmp(current->from, to)
+// 				&& !ft_strcmp(current->to, from))
+// 		{
+// 			return (0);
+// 		}
+// 		current = current->next;
+// 	}
+// 	return (1);
+// }
 
 int				check_edges_name(t_vertices *head, char *from, char *to)
 {
@@ -44,7 +44,7 @@ int				check_edges_name(t_vertices *head, char *from, char *to)
 	}
 	else
 	{
-		return (-1);
+		return (0);
 	}
 }
 
@@ -77,7 +77,7 @@ int				add_edge(t_edges **head, char *from, char *to)
 	t_edges *new;
 
 	if (!(new = new_edge(from, to)))
-		return (-1);
+		return (0);
 	new->next = *head;
 	*head = new;
 	return (1);

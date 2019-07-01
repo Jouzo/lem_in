@@ -23,7 +23,7 @@ int				check_vertices_name(t_vertices *head, char *name)
 	while (current != NULL)
 	{
 		if (!ft_strcmp(current->name, name))
-			return (-1);
+			return (0);
 		current = current->next;
 	}
 	return (1);
@@ -53,7 +53,7 @@ int				add_vertex(t_vertices **head, char *name, int x, int y)
 	t_vertices *new;
 
 	if (!(new = new_vertex(name, x, y)))
-		return (-1);
+		return (0);
 	new->next = *head;
 	*head = new;
 	return (1);

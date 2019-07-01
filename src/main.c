@@ -17,7 +17,7 @@ static int		init_data(t_data *data)
 			return (-1);
 		if (!(data->flag & QUIET))
 			ft_putendl(line);
-		if ((ret = parse(data, line)) <= 0)
+		if (!(ret = parse(data, line)))
 		{
 			ft_memdel((void**)&line);
 			return (ret);

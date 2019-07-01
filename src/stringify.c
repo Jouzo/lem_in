@@ -40,7 +40,7 @@ int		assign(t_edges *edge, t_vertices *vertice, char **s, int size)
 
 	split = NULL;
 	if (!(split = split_vertices(vertice)))
-		return (-1);
+		return (0);
 	tmp = edge;
 	while (tmp)
 	{
@@ -63,7 +63,7 @@ char	*stringify(t_data *data)
 	if (!(s = ft_strnew(sizeof(char) * size * size)))
 		return (NULL);
 	ft_memset(s, '0', size * size);
-	if (assign(data->edges, data->vertices, &s, size) == -1)
+	if (!assign(data->edges, data->vertices, &s, size))
 		return (NULL);
 	// print_map(s);
 	return (s);
