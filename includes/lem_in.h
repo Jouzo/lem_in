@@ -13,6 +13,7 @@
 # define QUIET 1 << 0
 # define COLOR 1 << 1
 # define MAP 1 << 2
+# define NAME 1 << 3
 
 /*
 *****************************************
@@ -158,7 +159,7 @@ t_path						*find_path(t_args *args, int stage, char **map);
 t_path						*get_path(int *path, t_queue queue,
 										char *edges, char **map);
 
-void						print_map(char *s);
+void						print_map(char *s, t_data *data);
 void						go_reverse(int vertex, int i);
 void						check_reverse(t_args *args, int vertex, char **map);
 

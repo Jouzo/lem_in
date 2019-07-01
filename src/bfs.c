@@ -27,7 +27,7 @@ int				get_max_bfs(char *source, char *sink, int ants, t_edges *edges)
 			j++;
 		tmp = tmp->next;
 	}
-	if (i == 0 && j == 0)
+	if (i == 0 || j == 0)
 		return (0);
 	if (i <= j && i <= ants)
 		return (i);

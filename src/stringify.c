@@ -14,7 +14,7 @@ void	get_coordinates(t_edges *edge, char **split, int *x, int *y)
 	while (*x < size)
 	{
 		if (!ft_strcmp(split[*x], edge->from)
-			|| !ft_strcmp(split[*x], edge->to))
+				|| !ft_strcmp(split[*x], edge->to))
 		{
 			(*y)++;
 			break ;
@@ -25,7 +25,7 @@ void	get_coordinates(t_edges *edge, char **split, int *x, int *y)
 	while (*y < size)
 	{
 		if (!ft_strcmp(split[*y], edge->from)
-			|| !ft_strcmp(split[*y], edge->to))
+				|| !ft_strcmp(split[*y], edge->to))
 			break ;
 		(*y)++;
 	}

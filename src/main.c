@@ -33,7 +33,7 @@ static void		lem_in(t_data *data)
 	int max_bfs;
 
 	max_bfs = 0;
-	map = NULL;
+	map = NULL;	
 	if (check_parsing(*data))
 	{
 		// printf("done parsing\n");
@@ -45,10 +45,9 @@ static void		lem_in(t_data *data)
 			return ;
 		}
 		algo(&map, ft_sqrt(ft_strlen(map)), data->ants);
-		
 		// printf("done algo\n");
 		if (data->flag & MAP)
-			print_map(map);
+			print_map(map, data);
 		output(map, data);
 		ft_memdel((void**)&map);
 	}
@@ -71,6 +70,8 @@ static int		get_flags(t_data *data, char *flag)
 			data->flag |= COLOR;
 		else if (flag[i] == 'm')
 			data->flag |= MAP;
+		else if (flag[i] == 'n')
+			data->flag |= NAME;
 		else
 			return (-1);
 		i++;
@@ -87,7 +88,7 @@ int				main(int ac, char **av)
 	{
 		if (get_flags(&data, av[1]) < 0 || ac > 2)
 		{
-			write(1, "usage: ./lem-in [-cmv] < a lem_in map\n", 38);
+			write(1, "usage: ./lem-in [-cmnv] < a lem_in map\n", 39);
 			return (-1);
 		}
 	}

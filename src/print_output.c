@@ -45,7 +45,7 @@ static int		formatted_output(char *vertex, int ant)
 }
 
 static void		print_ants_in_path(t_flow *flow,
-					char **vertices, int ant, int *ants)
+		char **vertices, int ant, int *ants)
 {
 	t_path	*tmp;
 	int		size;
@@ -74,7 +74,7 @@ static void		print_ants_in_path(t_flow *flow,
 }
 
 void			print_output(char **vertices, t_flow *flow,
-								int ants, int color)
+		int ants, int color)
 {
 	t_flow	*tmp;
 	int		i;
@@ -85,6 +85,7 @@ void			print_output(char **vertices, t_flow *flow,
 	i = 1;
 	while (ants)
 	{
+		printf("in print output\n");
 		tmp = flow;
 		while (tmp && ants)
 		{

@@ -30,13 +30,13 @@ int		parse_vertices(t_data *data, char **split)
 		if (!data->vertices)
 		{
 			if (!(data->vertices = new_vertex(split[0],
-				ft_atoi(split[1]), ft_atoi(split[2]))))
+							ft_atoi(split[1]), ft_atoi(split[2]))))
 				return (free_split(split, -1));
 		}
 		else
 		{
 			if (add_vertex(&data->vertices, split[0],
-				ft_atoi(split[1]), ft_atoi(split[2])) == -1)
+						ft_atoi(split[1]), ft_atoi(split[2])) == -1)
 				return (free_split(split, -1));
 		}
 		return (free_split(split, 1));

@@ -45,7 +45,7 @@ int		find_previous(char **map, int v, int size, int u)
 	int val1;
 	int val2;
 	(void)u;
-	
+
 	get_adj_vertice(map, v, size, &val1, &val2);
 	if (u == val1 || u == val2)
 		return (-1);
@@ -71,7 +71,7 @@ int		check_map(char **map, int u, int v, t_args *args, int stage, int *path)
 
 	i = 0;
 	size = ft_sqrt(ft_strlen(*map));
-		// printf("here u: %d  v: %d\n", u, v);
+	// printf("here u: %d  v: %d\n", u, v);
 	if (u == size - 1 || v == size - 1 || stage == 0 || u == 0 || v == 0) {
 		return (-1);
 	}
@@ -82,11 +82,11 @@ int		check_map(char **map, int u, int v, t_args *args, int stage, int *path)
 			// printf("find_previous of %d, return value: %d\n", v, find_previous(map, v, size));
 			// printf("--------------%d\n", i);
 			// printf("find previous: %d  find forbidden: %d\n", find_previous(map, v, size, path[v]), find_forbidden(map, v, size));
-            return (find_previous(map, v, size, path[v]));
+			return (find_previous(map, v, size, path[v]));
 		}
 		i++;
 	}
-		// printf("here u: %d  v: %d\n", u, v);
+	// printf("here u: %d  v: %d\n", u, v);
 	return (-1);
 }
 

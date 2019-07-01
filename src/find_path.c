@@ -21,7 +21,7 @@ t_path	*get_path(int *path, t_queue queue, char *edges, char **map)
 			(*map)[path[u] * queue.capacity + u] = '0';
 			(*map)[u * queue.capacity + path[u]] = '0';
 		}
-	// printf("value of u: %d, path[u]: %d\n", u, path[u]);
+		// printf("value of u: %d, path[u]: %d\n", u, path[u]);
 		u = path[u];
 		push_vertex(&aug_path, u);
 	}
@@ -63,7 +63,7 @@ t_path	*find_path(t_args *args, int stage, char **map)
 		while (i < args->queue.capacity)
 		{
 			if (args->edges[vertex * args->queue.capacity + i] > '0'
-			&& check_available(args->state, i))
+					&& check_available(args->state, i))
 			{
 				// printf("\n\n");
 				// printf("value de i: %d, vertex: %d value in map: %c\n", i, vertex, args->edges[vertex * args->queue.capacity + i]);
@@ -121,7 +121,7 @@ t_path	*find_path(t_args *args, int stage, char **map)
 						return (get_path(path, args->queue, args->edges, map));
 				}
 				// else 
-					// printf("4\n");
+				// printf("4\n");
 			}
 			// print_queue(args->queue);
 			i++;

@@ -1,6 +1,25 @@
 #include "lem_in.h"
 
-void			print_map(char *s)
+static void		print_vertices_name(t_vertices *head)
+{
+	char **split;
+	int i;
+
+	i = 0;
+	split = split_vertices(head);
+	while (split[i])
+	{
+		write(1, "Vertices nb : ", 14);
+		ft_putnbr(i);
+		write(1, ", name : ", 9);
+		write(1, split[i], ft_strlen(split[i]));
+		write(1, "\n", 1);
+		i++;
+	}
+	write(1, "\n", 1);
+}
+
+void			print_map(char *s, t_data *data)
 {
 	int		i;
 	int		size;
@@ -10,6 +29,8 @@ void			print_map(char *s)
 	ft_putchar('\n');
 	write(1, "---------- LEM IN MAP ----------\n", 33);
 	ft_putchar('\n');
+	if (data->flag & NAME)
+		print_vertices_name(data->vertices);
 	while (i < size * size)
 	{
 		if (s[i] == '1')
