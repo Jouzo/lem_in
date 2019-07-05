@@ -18,7 +18,7 @@ t_queue		create_queue(int nb_vertices)
 	queue.size = 0;
 	queue.rear = 0;
 	queue.capacity = nb_vertices;
-	queue.vertices = malloc(nb_vertices * sizeof(int));
+	queue.vertices = ft_memalloc(nb_vertices * sizeof(int) + 1);
 	return (queue);
 }
 

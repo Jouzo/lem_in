@@ -31,6 +31,10 @@ void			print_map(char *s, t_data *data)
 	ft_putchar('\n');
 	if (data->flag & NAME)
 		print_vertices_name(data->vertices);
+	while (i < size)
+	{
+		printf("%d ", i++);	
+	}
 	while (i < size * size)
 	{
 		if (s[i] == '1')

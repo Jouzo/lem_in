@@ -14,6 +14,10 @@
 # define COLOR 1 << 1
 # define MAP 1 << 2
 # define NAME 1 << 3
+# define SOURCE 1 << 0
+# define SINK 1 << 1
+# define VERTICES 1 << 2
+# define DASH 1 << 3
 
 /*
 *****************************************
@@ -39,9 +43,7 @@ typedef struct				s_edges
 typedef struct				s_data
 {
 	int						ants;
-	int						set_source;
-	int						set_sink;
-	int						set_vertices;
+	char					info;
 	char					*source;
 	char					*sink;
 	int						flag;
@@ -191,6 +193,7 @@ int							check_edges_name(t_vertices *head,
 								char *from, char *to);
 void						swap_source(t_data *data);
 
+
 /*
 **  Free functions
 */
@@ -236,5 +239,7 @@ void						print_output(char **vertices,
 int     check_map(int u, int v, t_args *args, int stage, int *path);
 void print_queue(t_queue queue);
 int		find_forbidden(char *map, int v, int size);
+void			print_vertices(t_vertices *head);
+
 
 #endif

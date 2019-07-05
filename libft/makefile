@@ -6,7 +6,7 @@
 #    By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 18:10:13 by jdescler          #+#    #+#              #
-#    Updated: 2019/06/30 21:05:48 by jdescler         ###   ########.fr        #
+#    Updated: 2019/07/01 17:34:44 by jdescler         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRCS_NAMES = 		ft_abs.c\
 	   				ft_isalpha.c\
 	   				ft_isascii.c\
 	   				ft_isdigit.c\
+	   				ft_isspace.c\
 	   				ft_isprint.c\
 	   				ft_isint.c\
 	   				ft_itoa.c\
@@ -59,7 +60,7 @@ SRCS_NAMES = 		ft_abs.c\
 	   				ft_strcpy.c\
 	   				ft_strdel.c\
 	   				ft_strdup.c\
-	   				ft_strdup_until.c\
+	   				ft_strndup.c\
 	   				ft_strequ.c\
 	   				ft_striter.c\
 	   				ft_striteri.c\

@@ -65,6 +65,5 @@ char	*stringify(t_data *data)
 	ft_memset(s, '0', size * size);
 	if (!assign(data->edges, data->vertices, &s, size))
 		return (NULL);
-	// print_map(s);
 	return (s);
 }

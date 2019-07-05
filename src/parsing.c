@@ -2,23 +2,16 @@
 
 int		parse_ants(t_data *data, char *s)
 {
-	if (strcmp(s, "0") == 0)
-		return (0);
-	else if (ft_atoll(s) <= 0)
-		return (0);
+	if (ft_isint(s))
+	{
+		if (ft_atoll(s) <= 0 || ft_atoll(s) > INT_MAX)
+			return (0);
+		data->ants = atoi(s);
+		return (1);
+	}
 	else
 	{
-		if (ft_isint(s))
-		{
-			if (ft_atoll(s) > INT_MAX)
-				return (0);
-			data->ants = atoi(s);
-			return (1);
-		}
-		else
-		{
-			return (0);
-		}
+		return (0);
 	}
 }
 
@@ -79,19 +72,18 @@ int		parse_ve(t_data *data, char *s)
 		return (parse_edges(data, split));
 	else
 		return (free_split(split, 0));
-	return (1);
 }
 
 int		parse(t_data *data, char *s)
 {
 	if (s[0] == '#')
 		return (check_hash(data, s));
-	else if (data->set_source == 1 && !data->source)
+	else if (data->info & SOURCE && !data->source)
 	{
 		if (!get_source_sink(data, s, 1))
 			return (0);
 	}
-	else if (data->set_sink == 1 && !data->sink)
+	else if (data->info & SINK && !data->sink)
 	{
 		if (!get_source_sink(data, s, 0))
 			return (0);

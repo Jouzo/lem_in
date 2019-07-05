@@ -56,28 +56,66 @@ int		count_dash(char *s)
 	return (count == 1);
 }
 
+int		get_edge(char *s, char ***split, t_vertices *head)
+{
+	int i;
+	char *tmp;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == '-')
+		{
+			if (!(tmp = ft_strndup(s, i)))
+				return (0);
+			if (!(check_vertices_name(head, tmp)))
+			{
+				if (!(*split = ft_memalloc(sizeof(char*) * 3)))
+					return (0);
+				if (!((*split)[0] = ft_strdup(tmp))
+					|| !((*split)[1] = ft_strdup(s + i + 1)))
+					return (0);
+				ft_memdel((void**)&tmp);
+				return (2);
+			}
+			ft_memdel((void**)&tmp);
+		}
+		i++;
+	}
+	return (0);
+}
+
+int		get_vertex(char *s, char ***split, char *info)
+{
+		if (*info & VERTICES)
+			return (0);
+		*split = ft_strsplit(s, ' ');
+		if (ft_strchr(*split[0], '-'))
+			*info |= DASH;
+		return (1);
+}
+
 int		split_arg(t_data *data, char *s, char ***split)
 {
 	int i;
 
 	i = 0;
-	while (s[i] && s[i] != ' ' && s[i] != '-')
+	while (s[i] && s[i] != ' ')
 		i++;
 	if (s[i] == ' ' && count_spaces(s))
 	{
-		if (data->set_vertices != 0)
-			return (0);
-		*split = ft_strsplit(s, ' ');
-		return (1);
+		return get_vertex(s, split, &(data->info));
 	}
-	else if (s[i] == '-' && count_dash(s))
+	else if (count_dash(s))
 	{
 		if (!data->vertices)
 			return (0);
 		*split = ft_strsplit(s, '-');
-		data->set_vertices = 1;
+		data->info |= VERTICES;
 		return (2);
 	}
+	else if (data->info & DASH)
+		return (get_edge(s, split, data->vertices));
 	else
 		return (0);
 }

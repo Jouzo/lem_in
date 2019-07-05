@@ -85,7 +85,6 @@ void			print_output(char **vertices, t_flow *flow,
 	i = 1;
 	while (ants)
 	{
-		printf("in print output\n");
 		tmp = flow;
 		while (tmp && ants)
 		{

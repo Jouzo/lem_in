@@ -90,7 +90,7 @@ void			print_edges(t_edges *head)
 	current = head;
 	while (current != NULL)
 	{
-		// printf("edge from : %s to: %s\n", current->from, current->to);
+		printf("edge from : %s to: %s\n", current->from, current->to);
 		current = current->next;
 	}
 }

@@ -5,6 +5,17 @@ static int		check_parsing(t_data data)
 	return (data.source && data.sink && data.ants && data.edges);
 }
 
+void   print_data(t_data *data)
+{
+       printf("current state :\n");
+       printf("source : %s\nsink : %s\nants : %d\n", data->source, data->sink, data->ants);
+       if (data->vertices)
+               print_vertices(data->vertices);
+    //    printf("Edges :\n");
+    //    if (data->edges)
+    //            print_edges(data->edges);
+}
+
 static int		init_data(t_data *data)
 {
 	char	*line;
@@ -36,22 +47,26 @@ static void		lem_in(t_data *data)
 	map = NULL;	
 	if (check_parsing(*data))
 	{
-		// printf("done parsing\n");
+		printf("done parsing\n");
 		swap_source(data);
-		if (!(map = stringify(data))|| (!(max_bfs = get_max_bfs(data->source, data->sink, data->ants, data->edges))))
+		exit(0);
+		if ((!(max_bfs = get_max_bfs(data->source, data->sink, data->ants, data->edges)) || !(map = stringify(data))))
 		{
-			write(1, "ERROR\n", 6);
+			write(2, "ERROR\n", 6);
 			return ;
 		}
+		print_data(data);
+		// printf("max_bfs : %d\n", max_bfs);
+		// print_map(map, data);
 		algo(&map, ft_sqrt(ft_strlen(map)), data->ants);
-		// printf("done algo\n");
+		printf("done algo\n");
 		if (data->flag & MAP)
 			print_map(map, data);
 		output(map, data);
 		ft_memdel((void**)&map);
 	}
 	else
-		write(1, "ERROR\n", 6);
+		write(2, "ERROR\n", 6);
 }
 
 static int		get_flags(t_data *data, char *flag)

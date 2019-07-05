@@ -6,7 +6,7 @@
 /*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 16:59:15 by jdescler          #+#    #+#             */
-/*   Updated: 2019/05/24 11:22:57 by jdescler         ###   ########.fr       */
+/*   Updated: 2019/07/01 17:40:47 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 char				*ft_strrev(char *s);
 char				*ft_strdup(const char *s1);
-char				*ft_strdup_until(const char *s1, int len);
+char				*ft_strndup(const char *s1, int len);
 size_t				ft_strlen(char const *s);
 char				*ft_strtolower(char *str);
 char				*ft_strtoupper(char *str);
@@ -130,6 +130,7 @@ int					ft_isdigit(int c);
 int					ft_isprint(int c);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
+int					ft_isspace(const char c);
 
 /*
  ** GNL

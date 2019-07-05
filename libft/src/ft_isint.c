@@ -6,7 +6,7 @@
 /*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 20:54:44 by jdescler          #+#    #+#             */
-/*   Updated: 2019/06/30 17:01:46 by jdescler         ###   ########.fr       */
+/*   Updated: 2019/07/01 16:19:07 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		ft_isint(char *s)
 		return (0);
 	while (s[i])
 	{
-		if (s[0] == '-')
+		if (s[0] == '-' || s[0] == '+')
 			i++;
 		if (!ft_isdigit(s[i]))
 			break ;

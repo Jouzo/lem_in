@@ -87,11 +87,9 @@ int				get_one_path(int start, t_flow **flow, char *map)
 
 	path = NULL;
 	size_path = find_source(map, start, 0, &path);
-	printf("seg\n");
 	if (!(*flow))
 		*flow = new_flow(path, size_path);
 	else
 		add_flow(flow, new_flow(path, size_path));
-	printf("seg2\n");
 	return (1);
 }

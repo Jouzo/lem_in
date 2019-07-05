@@ -54,9 +54,7 @@ int			output(char *map, t_data *data)
 	if (!(split = split_vertices(data->vertices)))
 		return (-1);
 	// print_map(map);
-	printf("here\n");
 	parse_map(map, size, &flow);
-	printf("here2\n");
 	if (get_ants_per_path(flow, data->ants, nb_path) == -1)
 		return (-1);
 	// print_flow(flow);

@@ -36,7 +36,7 @@ SRCS = $(addprefix $(SRCDIR)/,$(SRCS_NAMES))
 OBJS = $(addprefix $(OBJDIR)/,$(OBJS_NAMES))
 
 CC = gcc 
-CFLAGS = -O2 -g -Wall -Werror -Wextra
+CFLAGS = -g -Wall -Werror -Wextra
 
 LIBFT = libft/libft.a 
 
