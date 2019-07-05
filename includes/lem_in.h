@@ -235,4 +235,10 @@ int     check_map(int u, int v, t_args *args, int stage, int *path);
 void print_queue(t_queue queue);
 int		find_forbidden(char *map, int v, int size);
 
+
+
+// TO DELETE
+
+int		check_mapforbidden(int u, int v, t_args *args, int stage, int *path);
+
 #endif

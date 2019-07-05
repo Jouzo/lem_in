@@ -47,6 +47,11 @@ void	reinit_args(t_args *args)
 	args->queue.rear = 0;
 }
 
+/*
+in the matrix, check if there is more than two '2 in the line
+which means the paths found are invlalid
+*/
+
 void	check_line(char *map)
 {
 	int size;
