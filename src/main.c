@@ -49,7 +49,7 @@ static void		lem_in(t_data *data)
 	{
 		printf("done parsing\n");
 		swap_source(data);
-		exit(0);
+		// exit(0);
 		if ((!(max_bfs = get_max_bfs(data->source, data->sink, data->ants, data->edges)) || !(map = stringify(data))))
 		{
 			write(2, "ERROR\n", 6);

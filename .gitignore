@@ -60,3 +60,9 @@ lem-in-checker
 # Log files
 
 *.log
+
+# Map files
+
+test*
+
+test/
