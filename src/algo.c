@@ -32,7 +32,7 @@ t_args	*init_args(int nb_vertices, char **edges)
 		return (NULL);
 	if (!(args->state = ft_strnew(nb_vertices)))
 		return (NULL);
-	ft_memset(args->state, '1', nb_vertices);
+	ft_memset(args->state, INITIAL, nb_vertices);
 	args->edges = *edges;
 	args->queue = create_queue(nb_vertices);
 	return (args);
@@ -40,7 +40,7 @@ t_args	*init_args(int nb_vertices, char **edges)
 
 void	reinit_args(t_args *args)
 {
-	ft_memset(args->state, '1', strlen(args->state));
+	ft_memset(args->state, INITIAL, strlen(args->state));
 	ft_bzero(args->queue.vertices, sizeof(int) * ft_strlen(args->state));
 	args->queue.front = 0;
 	args->queue.size = 0;
@@ -67,10 +67,10 @@ void	check_line(char *map)
 		count = 0;
 		while (j < size)
 		{
-			if (map[i * size + j] == '2')
+			if (map[i * size + j] == TAKEN)
 				count++;
-			if (count > 2 && i != 0 && i != size - 1)
-				printf("\n\n\n%.*s\n\n\n", size, map + i * size);
+			// if (count > 2 && i != 0 && i != size - 1)
+			// 	printf("\n\n\n%.*s\n\n\n", size, map + i * size);
 			j++;
 		}
 		i++;
@@ -94,6 +94,7 @@ void	algo(char **edges, int nb_vertices, int max_bfs)
 		else
 			add_flow(&flow, new_flow(path, 0));
 		// print_path(path);
+		print_map(*edges);
 		count++;
 		check_line(*edges);
 	}

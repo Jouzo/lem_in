@@ -10,6 +10,8 @@
 # define INITIAL 1
 # define WAITING 2
 # define VISITED 3
+# define LINK 49
+# define TAKEN 50
 # define QUIET 1 << 0
 # define COLOR 1 << 1
 # define MAP 1 << 2
@@ -136,8 +138,6 @@ int							check_flow(int *path, int vertex, t_flow *flow,
 int							check_available(char *state, int vertex);
 void						change_state(char **state, int vertex,
 											int new_state);
-int							get_path_size(int *path, int sink,
-											int vertex_source);
 int							get_max_bfs(char *source, char *sink,
 									int ants, t_edges *edges);
 
@@ -240,5 +240,7 @@ int		find_forbidden(char *map, int v, int size);
 // TO DELETE
 
 int		check_mapforbidden(int u, int v, t_args *args, int stage, int *path);
+
+int		find_previous(char *map, int v, int size, int u);
 
 #endif

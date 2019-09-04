@@ -2,12 +2,12 @@
 
 void			change_state(char **state, int vertex, int new_state)
 {
-	(*state)[vertex] = new_state + 48;
+	(*state)[vertex] = new_state;
 }
 
 int				check_available(char *state, int vertex)
 {
-	return (state[vertex] == '1');
+	return (state[vertex] == INITIAL);
 }
 
 int				get_max_bfs(char *source, char *sink, int ants, t_edges *edges)

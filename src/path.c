@@ -9,7 +9,7 @@ int				number_of_path(char *map, int size)
 	count = 0;
 	while (i < size)
 	{
-		if (map[i] == '2')
+		if (map[i] == TAKEN)
 			count++;
 		i++;
 	}
@@ -23,7 +23,7 @@ int				first_path(char *map, int size)
 	i = 0;
 	while (i < size)
 	{
-		if (map[i] == '2')
+		if (map[i] == TAKEN)
 			return (i);
 		i++;
 	}
@@ -39,6 +39,7 @@ static int		find_source(char *map, int u, int v, t_path **path)
 
 	tmp = 0;
 	size = ft_sqrt(ft_strlen(map));
+
 	if (u == size - 1)
 	{
 		tmp = size_path;
@@ -49,7 +50,7 @@ static int		find_source(char *map, int u, int v, t_path **path)
 	i = 0;
 	while (i < size)
 	{
-		if (map[size * u + i] == '2' && i != v)
+		if (map[size * u + i] == TAKEN && i != v)
 		{
 			size_path++;
 			if (!(*path))
