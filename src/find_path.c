@@ -4,8 +4,8 @@ void	update_map(t_args *args, int u, int v)
 {
 	// if (args->edges[u * args->queue.capacity + v] == TAKEN)
 	// {
-	// 	args->edges[u * args->queue.capacity + v] = '0';
-	// 	args->edges[v * args->queue.capacity + u] = '0';
+	// 	args->edges[u * args->queue.capacity + v] = LINK;
+	// 	args->edges[v * args->queue.capacity + u] = LINK;
 	// }
 	// else
 	// {
@@ -36,7 +36,14 @@ t_path	*get_path(int *path, t_args *args)
 		push_vertex(&aug_path, u);
 	}
 	ft_memdel((void**)&path);
+	print_path(aug_path);
 	return (aug_path);
+}
+
+bool	check_used_link(t_args *args, int vertex, int i)
+{
+	// printf("IN CHECK_LINK %d AND RET VAL: %d\n", args->edges[vertex * args->queue.capacity + i], args->edges[vertex * args->queue.capacity + i] == LINK);
+	return (args->edges[vertex * args->queue.capacity + i] == TAKEN);
 }
 
 bool	check_link(t_args *args, int vertex, int i)
@@ -57,7 +64,10 @@ void	print_state(t_args *args)
 		printf("%d\n", args->state[i]);
 }
 
-bool	check_line2(t_args *args, int vertex)
+/*
+check que le vertex n'est pas TAKEN
+*/
+bool	check_taken(t_args *args, int vertex)
 {
 	int i;
 	int size;
@@ -75,12 +85,36 @@ bool	check_line2(t_args *args, int vertex)
 	return (1);
 }
 
+// int		find_prev(int u, int v, t_args *args)
+// {
+
+// }
+
+int		check_test(int vertex, t_args *args)
+{
+	int i;
+	int size;
+
+	i = 0;
+	size = args->queue.capacity;
+	if (vertex == size - 1 || vertex == 0)
+		return (0);
+	while (i < size)
+	{
+		if (args->edges[vertex + (size * i)] == TAKEN)
+			return (find_previous(args->edges, vertex, size, i));
+		i++;
+	}
+	return (0);
+}
+
 t_path	*find_path(t_args *args, int stage)
 {
 	int vertex;
 	int *path;
-	int i;
+	int to;
 	(void)stage;
+	int rev;
 
 	if (!(path = ft_memalloc(args->queue.capacity * sizeof(int))))
 		return (NULL);
@@ -88,26 +122,33 @@ t_path	*find_path(t_args *args, int stage)
 	{
 		vertex = dequeue(&args->queue);
 		change_state(&args->state, vertex, VISITED);
-		i = 1;
-		while (i < args->queue.capacity)
+		to = 1;
+		while (to < args->queue.capacity)
 		{
-			if (check_link(args, vertex, i) && check_available(args->state, i) && check_line2(args, i))
+			if (check_link(args, vertex, to) && check_available(args->state, to) && (rev = check_test(to, args)))
 			{
-				printf("%s\n", "=-=-=-+++++____+++");
-				printf("check link: %d\n", check_link(args, vertex, i));
-				printf("vertex: %d\n", vertex);
-				printf("i: %d\n", i);
-				printf("check line: %d\n\n", check_line2(args, i));
-				path[i] = vertex;
-				enqueue(&args->queue, i);
-				change_state(&args->state, i, WAITING);
-				if (check_end(args, vertex, i))
-				{
-					printf("%s\n", "00000000");
-					return (get_path(path, args));
-				}
+				printf("rev : %d , vertex: %d, to: %d\n", rev, vertex, to);
+				path[to] = vertex;
+				enqueue(&args->queue, to);
+				change_state(&args->state, to, WAITING);
+				
+				// path[rev] = to;
+				
+				// enqueue(&args->queue, rev);
+				
+				// change_state(&args->state, rev, WAITING);
+				
+				break;
 			}
-			i++;
+			else if (check_link(args, vertex, to) && check_available(args->state, to) && check_taken(args, to))
+			{
+				path[to] = vertex;
+				enqueue(&args->queue, to);
+				change_state(&args->state, to, WAITING);
+				if (check_end(args, vertex, to))
+					return (get_path(path, args));
+			}
+			to++;
 		}
 	}
 	return (get_path(path, args));

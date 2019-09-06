@@ -35,7 +35,7 @@ void		print_path(t_path *head)
 	while (current != NULL)
 	{
 		printf("vertex to the source: %d\n", current->vertex);
-		printf("ant no: %d\n", current->ant);
+		// printf("ant no: %d\n", current->ant);
 		current = current->next;
 	}
 	printf("\n");

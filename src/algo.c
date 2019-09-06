@@ -94,7 +94,7 @@ void	algo(char **edges, int nb_vertices, int max_bfs)
 		else
 			add_flow(&flow, new_flow(path, 0));
 		// print_path(path);
-		print_map(*edges);
+		// print_map(*edges);
 		count++;
 		check_line(*edges);
 	}

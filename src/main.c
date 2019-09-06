@@ -39,15 +39,14 @@ static void		lem_in(t_data *data)
 		map = stringify(data);
 		max_bfs = get_max_bfs(data->source, data->sink, data->ants, data->edges);
 		// printf("max_bfs : %d\n", max_bfs);
-		print_map(map);
+		// print_map(map);
 		algo(&map, ft_sqrt(ft_strlen(map)), max_bfs);
 		// printf("done algo\n");
 		if (data->flag & MAP)
 			print_map(map);
-		write(1, "\n", 1);
-		exit(0);
+		// write(1, "\n", 1);
+		// exit(0);
 		output(map, data);
-		printf("%s\n", "++++++++++++++");
 		ft_memdel((void**)&map);
 	}
 	else

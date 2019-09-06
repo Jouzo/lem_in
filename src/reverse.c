@@ -63,8 +63,10 @@ int		find_previous(char *map, int v, int size, int u)
 	(void)u;
 	
 	get_adj_vertice(map, v, size, &val1, &val2);
-	if (u == val1 || u == val2)
-		return (-1);
+	if (v == val1 || v == val2 || val1 == 0 || val2 == 0)
+	{
+		return (0);
+	}
 	return (find_source(map, val1, v, size) ? val1 : val2);
 }
 
@@ -114,7 +116,7 @@ int		check_map(int u, int v, t_args *args, int stage, int *path)
 		i++;
 	}
 		// printf("here u: %d  v: %d\n", u, v);
-	printf("%s\n", "RETURN -1");
+	// printf("%s\n", "RETURN -1");
 	return (-1);
 }
 
