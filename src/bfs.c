@@ -5,11 +5,6 @@ void			change_state(char **state, int vertex, int new_state)
 	(*state)[vertex] = new_state;
 }
 
-int				check_available(char *state, int vertex)
-{
-	return (state[vertex] == INITIAL);
-}
-
 int				get_max_bfs(char *source, char *sink, int ants, t_edges *edges)
 {
 	t_edges	*tmp;
@@ -38,7 +33,7 @@ int				get_max_bfs(char *source, char *sink, int ants, t_edges *edges)
 
 t_path			*BFS(t_args *args, int stage)
 {
-	printf("%s\n", "===========");
+	// printf("%s\n", "===========");
 	reinit_args(args);
 	// printf("---print map in BFS---\n");
 	// printf("\n");

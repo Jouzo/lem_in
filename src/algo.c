@@ -86,8 +86,9 @@ void	set_taken(t_args *args, t_path *path)
 	tmp = path;
 	while (tmp)
 	{
-		printf("%d\n", tmp->vertex);
-		args->taken[tmp->vertex] = 1;
+		if (tmp->vertex && tmp->vertex != args->queue.capacity - 1) {
+			args->taken[tmp->vertex] = 1;
+		}
 		tmp = tmp->next;
 	}
 }
@@ -113,7 +114,12 @@ void	algo(char **edges, int nb_vertices, int max_bfs)
 		// print_map(*edges);
 		count++;
 		check_line(*edges);
-		printf("%s\n", "here");
+		// printf("%s\n", "here");
+		// for (int i = 0; i < args->queue.capacity; i++)
+		// {
+		// 	printf("--%d  et i: %d\n", args->taken[i], i);
+		// }
+		// printf("%s\n", "-------------");
 	}
 	// printf("\n---------------------------------------\nAT THE END:\n");
 	free_flow(flow);

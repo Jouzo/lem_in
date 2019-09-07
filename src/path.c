@@ -50,6 +50,7 @@ static int		find_source(char *map, int u, int v, t_path **path)
 	i = 0;
 	while (i < size)
 	{
+		// printf("%d\n", i);
 		if (map[size * u + i] == TAKEN && i != v)
 		{
 			size_path++;
