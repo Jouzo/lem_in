@@ -52,6 +52,11 @@ bool	check_link(t_args *args, int vertex, int i)
 	return (args->edges[vertex * args->queue.capacity + i] == LINK);
 }
 
+bool	check_connection(int vertex, int to, t_args *args)
+{
+	return (args->edges[vertex * args->queue.capacity + to] > '0');
+}
+
 bool	check_end(t_args *args, int vertex, int i)
 {
 	return (i == args->queue.capacity - 1 || vertex == args->queue.capacity - 1);
@@ -125,28 +130,27 @@ t_path	*find_path(t_args *args, int stage)
 		to = 1;
 		while (to < args->queue.capacity)
 		{
-			if (check_link(args, vertex, to) && check_available(args->state, to) && (rev = check_test(to, args)))
+			if (check_connection(vertex, to, args))
 			{
-				printf("rev : %d , vertex: %d, to: %d\n", rev, vertex, to);
-				path[to] = vertex;
-				enqueue(&args->queue, to);
-				change_state(&args->state, to, WAITING);
-				
-				// path[rev] = to;
-				
-				// enqueue(&args->queue, rev);
-				
-				// change_state(&args->state, rev, WAITING);
-				
-				break;
-			}
-			else if (check_link(args, vertex, to) && check_available(args->state, to) && check_taken(args, to))
-			{
-				path[to] = vertex;
-				enqueue(&args->queue, to);
-				change_state(&args->state, to, WAITING);
-				if (check_end(args, vertex, to))
-					return (get_path(path, args));
+				if (!check_taken(args, vertex) && vertex != 0)
+				{
+					for (int to = 0; to < args->queue.capacity; to++)
+						printf("==path[%d] = %d\n", to, path[to]);
+					printf("\n");
+					rev = find_previous(args->edges, vertex, args->queue.capacity, to);
+					path[rev] = vertex;
+					enqueue(&args->queue, rev);
+					change_state(&args->state, rev, WAITING);
+					break;
+				}
+				else if (check_link(args, vertex, to) && check_available(args->state, to))// && check_taken(args, to))
+				{
+					path[to] = vertex;
+					enqueue(&args->queue, to);
+					change_state(&args->state, to, WAITING);
+					if (check_end(args, vertex, to))
+						return (get_path(path, args));
+				}
 			}
 			to++;
 		}
