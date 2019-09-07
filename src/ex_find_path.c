@@ -40,20 +40,6 @@ t_path	*get_path(int *path, t_args *args)
 	return (aug_path);
 }
 
-// static int		check_line(char *map, int line, int size)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while (i < size)
-// 	{
-// 		if (map[line * size + i] == '2' && line != 0 && i != 0)// && line != size - 1 && i != size -1)
-// 			return (1);
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
 t_path	*find_path(t_args *args, int stage)
 {
 	int vertex;

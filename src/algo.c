@@ -32,6 +32,8 @@ t_args	*init_args(int nb_vertices, char **edges)
 		return (NULL);
 	if (!(args->state = ft_strnew(nb_vertices)))
 		return (NULL);
+	if (!(args->taken = ft_memalloc((nb_vertices + 1) * sizeof(int))))
+		return (NULL);
 	ft_memset(args->state, INITIAL, nb_vertices);
 	args->edges = *edges;
 	args->queue = create_queue(nb_vertices);
@@ -77,6 +79,19 @@ void	check_line(char *map)
 	}
 }
 
+void	set_taken(t_args *args, t_path *path)
+{
+	t_path *tmp;
+
+	tmp = path;
+	while (tmp)
+	{
+		printf("%d\n", tmp->vertex);
+		args->taken[tmp->vertex] = 1;
+		tmp = tmp->next;
+	}
+}
+
 void	algo(char **edges, int nb_vertices, int max_bfs)
 {
 	int		count;
@@ -89,6 +104,7 @@ void	algo(char **edges, int nb_vertices, int max_bfs)
 	while (count < max_bfs)
 	{
 		path = BFS(args, count);
+		set_taken(args, path);
 		if (count == 0)
 			flow = new_flow(path, 0);
 		else
@@ -97,6 +113,7 @@ void	algo(char **edges, int nb_vertices, int max_bfs)
 		// print_map(*edges);
 		count++;
 		check_line(*edges);
+		printf("%s\n", "here");
 	}
 	// printf("\n---------------------------------------\nAT THE END:\n");
 	free_flow(flow);

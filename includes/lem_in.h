@@ -16,6 +16,19 @@
 # define COLOR 1 << 1
 # define MAP 1 << 2
 
+
+# define RESET  "\x1B[0m"
+# define BOLD "\x1B[1m"
+# define ITALIC "\x1B[3m"
+
+# define RED  "\x1B[31m"
+# define GRN  "\x1B[32m"
+# define YEL  "\x1B[33m"
+# define BLU  "\x1B[34m"
+# define MAG  "\x1B[35m"
+# define CYN  "\x1B[36m"
+# define WHT  "\x1B[37m"
+
 /*
 *****************************************
 *********     PARSING STRUCTS    ********
@@ -85,6 +98,7 @@ typedef struct				s_args
 	t_queue					queue;
 	char					*edges;
 	char					*state;
+	int						*taken;
 }							t_args;
 
 /*
@@ -214,6 +228,18 @@ int							first_path(char *map, int size);
 int							number_of_path(char *map, int size);
 int							get_one_path(int start,
 								t_flow **flow, char *map);
+
+/*
+** check path functions
+*/
+
+bool	check_used_link(t_args *args, int vertex, int i);
+bool	check_link(t_args *args, int vertex, int i);
+bool	check_end(t_args *args, int vertex, int i);
+bool	check_taken(t_args *args, int vertex);
+bool	check_connection(t_args *args, int vertex, int to);
+int		check_test(int vertex, t_args *args);
+
 
 /*
 ** ants functions
