@@ -41,10 +41,10 @@ static void		lem_in(t_data *data)
 		// printf("max_bfs : %d\n", max_bfs);
 		// print_map(map);
 		algo(&map, ft_sqrt(ft_strlen(map)), max_bfs);
-		printf("done algo\n");
+		// printf("done algo\n");
 		if (data->flag & MAP)
 			print_map(map);
-		exit(1);
+		// exit(1);
 		// write(1, "\n", 1);
 		// printf("%s\n", "out of algo");
 		output(map, data);
