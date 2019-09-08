@@ -36,17 +36,15 @@ t_args	*init_args(int nb_vertices, char **edges)
 		return (NULL);
 	ft_memset(args->state, INITIAL, nb_vertices);
 	args->edges = *edges;
-	args->queue = create_queue(nb_vertices);
+	args->nb_vertice = nb_vertices;
+	args->queue = create_queue();
 	return (args);
 }
 
 void	reinit_args(t_args *args)
 {
 	ft_memset(args->state, INITIAL, strlen(args->state));
-	ft_bzero(args->queue.vertices, sizeof(int) * ft_strlen(args->state));
-	args->queue.front = 0;
-	args->queue.size = 0;
-	args->queue.rear = 0;
+	initialize(args->queue);
 }
 
 /*
@@ -86,7 +84,7 @@ void	set_taken(t_args *args, t_path *path)
 	tmp = path;
 	while (tmp)
 	{
-		if (tmp->vertex && tmp->vertex != args->queue.capacity - 1) {
+		if (tmp->vertex && tmp->vertex != args->nb_vertice - 1) {
 			args->taken[tmp->vertex] = 1;
 		}
 		tmp = tmp->next;
@@ -120,6 +118,7 @@ void	algo(char **edges, int nb_vertices, int max_bfs)
 		// 	printf("--%d  et i: %d\n", args->taken[i], i);
 		// }
 		// printf("%s\n", "-------------");
+		free_queue_vertex(args->queue);
 	}
 	// printf("\n---------------------------------------\nAT THE END:\n");
 	free_flow(flow);

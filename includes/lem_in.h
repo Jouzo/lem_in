@@ -84,21 +84,26 @@ typedef struct				s_flow
 	struct s_flow			*next;
 }							t_flow;
 
+typedef struct				s_vertex
+{
+	struct s_vertex			*next;
+	int						vertex;
+}							t_vertex;
+
 typedef struct				s_queue
 {
-	int						front;
-	int						rear;
-	int						size;
-	int						capacity;
-	int						*vertices;
+	t_vertex				*front;
+	t_vertex				*rear;
+	int						count;
 }							t_queue;
 
 typedef struct				s_args
 {
-	t_queue					queue;
+	t_queue					*queue;
 	char					*edges;
 	char					*state;
 	int						*taken;
+	int						nb_vertice;
 }							t_args;
 
 /*
@@ -113,10 +118,12 @@ typedef struct				s_args
 
 bool						is_full(t_queue *queue);
 bool						is_empty(t_queue *queue);
-t_queue						create_queue(int nb_vertices);
+t_queue						*create_queue();
 int							dequeue(t_queue *queue);
 void						enqueue(t_queue *queue, int vertex);
-
+void						initialize(t_queue *queue);
+void    					free_queue_vertex(t_queue *queue);
+void						display_queue(t_vertex *head);
 /*
 ** linked list functions for t_path
 */

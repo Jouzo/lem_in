@@ -1,60 +1,68 @@
 #include "lem_in.h"
 
-// bool		is_full(t_queue *queue)
-// {
-// 	return (queue->size == queue->capacity);
-// }
-
-bool		is_empty(t_queue *queue)
+bool    is_empty(t_queue *queue)
 {
-	return (queue->size == 0);
+    return (queue->count == 0);
 }
 
-t_queue		create_queue(int nb_vertices)
+void    initialize(t_queue *queue)
 {
-	t_queue queue;
-
-	queue.front = 0;
-	queue.size = 0;
-	queue.rear = 0;
-	queue.capacity = nb_vertices;
-	queue.vertices = malloc(nb_vertices * sizeof(int));
-	return (queue);
+    queue->count = 0;
+    queue->front = NULL;
+    queue->rear = NULL;
 }
 
-int			dequeue(t_queue *queue)
+void    display_queue(t_vertex *head)
 {
-	int vertex;
-
-	if (is_empty(queue))
-		return (-1);
-	// print_queue(*queue);
-	// printf("front: -- %d\n", queue->vertices[18]);
-	vertex = queue->vertices[queue->front];
-	// queue->front = (queue->front + 1) % queue->capacity;
-	queue->front++;
-	queue->size--;
-	// printf("=-0=-0=-0   %d\n", vertex);
-	return (vertex);
+    if(head == NULL)
+        printf("FIN\n");
+    else
+        display_queue(head->next);
 }
 
-void		enqueue(t_queue *queue, int vertex)
+void    enqueue(t_queue *queue, int vertex)
 {
-	queue->vertices[queue->rear] = vertex;
-	queue->rear++;
-	queue->size++;
+    t_vertex *tmp;
+
+    tmp = malloc(sizeof(t_vertex));
+    tmp->vertex = vertex;
+    tmp->next = NULL;
+    if(!is_empty(queue))
+    {
+        queue->rear->next = tmp;
+        queue->rear = tmp;
+    }
+    else
+        queue->front = queue->rear = tmp;
+    queue->count++;
 }
 
-void	 print_queue(t_queue queue)
+int     dequeue(t_queue *queue)
 {
-       int i;
+    t_vertex *tmp;
 
-       i = queue.front; 
-    //    printf("the queue:\n");
-       while (i < queue.rear)
-       {
-               printf("%d\n", queue.vertices[i]);
-               i++;
-       }
-       printf("\n");
+    int n = queue->front->vertex;
+    tmp = queue->front;
+    queue->front = queue->front->next;
+    queue->count--;
+    free(tmp);
+    return(n);
+}
+
+t_queue		*create_queue()
+{
+    t_queue *queue;
+
+    queue = malloc(sizeof(t_queue));
+    initialize(queue);
+    return (queue);
+}
+
+void    free_queue_vertex(t_queue *queue)
+{
+    while(queue->front)
+    {
+        queue->front = queue->front->next;
+        free(queue->front);
+    }
 }

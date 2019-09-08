@@ -38,7 +38,7 @@ t_path			*BFS(t_args *args, int stage)
 	// printf("---print map in BFS---\n");
 	// printf("\n");
 	// print_map(*map);
-	enqueue(&args->queue, 0);
+	enqueue(args->queue, 0);
 	change_state(&args->state, 0, WAITING);
 	return (find_path(args, stage));
 }

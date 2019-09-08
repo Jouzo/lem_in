@@ -2,24 +2,24 @@
 
 bool	check_used_link(t_args *args, int vertex, int i)
 {
-	// printf("IN CHECK_LINK %d AND RET VAL: %d\n", args->edges[vertex * args->queue.capacity + i], args->edges[vertex * args->queue.capacity + i] == LINK);
-	return (args->edges[vertex * args->queue.capacity + i] == TAKEN);
+	// printf("IN CHECK_LINK %d AND RET VAL: %d\n", args->edges[vertex * args->nb_vertice + i], args->edges[vertex * args->nb_vertice + i] == LINK);
+	return (args->edges[vertex * args->nb_vertice + i] == TAKEN);
 }
 
 bool	check_link(t_args *args, int vertex, int i)
 {
-	// printf("IN CHECK_LINK %d AND RET VAL: %d\n", args->edges[vertex * args->queue.capacity + i], args->edges[vertex * args->queue.capacity + i] == LINK);
-	return (args->edges[vertex * args->queue.capacity + i] == LINK);
+	// printf("IN CHECK_LINK %d AND RET VAL: %d\n", args->edges[vertex * args->nb_vertice + i], args->edges[vertex * args->nb_vertice + i] == LINK);
+	return (args->edges[vertex * args->nb_vertice + i] == LINK);
 }
 
 bool	check_end(t_args *args, int vertex, int i)
 {
-	return (i == args->queue.capacity - 1 || vertex == args->queue.capacity - 1);
+	return (i == args->nb_vertice - 1 || vertex == args->nb_vertice - 1);
 }
 
 bool	check_connection(t_args *args, int vertex, int to)
 {
-	return (args->edges[vertex * args->queue.capacity + to] > '0');
+	return (args->edges[vertex * args->nb_vertice + to] > '0');
 }
 
 int				check_available(char *state, int vertex)
@@ -36,7 +36,7 @@ bool	check_taken(t_args *args, int vertex)
 	int size;
 
 	i = 0;
-	size = args->queue.capacity;
+	size = args->nb_vertice;
 	if (vertex == size - 1)
 		return (1);
 	while (i < size)
@@ -54,7 +54,7 @@ int		check_test(int vertex, t_args *args)
 	int size;
 
 	i = 0;
-	size = args->queue.capacity;
+	size = args->nb_vertice;
 	if (vertex == size - 1 || vertex == 0)
 		return (-1);
 	while (i < size)

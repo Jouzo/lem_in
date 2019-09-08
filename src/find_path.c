@@ -2,16 +2,16 @@
 
 void	update_map(t_args *args, int u, int v)
 {
-	if (args->edges[u * args->queue.capacity + v] == TAKEN)
+	if (args->edges[u * args->nb_vertice + v] == TAKEN)
 	{
-		args->edges[u * args->queue.capacity + v] = LINK;
-		args->edges[v * args->queue.capacity + u] = LINK;
+		args->edges[u * args->nb_vertice + v] = LINK;
+		args->edges[v * args->nb_vertice + u] = LINK;
 	}
 	else
 	{
-		args->edges[u * args->queue.capacity + v] = TAKEN;
-		args->edges[v * args->queue.capacity + u] = TAKEN;
-	}	
+		args->edges[u * args->nb_vertice + v] = TAKEN;
+		args->edges[v * args->nb_vertice + u] = TAKEN;
+	}
 }
 
 t_path	*get_path(int *path, t_args *args)
@@ -19,7 +19,7 @@ t_path	*get_path(int *path, t_args *args)
 	int		u;
 	t_path	*aug_path;
 
-	u = args->queue.capacity - 1;
+	u = args->nb_vertice - 1;
 	aug_path = init_path(u);
 	if (path[u] == 0 && args->edges[u] == '0')
 	{
@@ -33,22 +33,20 @@ t_path	*get_path(int *path, t_args *args)
 		push_vertex(&aug_path, u);
 	}
 	ft_memdel((void**)&path);
-	// print_path(aug_path);
 	return (aug_path);
 }
 
 void	print_state(t_args *args)
 {
 	printf("%s\n", "========STATE");
-	for (int i = 0; i < args->queue.capacity; i++)
+	for (int i = 0; i < args->nb_vertice; i++)
 		printf("%d\n", args->state[i]);
 }
 
 void	next_vertex(t_args *args, int *path, int vertex, int to, int *back)
 {
-	// printf("-=-=-%d\n", to);
 	path[to] = vertex;
-	enqueue(&args->queue, to);
+	enqueue(args->queue, to);
 	change_state(&args->state, to, WAITING);
 	*back = 0;
 }
@@ -97,7 +95,6 @@ bool	handle_available(t_args *args, int vertex, int to, int stage, int *path, in
 	return (1);
 }
 
-
 t_path	*find_path(t_args *args, int stage)
 {
 	int vertex;
@@ -106,16 +103,16 @@ t_path	*find_path(t_args *args, int stage)
 	(void)stage;
 	int *back_test;
 
-	if (!(back_test = ft_memalloc(args->queue.capacity * sizeof(int))))
+	if (!(back_test = ft_memalloc(args->nb_vertice * sizeof(int))))
 		return (NULL);
-	if (!(path = ft_memalloc(args->queue.capacity * sizeof(int))))
+	if (!(path = ft_memalloc(args->nb_vertice * sizeof(int))))
 		return (NULL);
-	while (!is_empty(&args->queue))
+	while (!is_empty(args->queue))
 	{
-		vertex = dequeue(&args->queue);
+		vertex = dequeue(args->queue);
 		change_state(&args->state, vertex, VISITED);
 		to = 1;
-		while (to < args->queue.capacity)
+		while (to < args->nb_vertice)
 		{
 			if (check_connection(args, vertex, to))
 			{

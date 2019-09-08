@@ -27,7 +27,7 @@ void		free_flow(t_flow *flow)
 
 void		reset(t_args *args)
 {
-	ft_memdel((void**)&(args->queue.vertices));
+	ft_memdel((void**)&(args->queue));
 	ft_memdel((void**)&(args->state));
 	ft_memdel((void**)&(args));
 }
