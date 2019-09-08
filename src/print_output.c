@@ -2,26 +2,6 @@
 
 int g_color = 0;
 
-static void		move_up_path(t_path *path)
-{
-	t_path	*list;
-	int		tmp;
-	int		tmp2;
-	int		check;
-
-	list = path;
-	tmp = list->ant;
-	list->ant = 0;
-	while (list->next)
-	{
-		check = list->ant > check ? list->ant : check;
-		list = list->next;
-		tmp2 = list->ant;
-		list->ant = tmp;
-		tmp = tmp2;
-	}
-}
-
 static int		formatted_output(char *vertex, int ant)
 {
 	char	*s;
@@ -42,6 +22,26 @@ static int		formatted_output(char *vertex, int ant)
 	ft_memdel((void**)&s);
 	ft_memdel((void**)&ant_to_a);
 	return (1);
+}
+
+static void		move_up_path(t_path *path)
+{
+	t_path	*list;
+	int		tmp;
+	int		tmp2;
+	int		check;
+
+	list = path;
+	tmp = list->ant;
+	list->ant = 0;
+	while (list->next)
+	{
+		check = list->ant > check ? list->ant : check;
+		list = list->next;
+		tmp2 = list->ant;
+		list->ant = tmp;
+		tmp = tmp2;
+	}
 }
 
 static void		print_ants_in_path(t_flow *flow,
@@ -73,31 +73,83 @@ static void		print_ants_in_path(t_flow *flow,
 	move_up_path(flow->path);
 }
 
-void			print_output(char **vertices, t_flow *flow,
-								int ants, int color)
-{
-	t_flow	*tmp;
-	int		i;
-	int		max_ants;
+// void			print_output(char **vertices, t_flow *flow,
+// 								int ants, int color)
+// {
+// 	t_flow	*tmp;
+// 	int		i;
+// 	int		max_ants;
 
-	g_color = color;
-	max_ants = ants + 1;
-	i = 1;
-	while (ants)
+// 	g_color = color;
+// 	max_ants = ants + 1;
+// 	i = 1;
+// 	while (ants)
+// 	{
+// 		tmp = flow;
+// 		while (tmp && ants)
+// 		{
+// 			if (tmp->ants > 0)
+// 			{
+// 				print_ants_in_path(tmp, vertices, i, &ants);
+// 				if (i > 0 && i < max_ants)
+// 					i++;
+// 			}
+// 			if (i == max_ants)
+// 				i = 0;
+// 			tmp = tmp->next;
+// 		}
+// 		ft_putchar('\n');
+// 	}
+// }
+
+int				nb_used_path(t_flow *flow)
+{
+	t_flow *tmp;
+	int count;
+
+	count = 0;
+	tmp = flow;
+	while (tmp && tmp->ants > 0)
 	{
-		tmp = flow;
-		while (tmp && ants)
+		tmp = tmp->next;
+		count++;
+	}
+	return (count);
+}
+
+void			print_output(char **vertices, t_flow *flow, int ants, int color)
+{
+	t_flow *tmp;
+	int i;
+	int nb_path;
+
+	tmp = flow;
+	i = 1;
+
+	while ((nb_path = nb_used_path(tmp)))
+	{
+		printf("L%d in path %d et nb_path: %d\n", i, i, nb_path);
+		while(tmp->path->next)
 		{
-			if (tmp->ants > 0)
-			{
-				print_ants_in_path(tmp, vertices, i, &ants);
-				if (i > 0 && i < max_ants)
-					i++;
-			}
-			if (i == max_ants)
-				i = 0;
-			tmp = tmp->next;
+			tmp->path = tmp->path->next;
+			printf("%d\n", tmp->path->vertex);
 		}
-		ft_putchar('\n');
+		printf("%s\n", "\n");
+		tmp->ants--;
+		tmp = tmp->next;
+		i++;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

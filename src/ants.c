@@ -56,6 +56,8 @@ int					get_ants_per_path(t_flow *flow, int nb_ants, int nb_path)
 	t_flow	*tmp;
 	int		*ants;
 	int		count;
+	t_flow	*tmp2 = flow; // for the for loop
+	int j = 0;
 
 	count = 0;
 	count_ants_per_path(flow);
@@ -72,5 +74,14 @@ int					get_ants_per_path(t_flow *flow, int nb_ants, int nb_path)
 			(ants[i++])++;
 		}
 	}
+	printf("%s\n", "-----\n\n");
+	printf("--nb path: %d, nb ants: %d\n", nb_path, nb_ants);
+	while (tmp2)
+	{
+		printf("path number : %d lenght %d and nb of ant: %d \n", j, tmp2->size, ants[j]);
+		tmp2 = tmp2->next;
+		j++;
+	}
+	printf("%s\n", "\n\n");
 	return (assign_ants_per_path(flow, ants));
 }
