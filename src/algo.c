@@ -24,7 +24,7 @@
 // 	}
 // }
 
-t_args	*init_args(int nb_vertices, char **edges)
+static t_args	*init_args(int nb_vertices, char **edges, int max_bfs)
 {
 	t_args *args;
 
@@ -33,6 +33,8 @@ t_args	*init_args(int nb_vertices, char **edges)
 	if (!(args->state = ft_strnew(nb_vertices)))
 		return (NULL);
 	if (!(args->taken = ft_memalloc((nb_vertices + 1) * sizeof(int))))
+		return (NULL);
+	if (!(args->change_bfs = ft_memalloc(3 * sizeof(int))))
 		return (NULL);
 	ft_memset(args->state, INITIAL, nb_vertices);
 	args->edges = *edges;
@@ -101,7 +103,7 @@ void	algo(char **edges, int nb_vertices, int max_bfs)
 	t_flow	*flow;
 
 	count = 0;
-	args = init_args(nb_vertices, edges);
+	args = init_args(nb_vertices, edges, max_bfs);
 	while (count < max_bfs)
 	{
 		path = BFS(args, count);

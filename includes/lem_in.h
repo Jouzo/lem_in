@@ -17,7 +17,7 @@
 # define MAP 1 << 2
 
 
-# define RESET  "\x1B[0m"
+# define RST  "\x1B[0m"
 # define BOLD "\x1B[1m"
 # define ITALIC "\x1B[3m"
 
@@ -28,6 +28,14 @@
 # define MAG  "\x1B[35m"
 # define CYN  "\x1B[36m"
 # define WHT  "\x1B[37m"
+
+# define BG_RED  "\x1B[41m"
+# define BG_GRN  "\x1B[42m"
+# define BG_YEL  "\x1B[43m"
+# define BG_BLU  "\x1B[44m"
+# define BG_MAG  "\x1B[45m"
+# define BG_CYN  "\x1B[46m"
+# define BG_WHT  "\x1B[47m"
 
 /*
 *****************************************
@@ -99,6 +107,7 @@ typedef struct				s_args
 	char					*edges;
 	char					*state;
 	int						*taken;
+	int						*change_bfs;
 }							t_args;
 
 /*
@@ -160,7 +169,7 @@ int							get_max_bfs(char *source, char *sink,
 */
 
 void						algo(char **edges, int nb_vertices, int max_bfs);
-t_args						*init_args(int nb_vertices, char **edges);
+// t_args						*init_args(int nb_vertices, char **edges);
 void						reinit_args(t_args *args);
 
 /*
