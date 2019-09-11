@@ -42,6 +42,7 @@ void		print_flow(t_flow *head)
 	current = head;
 	while (current != NULL)
 	{
+		printf("%d\n", current->path->vertex);
 		print_path(current->path);
 		current = current->next;
 	}

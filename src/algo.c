@@ -1,30 +1,6 @@
 #include "lem_in.h"
 
-// static void		update_map(char **map, t_args *args)
-// {
-// 	int i;
-// 	int debug;
-
-// 	debug = 0;
-// 	i = 1;
-// 	while ((*map)[i])
-// 	{
-// 		if ((*map)[i] == '2' && i % args->queue.capacity != 0)
-// 		{
-// 			if (!debug)
-// 			{
-// 			printf("set edges[i] to 2 !\n");
-// 			print_map(args->edges);
-// 			printf("i : %d\n", i);
-// 			debug = 1;
-// 			}
-// 			args->edges[i] = '2';
-// 		}
-// 		i++;
-// 	}
-// }
-
-t_args	*init_args(int nb_vertices, char **edges)
+static t_args	*init_args(int nb_vertices, char **edges, int max_bfs, int nb_ant)
 {
 	t_args *args;
 
@@ -34,7 +10,11 @@ t_args	*init_args(int nb_vertices, char **edges)
 		return (NULL);
 	if (!(args->taken = ft_memalloc((nb_vertices + 1) * sizeof(int))))
 		return (NULL);
+	if (!(args->update = ft_memalloc(sizeof(t_update))))
+		return (NULL);
 	ft_memset(args->state, INITIAL, nb_vertices);
+	args->max_bfs = max_bfs;
+	args->nb_ant = nb_ant;
 	args->edges = *edges;
 	args->nb_vertice = nb_vertices;
 	args->queue = create_queue();
@@ -44,6 +24,8 @@ t_args	*init_args(int nb_vertices, char **edges)
 void	reinit_args(t_args *args)
 {
 	ft_memset(args->state, INITIAL, strlen(args->state));
+	if (!(args->update = ft_memalloc(sizeof(t_update))))
+		exit(1);
 	initialize(args->queue);
 }
 
@@ -69,8 +51,6 @@ void	check_line(char *map)
 		{
 			if (map[i * size + j] == TAKEN)
 				count++;
-			// if (count > 2 && i != 0 && i != size - 1)
-			// 	printf("\n\n\n%.*s\n\n\n", size, map + i * size);
 			j++;
 		}
 		i++;
@@ -91,25 +71,31 @@ void	set_taken(t_args *args, t_path *path)
 	}
 }
 
-void	algo(char **edges, int nb_vertices, int max_bfs)
+
+
+void	algo(char **edges, int nb_vertices, int max_bfs, int nb_ant)
 {
 	int		count;
 	t_args	*args;
 	t_path	*path;
 	t_flow	*flow;
+	int max;
 
+	max = max_bfs;
 	count = 0;
-	args = init_args(nb_vertices, edges);
-	while (count < max_bfs)
+	args = init_args(nb_vertices, edges, max_bfs, nb_ant);
+	while (count < args->max_bfs)
 	{
-		path = BFS(args, count);
+		if (!(path = BFS(args, count)))
+			break;
 		set_taken(args, path);
 		if (count == 0)
 			flow = new_flow(path, 0);
 		else
 			add_flow(&flow, new_flow(path, 0));
+	
+		// printf("%s\n", "HERE");
 		// print_path(path);
-		// print_map(*edges);
 		count++;
 		check_line(*edges);
 		// printf("%s\n", "here");

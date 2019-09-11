@@ -58,11 +58,14 @@ t_queue		*create_queue()
     return (queue);
 }
 
-void    free_queue_vertex(t_queue *queue)
+void    free_queue_vertex(t_queue *head)
 {
-    while(queue->front)
-    {
-        queue->front = queue->front->next;
-        free(queue->front);
-    }
+    t_vertex	*tmp;
+
+	while (head->front)
+	{
+		tmp = head->front;
+		head->front = head->front->next;
+		ft_memdel((void**)&tmp);
+	}
 }

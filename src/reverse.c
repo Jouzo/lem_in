@@ -14,6 +14,8 @@ int		find_source(char *map, int u, int v, int size)
 	if (u == 0 || v == 0)
 		return (1);
 	i = 0;
+
+	// printf("%s u: %d, v: %d\n", "INSIDE FIND SOURCE", u, v);
 	while (i < size)
 	{
 		if (map[size * u + i] == TAKEN && i != v)

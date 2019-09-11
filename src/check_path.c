@@ -2,13 +2,11 @@
 
 bool	check_used_link(t_args *args, int vertex, int i)
 {
-	// printf("IN CHECK_LINK %d AND RET VAL: %d\n", args->edges[vertex * args->nb_vertice + i], args->edges[vertex * args->nb_vertice + i] == LINK);
 	return (args->edges[vertex * args->nb_vertice + i] == TAKEN);
 }
 
 bool	check_link(t_args *args, int vertex, int i)
 {
-	// printf("IN CHECK_LINK %d AND RET VAL: %d\n", args->edges[vertex * args->nb_vertice + i], args->edges[vertex * args->nb_vertice + i] == LINK);
 	return (args->edges[vertex * args->nb_vertice + i] == LINK);
 }
 
@@ -55,12 +53,16 @@ int		check_test(int vertex, t_args *args)
 
 	i = 0;
 	size = args->nb_vertice;
+	// printf("%s\n", "INSIDE CHECK TEST");
 	if (vertex == size - 1 || vertex == 0)
 		return (-1);
 	while (i < size)
 	{
-		if (args->edges[vertex + (size * i)] == TAKEN)
+		if (args->edges[vertex + (size * i)] == TAKEN) 
+		{
+			// printf("%s\n", "LOOKING FOR PREVIOUS");
 			return (find_previous(args->edges, vertex, size, i));
+		}
 		i++;
 	}
 	return (-1);

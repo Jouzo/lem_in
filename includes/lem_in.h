@@ -17,7 +17,7 @@
 # define MAP 1 << 2
 
 
-# define RESET  "\x1B[0m"
+# define RST  "\x1B[0m"
 # define BOLD "\x1B[1m"
 # define ITALIC "\x1B[3m"
 
@@ -28,6 +28,14 @@
 # define MAG  "\x1B[35m"
 # define CYN  "\x1B[36m"
 # define WHT  "\x1B[37m"
+
+# define BG_RED  "\x1B[41m"
+# define BG_GRN  "\x1B[42m"
+# define BG_YEL  "\x1B[43m"
+# define BG_BLU  "\x1B[44m"
+# define BG_MAG  "\x1B[45m"
+# define BG_CYN  "\x1B[46m"
+# define BG_WHT  "\x1B[47m"
 
 /*
 *****************************************
@@ -97,6 +105,14 @@ typedef struct				s_queue
 	int						count;
 }							t_queue;
 
+typedef struct				s_update
+{
+	int						vertex;
+	int						to_sink;
+	int						to_source;
+	struct s_update			*next;
+}							t_update;
+
 typedef struct				s_args
 {
 	t_queue					*queue;
@@ -104,6 +120,9 @@ typedef struct				s_args
 	char					*state;
 	int						*taken;
 	int						nb_vertice;
+	int						max_bfs;
+	int						nb_ant;
+	t_update				*update;
 }							t_args;
 
 /*
@@ -166,8 +185,8 @@ int							get_max_bfs(char *source, char *sink,
 **  algo functions
 */
 
-void						algo(char **edges, int nb_vertices, int max_bfs);
-t_args						*init_args(int nb_vertices, char **edges);
+void						algo(char **edges, int nb_vertices, int max_bfs, int nb_ant);
+// t_args						*init_args(int nb_vertices, char **edges);
 void						reinit_args(t_args *args);
 
 /*
@@ -180,6 +199,16 @@ t_path						*get_path(int *path, t_args *args);
 void						print_map(char *s);
 void						go_reverse(int vertex, int i);
 void						check_reverse(t_args *args, int vertex, char **map);
+
+/*
+**	update functions
+*/
+
+void	check_update(t_args *args, int vertex, int *path);
+void	del_update_list(t_update *head);
+void	get_update(t_update **update, int vertex, int rev, int to);
+void	update_map(t_args *args, int u, int v);
+
 
 /*
 ****************************************
@@ -226,6 +255,7 @@ void						free_data(t_data *data);
 char						*stringify(t_data *data);
 char						**split_vertices(t_vertices *head);
 int							output(char *map, t_data *data);
+void						parse_map(char *map, int size, t_flow **flow);
 
 /*
 ** path functions

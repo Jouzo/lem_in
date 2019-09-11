@@ -33,11 +33,11 @@ int				get_max_bfs(char *source, char *sink, int ants, t_edges *edges)
 
 t_path			*BFS(t_args *args, int stage)
 {
-	// printf("%s\n", "===========");
+	// printf("%s %d\n", "===========", stage);
 	reinit_args(args);
 	// printf("---print map in BFS---\n");
 	// printf("\n");
-	// print_map(*map);
+	// print_map(args->edges);
 	enqueue(args->queue, 0);
 	change_state(&args->state, 0, WAITING);
 	return (find_path(args, stage));

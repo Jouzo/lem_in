@@ -30,20 +30,19 @@ int				first_path(char *map, int size)
 	return (0);
 }
 
-static int		find_source(char *map, int u, int v, t_path **path)
+static int		find_sink(char *map, int u, int v, t_path **path)
 {
 	int i;
 	int size;
-	static int size_path = 0;
+	static int path_size = 1;
 	int tmp;
 
 	tmp = 0;
 	size = ft_sqrt(ft_strlen(map));
-
 	if (u == size - 1)
 	{
-		tmp = size_path;
-		size_path = 0;
+		tmp = path_size;
+		path_size = 1;
 		push_vertex(path, u);
 		return (tmp);
 	}
@@ -53,28 +52,34 @@ static int		find_source(char *map, int u, int v, t_path **path)
 		// printf("%d\n", i);
 		if (map[size * u + i] == TAKEN && i != v)
 		{
-			size_path++;
+			path_size++;
 			if (!(*path))
 				*path = init_path(u);
 			else
 				push_vertex(path, u);
-			return (find_source(map, i, u, path));
+			return (find_sink(map, i, u, path));
 		}
 		i++;
-	} 
+	}
+	// printf("%s\n", "RETURNING NO SOURCE");
+	// printf("%d\n", u);
 	return (0);
 }
 
 int				get_one_path(int start, t_flow **flow, char *map)
 {
 	t_path	*path;
-	int		size_path;
+	int		path_size;
 
 	path = NULL;
-	size_path = find_source(map, start, 0, &path);
+	path_size = find_sink(map, start, 0, &path);
+	if (path_size == 0)
+		path_size = 10000;
+	// printf("%s %d\n", "PATH SIZE: ", path_size);
+	
 	if (!(*flow))
-		*flow = new_flow(path, size_path);
+		*flow = new_flow(path, path_size);
 	else
-		add_flow(flow, new_flow(path, size_path));
+		add_flow(flow, new_flow(path, path_size));
 	return (1);
 }

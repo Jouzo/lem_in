@@ -58,10 +58,10 @@ int			output(char *map, t_data *data)
 	// printf("%s\n", "BEFORE PARSE MAP");
 	parse_map(map, size, &flow);
 	// printf("%s\n", "BEFORE GET ANTS PER PATH");
+	// print_flow(flow);
 	if (get_ants_per_path(flow, data->ants, nb_path) == -1)
 		return (-1);
 	// // printf("%s\n", "BEFORE PRINT OUTPUT");
-	// print_flow(flow);
 	// exit(1);
 	print_output(split, flow, data->ants, data->flag & COLOR);
 	free_flow(flow);
