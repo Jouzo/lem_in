@@ -14,7 +14,7 @@ static void	reset_link(t_args *args, int vertex, int to, int size)
 		// printf("%d\n", i);
 		if (args->edges[size * to + i] == TAKEN && i != vertex)
 		{
-			update_map(args, to, i);
+			update_map(args->edges, to, i, args->nb_vertice);
 			args->taken[to] = 0;
 			return (reset_link(args, to, i, size));
 		}
@@ -29,8 +29,8 @@ static void update_bfs(t_args *args, int *path, t_update *update)
 	
 	// printf("%s\n", "BEFORE");
 	// print_map(args->edges);
-	update_map(args, update->vertex, update->to_source);
-	update_map(args, update->vertex, update->to_sink);
+	update_map(args->edges, update->vertex, update->to_source, args->nb_vertice);
+	update_map(args->edges, update->vertex, update->to_sink, args->nb_vertice);
 	// printf("%s\n", "AFTER");
 	// print_map(args->edges);
 	reset_link(args, update->vertex, update->to_source, args->nb_vertice);

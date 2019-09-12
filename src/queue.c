@@ -12,12 +12,18 @@ void    initialize(t_queue *queue)
     queue->rear = NULL;
 }
 
-void    display_queue(t_vertex *head)
+void    display_queue(t_queue *queue)
 {
-    if(head == NULL)
-        printf("FIN\n");
-    else
-        display_queue(head->next);
+    t_vertex *tmp;
+    
+    tmp = queue->front;
+    printf("%s\n", "BEGINNING OF PRINT");
+    while (tmp)
+    {
+        printf("==%d\n", tmp->vertex);
+        tmp = tmp->next;
+    }
+    printf("%s\n\n", "END OF PRINT");
 }
 
 void    enqueue(t_queue *queue, int vertex)

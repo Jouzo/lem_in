@@ -122,6 +122,7 @@ typedef struct				s_args
 	int						nb_vertice;
 	int						max_bfs;
 	int						nb_ant;
+	int						step_number;
 	t_update				*update;
 }							t_args;
 
@@ -142,7 +143,7 @@ int							dequeue(t_queue *queue);
 void						enqueue(t_queue *queue, int vertex);
 void						initialize(t_queue *queue);
 void    					free_queue_vertex(t_queue *queue);
-void						display_queue(t_vertex *head);
+void						display_queue(t_queue *head);
 /*
 ** linked list functions for t_path
 */
@@ -207,8 +208,13 @@ void						check_reverse(t_args *args, int vertex, char **map);
 void	check_update(t_args *args, int vertex, int *path);
 void	del_update_list(t_update *head);
 void	get_update(t_update **update, int vertex, int rev, int to);
-void	update_map(t_args *args, int u, int v);
+void	update_map(char *map, int u, int v, int size);
 
+/*
+**	Yield functions
+*/
+
+bool		check_path_yield(t_args *args, int *path, int size);
 
 /*
 ****************************************

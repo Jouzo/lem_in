@@ -1,5 +1,7 @@
 #include "lem_in.h"
 
+extern int STAGE;
+
 bool	check_used_link(t_args *args, int vertex, int i)
 {
 	return (args->edges[vertex * args->nb_vertice + i] == TAKEN);
@@ -60,7 +62,11 @@ int		check_test(int vertex, t_args *args)
 	{
 		if (args->edges[vertex + (size * i)] == TAKEN) 
 		{
-			// printf("%s\n", "LOOKING FOR PREVIOUS");
+			// printf("STAGE: %d\n", STAGE);
+			if (STAGE == 2 && vertex == 1248) {
+				printf("find_previous: %d\n", find_previous(args->edges, vertex, size, i));
+
+			}
 			return (find_previous(args->edges, vertex, size, i));
 		}
 		i++;

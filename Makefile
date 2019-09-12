@@ -29,6 +29,7 @@ SRCS_NAMES = 	main.c\
 				stringify.c\
 				check_path.c\
 				update.c\
+				get_yield.c\
 
 OBJS_NAMES = $(SRCS_NAMES:.c=.o)
 
