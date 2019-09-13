@@ -63,7 +63,7 @@ int			output(char *map, t_data *data)
 		return (-1);
 	// // printf("%s\n", "BEFORE PRINT OUTPUT");
 	// exit(1);
-	print_output(split, flow, data->ants, data->flag & COLOR);
+	print_output(split, flow, data->flag & COLOR);
 	free_flow(flow);
 	return (free_split(split, 1));
 }

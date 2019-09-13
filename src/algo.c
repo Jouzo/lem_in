@@ -15,6 +15,7 @@ static t_args	*init_args(int nb_vertices, char **edges, int max_bfs, int nb_ant)
 	ft_memset(args->state, INITIAL, nb_vertices);
 	args->max_bfs = max_bfs;
 	args->nb_ant = nb_ant;
+	args->step_number = 0;
 	args->edges = *edges;
 	args->nb_vertice = nb_vertices;
 	args->queue = create_queue();
@@ -87,13 +88,15 @@ void	algo(char **edges, int nb_vertices, int max_bfs, int nb_ant)
 	while (count < args->max_bfs)
 	{
 		if (!(path = BFS(args, count)))
+        {
+            // printf("%s\n", "HERE");
 			break;
+        }
 		set_taken(args, path);
 		if (count == 0)
 			flow = new_flow(path, 0);
 		else
 			add_flow(&flow, new_flow(path, 0));
-	
 		// printf("%s\n", "HERE");
 		// print_path(path);
 		count++;
@@ -107,6 +110,7 @@ void	algo(char **edges, int nb_vertices, int max_bfs, int nb_ant)
 		free_queue_vertex(args->queue);
 	}
 	// printf("\n---------------------------------------\nAT THE END:\n");
+	*edges = ft_strdup(args->saved_map);
 	free_flow(flow);
 	reset(args);
 	// print_map(*edges);

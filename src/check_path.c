@@ -63,10 +63,6 @@ int		check_test(int vertex, t_args *args)
 		if (args->edges[vertex + (size * i)] == TAKEN) 
 		{
 			// printf("STAGE: %d\n", STAGE);
-			if (STAGE == 2 && vertex == 1248) {
-				printf("find_previous: %d\n", find_previous(args->edges, vertex, size, i));
-
-			}
 			return (find_previous(args->edges, vertex, size, i));
 		}
 		i++;

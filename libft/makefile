@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+         #
+#    By: mmovahhe <mmovahhe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 18:10:13 by jdescler          #+#    #+#              #
-#    Updated: 2019/05/26 20:33:14 by jdescler         ###   ########.fr        #
+#    Updated: 2019/09/13 16:52:21 by mmovahhe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,6 +90,7 @@ SRCS_NAMES = 		ft_abs.c\
 	   				get_next_line.c\
 	   				multi_free.c\
 	   				ft_atoll.c\
+	   				ft_swap.c\
 
 OBJS_NAMES = $(SRCS_NAMES:.c=.o)
 

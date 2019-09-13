@@ -32,18 +32,6 @@ int path_lenght(t_path *path)
 	return (i);
 }
 
-bool	check_path(char *map, int u, int *path)
-{
-	int size;
-
-	size = ft_sqrt(ft_strlen(map));
-	while (u > 0)
-	{
-		u = path[u];
-	}
-	return (1);
-}
-
 t_path	*retrieve_key_val(t_args *args, int *path, int u, int *size)
 {
 	t_path	*aug_path;
@@ -64,32 +52,23 @@ t_path	*get_path(int *path, t_args *args)
 	int		u;
 	t_path	*aug_path;
 	t_update *tmp;
-	static int count = 0;
-	static int size_first_path = 0;
 	int size;
 
-	// print_map(args->edges);
 	if (!(check_path_yield(args, path, args->nb_vertice)))
+	{
+		// printf("%s\n", "HERE CHECK PATH YIELD NULL");
 		return (NULL);
+	}
 	// exit(1);
 	size = 0;
-	count++;
 	tmp = args->update;
 	u = args->nb_vertice - 1;
-	check_path(args->edges, u, path);
 	if (path[u] == 0 && args->edges[u] == '0')
 	{
 		ft_memdel((void**)&path);
 		return (NULL);
 	}
 	aug_path = retrieve_key_val(args, path, u, &size);
-	// if (count == 0)
-	// 	size_first_path = size;
-	// else if (size > args->nb_ant / (count) + (size - size_first_path) / 2 + size_first_path)
-	// {
-	// 	// printf("%s value: %d, count: %d, size: %d\n", "RETURNING NULL!", args->nb_ant / (count + 1) + (size - size_first_path) / 2 + size_first_path, count, size);
-	// 	return (NULL);
-	// }
 	ft_memdel((void**)&path);
 	del_update_list(args->update);
 	return (aug_path);
@@ -189,6 +168,7 @@ int		go_to_next(t_args *args, int vertex, int *back_test, int *path, int stage)
 	{
 		// if (vertex ==1478)
 			// printf("%d\n", to);
+		// printf("to: %d\n", to);
 		if (check_connection(args, vertex, to) && !(vertex == 0 && args->taken[to]))
 		{
 			// printf("-=-=-=-----vertex: %d to: %d\n", vertex, to);
@@ -209,22 +189,6 @@ int		go_to_next(t_args *args, int vertex, int *back_test, int *path, int stage)
 	return (0);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 t_path	*find_path(t_args *args, int stage)
 {
 	int vertex;
@@ -243,7 +207,6 @@ t_path	*find_path(t_args *args, int stage)
 	{
 		vertex = dequeue(args->queue);
 		change_state(&args->state, vertex, VISITED);
-		// printf("HOLY SHIT PD VERTEX %d\n", vertex);
 		if (go_to_next(args, vertex, back_test, path, stage))
 			return (get_path(path, args));
 	}

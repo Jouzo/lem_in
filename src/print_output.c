@@ -60,7 +60,7 @@ static int				nb_used_path(t_flow *flow)
 	return (count);
 }
 
-static void			send_ants_in_path(t_flow *flow, int count, int path_id, char **vertices, int nb_path)
+static void			send_ants_in_path(t_flow *flow, int count, char **vertices)
 {
 	t_path *tmp;
 	int		size;
@@ -114,7 +114,7 @@ void test(t_flow *flow)
 	}
 }
 
-void			print_output(char **vertices, t_flow *flow, int ants, int color)
+void			print_output(char **vertices, t_flow *flow, int color)
 {
 	test(flow);
 	t_flow *tmp;
@@ -132,7 +132,7 @@ void			print_output(char **vertices, t_flow *flow, int ants, int color)
 		path_id = 1;
 		while (path_id <= nb_path)
 		{
-			send_ants_in_path(tmp, count, path_id, vertices, nb_path);
+			send_ants_in_path(tmp, count, vertices);
 			path_id++;
 			tmp = tmp->next;
 		}

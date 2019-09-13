@@ -22,7 +22,6 @@ void		free_flow(t_flow *flow)
 		tmp = flow;
 		flow = flow->next;
 		free_path(tmp->path);
-		exit(1);
 		ft_memdel((void**)&tmp);
 	}
 	flow = NULL;

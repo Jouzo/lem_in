@@ -22,7 +22,7 @@ static void	reset_link(t_args *args, int vertex, int to, int size)
 	}
 }
 
-static void update_bfs(t_args *args, int *path, t_update *update)
+static void update_bfs(t_args *args, t_update *update)
 {
 	// printf("vertex: %d\n", vertex);
 	// printf("rev: %d\n", rev);
@@ -47,7 +47,7 @@ static void update_bfs(t_args *args, int *path, t_update *update)
 	// update_map(args, path[vertex], vertex);
 }
 
-void	check_update(t_args *args, int vertex, int *path)
+void	check_update(t_args *args, int vertex)
 {
 	t_update *tmp;
 
@@ -62,7 +62,7 @@ void	check_update(t_args *args, int vertex, int *path)
 		if (tmp->vertex == vertex)
 		{
 			// printf("%s vertex: %d, to_source: %d, to_sink: %d\n", "UPDATE BFS", tmp->vertex, tmp->to_source, tmp->to_sink);
-			update_bfs(args, path, tmp);
+			update_bfs(args, tmp);
 			args->max_bfs++;
 		}
 		tmp = tmp->next;

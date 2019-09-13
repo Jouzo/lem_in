@@ -123,6 +123,7 @@ typedef struct				s_args
 	int						max_bfs;
 	int						nb_ant;
 	int						step_number;
+	char					*saved_map;
 	t_update				*update;
 }							t_args;
 
@@ -205,7 +206,7 @@ void						check_reverse(t_args *args, int vertex, char **map);
 **	update functions
 */
 
-void	check_update(t_args *args, int vertex, int *path);
+void	check_update(t_args *args, int vertex);
 void	del_update_list(t_update *head);
 void	get_update(t_update **update, int vertex, int rev, int to);
 void	update_map(char *map, int u, int v, int size);
@@ -296,7 +297,7 @@ int							get_ants_per_path(t_flow *flow, int nb_ants,
 */
 
 void						print_output(char **vertices,
-										t_flow *flow, int ants, int color);
+										t_flow *flow, int color);
 
 
 
