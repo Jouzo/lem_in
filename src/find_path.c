@@ -47,7 +47,10 @@ t_path	*get_path(int *path, t_args *args)
 	{
 		count--;
 		if (count == 0)
+		{
+			ft_memdel((void**)&path);
 			return (NULL);
+		}
 	}
 	size = 0;
 	u = args->nb_vertice - 1;
@@ -58,7 +61,6 @@ t_path	*get_path(int *path, t_args *args)
 	}
 	aug_path = retrieve_key_val(args, path, u, &size);
 	ft_memdel((void**)&path);
-	free(path);
 	return (aug_path);
 }
 
@@ -90,6 +92,7 @@ bool	handle_available(t_args *args, int vertex, int to, int *path, int *back_tes
 			next_vertex(args, path, vertex, to, &back_test[vertex]);
 			if (check_end(args, vertex, to))
 			{
+				
 				return (0);
 			}
 		}

@@ -8,6 +8,8 @@ static t_args	*init_args(int nb_vertices, char **edges, int max_bfs, int nb_ant)
 		return (NULL);
 	if (!(args->state = ft_strnew(nb_vertices)))
 		return (NULL);
+	if (!(args->saved_map = ft_strnew(nb_vertices * nb_vertices)))
+		return (NULL);
 	if (!(args->taken = ft_memalloc((nb_vertices + 1) * sizeof(int))))
 		return (NULL);
 	ft_memset(args->state, INITIAL, nb_vertices);
@@ -100,8 +102,7 @@ void	algo(char **edges, int size, int max_bfs, int nb_ant)
 		check_line(*edges, args->nb_ant);
 		free_queue_vertex(args->queue);
 	}
-	*edges = ft_strdup(args->saved_map);
+	ft_memcpy(*edges, args->saved_map, size * size);
 	free_flow(flow);
 	free_args(args);
-	// reset(args);
 }

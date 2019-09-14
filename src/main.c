@@ -41,7 +41,7 @@ static void		lem_in(t_data *data)
 		if (data->flag & MAP)
 			print_map(map);
 		output(map, data);
-		ft_memdel((void**)&map);
+		ft_strdel(&map);
 	}
 	else
 		write(1, "ERROR\n", 6);

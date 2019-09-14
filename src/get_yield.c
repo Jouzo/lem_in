@@ -98,16 +98,16 @@ bool			check_path_yield(t_args *args, int *path, int size)
 		u = path[u];
 	}
 	count = count_move(map_tmp, size, args->nb_ant);
-	// printf("count: %d\n", count);
 	if ((!args->step_number || args->step_number > count))
 	{
 		args->step_number = count;
-		if (!(args->saved_map = ft_strdup(map_tmp)))
-			return (0);
+		ft_memcpy(args->saved_map, map_tmp, size * size);
 		ft_strdel(&map_tmp);
-		// printf("args->step_number: %d\n", args->step_number);
 		return (1);
 	}
 	else
+	{
+		ft_strdel(&map_tmp);
 		return (0);
+	}
 }
