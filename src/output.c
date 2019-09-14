@@ -31,11 +31,7 @@ void		parse_map(char *map, int size, t_flow **flow)
 	while (i < size)
 	{
 		if ((map)[i] & TAKEN)
-		{
-			// if (count++ == 7)
-			// 	exit(1);
-			get_one_path(i, flow, map);
-		}
+			get_one_path(i, flow, map, size);
 		i++;
 	}
 

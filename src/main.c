@@ -29,15 +29,16 @@ static void		lem_in(t_data *data)
 {
 	char *map;
 	int max_bfs;
+	int size;
 
 	max_bfs = 0;
-	map = NULL;
 	if (check_parsing(*data))
 	{
 		swap_source(data);
-		map = stringify(data);
+		size = stringify(data, &map);
 		max_bfs = get_max_bfs(data->source, data->sink, data->ants, data->edges);
-		algo(&map, ft_sqrt(ft_strlen(map)), max_bfs, data->ants);
+		// exit(1);
+		algo(&map, size, max_bfs, data->ants);
 		if (data->flag & MAP)
 			print_map(map);
 		output(map, data);

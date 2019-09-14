@@ -47,15 +47,13 @@ static int		find_sink(char *map, int u, int v, t_path **path, int size)
 	return (0);
 }
 
-int				get_one_path(int start, t_flow **flow, char *map)
+int				get_one_path(int start, t_flow **flow, char *map, int size)
 {
 	t_path	*path;
 	int		path_size;
 	// static int i = 0;
-	int size;
 
 	path = NULL;
-	size = ft_sqrt(ft_strlen(map));
 	path_size = find_sink(map, start, 0, &path, size);
 	// printf("i:%d\n", i++);
 	if (!(*flow))
