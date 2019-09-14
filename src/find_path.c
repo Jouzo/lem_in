@@ -61,6 +61,7 @@ t_path	*get_path(int *path, t_args *args)
 	aug_path = retrieve_key_val(args, path, u, &size);
 	ft_memdel((void**)&path);
 	del_update_list(args->update);
+	free(path);
 	return (aug_path);
 }
 
@@ -172,7 +173,8 @@ t_path	*find_path(t_args *args)
 		vertex = dequeue(args->queue);
 		change_state(&args->state, vertex, VISITED);
 		if (go_to_next(args, vertex, back_test, path))
-			return (get_path(path, args));
+			break ;
 	}
+	free(back_test);
 	return (get_path(path, args));
 }
