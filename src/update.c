@@ -11,7 +11,6 @@ static void	reset_link(t_args *args, int vertex, int to, int size)
 	i = 0;
 	while (i < size)
 	{
-		// printf("%d\n", i);
 		if (args->edges[size * to + i] & TAKEN && i != vertex)
 		{
 			update_map(args->edges, to, i, args->nb_vertice);
@@ -24,27 +23,10 @@ static void	reset_link(t_args *args, int vertex, int to, int size)
 
 static void update_bfs(t_args *args, t_update *update)
 {
-	// printf("vertex: %d\n", vertex);
-	// printf("rev: %d\n", rev);
-	
-	// printf("%s\n", "BEFORE");
-	// print_map(args->edges);
 	update_map(args->edges, update->vertex, update->to_source, args->nb_vertice);
 	update_map(args->edges, update->vertex, update->to_sink, args->nb_vertice);
-	// printf("%s\n", "AFTER");
-	// print_map(args->edges);
 	reset_link(args, update->vertex, update->to_source, args->nb_vertice);
-	// printf("%s\n", "AFTER2");
-	// print_map(args->edges);
 	reset_link(args, update->vertex, update->to_sink, args->nb_vertice);
-	// printf("%s\n", "AFTER3");
-	// print_map(args->edges);
-	// for (int i = 0; i < args->nb_vertice; i++)
-	// {
-	// 	printf("%d\n", args->taken[i]);
-	// }
-	
-	// update_map(args, path[vertex], vertex);
 }
 
 void	check_update(t_args *args, int vertex)
@@ -58,10 +40,8 @@ void	check_update(t_args *args, int vertex)
 	}    
 	while (tmp)
 	{
-		// printf("%d\n", tmp->vertex);
 		if (tmp->vertex == vertex)
 		{
-			// printf("%s vertex: %d, to_source: %d, to_sink: %d\n", "UPDATE BFS", tmp->vertex, tmp->to_source, tmp->to_sink);
 			update_bfs(args, tmp);
 			args->max_bfs++;
 		}

@@ -25,15 +25,17 @@ void		parse_map(char *map, int size, t_flow **flow)
 {
 	int		i;
 	int		count;
-	int		first;
 
-	first = first_path(map, size);
 	count = 0;
-	i = first;
+	i = 0;
 	while (i < size)
 	{
 		if ((map)[i] & TAKEN)
+		{
+			// if (count++ == 7)
+			// 	exit(1);
 			get_one_path(i, flow, map);
+		}
 		i++;
 	}
 

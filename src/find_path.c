@@ -1,13 +1,10 @@
 #include "lem_in.h"
 
-int STAGE;
-
 void	update_map(char *map, int u, int v, int size)
 {
 		map[v * size + u] ^= 3;
 		map[u * size + v] ^= 3;
 }
-
 
 int path_lenght(t_path *path)
 {

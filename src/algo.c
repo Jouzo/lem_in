@@ -88,10 +88,7 @@ void	algo(char **edges, int nb_vertices, int max_bfs, int nb_ant)
 	while (count > 0)
 	{
 		if (!(path = BFS(args)))
-        {
-            // printf("%s\n", "HERE");
 			break;
-        }
 		set_taken(args, path);
 		if (count == max_bfs)
 			flow = new_flow(path, 0);

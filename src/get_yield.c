@@ -79,7 +79,10 @@ int		count_move(char *map, int size, int ants)
 	get_lengths(map, size, arr, n);
 	// ft_print_arr(arr, n);
 	set_ants(arr, n, ants);
+	// printf("%s\n", "PRINTA RR:");
+	// ft_print_arr(arr, n);
 	ret = arr[0];
+	// printf("ret: %d\n", ret);
 	free(arr);
 	return (ret);
 }
