@@ -37,7 +37,6 @@ static void		lem_in(t_data *data)
 		swap_source(data);
 		size = stringify(data, &map);
 		max_bfs = get_max_bfs(data->source, data->sink, data->ants, data->edges);
-		// exit(1);
 		algo(&map, size, max_bfs, data->ants);
 		if (data->flag & MAP)
 			print_map(map);
