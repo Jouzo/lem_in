@@ -4,16 +4,8 @@ int STAGE;
 
 void	update_map(char *map, int u, int v, int size)
 {
-	if (map[u * size + v] & TAKEN)
-	{
-		map[u * size + v] = LINK;
-		map[v * size + u] = LINK;
-	}
-	else
-	{
-		map[u * size + v] = TAKEN;
-		map[v * size + u] = TAKEN;
-	}
+		map[v * size + u] ^= 3;
+		map[u * size + v] ^= 3;
 }
 
 
