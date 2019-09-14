@@ -10,8 +10,8 @@
 # define INITIAL 1
 # define WAITING 2
 # define VISITED 3
-# define LINK 49
-# define TAKEN 50
+# define LINK 1 << 0
+# define TAKEN 1 << 1
 # define QUIET 1 << 0
 # define COLOR 1 << 1
 # define MAP 1 << 2

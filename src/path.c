@@ -9,7 +9,7 @@ int				number_of_path(char *map, int size)
 	count = 0;
 	while (i < size)
 	{
-		if (map[i] == TAKEN)
+		if (map[i] & TAKEN)
 			count++;
 		i++;
 	}
@@ -23,7 +23,7 @@ int				first_path(char *map, int size)
 	i = 0;
 	while (i < size)
 	{
-		if (map[i] == TAKEN)
+		if (map[i] & TAKEN)
 			return (i);
 		i++;
 	}
@@ -49,7 +49,7 @@ static int		find_sink(char *map, int u, int v, t_path **path)
 	i = 0;
 	while (i < size)
 	{
-		if (map[size * u + i] == TAKEN && i != v)
+		if (map[size * u + i] & TAKEN && i != v)
 		{
 			path_size++;
 			if (!(*path))

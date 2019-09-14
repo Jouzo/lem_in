@@ -50,7 +50,7 @@ void	check_line(char *map)
 		count = 0;
 		while (j < size)
 		{
-			if (map[i * size + j] == TAKEN)
+			if (map[i * size + j] & TAKEN)
 				count++;
 			j++;
 		}

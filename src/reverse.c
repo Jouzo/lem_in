@@ -18,7 +18,7 @@ static int		find_source(char *map, int u, int v, int size)
 	i = 0;
 	while (i < size)
 	{
-		if (map[size * u + i] == TAKEN && i != v)
+		if (map[size * u + i] & TAKEN && i != v)
 			return (find_source(map, i, u, size));
 		i++;
 	}
@@ -39,7 +39,7 @@ static void	get_adj_vertice(char *map, int v, int size, int *val1, int *val2)
 	*val2 = 0;
 	while (i < size)
 	{
-		if (map[size * v + i] == TAKEN)
+		if (map[size * v + i] & TAKEN)
 		{
 			if (!(*val1))
 				*val1 = i;
@@ -87,7 +87,7 @@ bool	check_taken(t_args *args, int vertex)
 		return (1);
 	while (i < size)
 	{
-		if (args->edges[vertex + (size * i)] == TAKEN)
+		if (args->edges[vertex + (size * i)] & TAKEN)
 			return (0);
 		i++;
 	}
@@ -105,7 +105,7 @@ int		get_previous(int vertex, t_args *args)
 		return (-1);
 	while (i < size)
 	{
-		if (args->edges[vertex + (size * i)] == TAKEN)
+		if (args->edges[vertex + (size * i)] & TAKEN)
 			return (find_previous(args->edges, vertex, size));
 		i++;
 	}

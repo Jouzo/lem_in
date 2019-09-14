@@ -4,7 +4,7 @@ int STAGE;
 
 void	update_map(char *map, int u, int v, int size)
 {
-	if (map[u * size + v] == TAKEN)
+	if (map[u * size + v] & TAKEN)
 	{
 		map[u * size + v] = LINK;
 		map[v * size + u] = LINK;
@@ -95,7 +95,7 @@ bool	handle_available(t_args *args, int vertex, int to, int stage, int *path, in
 	// printf("%s\n", "HERE");
 	if (check_available(args->state, to))// && !args->taken[to])
 	{
-		if (args->taken[to] && !(args->edges[vertex * args->nb_vertice + to] == TAKEN))
+		if (args->taken[to] && !(args->edges[vertex * args->nb_vertice + to] & TAKEN))
 		{
 			// printf(RED"||--- available 1 ----|| vertex: %d, to: %d \n"RST, vertex, to);
 			next_vertex(args, path, vertex, to, &back_test[vertex]);

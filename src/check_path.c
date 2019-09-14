@@ -2,12 +2,12 @@
 
 bool	check_used_link(t_args *args, int vertex, int i)
 {
-	return (args->edges[vertex * args->nb_vertice + i] == TAKEN);
+	return (args->edges[vertex * args->nb_vertice + i] & TAKEN);
 }
 
 bool	check_link(t_args *args, int vertex, int i)
 {
-	return (args->edges[vertex * args->nb_vertice + i] == LINK);
+	return (args->edges[vertex * args->nb_vertice + i] & LINK);
 }
 
 bool	check_end(t_args *args, int vertex, int i)

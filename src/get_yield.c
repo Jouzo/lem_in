@@ -11,7 +11,7 @@ static int		path_size(char *map, int vertex, int size)
 	tmp = vertex;
 	while (i < size && vertex != size - 1)
 	{
-		if (map[vertex + i * size] == TAKEN && i != tmp)
+		if (map[vertex + i * size] & TAKEN && i != tmp)
 		{
 			tmp = vertex;
 			path_size++;
@@ -54,7 +54,7 @@ static void		get_lengths(char *map, int map_size, int *arr, int n)
 	j = 0;
 	while (i < map_size)
 	{
-		if (map[i] == TAKEN)
+		if (map[i] & TAKEN)
 		{
 			arr[j] = path_size(map, i, map_size);
 			if (arr[j] == 0)
