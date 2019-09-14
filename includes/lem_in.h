@@ -304,6 +304,7 @@ void						print_output(char **vertices,
 int     check_map(int u, int v, t_args *args, int stage, int *path);
 void print_queue(t_queue queue);
 
+int		count_move(char *map, int size, int ants);
 
 
 #endif

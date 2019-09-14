@@ -16,7 +16,7 @@ static t_args	*init_args(int nb_vertices, char **edges, int max_bfs, int nb_ant)
 	args->max_bfs = max_bfs;
 	args->nb_ant = nb_ant;
 	args->step_number = 0;
-	args->edges = *edges;
+	args->edges = ft_strdup(*edges);
 	args->nb_vertice = nb_vertices;
 	args->queue = create_queue();
 	return (args);
@@ -111,6 +111,8 @@ void	algo(char **edges, int nb_vertices, int max_bfs, int nb_ant)
 	}
 	// printf("\n---------------------------------------\nAT THE END:\n");
 	*edges = ft_strdup(args->saved_map);
+	// printf("%s\n", "COUNT MOVE:");
+	// printf("count_move(*edges, nb_vertices, nb_ant): %d\n", count_move(*edges, nb_vertices, nb_ant));
 	free_flow(flow);
 	reset(args);
 	// print_map(*edges);

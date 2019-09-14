@@ -38,7 +38,6 @@ static void		lem_in(t_data *data)
 		swap_source(data);
 		map = stringify(data);
 		max_bfs = get_max_bfs(data->source, data->sink, data->ants, data->edges);
-		// printf("max_bfs : %d\n", max_bfs);
 		// print_map(map);
 		algo(&map, ft_sqrt(ft_strlen(map)), max_bfs, data->ants);
 		// printf("done algo\n");

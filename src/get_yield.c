@@ -57,6 +57,8 @@ static void		get_lengths(char *map, int map_size, int *arr, int n)
 		if (map[i] == TAKEN)
 		{
 			arr[j] = path_size(map, i, map_size);
+			if (arr[j] == 0)
+				arr[j] = 1000;
 			j++;
 		}
 		i++;
@@ -64,20 +66,22 @@ static void		get_lengths(char *map, int map_size, int *arr, int n)
 	ft_insertion_sort(arr, n);
 }
 
-static int		count_move(char *map, int size, int ants)
+int		count_move(char *map, int size, int ants)
 {
 	int n;
 	int *arr;
 	int ret;
 
 	n = number_of_path(map, size);
+	// printf("number of path: %d\n", n);
 	if (!(arr = ft_memalloc(n * sizeof(int))))
 		return (0);
 	get_lengths(map, size, arr, n);
+	// ft_print_arr(arr, n);
 	set_ants(arr, n, ants);
 	ret = arr[0];
 	free(arr);
-	return (arr[0]);
+	return (ret);
 }
 
 bool			check_path_yield(t_args *args, int *path, int size)
@@ -96,12 +100,14 @@ bool			check_path_yield(t_args *args, int *path, int size)
 		u = path[u];
 	}
 	count = count_move(map_tmp, size, args->nb_ant);
-	ft_strdel(&map_tmp);
-	if (!args->step_number || args->step_number > count)
+	// printf("count: %d\n", count);
+	if ((!args->step_number || args->step_number > count))
 	{
 		args->step_number = count;
-		if (!(args->saved_map = ft_strdup(args->edges)))
+		if (!(args->saved_map = ft_strdup(map_tmp)))
 			return (0);
+		ft_strdel(&map_tmp);
+		// printf("args->step_number: %d\n", args->step_number);
 		return (1);
 	}
 	else

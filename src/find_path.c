@@ -53,13 +53,14 @@ t_path	*get_path(int *path, t_args *args)
 	t_path	*aug_path;
 	t_update *tmp;
 	int size;
+	static int count = 10;
 
 	if (!(check_path_yield(args, path, args->nb_vertice)))
 	{
-		// printf("%s\n", "HERE CHECK PATH YIELD NULL");
-		return (NULL);
+		count--;
+		if (count == 0)
+			return (NULL);
 	}
-	// exit(1);
 	size = 0;
 	tmp = args->update;
 	u = args->nb_vertice - 1;
@@ -136,10 +137,7 @@ bool	handle_taken(t_args *args, int vertex, int to, int *back_test, int *path)
 		{
 			i = path[i];
 			if (i == rev)
-			{
-				// printf("%s\n", "GOING BACK ON THE SAME");
 				return (0);
-			}
 		}
 		next_vertex(args, path, vertex, rev, &back_test[vertex]);
 		back_test[rev] = 1;
