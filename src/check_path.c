@@ -17,7 +17,7 @@ bool	check_end(t_args *args, int vertex, int i)
 
 bool	check_connection(t_args *args, int vertex, int to)
 {
-	return (args->edges[vertex * args->nb_vertice + to] > '0');
+	return (check_used_link(args, vertex, to) || check_link(args, vertex, to));
 }
 
 int		check_available(char *state, int vertex)

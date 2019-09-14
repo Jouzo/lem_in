@@ -90,30 +90,24 @@ void	next_vertex(t_args *args, int *path, int vertex, int to, int *back)
 	*back = 0;
 }
 
-bool	handle_available(t_args *args, int vertex, int to, int stage, int *path, int *back_test)
+bool	handle_available(t_args *args, int vertex, int to, int *path, int *back_test)
 {
-	// printf("%s\n", "HERE");
-	if (check_available(args->state, to))// && !args->taken[to])
+	static int stage = 0;
+
+	if (check_available(args->state, to))
 	{
 		if (args->taken[to] && !(args->edges[vertex * args->nb_vertice + to] & TAKEN))
-		{
-			// printf(RED"||--- available 1 ----|| vertex: %d, to: %d \n"RST, vertex, to);
 			next_vertex(args, path, vertex, to, &back_test[vertex]);
-		}
 		else if ((stage == 0 || !args->taken[to]))
 		{
-			// printf(RED"||--- available 2 ----|| vertex: %d, to: %d\n"RST, vertex, to);
 			next_vertex(args, path, vertex, to, &back_test[vertex]);
 			if (check_end(args, vertex, to))
 			{
 				return (0);
 			}
 		}
-		// else {
-		// 	// printf(RED"||--- available 3 ----||\n"RST);
-		// }
 	}
-	// printf(RED"||--- available 4 ----||\n"RST);
+	stage++;
 	return (1);
 }
 
@@ -126,12 +120,8 @@ bool	handle_taken(t_args *args, int vertex, int to, int *back_test, int *path)
 	to_source = 0;
 	skip_path = 0;
 	rev = get_previous(vertex, args);
-	// printf("back test %d, vertex: %d\n", back_test[vertex], vertex);
-	// printf("%s\n", "tHERE");
-	if (!back_test[vertex] && rev != -1)
+	if (!back_test[vertex] && rev >= 0)
 	{
-		// if (STAGE == 2)
-			// printf(GRN"||--- taken "MAG"1"RST GRN" ----|| vertex: %d, rev: %d\n"RST, vertex, rev);
 		int i = vertex;
 		while (path[i])
 		{
@@ -145,40 +135,31 @@ bool	handle_taken(t_args *args, int vertex, int to, int *back_test, int *path)
 	}
 	else if (check_available(args->state, to) && !back_test[to])
 	{
-			// printf(GRN"||--- taken "BLU"2"RST GRN" ----|| vertex: %d, to: %d\n"RST, vertex, to);
 		next_vertex(args, path, vertex, to, &back_test[to]);
 		if (rev == to) {
 			back_test[rev] = 1;
 		}
 	}
-	// else {
-	// 	// printf("%s\n", "OTHER CONDITION");
-	// }
 	return (1);
 }
 
-int		go_to_next(t_args *args, int vertex, int *back_test, int *path, int stage)
+int		go_to_next(t_args *args, int vertex, int *back_test, int *path)
 {
 	int to;
 
 	to = 1;
 	while (to < args->nb_vertice)
 	{
-		// if (vertex ==1478)
-			// printf("%d\n", to);
-		// printf("to: %d\n", to);
 		if (check_connection(args, vertex, to) && !(vertex == 0 && args->taken[to]))
 		{
-			// printf("-=-=-=-----vertex: %d to: %d\n", vertex, to);
 			if (args->taken[vertex])
 			{
-				// printf("vertex: %d\n", vertex);
 				if (!handle_taken(args, vertex, to, back_test, path))
 					break;
 			}
 			else
 			{
-				if (!handle_available(args, vertex, to, stage, path, back_test))
+				if (!handle_available(args, vertex, to, path, back_test))
 					return (1);
 			}
 		}
@@ -187,25 +168,21 @@ int		go_to_next(t_args *args, int vertex, int *back_test, int *path, int stage)
 	return (0);
 }
 
-t_path	*find_path(t_args *args, int stage)
+t_path	*find_path(t_args *args)
 {
 	int vertex;
 	int *path;
-	(void)stage;
 	int *back_test;
 
 	if (!(back_test = ft_memalloc(args->nb_vertice * sizeof(int))))
 		return (NULL);
 	if (!(path = ft_memalloc(args->nb_vertice * sizeof(int))))
 		return (NULL);
-	STAGE = stage;
-	// printf("%d\n", args->nb_vertice);
-	// printf("check_connection: %d\n", check_link(args, 676, 1248));
 	while (!is_empty(args->queue))
 	{
 		vertex = dequeue(args->queue);
 		change_state(&args->state, vertex, VISITED);
-		if (go_to_next(args, vertex, back_test, path, stage))
+		if (go_to_next(args, vertex, back_test, path))
 			return (get_path(path, args));
 	}
 	return (get_path(path, args));

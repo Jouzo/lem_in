@@ -83,37 +83,25 @@ void	algo(char **edges, int nb_vertices, int max_bfs, int nb_ant)
 	int max;
 
 	max = max_bfs;
-	count = 0;
+	count = max_bfs;
 	args = init_args(nb_vertices, edges, max_bfs, nb_ant);
-	while (count < args->max_bfs)
+	while (count > 0)
 	{
-		if (!(path = BFS(args, count)))
+		if (!(path = BFS(args)))
         {
             // printf("%s\n", "HERE");
 			break;
         }
 		set_taken(args, path);
-		if (count == 0)
+		if (count == max_bfs)
 			flow = new_flow(path, 0);
 		else
 			add_flow(&flow, new_flow(path, 0));
-		// printf("%s\n", "HERE");
-		// print_path(path);
-		count++;
+		count--;
 		check_line(*edges);
-		// printf("%s\n", "here");
-		// for (int i = 0; i < args->queue.capacity; i++)
-		// {
-		// 	printf("--%d  et i: %d\n", args->taken[i], i);
-		// }
-		// printf("%s\n", "-------------");
 		free_queue_vertex(args->queue);
 	}
-	// printf("\n---------------------------------------\nAT THE END:\n");
 	*edges = ft_strdup(args->saved_map);
-	// printf("%s\n", "COUNT MOVE:");
-	// printf("count_move(*edges, nb_vertices, nb_ant): %d\n", count_move(*edges, nb_vertices, nb_ant));
 	free_flow(flow);
 	reset(args);
-	// print_map(*edges);
 }

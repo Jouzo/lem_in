@@ -34,18 +34,12 @@ static void		lem_in(t_data *data)
 	map = NULL;
 	if (check_parsing(*data))
 	{
-		// printf("done parsing\n");
 		swap_source(data);
 		map = stringify(data);
 		max_bfs = get_max_bfs(data->source, data->sink, data->ants, data->edges);
-		// print_map(map);
 		algo(&map, ft_sqrt(ft_strlen(map)), max_bfs, data->ants);
-		// printf("done algo\n");
-		// exit(1);
 		if (data->flag & MAP)
 			print_map(map);
-		// write(1, "\n", 1);
-		// printf("%s\n", "out of algo");
 		output(map, data);
 		ft_memdel((void**)&map);
 	}

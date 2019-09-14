@@ -174,7 +174,7 @@ void						free_flow(t_flow *flow);
 **  bfs functions
 */
 
-t_path						*BFS(t_args *args, int stage);
+t_path						*BFS(t_args *args);
 int							check_flow(int *path, int vertex, t_flow *flow,
 								int stage, int vertex_source);
 int							check_available(char *state, int vertex);
@@ -195,7 +195,7 @@ void						reinit_args(t_args *args);
 **	path functions
 */
 
-t_path						*find_path(t_args *args, int stage);
+t_path						*find_path(t_args *args);
 t_path						*get_path(int *path, t_args *args);
 
 void						print_map(char *s);
