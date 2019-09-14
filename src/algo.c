@@ -10,8 +10,6 @@ static t_args	*init_args(int nb_vertices, char **edges, int max_bfs, int nb_ant)
 		return (NULL);
 	if (!(args->taken = ft_memalloc((nb_vertices + 1) * sizeof(int))))
 		return (NULL);
-	if (!(args->update = ft_memalloc(sizeof(t_update))))
-		return (NULL);
 	ft_memset(args->state, INITIAL, nb_vertices);
 	args->max_bfs = max_bfs;
 	args->nb_ant = nb_ant;
@@ -24,9 +22,7 @@ static t_args	*init_args(int nb_vertices, char **edges, int max_bfs, int nb_ant)
 
 void	reinit_args(t_args *args)
 {
-	ft_memset(args->state, INITIAL, strlen(args->state));
-	if (!(args->update = ft_memalloc(sizeof(t_update))))
-		exit(1);
+	ft_memset(args->state, INITIAL, ft_strlen(args->state));
 	initialize(args->queue);
 }
 
@@ -70,7 +66,15 @@ void	set_taken(t_args *args, t_path *path)
 	}
 }
 
-
+void	free_args(t_args *args)
+{
+	free(args->taken);
+	free(args->state);
+	free(args->edges);
+	free(args->queue);
+	free(args->saved_map);
+	free(args);
+}
 
 void	algo(char **edges, int size, int max_bfs, int nb_ant)
 {
@@ -98,5 +102,6 @@ void	algo(char **edges, int size, int max_bfs, int nb_ant)
 	}
 	*edges = ft_strdup(args->saved_map);
 	free_flow(flow);
-	reset(args);
+	free_args(args);
+	// reset(args);
 }
