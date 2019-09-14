@@ -259,7 +259,7 @@ void						free_data(t_data *data);
 ****************************************
 */
 
-char						*stringify(t_data *data);
+int							stringify(t_data *data, char **map);
 char						**split_vertices(t_vertices *head);
 int							output(char *map, t_data *data);
 void						parse_map(char *map, int size, t_flow **flow);
@@ -271,7 +271,7 @@ void						parse_map(char *map, int size, t_flow **flow);
 int							first_path(char *map, int size);
 int							number_of_path(char *map, int size);
 int							get_one_path(int start,
-								t_flow **flow, char *map);
+								t_flow **flow, char *map, int size);
 
 /*
 ** check path functions

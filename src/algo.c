@@ -35,15 +35,13 @@ in the matrix, check if there is more than two '2 in the line
 which means the paths found are invlalid
 */
 
-void	check_line(char *map)
+void	check_line(char *map, int size)
 {
-	int size;
 	int i;
 	int j;
 	int count;
 
 	i = 0;
-	size = ft_sqrt(ft_strlen(map));
 	while (i < size)
 	{
 		j = 0;
@@ -74,7 +72,7 @@ void	set_taken(t_args *args, t_path *path)
 
 
 
-void	algo(char **edges, int nb_vertices, int max_bfs, int nb_ant)
+void	algo(char **edges, int size, int max_bfs, int nb_ant)
 {
 	int		count;
 	t_args	*args;
@@ -84,7 +82,7 @@ void	algo(char **edges, int nb_vertices, int max_bfs, int nb_ant)
 
 	max = max_bfs;
 	count = max_bfs;
-	args = init_args(nb_vertices, edges, max_bfs, nb_ant);
+	args = init_args(size, edges, max_bfs, nb_ant);
 	while (count > 0)
 	{
 		if (!(path = BFS(args)))
@@ -95,7 +93,7 @@ void	algo(char **edges, int nb_vertices, int max_bfs, int nb_ant)
 		else
 			add_flow(&flow, new_flow(path, 0));
 		count--;
-		check_line(*edges);
+		check_line(*edges, args->nb_ant);
 		free_queue_vertex(args->queue);
 	}
 	*edges = ft_strdup(args->saved_map);

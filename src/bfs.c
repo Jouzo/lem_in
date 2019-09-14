@@ -22,7 +22,6 @@ int				get_max_bfs(char *source, char *sink, int ants, t_edges *edges)
 			j++;
 		tmp = tmp->next;
 	}
-
 	return (ft_min(i, ft_min(j, ants)));
 }
 

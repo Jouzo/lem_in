@@ -2,8 +2,8 @@
 
 void	fill_string(char **s, int x, int y, int size)
 {
-	(*s)[y * size + x] = '1';
-	(*s)[x * size + y] = '1';
+	(*s)[y * size + x] |= LINK;
+	(*s)[x * size + y] |= LINK;
 }
 
 void	get_coordinates(t_edges *edge, char **split, int *x, int *y)
@@ -53,18 +53,15 @@ int		assign(t_edges *edge, t_vertices *vertice, char **s, int size)
 	return (free_split(split, 1));
 }
 
-char	*stringify(t_data *data)
+int		stringify(t_data *data, char **map)
 {
-	char	*s;
-	size_t	size;
+	int		size;
 
-	size = 0;
 	size = vertices_len(data->vertices);
-	if (!(s = ft_strnew(sizeof(char) * size * size)))
-		return (NULL);
-	ft_memset(s, '0', size * size);
-	if (assign(data->edges, data->vertices, &s, size) == -1)
-		return (NULL);
-	// print_map(s);
-	return (s);
+	if (!(*map = ft_strnew(sizeof(char) * size * size)))
+		return (0);
+	ft_memset(*map, '0', size * size);
+	if (assign(data->edges, data->vertices, map, size) == -1)
+		return (0);
+	return (size);
 }

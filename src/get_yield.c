@@ -73,16 +73,11 @@ int		count_move(char *map, int size, int ants)
 	int ret;
 
 	n = number_of_path(map, size);
-	// printf("number of path: %d\n", n);
 	if (!(arr = ft_memalloc(n * sizeof(int))))
 		return (0);
 	get_lengths(map, size, arr, n);
-	// ft_print_arr(arr, n);
 	set_ants(arr, n, ants);
-	// printf("%s\n", "PRINTA RR:");
-	// ft_print_arr(arr, n);
 	ret = arr[0];
-	// printf("ret: %d\n", ret);
 	free(arr);
 	return (ret);
 }
