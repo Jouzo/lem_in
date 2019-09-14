@@ -1,125 +1,93 @@
 #include "lem_in.h"
 
-static int     path_size(char *map, int vertex, int size)
+static int		path_size(char *map, int vertex, int size)
 {
-    int path_size = 0;
-    int i;
-    int tmp;
+	int path_size;
+	int i;
+	int tmp;
 
-  	i = 1;
-    tmp = vertex;
+	i = 1;
+	path_size = 0;
+	tmp = vertex;
 	while (i < size && vertex != size - 1)
 	{
 		if (map[vertex + i * size] == TAKEN && i != tmp)
 		{
-            tmp = vertex;
+			tmp = vertex;
 			path_size++;
-            vertex = i;
-            i = 0;
+			vertex = i;
+			i = 0;
 		}
 		i++;
 	}
-    return (path_size);
+	return (path_size);
 }
 
-static void    get_min_and_max_len(char *map, int size, int *min, int *max)
+static void		set_ants(int *arr, int n, int ants)
 {
-    int i;
-    int len;
+	int i;
 
-    len = 0;
-    *min = 0;
-    *max = 0;
-    i = 0;
-    while (i < size)
-    {
-        if (map[i] == TAKEN)
-        {
-            len = path_size(map, i, size);
-            if (*min == 0)
-                *min = len;
-            *min = len < *min ? len : *min;
-            *max = len > *max ? len : *max;
-        }
-        i++;
-    }
+	i = 1;
+	while (i < n)
+	{
+		arr[i] = arr[0] - arr[i];
+		i++;
+	}
+	while (ants > 0)
+	{
+		i = 0;
+		while (i < n && ants > 0)
+		{
+			if (arr[i] >= 0)
+				ants--;
+			(arr[i++])++;
+		}
+	}
 }
 
-// static void     get_lengths(char *map, int *len, int size)
-// {
-//     int i;
-//     int j;
-
-//     i = 0;
-//     j = 0;
-//     printf("size: %d\n", size);
-//     while (i < size)
-//     {
-//         printf("=-=-=-=-map[i]: %d\n", map[i]);
-//         if (map[i] == TAKEN)
-//         {
-//             len[j] = path_size(map, i, size);
-//             printf("----len[j]: %d\n", len[j]);
-//             j++;
-//         }
-//         i++;
-//     }
-//     i = 0;
-//     while (i < size - 1)
-//     {
-//         if (len[i] > len[i + 1])
-//         {
-//             ft_swap(&len[i], &len[i + 1]);
-//             i = 0;
-//         }
-//         i++;
-//     }
-// }
-
-static int      count_move(char *map, int size, int ants)
+static void		get_lengths(char *map, int map_size, int *arr, int n)
 {
-    int min;
-    int max;
-    int nb_path;
+	int i;
+	int j;
 
-    nb_path = number_of_path(map, size);
-    get_min_and_max_len(map, size, &min, &max);
-    if (nb_path)
-        return (ants / (nb_path) + (max - min) / 2 + min);
-    else
-        return (0);
+	i = 0;
+	j = 0;
+	while (i < map_size)
+	{
+		if (map[i] == TAKEN)
+		{
+			arr[j] = path_size(map, i, map_size);
+			j++;
+		}
+		i++;
+	}
+	ft_insertion_sort(arr, n);
 }
 
-// static int      count_move(char *map, int size, int ants)
-// {
-//     int nb_path;
-//     int *len;
-//     int min;
-//     int max;
-
-//     if (!(len = ft_memalloc(size * sizeof(int))))
-//         return (0);
-//     nb_path = number_of_path(map, size);
-//     get_lengths(map, len, nb_path);
-//     get_min_and_max_len(map, size, &min, &max);
-//     for (int i = 0; i < nb_path; i++)
-//         printf("len[i]: %d\n", len[i]);
-//     if (nb_path)
-//         return (ants / (nb_path) + (max - min) / 2 + min);
-//     else
-//         return (0);
-// }
-
-
-
-bool		check_path_yield(t_args *args, int *path, int size)
+static int		count_move(char *map, int size, int ants)
 {
-	char *map_tmp;
-	int u;
-    int count;
-    static int i = 0;
+	int n;
+	int *arr;
+	int ret;
 
-    i++;
+	n = number_of_path(map, size);
+	if (!(arr = ft_memalloc(n * sizeof(int))))
+		return (0);
+	get_lengths(map, size, arr, n);
+	set_ants(arr, n, ants);
+	ret = arr[0];
+	free(arr);
+	return (arr[0]);
+}
+
+bool			check_path_yield(t_args *args, int *path, int size)
+{
+	char		*map_tmp;
+	int			u;
+	int			count;
+	static int	i = 0;
+
+	i++;
 	u = size - 1;
 	map_tmp = ft_strdup(args->edges);
 	while (u > 0)
@@ -127,18 +95,15 @@ bool		check_path_yield(t_args *args, int *path, int size)
 		update_map(map_tmp, u, path[u], size);
 		u = path[u];
 	}
-	// print_map(map_tmp);
-    count = count_move(map_tmp, size, args->nb_ant);
-    ft_strdel(&map_tmp);
-    // printf("count: %d\n", count);
-    if (!args->step_number || args->step_number > count)
-    {
-        args->step_number = count;
+	count = count_move(map_tmp, size, args->nb_ant);
+	ft_strdel(&map_tmp);
+	if (!args->step_number || args->step_number > count)
+	{
+		args->step_number = count;
 		if (!(args->saved_map = ft_strdup(args->edges)))
-            return (0);
-        // printf("args->step_number: %d and max_bfs: %d\n", args->step_number, args->max_bfs);
-        return (1);
-    }
-    else
-        return (1);
+			return (0);
+		return (1);
+	}
+	else
+		return (0);
 }

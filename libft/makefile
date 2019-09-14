@@ -6,7 +6,7 @@
 #    By: mmovahhe <mmovahhe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 18:10:13 by jdescler          #+#    #+#              #
-#    Updated: 2019/09/13 16:52:21 by mmovahhe         ###   ########.fr        #
+#    Updated: 2019/09/14 13:35:38 by mmovahhe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,6 +91,10 @@ SRCS_NAMES = 		ft_abs.c\
 	   				multi_free.c\
 	   				ft_atoll.c\
 	   				ft_swap.c\
+					ft_ceil.c\
+	   				ft_insertion_sort.c\
+	   				ft_print_arr.c\
+	   				ft_min.c\
 
 OBJS_NAMES = $(SRCS_NAMES:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: mmovahhe <mmovahhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 16:59:15 by jdescler          #+#    #+#             */
-/*   Updated: 2019/09/13 16:51:50 by mmovahhe         ###   ########.fr       */
+/*   Updated: 2019/09/14 13:42:19 by mmovahhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <string.h>
 # include <unistd.h>
 
-# define BUFF_GNL 32
+# define BUFF_SIZE 32
 # define FD_MAX 15
 
 typedef struct		s_list
@@ -101,6 +101,8 @@ size_t				ft_abs(int i);
 int					ft_sizeofint(int n);
 int					ft_pow(int nb, int pow);
 int					ft_sqrt(int nb);
+int					ft_ceil(int a, int b);
+int					ft_min(int a, int b);
 
 /*
  ** Print functions
@@ -114,6 +116,7 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
+void				ft_print_arr(int *arr, int n);
 
 /*
  ** check & modif functions
@@ -131,6 +134,7 @@ int					ft_isprint(int c);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
 void				ft_swap(int *a, int *b);
+void				ft_insertion_sort(int *arr, int n);
 
 /*
  ** GNL

@@ -11,7 +11,6 @@ static void			count_ants_per_path(t_flow *flow)
 	{
 		tmp->next->ants = flow->size - tmp->next->size;
 		tmp = tmp->next;
-		// printf("path size: %d\n", tmp->size);
 	}
 	flow->ants = 0;
 }

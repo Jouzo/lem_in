@@ -282,7 +282,7 @@ bool	check_link(t_args *args, int vertex, int i);
 bool	check_end(t_args *args, int vertex, int i);
 bool	check_taken(t_args *args, int vertex);
 bool	check_connection(t_args *args, int vertex, int to);
-int		check_test(int vertex, t_args *args);
+int		get_previous(int vertex, t_args *args);
 
 
 /*
@@ -303,14 +303,7 @@ void						print_output(char **vertices,
 
 int     check_map(int u, int v, t_args *args, int stage, int *path);
 void print_queue(t_queue queue);
-int		find_forbidden(char *map, int v, int size);
 
 
-
-// TO DELETE
-
-int		check_mapforbidden(int u, int v, t_args *args, int stage, int *path);
-
-int		find_previous(char *map, int v, int size, int u);
 
 #endif

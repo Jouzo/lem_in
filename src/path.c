@@ -49,7 +49,6 @@ static int		find_sink(char *map, int u, int v, t_path **path)
 	i = 0;
 	while (i < size)
 	{
-		// printf("%d\n", i);
 		if (map[size * u + i] == TAKEN && i != v)
 		{
 			path_size++;
@@ -61,8 +60,6 @@ static int		find_sink(char *map, int u, int v, t_path **path)
 		}
 		i++;
 	}
-	// printf("%s\n", "RETURNING NO SOURCE");
-	// printf("%d\n", u);
 	return (0);
 }
 
@@ -73,10 +70,6 @@ int				get_one_path(int start, t_flow **flow, char *map)
 
 	path = NULL;
 	path_size = find_sink(map, start, 0, &path);
-	if (path_size == 0)
-		path_size = 10000;
-	// printf("%s %d\n", "PATH SIZE: ", path_size);
-	
 	if (!(*flow))
 		*flow = new_flow(path, path_size);
 	else

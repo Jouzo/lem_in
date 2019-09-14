@@ -124,7 +124,7 @@ bool	handle_taken(t_args *args, int vertex, int to, int *back_test, int *path)
 
 	to_source = 0;
 	skip_path = 0;
-	rev = check_test(vertex, args);
+	rev = get_previous(vertex, args);
 	// printf("back test %d, vertex: %d\n", back_test[vertex], vertex);
 	// printf("%s\n", "tHERE");
 	if (!back_test[vertex] && rev != -1)
