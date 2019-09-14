@@ -40,7 +40,6 @@ t_path	*get_path(int *path, t_args *args)
 {
 	int		u;
 	t_path	*aug_path;
-	t_update *tmp;
 	int size;
 	static int count = 10;
 
@@ -51,7 +50,6 @@ t_path	*get_path(int *path, t_args *args)
 			return (NULL);
 	}
 	size = 0;
-	tmp = args->update;
 	u = args->nb_vertice - 1;
 	if (path[u] == 0 && args->edges[u] == '0')
 	{
@@ -60,7 +58,6 @@ t_path	*get_path(int *path, t_args *args)
 	}
 	aug_path = retrieve_key_val(args, path, u, &size);
 	ft_memdel((void**)&path);
-	del_update_list(args->update);
 	return (aug_path);
 }
 

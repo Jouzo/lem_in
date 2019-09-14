@@ -105,14 +105,6 @@ typedef struct				s_queue
 	int						count;
 }							t_queue;
 
-typedef struct				s_update
-{
-	int						vertex;
-	int						to_sink;
-	int						to_source;
-	struct s_update			*next;
-}							t_update;
-
 typedef struct				s_args
 {
 	t_queue					*queue;
@@ -124,7 +116,6 @@ typedef struct				s_args
 	int						nb_ant;
 	int						step_number;
 	char					*saved_map;
-	t_update				*update;
 }							t_args;
 
 /*
@@ -206,9 +197,6 @@ void						check_reverse(t_args *args, int vertex, char **map);
 **	update functions
 */
 
-void	check_update(t_args *args, int vertex);
-void	del_update_list(t_update *head);
-void	get_update(t_update **update, int vertex, int rev, int to);
 void	update_map(char *map, int u, int v, int size);
 
 /*
