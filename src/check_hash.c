@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_hash.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmovahhe <mmovahhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 19:29:33 by jdescler          #+#    #+#             */
-/*   Updated: 2019/09/15 19:29:33 by jdescler         ###   ########.fr       */
+/*   Updated: 2019/09/15 19:33:23 by mmovahhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@ static int		parse_source_sink(char *s, t_data *data)
 {
 	if (s)
 	{
-		if (strcmp(s, "##start") == 0 && !data->set_source)
+		if (ft_strcmp(s, "##start") == 0 && !data->set_source)
 		{
 			data->set_source = 1;
 			return (1);
 		}
-		else if (strcmp(s, "##start") == 0 && data->set_source)
+		else if (ft_strcmp(s, "##start") == 0 && data->set_source)
 			return (-1);
-		else if (strcmp(s, "##end") == 0 && !data->set_sink)
+		else if (ft_strcmp(s, "##end") == 0 && !data->set_sink)
 		{
 			data->set_sink = 1;
 			return (1);
 		}
-		else if (strcmp(s, "##end") == 0 && data->set_sink)
+		else if (ft_strcmp(s, "##end") == 0 && data->set_sink)
 			return (-1);
 		return (0);
 	}
