@@ -116,6 +116,8 @@ typedef struct				s_args
 	int						nb_ant;
 	int						step_number;
 	char					*saved_map;
+	int						*went_back;
+	int						*path;
 }							t_args;
 
 /*
@@ -160,12 +162,13 @@ void						reset(t_args *args);
 void						free_queue(t_queue *queue);
 void						free_path(t_path *head);
 void						free_flow(t_flow *flow);
+void						free_args(t_args *args);
 
 /*
 **  bfs functions
 */
 
-t_path						*BFS(t_args *args);
+t_path						*bfs(t_args *args);
 int							check_flow(int *path, int vertex, t_flow *flow,
 								int stage, int vertex_source);
 int							check_available(char *state, int vertex);
@@ -187,7 +190,7 @@ void						reinit_args(t_args *args);
 */
 
 t_path						*find_path(t_args *args);
-t_path						*get_path(int *path, t_args *args);
+t_path						*get_path(t_args *args);
 
 void						print_map(char *s);
 void						go_reverse(int vertex, int i);
@@ -203,7 +206,7 @@ void	update_map(char *map, int u, int v, int size);
 **	Yield functions
 */
 
-bool		check_path_yield(t_args *args, int *path, int size);
+bool		check_path_yield(t_args *args, int size);
 
 /*
 ****************************************

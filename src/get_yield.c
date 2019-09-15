@@ -82,7 +82,7 @@ int		count_move(char *map, int size, int ants)
 	return (ret);
 }
 
-bool			check_path_yield(t_args *args, int *path, int size)
+bool			check_path_yield(t_args *args, int size)
 {
 	char		*map_tmp;
 	int			u;
@@ -94,8 +94,8 @@ bool			check_path_yield(t_args *args, int *path, int size)
 	map_tmp = ft_strdup(args->edges);
 	while (u > 0)
 	{
-		update_map(map_tmp, u, path[u], size);
-		u = path[u];
+		update_map(map_tmp, u, args->path[u], size);
+		u = args->path[u];
 	}
 	count = count_move(map_tmp, size, args->nb_ant);
 	if ((!args->step_number || args->step_number > count))
