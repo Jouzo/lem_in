@@ -30,13 +30,14 @@ static int		find_source(char *map, int u, int v, int size)
 ** it gives them the values of the two adjacent vertex of the one you give him
 */
 
-static void		get_adj_vertice(char *map, int v, int size, int *val1, int *val2)
+static int		get_adj_vertice(char *map, int v, int size, int *val1)
 {
 	int i;
+	int val2;
 
 	i = 0;
+	val2 = 0;
 	*val1 = 0;
-	*val2 = 0;
 	while (i < size)
 	{
 		if (map[size * v + i] & TAKEN)
@@ -44,14 +45,13 @@ static void		get_adj_vertice(char *map, int v, int size, int *val1, int *val2)
 			if (!(*val1))
 				*val1 = i;
 			else
-				*val2 = i;
+				val2 = i;
 		}
-		if (*val2 == size - 1)
-			return ;
-		if (*val1 && *val2)
-			break ;
+		if (val2 == size - 1 || (*val1 && val2))
+			return (val2);
 		i++;
 	}
+	return (val2);
 }
 
 /*
@@ -64,7 +64,7 @@ static int		find_previous(char *map, int v, int size)
 	int val1;
 	int val2;
 
-	get_adj_vertice(map, v, size, &val1, &val2);
+	val2 = get_adj_vertice(map, v, size, &val1);
 	if (v == val1 || v == val2 || val1 == 0 || val2 == 0)
 	{
 		return (0);
