@@ -15,9 +15,9 @@
 
 int		parse_ants(t_data *data, char *s)
 {
-	if (strcmp(s, "0") == 0)
+	if (ft_strcmp(s, "0") == 0)
 		return (0);
-	else if (atoi(s) <= 0)
+	else if (ft_atoi(s) <= 0)
 		return (-1);
 	else
 	{
@@ -25,7 +25,7 @@ int		parse_ants(t_data *data, char *s)
 		{
 			if (ft_atoll(s) > INT_MAX)
 				return (-1);
-			data->ants = atoi(s);
+			data->ants = ft_atoi(s);
 			return (1);
 		}
 		else
