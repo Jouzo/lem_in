@@ -6,7 +6,7 @@
 /*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 19:26:48 by jdescler          #+#    #+#             */
-/*   Updated: 2019/09/15 19:26:49 by jdescler         ###   ########.fr       */
+/*   Updated: 2019/09/15 22:38:18 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void						change_state(char **state, int vertex,
 */
 
 bool						is_empty(t_queue *queue);
-t_queue						*create_queue(void);
 int							dequeue(t_queue *queue);
 void						enqueue(t_queue *queue, int vertex);
 void						free_queue_vertex(t_queue *queue);
@@ -85,14 +84,14 @@ void						free_args(t_args *args);
 **	path functions
 */
 
-t_path						*find_path(t_args *args);
-t_path						*get_path(t_args *args);
+bool						find_path(t_args *args);
+bool						get_path(t_args *args);
 
 /*
 **	update functions
 */
 
-void						update_map(char *map, int u, int v, int size);
+void						update_from_path(t_args *args, char *map, int u);
 
 /*
 **	yield functions

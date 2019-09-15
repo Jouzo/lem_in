@@ -6,7 +6,7 @@
 /*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 19:29:20 by jdescler          #+#    #+#             */
-/*   Updated: 2019/09/15 19:29:20 by jdescler         ###   ########.fr       */
+/*   Updated: 2019/09/15 22:38:02 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int		go_to_next(t_args *args, int vertex)
 	return (0);
 }
 
-t_path	*find_path(t_args *args)
+bool		find_path(t_args *args)
 {
 	int vertex;
 

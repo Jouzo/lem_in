@@ -6,54 +6,31 @@
 /*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 19:29:06 by jdescler          #+#    #+#             */
-/*   Updated: 2019/09/15 19:29:07 by jdescler         ###   ########.fr       */
+/*   Updated: 2019/09/15 22:45:51 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 #include "libft.h"
 
-void		update_map(char *map, int u, int v, int size)
+static void		update_map(char *map, int u, int v, int size)
 {
 	map[v * size + u] ^= 3;
 	map[u * size + v] ^= 3;
 }
 
-int			path_lenght(t_path *path)
+void		update_from_path(t_args *args, char *map, int u)
 {
-	t_path	*tmp;
-	int		i;
-
-	i = 0;
-	tmp = path;
-	while (tmp)
-	{
-		tmp = tmp->next;
-		i++;
-	}
-	return (i);
-}
-
-t_path		*retrieve_key_val(t_args *args, int u, int *size)
-{
-	t_path	*aug_path;
-
-	aug_path = init_path(u);
 	while (u > 0)
 	{
-		(*size)++;
-		update_map(args->edges, u, args->path[u], args->nb_vertice);
+		update_map(map, u, args->path[u], args->nb_vertice);
 		u = args->path[u];
-		push_vertex(&aug_path, u);
 	}
-	return (aug_path);
 }
 
-t_path		*get_path(t_args *args)
+bool		get_path(t_args *args)
 {
 	int				u;
-	t_path			*aug_path;
-	int				size;
 	static int		count = 10;
 
 	if (!(check_path_yield(args, args->nb_vertice)))
@@ -65,13 +42,18 @@ t_path		*get_path(t_args *args)
 			return (NULL);
 		}
 	}
-	size = 0;
 	u = args->nb_vertice - 1;
 	if (args->path[u] == 0 && args->edges[u] == '0')
 	{
 		ft_memdel((void**)&args->path);
 		return (NULL);
 	}
-	aug_path = retrieve_key_val(args, u, &size);
-	return (aug_path);
+	update_from_path(args, args->edges, u);
+	while (u > 0)
+	{
+		u = args->path[u];
+		args->taken[u] = 1;
+	}
+	args->taken[u] = 0;
+	return (1);
 }

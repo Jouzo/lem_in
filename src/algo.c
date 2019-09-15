@@ -6,7 +6,7 @@
 /*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 19:29:47 by jdescler          #+#    #+#             */
-/*   Updated: 2019/09/15 19:29:47 by jdescler         ###   ########.fr       */
+/*   Updated: 2019/09/15 22:42:59 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static t_args	*init_args(int nb_vert, char **edges, int max_bfs, int nb_ant)
 	args->nb_ant = nb_ant;
 	args->step_number = 0;
 	args->nb_vertice = nb_vert;
-	args->queue = create_queue();
+	if (!(args->queue = ft_memalloc(sizeof(t_queue))))
+		return (NULL);
 	return (args);
 }
 
@@ -48,25 +49,10 @@ void			reinit_args(t_args *args)
 	ft_bzero(args->queue, sizeof(t_queue));
 }
 
-void			set_taken(t_args *args, t_path *path)
-{
-	t_path *tmp;
-
-	tmp = path;
-	while (tmp)
-	{
-		if (tmp->vertex && tmp->vertex != args->nb_vertice - 1)
-			args->taken[tmp->vertex] = 1;
-		tmp = tmp->next;
-	}
-}
-
 void			algo(char **edges, int size, int max_bfs, int nb_ant)
 {
 	int		count;
 	t_args	*args;
-	t_path	*path;
-	t_flow	*flow;
 	int		max;
 
 	max = max_bfs;
@@ -74,13 +60,8 @@ void			algo(char **edges, int size, int max_bfs, int nb_ant)
 	args = init_args(size, edges, max_bfs, nb_ant);
 	while (count > 0)
 	{
-		if (!(path = bfs(args)))
+		if (!bfs(args))
 			break ;
-		set_taken(args, path);
-		if (count == max_bfs)
-			flow = new_flow(path, 0);
-		else
-			add_flow(&flow, new_flow(path, 0));
 		count--;
 		free_queue_vertex(args->queue);
 	}

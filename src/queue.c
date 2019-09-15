@@ -6,7 +6,7 @@
 /*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 19:27:51 by jdescler          #+#    #+#             */
-/*   Updated: 2019/09/15 19:27:52 by jdescler         ###   ########.fr       */
+/*   Updated: 2019/09/15 22:19:35 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,6 @@ int			dequeue(t_queue *queue)
 	queue->count--;
 	free(tmp);
 	return (n);
-}
-
-t_queue		*create_queue(void)
-{
-	t_queue *queue;
-
-	if (!(queue = ft_memalloc(sizeof(t_queue))))
-		return (NULL);
-	return (queue);
 }
 
 void		free_queue_vertex(t_queue *head)
