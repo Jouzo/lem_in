@@ -10,24 +10,8 @@
 # define TAKEN 1 << 1
 # define COLOR 1 << 1
 
-# define RST  "\x1B[0m"
-# define BOLD "\x1B[1m"
-# define ITALIC "\x1B[3m"
-
 # define RED  "\x1B[31m"
-# define GRN  "\x1B[32m"
-# define YEL  "\x1B[33m"
-# define BLU  "\x1B[34m"
-# define MAG  "\x1B[35m"
-# define CYN  "\x1B[36m"
-# define WHT  "\x1B[37m"
-
-/*
-****************************************
-*********   OUTPUT FUNCTIONS    ********
-****************************************
-*/
-
+# define RST  "\x1B[0m"
 
 int							output(char *map, t_data *data);
 size_t						vertices_len(t_vertices *head);
@@ -40,7 +24,6 @@ int							free_split(char **split, int ret);
 int							number_of_path(char *map, int size);
 int							get_one_path(int start,
 								t_flow **flow, char *map, int size);
-
 
 /*
 ** ants functions

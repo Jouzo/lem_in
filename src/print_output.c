@@ -1,5 +1,6 @@
 #include "output.h"
 #include "libft.h"
+#include <stdio.h>
 
 int g_color = 0;
 
@@ -76,11 +77,11 @@ static void		send_ants_in_path(t_flow *flow, int count, char **vertices)
 	{
 		if (tmp->ant)
 		{
-			(g_color > 0 && (tmp->vertex == size - 1))
-				? write(1, RED, 5) : 0;
-			(g_color > 0 && (tmp->vertex == size - 1))
-				? write(1, RST, 4) : 0;
+			if (g_color > 0 && tmp->vertex == size - 1)
+				write(1, RED, 5);
 			formatted_output(vertices[tmp->vertex], tmp->ant);
+			if (g_color > 0 && tmp->vertex == size - 1)
+				write(1, RST, 4);
 			ft_putchar(' ');
 		}
 		tmp = tmp->next;
@@ -97,6 +98,7 @@ void			print_output(char **vertices, t_flow *flow, int color)
 
 	nb_path = nb_used_path(flow);
 	g_color = color;
+	printf("%d\n", g_color);
 	count = 0;
 	while (count < flow->ants + flow->size - 1)
 	{

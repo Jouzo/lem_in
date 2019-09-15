@@ -24,7 +24,8 @@
 **  algo functions
 */
 
-void						algo(char **edges, int nb_vertices, int max_bfs, int nb_ant);
+void						algo(char **edges, int nb_vertices,
+								int max_bfs, int nb_ant);
 void						reinit_args(t_args *args);
 
 /*
@@ -43,7 +44,7 @@ bool						is_empty(t_queue *queue);
 t_queue						*create_queue(void);
 int							dequeue(t_queue *queue);
 void						enqueue(t_queue *queue, int vertex);
-void    					free_queue_vertex(t_queue *queue);
+void						free_queue_vertex(t_queue *queue);
 
 /*
 ** linked list functions for t_path
