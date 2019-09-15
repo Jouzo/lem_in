@@ -34,19 +34,3 @@ int			add_flow(t_flow **head, t_flow *new)
 	}
 	return (1);
 }
-
-void		print_flow(t_flow *head)
-{
-	t_flow	*current;
-
-	current = head;
-	while (current != NULL)
-	{
-		// printf("%d\n", current->path->vertex);
-		printf("path size: %d\n", current->size);
-		printf("%s\n", "");
-		printf("path ants: %d\n", current->ants);
-		// print_path(current->path);
-		current = current->next;
-	}
-}

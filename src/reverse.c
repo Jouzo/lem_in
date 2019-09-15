@@ -30,7 +30,7 @@ static int		find_source(char *map, int u, int v, int size)
 ** it gives them the values of the two adjacent vertex of the one you give him
 */
 
-static void	get_adj_vertice(char *map, int v, int size, int *val1, int *val2)
+static void		get_adj_vertice(char *map, int v, int size, int *val1, int *val2)
 {
 	int i;
 
@@ -76,7 +76,7 @@ static int		find_previous(char *map, int v, int size)
 ** check que le vertex ne soit pas TAKEN
 */
 
-bool	check_taken(t_args *args, int vertex)
+bool			check_taken(t_args *args, int vertex)
 {
 	int i;
 	int size;
@@ -94,7 +94,7 @@ bool	check_taken(t_args *args, int vertex)
 	return (1);
 }
 
-int		get_previous(int vertex, t_args *args)
+int				get_previous(int vertex, t_args *args)
 {
 	int i;
 	int size;

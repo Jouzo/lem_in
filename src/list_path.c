@@ -23,20 +23,3 @@ int			push_vertex(t_path **head, int vertex)
 		return (-1);
 	return (1);
 }
-
-void		print_path(t_path *head)
-{
-	t_path *current;
-
-	current = head;
-	printf("\n");
-	printf("inside print path\n");
-	printf("\n");
-	while (current != NULL)
-	{
-		printf("vertex to the source: %d\n", current->vertex);
-		printf("ant no: %d\n", current->ant);
-		current = current->next;
-	}
-	printf("\n");
-}

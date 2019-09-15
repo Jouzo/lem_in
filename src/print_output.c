@@ -44,35 +44,33 @@ static void		move_up_path(t_path *path)
 	}
 }
 
-static int				nb_used_path(t_flow *flow)
+static int		nb_used_path(t_flow *flow)
 {
-	t_flow *tmp;
-	int count;
+	t_flow	*tmp;
+	int		count;
 
 	count = 0;
 	tmp = flow;
 	while (tmp && tmp->ants > 0)
 	{
-		// printf("%s size: %d, number of ants: %d\n", "PATHS:", tmp->size, tmp->ants);
 		tmp = tmp->next;
 		count++;
 	}
 	return (count);
 }
 
-static void			send_ants_in_path(t_flow *flow, int count, char **vertices)
+static void		send_ants_in_path(t_flow *flow, int count, char **vertices)
 {
-	t_path *tmp;
-	int		size;
-	size = 0;
-	static int ant_id = 1;
+	t_path		*tmp;
+	int			size;
+	static int	ant_id = 1;
 
+	size = 0;
 	tmp = flow->path;
 	while (vertices[size])
 		size++;
-	if (flow->ants > count) {
+	if (flow->ants > count)
 		tmp->ant = ant_id++;
-	}
 	while (tmp)
 	{
 		if (tmp->ant)
@@ -82,48 +80,21 @@ static void			send_ants_in_path(t_flow *flow, int count, char **vertices)
 			(g_color > 0 && (tmp->vertex == size - 1))
 				? write(1, RST, 4) : 0;
 			formatted_output(vertices[tmp->vertex], tmp->ant);
-		ft_putchar(' ');
+			ft_putchar(' ');
 		}
 		tmp = tmp->next;
 	}
 	move_up_path(flow->path);
 }
 
-// int path_lenght(t_path *path)
-// {
-// 	t_path *tmp;
-// 	int i;
-
-// 	i = 0;
-// 	tmp = path;
-// 	while (tmp)
-// 	{
-// 		tmp = tmp->next;
-// 		i++;
-// 	}
-// 	return (i);
-// }
-
-void test(t_flow *flow)
-{
-	t_flow *tmp = flow;
-	while (tmp)
-	{
-		// printf("size: %d and ants: %d\n", tmp->size, tmp->ants);
-		tmp = tmp->next;
-	}
-}
-
 void			print_output(char **vertices, t_flow *flow, int color)
 {
-	test(flow);
-	t_flow *tmp;
-	int path_id;
-	int count;
-	int nb_path = nb_used_path(flow);
-	// printf("flow->size %d\n", flow->size);
-	// printf("flow->ants %d\n", flow->ants);
-	// exit(1);
+	t_flow	*tmp;
+	int		path_id;
+	int		count;
+	int		nb_path;
+
+	nb_path = nb_used_path(flow);
 	g_color = color;
 	count = 0;
 	while (count < flow->ants + flow->size - 1)

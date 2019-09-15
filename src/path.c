@@ -18,9 +18,9 @@ int				number_of_path(char *map, int size)
 
 static int		find_sink(char *map, int u, int v, t_path **path, int size)
 {
-	int i;
-	static int path_size = 1;
-	int tmp;
+	int			i;
+	int			tmp;
+	static int	path_size = 1;
 
 	tmp = 0;
 	if (u == size - 1)
@@ -51,11 +51,9 @@ int				get_one_path(int start, t_flow **flow, char *map, int size)
 {
 	t_path	*path;
 	int		path_size;
-	// static int i = 0;
 
 	path = NULL;
 	path_size = find_sink(map, start, 0, &path, size);
-	// printf("i:%d\n", i++);
 	if (!(*flow))
 		*flow = new_flow(path, path_size);
 	else

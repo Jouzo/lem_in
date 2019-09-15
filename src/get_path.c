@@ -1,15 +1,15 @@
 #include "lem_in.h"
 
-void	update_map(char *map, int u, int v, int size)
+void		update_map(char *map, int u, int v, int size)
 {
-		map[v * size + u] ^= 3;
-		map[u * size + v] ^= 3;
+	map[v * size + u] ^= 3;
+	map[u * size + v] ^= 3;
 }
 
-int path_lenght(t_path *path)
+int			path_lenght(t_path *path)
 {
-	t_path *tmp;
-	int i;
+	t_path	*tmp;
+	int		i;
 
 	i = 0;
 	tmp = path;
@@ -21,7 +21,7 @@ int path_lenght(t_path *path)
 	return (i);
 }
 
-t_path	*retrieve_key_val(t_args *args, int u, int *size)
+t_path		*retrieve_key_val(t_args *args, int u, int *size)
 {
 	t_path	*aug_path;
 
@@ -36,12 +36,12 @@ t_path	*retrieve_key_val(t_args *args, int u, int *size)
 	return (aug_path);
 }
 
-t_path	*get_path(t_args *args)
+t_path		*get_path(t_args *args)
 {
-	int		u;
-	t_path	*aug_path;
-	int size;
-	static int count = 10;
+	int				u;
+	t_path			*aug_path;
+	int				size;
+	static int		count = 10;
 
 	if (!(check_path_yield(args, args->nb_vertice)))
 	{

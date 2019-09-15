@@ -34,12 +34,11 @@ void		parse_map(char *map, int size, t_flow **flow)
 			get_one_path(i, flow, map, size);
 		i++;
 	}
-
 }
 
 int			output(char *map, t_data *data)
 {
-	char	**split; 
+	char	**split;
 	int		size;
 	t_flow	*flow;
 	int		nb_path;

@@ -82,15 +82,3 @@ int				add_edge(t_edges **head, char *from, char *to)
 	*head = new;
 	return (1);
 }
-
-void			print_edges(t_edges *head)
-{
-	t_edges *current;
-
-	current = head;
-	while (current != NULL)
-	{
-		// printf("edge from : %s to: %s\n", current->from, current->to);
-		current = current->next;
-	}
-}

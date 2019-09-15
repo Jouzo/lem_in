@@ -60,17 +60,3 @@ int				add_vertex(t_vertices **head, char *name, int x, int y)
 	*head = new;
 	return (1);
 }
-
-void			print_vertices(t_vertices *head)
-{
-	t_vertices *current;
-
-	current = head;
-	while (current)
-	{
-		if (current->name && current->x && current->y)
-			printf("vertices : %s, x : %d, y: %d\n",
-				current->name, current->x, current->y);
-		current = current->next;
-	}
-}

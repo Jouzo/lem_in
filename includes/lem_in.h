@@ -137,7 +137,7 @@ int							dequeue(t_queue *queue);
 void						enqueue(t_queue *queue, int vertex);
 void						initialize(t_queue *queue);
 void    					free_queue_vertex(t_queue *queue);
-void						display_queue(t_queue *head);
+
 /*
 ** linked list functions for t_path
 */
@@ -151,7 +151,6 @@ t_path						*init_path(int vertex);
 */
 
 t_flow						*new_flow(t_path *head, int size);
-void						print_flow(t_flow *head);
 int							add_flow(t_flow **head, t_flow *new);
 
 /*
@@ -162,7 +161,6 @@ void						reset(t_args *args);
 void						free_queue(t_queue *queue);
 void						free_path(t_path *head);
 void						free_flow(t_flow *flow);
-void						free_args(t_args *args);
 
 /*
 **  bfs functions
@@ -293,7 +291,6 @@ void						print_output(char **vertices,
 
 
 int     check_map(int u, int v, t_args *args, int stage, int *path);
-void print_queue(t_queue queue);
 
 int		count_move(char *map, int size, int ants);
 

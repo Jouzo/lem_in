@@ -66,7 +66,7 @@ static void		get_lengths(char *map, int map_size, int *arr, int n)
 	ft_insertion_sort(arr, n);
 }
 
-int		count_move(char *map, int size, int ants)
+int				count_move(char *map, int size, int ants)
 {
 	int n;
 	int *arr;
@@ -87,9 +87,7 @@ bool			check_path_yield(t_args *args, int size)
 	char		*map_tmp;
 	int			u;
 	int			count;
-	static int	i = 0;
 
-	i++;
 	u = size - 1;
 	map_tmp = ft_strdup(args->edges);
 	while (u > 0)

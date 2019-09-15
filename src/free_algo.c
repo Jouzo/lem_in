@@ -33,14 +33,3 @@ void		reset(t_args *args)
 	ft_memdel((void**)&(args->state));
 	ft_memdel((void**)&(args));
 }
-
-void	free_args(t_args *args)
-{
-	free(args->taken);
-	free(args->went_back);
-	free(args->state);
-	free(args->edges);
-	free(args->queue);
-	free(args->saved_map);
-	free(args);
-}

@@ -31,7 +31,7 @@ void			reinit_args(t_args *args)
 	ft_memset(args->state, INITIAL, ft_strlen(args->state));
 	ft_memset(args->went_back, 0, args->nb_vertice * sizeof(int));
 	ft_memset(args->path, 0, args->nb_vertice * sizeof(int));
-	initialize(args->queue);
+	ft_bzero(args->queue, sizeof(t_queue));
 }
 
 /*
@@ -98,6 +98,5 @@ void			algo(char **edges, int size, int max_bfs, int nb_ant)
 		free_queue_vertex(args->queue);
 	}
 	ft_memcpy(*edges, args->saved_map, size * size);
-	free_flow(flow);
-	free_args(args);
+	ft_memdel((void**)&args);
 }

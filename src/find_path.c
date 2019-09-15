@@ -14,16 +14,14 @@ bool	handle_available(t_args *args, int vertex, int to)
 
 	if (check_available(args->state, to))
 	{
-		if (args->taken[to] && !(args->edges[vertex * args->nb_vertice + to] & TAKEN))
+		if (args->taken[to] && !(args->edges[vertex * args->nb_vertice + to]
+				& TAKEN))
 			next_vertex(args, vertex, to, &args->went_back[vertex]);
 		else if ((stage == 0 || !args->taken[to]))
 		{
-			next_vertex(args,vertex, to, &args->went_back[vertex]);
+			next_vertex(args, vertex, to, &args->went_back[vertex]);
 			if (check_end(args, vertex, to))
-			{
-				
 				return (0);
-			}
 		}
 	}
 	stage++;
@@ -33,15 +31,12 @@ bool	handle_available(t_args *args, int vertex, int to)
 bool	handle_taken(t_args *args, int vertex, int to)
 {
 	int rev;
-	int skip_path;
-	int to_source;
+	int i;
 
-	to_source = 0;
-	skip_path = 0;
 	rev = get_previous(vertex, args);
 	if (!args->went_back[vertex] && rev >= 0)
 	{
-		int i = vertex;
+		i = vertex;
 		while (args->path[i])
 		{
 			i = args->path[i];
@@ -68,12 +63,13 @@ int		go_to_next(t_args *args, int vertex)
 	to = 1;
 	while (to < args->nb_vertice)
 	{
-		if (check_connection(args, vertex, to) && !(vertex == 0 && args->taken[to]))
+		if (check_connection(args, vertex, to)
+			&& !(vertex == 0 && args->taken[to]))
 		{
 			if (args->taken[vertex])
 			{
 				if (!handle_taken(args, vertex, to))
-					break;
+					break ;
 			}
 			else
 			{

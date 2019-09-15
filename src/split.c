@@ -4,12 +4,16 @@ int		check_split(char **s)
 {
 	if (s[1] && ft_strlen(s[1]) >= 10)
 	{
-		if (ft_strlen(s[1]) > 11 || ft_atoll(s[1]) > INT_MAX || ft_atoll(s[1]) < INT_MIN)
+		if (ft_strlen(s[1]) > 11 || ft_atoll(s[1]) > INT_MAX
+			|| ft_atoll(s[1]) < INT_MIN)
+		{
 			return (0);
+		}
 	}
 	if (s[2] && ft_strlen(s[2]) >= 10)
 	{
-		if (ft_strlen(s[2]) > 11 || ft_atoll(s[2]) > INT_MAX || ft_atoll(s[2]) < INT_MIN)
+		if (ft_strlen(s[2]) > 11 || ft_atoll(s[2]) > INT_MAX
+			|| ft_atoll(s[2]) < INT_MIN)
 		{
 			return (0);
 		}
