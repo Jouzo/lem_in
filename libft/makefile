@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mmovahhe <mmovahhe@student.42.fr>          +#+  +:+       +#+         #
+#    By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 18:10:13 by jdescler          #+#    #+#              #
-#    Updated: 2019/09/14 13:35:38 by mmovahhe         ###   ########.fr        #
+#    Updated: 2019/09/15 19:34:00 by jdescler         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,7 +105,6 @@ CC = gcc
 CFLAGS = -c -O2 -Wall -Werror -Wextra -Iincludes
 
 all: $(OBJDIR) $(NAME)
-	@:
 
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)

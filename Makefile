@@ -51,11 +51,11 @@ $(LIBFT): FORCE
 	@make -C $(LIBFTDIR)
 
 $(NAME): $(OBJS) $(LIBFT)
-	@ $(CC) $(INC) $(LIBINC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	@$(CC) $(INC) $(LIBINC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 	@echo "Made lem-in !"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@ $(CC) $(INC) $(LIBINC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(INC) $(LIBINC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@make clean -C libft
