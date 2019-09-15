@@ -44,8 +44,6 @@ LIBFT = libft/libft.a
 
 all: $(OBJS) $(NAME)
 
-$(OBJDIR):
-	@mkdir -p $(OBJDIR)
 
 $(LIBFT): FORCE
 	@make -C $(LIBFTDIR)
@@ -59,12 +57,10 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 
 clean:
 	@make clean -C libft
-	@-rm -rf $(OBJS)
 	@echo "Cleaned lem-in !"	
 
 fclean:
 	@make fclean -C libft
-	@-rm -rf $(OBJS)
 	@-rm -f $(NAME)
 	@echo "Fcleaned lem-in !"	
 
