@@ -1,4 +1,5 @@
-#include "lem_in.h"
+#include "parsing.h"
+#include "libft.h"
 
 int				check_existing_edges(t_edges *head, char *from, char *to)
 {

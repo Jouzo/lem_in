@@ -1,4 +1,5 @@
-#include "lem_in.h"
+#include "parsing.h"
+#include "libft.h"
 
 int		parse_ants(t_data *data, char *s)
 {

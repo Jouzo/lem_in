@@ -1,12 +1,10 @@
 #ifndef LEM_IN_H
 # define LEM_IN_H
-# include "../libft/includes/libft.h"
+
 # include <stdbool.h>
-# include <stdio.h>
 # include <stdlib.h>
-# include <limits.h>
-# include <stdlib.h>
-# include <strings.h>
+# include "struct_lem_in.h"
+
 # define INITIAL 1
 # define WAITING 2
 # define VISITED 3
@@ -16,133 +14,41 @@
 # define COLOR 1 << 1
 # define MAP 1 << 2
 
-
-# define RST  "\x1B[0m"
-# define BOLD "\x1B[1m"
-# define ITALIC "\x1B[3m"
-
-# define RED  "\x1B[31m"
-# define GRN  "\x1B[32m"
-# define YEL  "\x1B[33m"
-# define BLU  "\x1B[34m"
-# define MAG  "\x1B[35m"
-# define CYN  "\x1B[36m"
-# define WHT  "\x1B[37m"
-
-# define BG_RED  "\x1B[41m"
-# define BG_GRN  "\x1B[42m"
-# define BG_YEL  "\x1B[43m"
-# define BG_BLU  "\x1B[44m"
-# define BG_MAG  "\x1B[45m"
-# define BG_CYN  "\x1B[46m"
-# define BG_WHT  "\x1B[47m"
-
-/*
-*****************************************
-*********     PARSING STRUCTS    ********
-*****************************************
-*/
-
-typedef struct				s_vertices
-{
-	int						x;
-	int						y;
-	char					*name;
-	struct s_vertices		*next;
-}							t_vertices;
-
-typedef struct				s_edges
-{
-	char					*from;
-	char					*to;
-	struct s_edges			*next;
-}							t_edges;
-
-typedef struct				s_data
-{
-	int						ants;
-	int						set_source;
-	int						set_sink;
-	int						set_vertices;
-	char					*source;
-	char					*sink;
-	int						flag;
-	t_vertices				*vertices;
-	t_edges					*edges;
-}							t_data;
-
-/*
-*****************************************
-*********      ALGO STRUCTS       *******
-*****************************************
-*/
-
-typedef struct				s_path
-{
-	int						vertex;
-	int						ant;
-	struct s_path			*next;
-}							t_path;
-
-typedef struct				s_flow
-{
-	t_path					*path;
-	int						size;
-	int						ants;
-	struct s_flow			*next;
-}							t_flow;
-
-typedef struct				s_vertex
-{
-	struct s_vertex			*next;
-	int						vertex;
-}							t_vertex;
-
-typedef struct				s_queue
-{
-	t_vertex				*front;
-	t_vertex				*rear;
-	int						count;
-}							t_queue;
-
-typedef struct				s_args
-{
-	t_queue					*queue;
-	char					*edges;
-	char					*state;
-	int						*taken;
-	int						nb_vertice;
-	int						max_bfs;
-	int						nb_ant;
-	int						step_number;
-	char					*saved_map;
-	int						*went_back;
-	int						*path;
-}							t_args;
-
 /*
 ****************************************
-*********     ALGO FUNCTIONS     *******
+***********     FUNCTIONS     **********
 ****************************************
 */
 
+/*
+**  algo functions
+*/
+
+void						algo(char **edges, int nb_vertices, int max_bfs, int nb_ant);
+void						reinit_args(t_args *args);
+
+/*
+**  bfs functions
+*/
+
+t_path						*bfs(t_args *args);
+int							check_available(char *state, int vertex);
+void						change_state(char **state, int vertex,
+											int new_state);
 /*
 ** queue functions
 */
 
-bool						is_full(t_queue *queue);
 bool						is_empty(t_queue *queue);
-t_queue						*create_queue();
+t_queue						*create_queue(void);
 int							dequeue(t_queue *queue);
 void						enqueue(t_queue *queue, int vertex);
-void						initialize(t_queue *queue);
 void    					free_queue_vertex(t_queue *queue);
 
 /*
 ** linked list functions for t_path
 */
 
-void						print_path(t_path *head);
 int							push_vertex(t_path **head, int vertex);
 t_path						*init_path(int vertex);
 
@@ -157,31 +63,10 @@ int							add_flow(t_flow **head, t_flow *new);
 **  free functions
 */
 
-void						reset(t_args *args);
 void						free_queue(t_queue *queue);
 void						free_path(t_path *head);
 void						free_flow(t_flow *flow);
-
-/*
-**  bfs functions
-*/
-
-t_path						*bfs(t_args *args);
-int							check_flow(int *path, int vertex, t_flow *flow,
-								int stage, int vertex_source);
-int							check_available(char *state, int vertex);
-void						change_state(char **state, int vertex,
-											int new_state);
-int							get_max_bfs(char *source, char *sink,
-									int ants, t_edges *edges);
-
-/*
-**  algo functions
-*/
-
-void						algo(char **edges, int nb_vertices, int max_bfs, int nb_ant);
-// t_args						*init_args(int nb_vertices, char **edges);
-void						reinit_args(t_args *args);
+void						free_args(t_args *args);
 
 /*
 **	path functions
@@ -190,109 +75,27 @@ void						reinit_args(t_args *args);
 t_path						*find_path(t_args *args);
 t_path						*get_path(t_args *args);
 
-void						print_map(char *s);
-void						go_reverse(int vertex, int i);
-void						check_reverse(t_args *args, int vertex, char **map);
-
 /*
 **	update functions
 */
 
-void	update_map(char *map, int u, int v, int size);
+void						update_map(char *map, int u, int v, int size);
 
 /*
-**	Yield functions
+**	yield functions
 */
 
-bool		check_path_yield(t_args *args, int size);
-
-/*
-****************************************
-*********   PARSING FUNCTIONS    *******
-****************************************
-*/
-
-int							parse(t_data *data, char *s);
-int							check_hash(t_data *data, char *s);
-int							get_source_sink(t_data *data, char *s, int st);
-int							split_count(char **split);
-int							split_arg(t_data *data, char *s, char ***split);
-
-/*
-**  List functions
-*/
-
-t_vertices					*new_vertex(char const *name, int x, int y);
-int							add_vertex(t_vertices **head,
-								char *name, int x, int y);
-int							check_vertices_name(t_vertices *head,
-								char *name);
-size_t						vertices_len(t_vertices *head);
-int							check_split(char **split);
-t_edges						*new_edge(char const *from, char const *to);
-int							add_edge(t_edges **head, char *from, char *to);
-int							check_edges_name(t_vertices *head,
-								char *from, char *to);
-void						swap_source(t_data *data);
-
-/*
-**  Free functions
-*/
-
-int							free_split(char **split, int ret);
-void						free_data(t_data *data);
-
-/*
-****************************************
-*********   OUTPUT FUNCTIONS    ********
-****************************************
-*/
-
-int							stringify(t_data *data, char **map);
-char						**split_vertices(t_vertices *head);
-int							output(char *map, t_data *data);
-void						parse_map(char *map, int size, t_flow **flow);
-
-/*
-** path functions
-*/
-
-int							first_path(char *map, int size);
-int							number_of_path(char *map, int size);
-int							get_one_path(int start,
-								t_flow **flow, char *map, int size);
+bool						check_path_yield(t_args *args, int size);
 
 /*
 ** check path functions
 */
 
-bool	check_used_link(t_args *args, int vertex, int i);
-bool	check_link(t_args *args, int vertex, int i);
-bool	check_end(t_args *args, int vertex, int i);
-bool	check_taken(t_args *args, int vertex);
-bool	check_connection(t_args *args, int vertex, int to);
-int		get_previous(int vertex, t_args *args);
-
-
-/*
-** ants functions
-*/
-
-int							get_ants_per_path(t_flow *flow, int nb_ants,
-												int nb_path);
-
-/*
-** print functions
-*/
-
-void						print_output(char **vertices,
-										t_flow *flow, int color);
-
-
-
-int     check_map(int u, int v, t_args *args, int stage, int *path);
-
-int		count_move(char *map, int size, int ants);
-
+bool						check_used_link(t_args *args, int vertex, int i);
+bool						check_link(t_args *args, int vertex, int i);
+bool						check_end(t_args *args, int vertex, int i);
+bool						check_taken(t_args *args, int vertex);
+bool						check_connection(t_args *args, int vertex, int to);
+int							get_previous(int vertex, t_args *args);
 
 #endif

@@ -1,4 +1,5 @@
-#include "lem_in.h"
+#include "output.h"
+#include "libft.h"
 
 void			print_map(char *s)
 {

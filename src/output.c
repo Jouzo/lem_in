@@ -1,4 +1,5 @@
-#include "lem_in.h"
+#include "output.h"
+#include "libft.h"
 
 char		**split_vertices(t_vertices *head)
 {
@@ -21,7 +22,7 @@ char		**split_vertices(t_vertices *head)
 	return (split);
 }
 
-void		parse_map(char *map, int size, t_flow **flow)
+static void	parse_map(char *map, int size, t_flow **flow)
 {
 	int		i;
 	int		count;
@@ -48,10 +49,12 @@ int			output(char *map, t_data *data)
 	size = vertices_len(data->vertices);
 	nb_path = number_of_path(map, size);
 	if (!(split = split_vertices(data->vertices)))
-		return (-1);
+		return (0);
 	parse_map(map, size, &flow);
+	if (!flow)
+		return (free_split(split, 0));
 	if (get_ants_per_path(flow, data->ants, nb_path) == -1)
-		return (-1);
+		return (free_split(split, 0));
 	print_output(split, flow, data->flag & COLOR);
 	free_flow(flow);
 	return (free_split(split, 1));

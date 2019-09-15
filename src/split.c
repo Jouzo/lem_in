@@ -1,4 +1,5 @@
-#include "lem_in.h"
+#include "parsing.h"
+#include "libft.h"
 
 int		check_split(char **s)
 {

@@ -1,4 +1,5 @@
-#include "lem_in.h"
+#include "parsing.h"
+#include "libft.h"
 
 void	fill_string(char **s, int x, int y, int size)
 {

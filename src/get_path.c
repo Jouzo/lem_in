@@ -1,4 +1,5 @@
 #include "lem_in.h"
+#include "libft.h"
 
 void		update_map(char *map, int u, int v, int size)
 {

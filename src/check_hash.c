@@ -1,4 +1,5 @@
-#include "lem_in.h"
+#include "parsing.h"
+#include "libft.h"
 
 static int		parse_source_sink(char *s, t_data *data)
 {

@@ -4,6 +4,7 @@ INC = -Iincludes
 OBJDIR = obj
 SRCDIR = src
 LIBFTDIR = libft
+LIBINC = -Ilibft/includes
 
 SRCS_NAMES = 	main.c\
 				output.c\
@@ -50,11 +51,11 @@ $(LIBFT): FORCE
 	@make -C $(LIBFTDIR)
 
 $(NAME): $(OBJS) $(LIBFT)
-	@ $(CC) $(INC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	@ $(CC) $(INC) $(LIBINC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 	@echo "Made lem-in !"
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@ $(CC) $(INC) $(CFLAGS) -c $< -o $@
+	@ $(CC) $(INC) $(LIBINC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@make clean -C libft

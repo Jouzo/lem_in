@@ -1,4 +1,5 @@
 #include "lem_in.h"
+#include "libft.h"
 
 bool		is_empty(t_queue *queue)
 {

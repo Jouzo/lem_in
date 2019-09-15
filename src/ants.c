@@ -7,12 +7,15 @@ static void			count_ants_per_path(t_flow *flow)
 
 	tmp = flow;
 	i = 0;
-	while (tmp->next)
+	if (flow->size)
 	{
-		tmp->next->ants = flow->size - tmp->next->size;
-		tmp = tmp->next;
+		while (tmp->next)
+		{
+			tmp->next->ants = flow->size - tmp->next->size;
+			tmp = tmp->next;
+		}
+		flow->ants = 0;
 	}
-	flow->ants = 0;
 }
 
 static int			*get_ants_tab(t_flow *flow, int nb_path)

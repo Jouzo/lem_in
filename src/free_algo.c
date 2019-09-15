@@ -1,4 +1,5 @@
 #include "lem_in.h"
+#include "libft.h"
 
 void		free_path(t_path *head)
 {
@@ -27,9 +28,14 @@ void		free_flow(t_flow *flow)
 	flow = NULL;
 }
 
-void		reset(t_args *args)
+void		free_args(t_args *args)
 {
-	ft_memdel((void**)&(args->queue));
-	ft_memdel((void**)&(args->state));
-	ft_memdel((void**)&(args));
+	free(args->state);
+	free(args->saved_map);
+	free(args->taken);
+	free(args->went_back);
+	free(args->path);
+	free(args->edges);
+	ft_memdel((void**)&args->queue);
+	ft_memdel((void**)&args);
 }

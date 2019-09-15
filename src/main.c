@@ -1,4 +1,7 @@
+#include "parsing.h"
 #include "lem_in.h"
+#include "output.h"
+#include "libft.h"
 
 static int		check_parsing(t_data data)
 {
@@ -25,7 +28,7 @@ static int		init_data(t_data *data)
 	return (ret);
 }
 
-static void		lem_in(t_data *data)
+static bool		lem_in(t_data *data)
 {
 	char	*map;
 	int		max_bfs;
@@ -41,11 +44,16 @@ static void		lem_in(t_data *data)
 		algo(&map, size, max_bfs, data->ants);
 		if (data->flag & MAP)
 			print_map(map);
-		output(map, data);
+		if (!(output(map, data)))
+		{
+			ft_strdel(&map);
+			return (0);
+		}
 		ft_strdel(&map);
+		return (1);
 	}
 	else
-		write(1, "ERROR\n", 6);
+		return (0);
 }
 
 static int		get_flags(t_data *data, char *flag)
@@ -84,7 +92,8 @@ int				main(int ac, char **av)
 		}
 	}
 	init_data(&data);
-	lem_in(&data);
+	if (!(lem_in(&data)))
+		write(1, "ERROR\n", 6);
 	free_data(&data);
 	return (0);
 }

@@ -1,4 +1,6 @@
 #include "lem_in.h"
+#include "libft.h"
+#include "struct_parsing.h"
 
 void			change_state(char **state, int vertex, int new_state)
 {

@@ -1,4 +1,6 @@
 #include "lem_in.h"
+#include "output.h"
+#include "libft.h"
 
 static int		path_size(char *map, int vertex, int size)
 {
@@ -66,7 +68,7 @@ static void		get_lengths(char *map, int map_size, int *arr, int n)
 	ft_insertion_sort(arr, n);
 }
 
-int				count_move(char *map, int size, int ants)
+static int		count_move(char *map, int size, int ants)
 {
 	int n;
 	int *arr;
