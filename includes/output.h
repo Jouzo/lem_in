@@ -3,7 +3,6 @@
 
 # include "struct_parsing.h"
 # include "struct_lem_in.h"
-# include <stdbool.h>
 # include <stdlib.h>
 
 # define LINK 1 << 0

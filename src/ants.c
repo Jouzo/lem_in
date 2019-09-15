@@ -1,4 +1,4 @@
-#include "lem_in.h"
+#include "output.h"
 
 static void			count_ants_per_path(t_flow *flow)
 {

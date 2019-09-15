@@ -1,6 +1,5 @@
 #include "output.h"
 #include "libft.h"
-#include <stdio.h>
 
 int g_color = 0;
 
@@ -98,7 +97,6 @@ void			print_output(char **vertices, t_flow *flow, int color)
 
 	nb_path = nb_used_path(flow);
 	g_color = color;
-	printf("%d\n", g_color);
 	count = 0;
 	while (count < flow->ants + flow->size - 1)
 	{
