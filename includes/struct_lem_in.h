@@ -22,6 +22,12 @@ typedef struct				s_vertex
 	int						vertex;
 }							t_vertex;
 
+typedef struct				s_vert
+{
+	int						u;
+	int						v;
+}							t_vert;
+
 typedef struct				s_queue
 {
 	t_vertex				*front;
