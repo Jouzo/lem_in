@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ceil.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmovahhe <mmovahhe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 13:37:26 by jdescler          #+#    #+#             */
-/*   Updated: 2019/09/14 11:55:08 by mmovahhe         ###   ########.fr       */
+/*   Updated: 2019/09/15 19:23:48 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int     ft_ceil(int a, int b)
+int		ft_ceil(int a, int b)
 {
-    return (a / b + (a % b != 0));
+	return (a / b + (a % b != 0));
 }

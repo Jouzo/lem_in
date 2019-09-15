@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_min.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmovahhe <mmovahhe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 20:08:56 by jdescler          #+#    #+#             */
-/*   Updated: 2019/09/14 13:37:32 by mmovahhe         ###   ########.fr       */
+/*   Updated: 2019/09/15 19:23:23 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int     ft_min(int a, int b)
+int		ft_min(int a, int b)
 {
-    return (a < b ? a : b);
+	return (a < b ? a : b);
 }

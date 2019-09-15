@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmovahhe <mmovahhe@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 18:33:12 by jdescler          #+#    #+#             */
-/*   Updated: 2019/09/13 16:51:16 by mmovahhe         ###   ########.fr       */
+/*   Updated: 2019/09/15 19:21:29 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void        ft_swap(int *a, int *b)
+void	ft_swap(int *a, int *b)
 {
-    int tmp;
+	int tmp;
 
-    tmp = *b;
-    *b = *a;
-    *a = tmp;
+	tmp = *b;
+	*b = *a;
+	*a = tmp;
 }
