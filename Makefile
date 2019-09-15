@@ -44,7 +44,6 @@ LIBFT = libft/libft.a
 
 all: $(OBJS) $(NAME)
 
-
 $(LIBFT): FORCE
 	@make -C $(LIBFTDIR)
 
