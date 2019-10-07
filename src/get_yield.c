@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_yield.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmovahhe <mmovahhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 19:28:57 by jdescler          #+#    #+#             */
-/*   Updated: 2019/09/15 22:38:21 by jdescler         ###   ########.fr       */
+/*   Updated: 2019/10/07 19:29:33 by mmovahhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ bool			check_path_yield(t_args *args, int size)
 
 	u = size - 1;
 	if (!(map_tmp = ft_strdup(args->edges)))
-		return (NULL);
+		return (0);
 	update_from_path(args, map_tmp, u);
 	count = count_move(map_tmp, size, args->nb_ant);
 	if ((!args->step_number || args->step_number > count))

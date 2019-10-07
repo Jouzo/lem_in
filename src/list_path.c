@@ -6,7 +6,7 @@
 /*   By: mmovahhe <mmovahhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 19:28:40 by jdescler          #+#    #+#             */
-/*   Updated: 2019/10/06 21:31:14 by mmovahhe         ###   ########.fr       */
+/*   Updated: 2019/10/07 18:25:50 by mmovahhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,10 @@ t_path		*init_path(int vertex)
 	return (list);
 }
 
-#include <stdio.h>
-
 int			push_vertex(t_path **head, int vertex)
 {
 	t_path *tmp;
-	
+
 	if (!(*head))
 	{
 		if (!((*head) = init_path(vertex)))

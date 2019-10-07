@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmovahhe <mmovahhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 19:29:06 by jdescler          #+#    #+#             */
-/*   Updated: 2019/09/15 22:45:51 by jdescler         ###   ########.fr       */
+/*   Updated: 2019/10/07 19:29:11 by mmovahhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void		update_map(char *map, int u, int v, int size)
 	map[u * size + v] ^= 3;
 }
 
-void		update_from_path(t_args *args, char *map, int u)
+void			update_from_path(t_args *args, char *map, int u)
 {
 	while (u > 0)
 	{
@@ -28,7 +28,7 @@ void		update_from_path(t_args *args, char *map, int u)
 	}
 }
 
-bool		get_path(t_args *args)
+bool			get_path(t_args *args)
 {
 	int				u;
 	static int		count = 10;
