@@ -6,7 +6,7 @@
 /*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 19:28:29 by jdescler          #+#    #+#             */
-/*   Updated: 2019/09/15 19:28:30 by jdescler         ###   ########.fr       */
+/*   Updated: 2019/10/07 20:31:22 by jdescler         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,50 @@
 #include "lem_in.h"
 #include "output.h"
 #include "libft.h"
+#include <stdio.h>
 
-static int		check_parsing(t_data data)
+static char		*add_line(char *s, char *s2)
 {
-	return (data.source && data.sink && data.ants && data.edges);
+	char *ret;
+
+	if (!s2)
+		return (NULL);
+	if (!s)
+		return (ft_strdup(s2));
+	if (!(ret = malloc(ft_strlen(s) + ft_strlen(s2) + 2)))
+		return (NULL);
+	ft_strcat(ret, s);
+	ft_strcat(ret, "\n");
+	ft_strcat(ret, s2);
+	free(s);
+	return (ret);
 }
 
 static int		init_data(t_data *data)
 {
 	char	*line;
 	int		ret;
+	char 	*s;
 
-	ret = 1;
+	s = NULL; 
 	while (get_next_line(0, &line) > 0)
 	{
 		if (!(data->flag & QUIET))
-			ft_putendl(line);
+		{
+			if (!(s = add_line(s, line)))
+				return (0);
+		}
 		if ((ret = parse(data, line)) <= 0)
 		{
 			ft_memdel((void**)&line);
+			ft_putendl(s);
+			free(s);
 			return (ret);
 		}
 		ft_memdel((void**)&line);
 	}
+	ft_putendl(s);
+	free(s);
 	return (ret);
 }
 
@@ -47,7 +68,7 @@ static bool		lem_in(t_data *data)
 	int		size;
 
 	max_bfs = 0;
-	if (check_parsing(*data))
+	if (data->source && data->sink && data->ants && data->edges)
 	{
 		swap_source(data);
 		size = stringify(data, &map);
@@ -99,7 +120,7 @@ int				main(int ac, char **av)
 	{
 		if (get_flags(&data, av[1]) < 0 || ac > 2)
 		{
-			write(1, "usage: ./lem-in [-cmv] < a lem_in map\n", 38);
+			write(1, "usage: ./lem-in [-cmq] < a lem_in map\n", 38);
 			return (-1);
 		}
 	}
