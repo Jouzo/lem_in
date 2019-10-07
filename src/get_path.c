@@ -6,7 +6,7 @@
 /*   By: mmovahhe <mmovahhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 19:29:06 by jdescler          #+#    #+#             */
-/*   Updated: 2019/10/07 19:29:11 by mmovahhe         ###   ########.fr       */
+/*   Updated: 2019/10/07 19:43:21 by mmovahhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ bool			get_path(t_args *args)
 
 	if (!(check_path_yield(args, args->nb_vertice)))
 	{
-		count--;
-		if (count == 0)
+		if (count-- == 0)
 		{
 			ft_memdel((void**)&args->path);
 			return (NULL);
