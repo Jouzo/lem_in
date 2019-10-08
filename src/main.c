@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmovahhe <mmovahhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 19:28:29 by jdescler          #+#    #+#             */
-/*   Updated: 2019/10/07 20:31:22 by jdescler         ###   ########.fr       */
+/*   Updated: 2019/10/08 17:09:47 by mmovahhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,35 +16,38 @@
 #include "libft.h"
 #include <stdio.h>
 
-static char		*add_line(char *s, char *s2)
+char			*cat_line(char *s1, char *s2)
 {
-	char *ret;
+	char *res;
 
 	if (!s2)
 		return (NULL);
-	if (!s)
+	if (!s1)
 		return (ft_strdup(s2));
-	if (!(ret = malloc(ft_strlen(s) + ft_strlen(s2) + 2)))
+	if (!(res = (char *)malloc(sizeof(char) * (ft_strlen(s1) \
+						+ ft_strlen(s2) + 2))))
 		return (NULL);
-	ft_strcat(ret, s);
-	ft_strcat(ret, "\n");
-	ft_strcat(ret, s2);
-	free(s);
-	return (ret);
+	ft_bzero(res, ft_strlen(s1) + ft_strlen(s2) + 2);
+	ft_strcat(res, s1);
+	ft_strcat(res, "\n");
+	ft_strcat(res, s2);
+	ft_memdel((void**)&s1);
+	return (res);
 }
 
 static int		init_data(t_data *data)
 {
 	char	*line;
 	int		ret;
-	char 	*s;
+	char	*s;
 
-	s = NULL; 
+	s = NULL;
+	ret = 1;
 	while (get_next_line(0, &line) > 0)
 	{
 		if (!(data->flag & QUIET))
 		{
-			if (!(s = add_line(s, line)))
+			if (!(s = cat_line(s, line)))
 				return (0);
 		}
 		if ((ret = parse(data, line)) <= 0)
@@ -128,5 +131,6 @@ int				main(int ac, char **av)
 	if (!(lem_in(&data)))
 		write(1, "ERROR\n", 6);
 	free_data(&data);
+	while (1);
 	return (0);
 }
