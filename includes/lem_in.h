@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lem_in.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmovahhe <mmovahhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 19:26:48 by jdescler          #+#    #+#             */
-/*   Updated: 2019/09/15 22:38:18 by jdescler         ###   ########.fr       */
+/*   Updated: 2019/10/08 18:22:55 by mmovahhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void						reinit_args(t_args *args);
 **  bfs functions
 */
 
-t_path						*bfs(t_args *args);
+bool						bfs(t_args *args);
 int							check_available(char *state, int vertex);
 void						change_state(char **state, int vertex,
 											int new_state);

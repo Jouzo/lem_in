@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bfs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdescler <jdescler@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mmovahhe <mmovahhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 19:29:37 by jdescler          #+#    #+#             */
-/*   Updated: 2019/09/15 19:29:37 by jdescler         ###   ########.fr       */
+/*   Updated: 2019/10/08 18:17:10 by mmovahhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int				get_max_bfs(char *source, char *sink, int ants, t_edges *edges)
 	return (ft_min(i, ft_min(j, ants)));
 }
 
-t_path			*bfs(t_args *args)
+bool			bfs(t_args *args)
 {
 	reinit_args(args);
 	enqueue(args->queue, 0);

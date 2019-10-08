@@ -6,7 +6,7 @@
 /*   By: mmovahhe <mmovahhe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 19:28:29 by jdescler          #+#    #+#             */
-/*   Updated: 2019/10/08 17:09:47 by mmovahhe         ###   ########.fr       */
+/*   Updated: 2019/10/08 18:06:55 by mmovahhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,9 @@ char			*cat_line(char *s1, char *s2)
 		return (NULL);
 	if (!s1)
 		return (ft_strdup(s2));
-	if (!(res = (char *)malloc(sizeof(char) * (ft_strlen(s1) \
+	if (!(res = (char *)ft_memalloc(sizeof(char) * (ft_strlen(s1) \
 						+ ft_strlen(s2) + 2))))
 		return (NULL);
-	ft_bzero(res, ft_strlen(s1) + ft_strlen(s2) + 2);
 	ft_strcat(res, s1);
 	ft_strcat(res, "\n");
 	ft_strcat(res, s2);
@@ -131,6 +130,5 @@ int				main(int ac, char **av)
 	if (!(lem_in(&data)))
 		write(1, "ERROR\n", 6);
 	free_data(&data);
-	while (1);
 	return (0);
 }

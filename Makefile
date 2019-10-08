@@ -6,6 +6,10 @@ SRCDIR = src
 LIBFTDIR = libft
 LIBINC = -Ilibft/includes
 
+INC_NAME = 		includes/lem_in.h\
+				includes/struct_lem_in.h\
+				includes/struct_parsing.h
+
 SRCS_NAMES = 	main.c\
 				output.c\
 				path.c\
@@ -37,7 +41,7 @@ OBJS_NAMES = $(SRCS_NAMES:.c=.o)
 SRCS = $(addprefix $(SRCDIR)/,$(SRCS_NAMES))
 OBJS = $(addprefix $(OBJDIR)/,$(OBJS_NAMES))
 
-CC = gcc 
+CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 
 LIBFT = libft/libft.a
@@ -47,7 +51,7 @@ all: $(OBJS) $(NAME)
 $(LIBFT): FORCE
 	@make -C $(LIBFTDIR)
 
-$(NAME): $(OBJS) $(LIBFT)
+$(NAME): $(OBJS) $(INC_NAME) $(LIBFT)
 	@$(CC) $(INC) $(LIBINC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 	@echo "Made lem-in !"
 
@@ -56,11 +60,13 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 
 clean:
 	@make clean -C libft
+	@-rm -f $(OBJS)
 	@echo "Cleaned lem-in !"	
 
 fclean:
 	@make fclean -C libft
 	@-rm -f $(NAME)
+	@-rm -f $(OBJS)
 	@echo "Fcleaned lem-in !"	
 
 re: fclean all
